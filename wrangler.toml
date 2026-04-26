@@ -1,0 +1,12 @@
+# Config Cloudflare Workers + Static Assets para servir el sitio Astro
+# (alternativa moderna a CF Pages — un Worker que solo sirve dist/)
+#
+# El otro wrangler.toml está en workers/petition-handler/ — ese deploya
+# el Worker de petición separado. Este es solo para el sitio.
+
+name = "logiaunionitaliana12"
+compatibility_date = "2025-04-01"
+
+[assets]
+directory = "./dist"
+not_found_handling = "404-page"
