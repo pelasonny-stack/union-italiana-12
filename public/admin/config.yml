@@ -1,0 +1,97 @@
+# Sveltia CMS — config
+# Docs: https://github.com/sveltia/sveltia-cms
+
+backend:
+  name: github
+  repo: pelasonny-stack/union-italiana-12
+  branch: main
+  base_url: https://api.netlify.com  # OAuth proxy default — opcional, ver docs/ADMIN.md
+
+site_url: https://pelasonny-stack.github.io/union-italiana-12/
+display_url: https://pelasonny-stack.github.io/union-italiana-12/
+
+publish_mode: simple
+media_folder: public/assets/uploads
+public_folder: /assets/uploads
+
+i18n:
+  structure: multiple_folders
+  locales: [es, it]
+  default_locale: es
+
+collections:
+  - name: eventos
+    label: Eventos · Tenidas blancas
+    label_singular: Evento
+    folder: src/content/eventos
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    i18n: true
+    editor:
+      preview: false
+    fields:
+      - { name: title, label: Título, widget: string, i18n: true }
+      - { name: translationKey, label: Translation Key (mismo en ambos idiomas), widget: string, i18n: duplicate, hint: "ej. tenida-cultura-italiana-2026-05" }
+      - { name: date, label: Fecha y hora, widget: datetime, i18n: duplicate }
+      - { name: endDate, label: Fecha y hora de cierre, widget: datetime, required: false, i18n: duplicate }
+      - name: location
+        label: Ubicación
+        widget: object
+        i18n: duplicate
+        fields:
+          - { name: venue, label: Templo / Lugar, widget: string }
+          - { name: address, label: Dirección, widget: string }
+          - { name: city, label: Ciudad, widget: string }
+      - { name: kind, label: Tipo, widget: select, options: [tenida-blanca, agape, columna-instruccion, evento-publico, aniversario], i18n: duplicate }
+      - { name: isPublic, label: Visible al público, widget: boolean, default: true, i18n: duplicate }
+      - { name: cover, label: Imagen de portada, widget: image, required: false, i18n: duplicate }
+      - { name: excerpt, label: Resumen breve (máx 280 caracteres), widget: text, i18n: true }
+      - { name: draft, label: Borrador (no publicar todavía), widget: boolean, default: false, i18n: duplicate }
+      - { name: body, label: Cuerpo, widget: markdown, i18n: true }
+
+  - name: blog
+    label: Blog — Il Lavoro
+    label_singular: Pieza
+    folder: src/content/blog
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    i18n: true
+    fields:
+      - { name: title, label: Título, widget: string, i18n: true }
+      - { name: translationKey, label: Translation Key, widget: string, i18n: duplicate }
+      - { name: pubDate, label: Fecha de publicación, widget: datetime, i18n: duplicate }
+      - { name: updatedDate, label: Última actualización, widget: datetime, required: false, i18n: duplicate }
+      - { name: author, label: Autor, widget: string, default: "R∴L∴ Unión Italiana N°12", i18n: true }
+      - { name: tags, label: Tags, widget: list, default: [], i18n: duplicate }
+      - { name: category, label: Categoría, widget: select, options: [cronica, efemerides, semblanzas, cultura, lecturas, archivo], default: cronica, i18n: duplicate }
+      - { name: cover, label: Imagen de portada, widget: image, required: false, i18n: duplicate }
+      - { name: excerpt, label: Resumen breve, widget: text, i18n: true }
+      - { name: draft, label: Borrador, widget: boolean, default: false, i18n: duplicate }
+      - { name: body, label: Cuerpo, widget: markdown, i18n: true }
+
+  - name: data
+    label: Datos del sitio
+    files:
+      - name: upcoming-event
+        label: Próxima Tenida (banda Home)
+        file: src/data/upcoming-event.json
+        fields:
+          - { name: isPublic, label: Visible en el Home, widget: boolean, default: true }
+          - { name: date, label: Fecha y hora, widget: datetime }
+          - name: title
+            label: Título
+            widget: object
+            fields:
+              - { name: es, label: Título · Español, widget: string }
+              - { name: it, label: Título · Italiano, widget: string }
+          - name: kind
+            label: Tipo
+            widget: object
+            fields:
+              - { name: es, label: Tipo · Español, widget: string, default: "Tenida blanca" }
+              - { name: it, label: Tipo · Italiano, widget: string, default: "Tornata bianca" }
+          - { name: location, label: Ubicación (texto libre), widget: string, default: "Templo Hijos del Trabajo · Barracas" }
+          - { name: speaker, label: Expositor / Hno. invitado, widget: string, required: false }
+          - { name: rsvpUrl, label: URL de inscripción (opcional), widget: string, required: false }
