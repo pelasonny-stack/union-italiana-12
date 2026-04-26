@@ -3,37 +3,739 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
+    <meta name="robots" content="noindex,nofollow" />
     <title>Panel · Unión Italiana N°12</title>
     <link rel="icon" type="image/svg+xml" href="/union-italiana-12/favicon.svg" />
     <style>
-      body { font-family: -apple-system, system-ui, sans-serif; }
-      .nf-loading {
-        position: fixed; inset: 0; display: flex; align-items: center;
-        justify-content: center; background: #f4efe6; color: #141014;
+      :root {
+        --bg: #efe7d2;
+        --bg-elev: #f6f1e4;
+        --fg: #141014;
+        --fg-muted: #3a2f26;
+        --fg-subtle: #6b5a48;
+        --accent: #b8893c;
+        --accent-bright: #d4a845;
+        --vermiglio: #7e2a1e;
+        --error: #7a1f1f;
+        --success: #2f5d3a;
+        --border: #d8d0bf;
       }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, "Inter", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        font-size: 15px;
+        line-height: 1.5;
+      }
+      .container {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1, h2, h3 {
+        font-family: "Cormorant Garamond", Garamond, serif;
+        font-weight: 500;
+        margin: 0;
+      }
+      h1 { font-size: 2.4rem; }
+      h2 { font-size: 1.6rem; margin-bottom: 16px; }
+      h3 { font-size: 1.2rem; margin-bottom: 8px; }
+      .overline {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--fg-muted);
+        font-weight: 600;
+      }
+      .header {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 24px;
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .header-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .header-brand img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+      }
+      .header-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .card {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        padding: 24px;
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--fg);
+      }
+      .help {
+        font-size: 0.78rem;
+        color: var(--fg-subtle);
+        margin: 4px 0 12px;
+      }
+      input, textarea, select {
+        font: inherit;
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        background: white;
+        color: var(--fg);
+        margin-bottom: 16px;
+      }
+      input:focus, textarea:focus, select:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: -1px;
+      }
+      textarea { min-height: 120px; resize: vertical; font-family: ui-monospace, monospace; font-size: 13px; }
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
+
+      button {
+        font: inherit;
+        font-size: 0.85rem;
+        padding: 10px 16px;
+        background: var(--vermiglio);
+        color: white;
+        border: 1px solid var(--vermiglio);
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: opacity 0.2s;
+      }
+      button:hover { opacity: 0.85; }
+      button.secondary {
+        background: transparent;
+        color: var(--fg);
+        border-color: var(--border);
+      }
+      button.danger {
+        background: var(--error);
+        border-color: var(--error);
+      }
+      button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        max-width: 360px;
+        padding: 12px 16px;
+        background: var(--success);
+        color: white;
+        border-left: 4px solid white;
+        font-size: 0.85rem;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 0.3s, transform 0.3s;
+        pointer-events: none;
+      }
+      .toast.show { opacity: 1; transform: none; pointer-events: auto; }
+      .toast.error { background: var(--error); }
+
+      .tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 24px;
+      }
+      .tab {
+        padding: 12px 20px;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        color: var(--fg-muted);
+        cursor: pointer;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0;
+        font-size: 0.9rem;
+      }
+      .tab.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      .event-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .event-list li {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .event-list li:last-child { border-bottom: none; }
+      .event-list .meta {
+        font-size: 0.78rem;
+        color: var(--fg-subtle);
+      }
+      .event-list .actions { display: flex; gap: 8px; }
+      .event-list button { padding: 6px 12px; font-size: 0.75rem; }
+
+      .login-screen {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+      .login-card {
+        max-width: 420px;
+        width: 100%;
+        padding: 40px;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        text-align: center;
+      }
+      .login-card img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        margin: 0 auto 16px;
+      }
+      .login-card h1 {
+        font-size: 1.4rem;
+        margin-bottom: 24px;
+      }
+      .login-card input {
+        text-align: center;
+        font-family: ui-monospace, monospace;
+        font-size: 16px;
+      }
+
+      [hidden] { display: none !important; }
     </style>
   </head>
   <body>
-    <div class="nf-loading">Cargando panel…</div>
+    <!-- LOGIN -->
+    <div id="login" class="login-screen">
+      <form id="login-form" class="login-card">
+        <img src="/union-italiana-12/assets/logos/union-italiana-12-logo.png" alt="" />
+        <p class="overline">Panel administrativo</p>
+        <h1>R∴L∴ Unión Italiana N°12</h1>
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" autocomplete="current-password" required autofocus />
+        <button type="submit">Entrar</button>
+        <p id="login-error" class="help" style="color: var(--error); margin-top: 12px;" hidden>Contraseña incorrecta.</p>
+      </form>
+    </div>
 
-    <!-- Netlify Identity widget — handles login user/pass -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- PANEL -->
+    <div id="panel" class="container" hidden>
+      <header class="header">
+        <div class="header-brand">
+          <img src="/union-italiana-12/assets/logos/union-italiana-12-logo.png" alt="" />
+          <div>
+            <p class="overline" style="margin: 0">Panel administrativo</p>
+            <h1 style="font-size: 1.3rem">R∴L∴ Unión Italiana N°12</h1>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="secondary" id="logout-btn">Salir</button>
+        </div>
+      </header>
 
-    <!-- Decap CMS (anteriormente Netlify CMS) — admin estático -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+      <!-- PAT setup (primera vez por browser) -->
+      <div id="pat-setup" class="card" hidden>
+        <h2>Conectar con GitHub</h2>
+        <p class="help">
+          Para guardar cambios necesito un <strong>Personal Access Token</strong> de GitHub. Es una llave que solo este browser conoce y se usa para hacer commits al repo. <strong>NO se sube al sitio</strong> — queda solo en este navegador.
+        </p>
+        <ol style="font-size: 0.85rem; color: var(--fg-muted); padding-left: 20px;">
+          <li>Andá a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">https://github.com/settings/personal-access-tokens/new</a></li>
+          <li><strong>Token name:</strong> "Admin Unión Italiana 12"</li>
+          <li><strong>Expiration:</strong> 90 days (o lo que prefieras)</li>
+          <li><strong>Repository access:</strong> Only select repositories → seleccionar <code>pelasonny-stack/union-italiana-12</code></li>
+          <li><strong>Permissions → Repository:</strong> Contents = <strong>Read and write</strong>; Metadata = Read-only (auto)</li>
+          <li>Click <strong>Generate token</strong>. Copiá el token (empieza con <code>github_pat_...</code>) y pegalo abajo.</li>
+        </ol>
+        <label for="pat">Personal Access Token</label>
+        <input id="pat" type="password" placeholder="github_pat_..." autocomplete="off" />
+        <button id="pat-save">Guardar token</button>
+      </div>
+
+      <!-- Tabs -->
+      <div id="content" hidden>
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="upcoming">Próxima Tenida</button>
+          <button class="tab" data-tab="events">Eventos</button>
+          <button class="tab" data-tab="new-event">Crear evento</button>
+        </div>
+
+        <!-- TAB: Próxima Tenida (banda Home) -->
+        <section id="tab-upcoming" class="tab-pane">
+          <div class="card">
+            <h2>Próxima Tenida (banda del Home)</h2>
+            <p class="help">Esta es la franja roja+oro que aparece justo debajo del Hero del Home. Si <code>isPublic</code> está apagado o la fecha ya pasó, no se muestra.</p>
+
+            <div class="row">
+              <div>
+                <label><input type="checkbox" id="ue-public" /> Visible en el Home</label>
+              </div>
+              <div>
+                <label for="ue-date">Fecha y hora (ISO)</label>
+                <input id="ue-date" type="datetime-local" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="ue-title-es">Título · Español</label>
+                <input id="ue-title-es" />
+              </div>
+              <div>
+                <label for="ue-title-it">Título · Italiano</label>
+                <input id="ue-title-it" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="ue-kind-es">Tipo · Español</label>
+                <input id="ue-kind-es" placeholder="Tenida blanca" />
+              </div>
+              <div>
+                <label for="ue-kind-it">Tipo · Italiano</label>
+                <input id="ue-kind-it" placeholder="Tornata bianca" />
+              </div>
+            </div>
+
+            <label for="ue-location">Ubicación</label>
+            <input id="ue-location" placeholder="Templo Hijos del Trabajo · Barracas" />
+
+            <label for="ue-speaker">Expositor (opcional)</label>
+            <input id="ue-speaker" placeholder="Dr. Hno. ..." />
+
+            <label for="ue-rsvp">URL de inscripción (opcional)</label>
+            <input id="ue-rsvp" placeholder="https://..." />
+
+            <button id="ue-save">Guardar próxima Tenida</button>
+            <button class="secondary" id="ue-reload">Recargar</button>
+          </div>
+        </section>
+
+        <!-- TAB: Eventos listado -->
+        <section id="tab-events" class="tab-pane" hidden>
+          <div class="card">
+            <h2>Eventos publicados</h2>
+            <p class="help">Cada evento existe en dos archivos espejados (ES + IT) en <code>src/content/eventos/</code>.</p>
+            <ul class="event-list" id="event-list">
+              <li>Cargando…</li>
+            </ul>
+            <button class="secondary" id="events-reload">Recargar lista</button>
+          </div>
+        </section>
+
+        <!-- TAB: Crear evento nuevo -->
+        <section id="tab-new-event" class="tab-pane" hidden>
+          <div class="card">
+            <h2>Nuevo evento</h2>
+            <p class="help">Se crearán dos archivos espejados en <code>src/content/eventos/es/</code> y <code>src/content/eventos/it/</code>.</p>
+
+            <label for="ne-slug">Slug (sin acentos, kebab-case)</label>
+            <input id="ne-slug" placeholder="2026-06-tenida-aniversario" />
+
+            <div class="row">
+              <div>
+                <label for="ne-title-es">Título · Español</label>
+                <input id="ne-title-es" />
+              </div>
+              <div>
+                <label for="ne-title-it">Título · Italiano</label>
+                <input id="ne-title-it" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="ne-date">Fecha y hora</label>
+                <input id="ne-date" type="datetime-local" />
+              </div>
+              <div>
+                <label for="ne-kind">Tipo</label>
+                <select id="ne-kind">
+                  <option value="tenida-blanca">Tenida blanca</option>
+                  <option value="agape">Ágape</option>
+                  <option value="columna-instruccion">Columna de instrucción</option>
+                  <option value="evento-publico">Evento público</option>
+                  <option value="aniversario">Aniversario</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="ne-venue">Templo / Lugar</label>
+            <input id="ne-venue" value="Templo Hijos del Trabajo" />
+
+            <div class="row">
+              <div>
+                <label for="ne-address">Dirección</label>
+                <input id="ne-address" value="San Antonio 814" />
+              </div>
+              <div>
+                <label for="ne-city">Ciudad</label>
+                <input id="ne-city" value="Barracas, CABA" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="ne-excerpt-es">Resumen breve · Español (max 280)</label>
+                <textarea id="ne-excerpt-es" maxlength="280" style="min-height: 80px;"></textarea>
+              </div>
+              <div>
+                <label for="ne-excerpt-it">Resumen breve · Italiano (max 280)</label>
+                <textarea id="ne-excerpt-it" maxlength="280" style="min-height: 80px;"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="ne-body-es">Cuerpo · Español (markdown)</label>
+                <textarea id="ne-body-es"></textarea>
+              </div>
+              <div>
+                <label for="ne-body-it">Cuerpo · Italiano (markdown)</label>
+                <textarea id="ne-body-it"></textarea>
+              </div>
+            </div>
+
+            <button id="ne-save">Crear evento</button>
+            <button class="secondary" id="ne-reset">Limpiar</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script>
-      // Auto-redirect después del confirm token (signup invitation)
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
+    (() => {
+      // ─── CONFIG ───────────────────────────────────────────────────
+      const PASSWORD_HASH = "4a87d32d9c63294eba6021c8e64ded908835ed15e47bbf8368a27e3c2159db5a"; // SHA-256("unionitaliana12") — cambiar en index.html
+      const REPO = "pelasonny-stack/union-italiana-12";
+      const BRANCH = "main";
+      const STORAGE_PAT = "ui12_admin_pat";
+      const STORAGE_AUTH = "ui12_admin_auth";
+
+      // ─── HELPERS ──────────────────────────────────────────────────
+      const $ = (id) => document.getElementById(id);
+      const sha256 = async (text) => {
+        const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+      };
+      const toast = (msg, type = "success") => {
+        const t = $("toast");
+        t.textContent = msg;
+        t.className = "toast show" + (type === "error" ? " error" : "");
+        setTimeout(() => t.classList.remove("show"), 4000);
+      };
+
+      // Codificación UTF-8 → base64 (para GitHub API)
+      const b64encode = (str) => btoa(unescape(encodeURIComponent(str)));
+      const b64decode = (str) => decodeURIComponent(escape(atob(str)));
+
+      // ─── GITHUB API ───────────────────────────────────────────────
+      const ghApi = async (path, options = {}) => {
+        const pat = sessionStorage.getItem(STORAGE_PAT);
+        if (!pat) throw new Error("PAT no configurado");
+        const res = await fetch(`https://api.github.com${path}`, {
+          ...options,
+          headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": `Bearer ${pat}`,
+            "X-GitHub-Api-Version": "2022-11-28",
+            ...(options.body ? { "Content-Type": "application/json" } : {}),
+            ...options.headers,
+          },
         });
+        if (!res.ok) {
+          const err = await res.text();
+          throw new Error(`GitHub API ${res.status}: ${err.slice(0, 200)}`);
+        }
+        return res.json();
+      };
+
+      // GET file content
+      const getFile = async (path) => {
+        const data = await ghApi(`/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+        return { content: b64decode(data.content), sha: data.sha, path };
+      };
+
+      // PUT file (create or update)
+      const putFile = async (path, content, message, sha = null) => {
+        const body = {
+          message,
+          content: b64encode(content),
+          branch: BRANCH,
+          ...(sha ? { sha } : {}),
+        };
+        return ghApi(`/repos/${REPO}/contents/${path}`, {
+          method: "PUT",
+          body: JSON.stringify(body),
+        });
+      };
+
+      // List dir
+      const listDir = async (path) => {
+        return ghApi(`/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+      };
+
+      // DELETE file
+      const deleteFile = async (path, sha, message) => {
+        return ghApi(`/repos/${REPO}/contents/${path}`, {
+          method: "DELETE",
+          body: JSON.stringify({ message, sha, branch: BRANCH }),
+        });
+      };
+
+      // ─── LOGIN ────────────────────────────────────────────────────
+      $("login-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const password = $("password").value;
+        const hash = await sha256(password);
+        if (hash === PASSWORD_HASH) {
+          sessionStorage.setItem(STORAGE_AUTH, "1");
+          showPanel();
+        } else {
+          $("login-error").hidden = false;
+          $("password").value = "";
+        }
+      });
+
+      $("logout-btn").addEventListener("click", () => {
+        sessionStorage.removeItem(STORAGE_AUTH);
+        location.reload();
+      });
+
+      // ─── PAT SETUP ────────────────────────────────────────────────
+      $("pat-save").addEventListener("click", () => {
+        const pat = $("pat").value.trim();
+        if (!pat || !pat.startsWith("github_pat_") && !pat.startsWith("ghp_")) {
+          toast("Token inválido. Empieza con 'github_pat_' o 'ghp_'.", "error");
+          return;
+        }
+        sessionStorage.setItem(STORAGE_PAT, pat);
+        // Persistir en localStorage también para que dure entre sessions del browser
+        try { localStorage.setItem(STORAGE_PAT, pat); } catch (_) {}
+        $("pat-setup").hidden = true;
+        $("content").hidden = false;
+        toast("Token guardado. Cargando contenido…");
+        loadUpcoming();
+      });
+
+      // ─── TABS ─────────────────────────────────────────────────────
+      document.querySelectorAll(".tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          document.querySelectorAll(".tab-pane").forEach(p => p.hidden = true);
+          $(`tab-${btn.dataset.tab}`).hidden = false;
+          if (btn.dataset.tab === "events") loadEvents();
+        });
+      });
+
+      // ─── UPCOMING EVENT ───────────────────────────────────────────
+      const UPCOMING_PATH = "src/data/upcoming-event.json";
+      let upcomingSha = null;
+
+      const loadUpcoming = async () => {
+        try {
+          const f = await getFile(UPCOMING_PATH);
+          upcomingSha = f.sha;
+          const data = JSON.parse(f.content);
+          $("ue-public").checked = !!data.isPublic;
+          $("ue-date").value = data.date ? new Date(data.date).toISOString().slice(0, 16) : "";
+          $("ue-title-es").value = data.title?.es ?? "";
+          $("ue-title-it").value = data.title?.it ?? "";
+          $("ue-kind-es").value = data.kind?.es ?? "Tenida blanca";
+          $("ue-kind-it").value = data.kind?.it ?? "Tornata bianca";
+          $("ue-location").value = data.location ?? "";
+          $("ue-speaker").value = data.speaker ?? "";
+          $("ue-rsvp").value = data.rsvpUrl ?? "";
+        } catch (e) {
+          toast("Error cargando: " + e.message, "error");
+        }
+      };
+
+      $("ue-reload").addEventListener("click", loadUpcoming);
+
+      $("ue-save").addEventListener("click", async () => {
+        try {
+          const data = {
+            isPublic: $("ue-public").checked,
+            date: new Date($("ue-date").value).toISOString(),
+            title: { es: $("ue-title-es").value, it: $("ue-title-it").value },
+            kind: { es: $("ue-kind-es").value, it: $("ue-kind-it").value },
+            location: $("ue-location").value,
+            speaker: $("ue-speaker").value || null,
+            rsvpUrl: $("ue-rsvp").value || null,
+          };
+          const content = JSON.stringify(data, null, 2) + "\n";
+          $("ue-save").disabled = true;
+          $("ue-save").textContent = "Guardando…";
+          const result = await putFile(UPCOMING_PATH, content, "admin: actualizar próxima Tenida", upcomingSha);
+          upcomingSha = result.content.sha;
+          toast("Guardado. Sitio se actualiza en ~30 segundos.");
+        } catch (e) {
+          toast("Error: " + e.message, "error");
+        } finally {
+          $("ue-save").disabled = false;
+          $("ue-save").textContent = "Guardar próxima Tenida";
+        }
+      });
+
+      // ─── EVENTS LIST ──────────────────────────────────────────────
+      const loadEvents = async () => {
+        const list = $("event-list");
+        list.innerHTML = "<li>Cargando…</li>";
+        try {
+          const items = await listDir("src/content/eventos/es");
+          if (!items.length) {
+            list.innerHTML = "<li>No hay eventos.</li>";
+            return;
+          }
+          list.innerHTML = "";
+          for (const item of items.filter(i => i.name.endsWith(".md"))) {
+            const slug = item.name.replace(/\.md$/, "");
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <div>
+                <strong>${slug}</strong>
+                <div class="meta">src/content/eventos/{es,it}/${item.name}</div>
+              </div>
+              <div class="actions">
+                <button class="danger" data-slug="${slug}">Borrar</button>
+              </div>
+            `;
+            li.querySelector("button.danger").addEventListener("click", async () => {
+              if (!confirm(`¿Borrar evento "${slug}" (ES + IT)?`)) return;
+              try {
+                const esF = await getFile(`src/content/eventos/es/${item.name}`);
+                await deleteFile(`src/content/eventos/es/${item.name}`, esF.sha, `admin: borrar evento ${slug} (ES)`);
+                try {
+                  const itF = await getFile(`src/content/eventos/it/${item.name}`);
+                  await deleteFile(`src/content/eventos/it/${item.name}`, itF.sha, `admin: borrar evento ${slug} (IT)`);
+                } catch (_) { /* IT puede no existir */ }
+                toast(`Evento "${slug}" borrado.`);
+                loadEvents();
+              } catch (e) {
+                toast("Error borrando: " + e.message, "error");
+              }
+            });
+            list.appendChild(li);
+          }
+        } catch (e) {
+          list.innerHTML = `<li style="color: var(--error)">Error: ${e.message}</li>`;
+        }
+      };
+      $("events-reload").addEventListener("click", loadEvents);
+
+      // ─── NEW EVENT ────────────────────────────────────────────────
+      const buildFrontmatter = (title, date, venue, address, city, kind, isPublic, excerpt) => `---
+title: "${title.replace(/"/g, '\\"')}"
+translationKey: "${$("ne-slug").value}"
+date: ${date}
+location:
+  venue: "${venue}"
+  address: "${address}"
+  city: "${city}"
+kind: "${kind}"
+isPublic: ${isPublic}
+excerpt: "${excerpt.replace(/"/g, '\\"').replace(/\n/g, " ")}"
+draft: false
+---
+`;
+
+      $("ne-save").addEventListener("click", async () => {
+        const slug = $("ne-slug").value.trim();
+        if (!/^[a-z0-9-]+$/.test(slug)) {
+          toast("Slug inválido. Solo letras minúsculas, números y guiones.", "error");
+          return;
+        }
+        const date = new Date($("ne-date").value).toISOString();
+        const kind = $("ne-kind").value;
+        const venue = $("ne-venue").value;
+        const address = $("ne-address").value;
+        const city = $("ne-city").value;
+
+        try {
+          $("ne-save").disabled = true;
+          $("ne-save").textContent = "Creando…";
+
+          const esContent = buildFrontmatter(
+            $("ne-title-es").value, date, venue, address, city, kind, true, $("ne-excerpt-es").value
+          ) + "\n" + ($("ne-body-es").value || "");
+          await putFile(`src/content/eventos/es/${slug}.md`, esContent, `admin: nuevo evento ${slug} (ES)`);
+
+          const itContent = buildFrontmatter(
+            $("ne-title-it").value, date, venue, address, city, kind, true, $("ne-excerpt-it").value
+          ) + "\n" + ($("ne-body-it").value || "");
+          await putFile(`src/content/eventos/it/${slug}.md`, itContent, `admin: nuevo evento ${slug} (IT)`);
+
+          toast("Evento creado. Sitio se actualiza en ~30 segundos.");
+          $("ne-reset").click();
+        } catch (e) {
+          toast("Error: " + e.message, "error");
+        } finally {
+          $("ne-save").disabled = false;
+          $("ne-save").textContent = "Crear evento";
+        }
+      });
+
+      $("ne-reset").addEventListener("click", () => {
+        document.querySelectorAll("#tab-new-event input, #tab-new-event textarea").forEach(el => {
+          if (el.id === "ne-venue") el.value = "Templo Hijos del Trabajo";
+          else if (el.id === "ne-address") el.value = "San Antonio 814";
+          else if (el.id === "ne-city") el.value = "Barracas, CABA";
+          else el.value = "";
+        });
+      });
+
+      // ─── BOOTSTRAP ────────────────────────────────────────────────
+      const showPanel = () => {
+        $("login").hidden = true;
+        $("panel").hidden = false;
+
+        // Restaurar PAT desde localStorage si existe
+        const savedPat = localStorage.getItem(STORAGE_PAT);
+        if (savedPat) sessionStorage.setItem(STORAGE_PAT, savedPat);
+
+        if (sessionStorage.getItem(STORAGE_PAT)) {
+          $("pat-setup").hidden = true;
+          $("content").hidden = false;
+          loadUpcoming();
+        } else {
+          $("pat-setup").hidden = false;
+          $("content").hidden = true;
+        }
+      };
+
+      // Auto-login si sessionStorage tiene flag
+      if (sessionStorage.getItem(STORAGE_AUTH) === "1") {
+        showPanel();
       }
+    })();
     </script>
   </body>
 </html>
