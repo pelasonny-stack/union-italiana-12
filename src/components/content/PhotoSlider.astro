@@ -26,6 +26,12 @@ const {
 } = Astro.props;
 
 const id = `slider-${Math.random().toString(36).slice(2, 8)}`;
+
+const widths = [480, 960, 1440, 1920];
+function buildSrcset(src: string, ext: "webp" | "jpeg") {
+  const base = src.replace(/\.(jpe?g|png|webp)$/i, "");
+  return widths.map((w) => `${base}-${w}w.${ext} ${w}w`).join(", ");
+}
 ---
 
 <section
@@ -45,13 +51,19 @@ const id = `slider-${Math.random().toString(36).slice(2, 8)}`;
         data-active={i === startIndex ? "true" : "false"}
         aria-hidden={i === startIndex ? "false" : "true"}
       >
-        <img
-          src={p.src}
-          alt={p.alt}
-          loading={i === startIndex ? "eager" : "lazy"}
-          decoding="async"
-          fetchpriority={i === startIndex ? "high" : "auto"}
-        />
+        <picture>
+          <source type="image/webp" srcset={buildSrcset(p.src, "webp")} sizes="(max-width: 720px) 100vw, 90vw" />
+          <source type="image/jpeg" srcset={buildSrcset(p.src, "jpeg")} sizes="(max-width: 720px) 100vw, 90vw" />
+          <img
+            src={p.src}
+            alt={p.alt}
+            width="1920"
+            height="1080"
+            loading={i === startIndex ? "eager" : "lazy"}
+            decoding="async"
+            fetchpriority={i === startIndex ? "high" : "auto"}
+          />
+        </picture>
         {p.caption && (
           <figcaption class="caption">
             <span class="caption-inner">{p.caption}</span>
