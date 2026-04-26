@@ -70,7 +70,7 @@ const monthRoman = toRoman(today.getUTCMonth() + 1);
   .rotating-quote {
     border-block: 1px solid var(--border);
     background: var(--bg-elevated);
-    padding-block: var(--space-8);
+    padding-block: clamp(4rem, 8vh, var(--space-12));
   }
   .rq-inner { text-align: center; }
   .rq-label { color: var(--fg-muted); margin-bottom: var(--space-3); }

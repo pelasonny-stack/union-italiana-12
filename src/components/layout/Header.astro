@@ -206,7 +206,18 @@ const obedienceLabel = lang === "es"
     closers.forEach((el) => el.addEventListener("click", close));
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !drawer.hidden) close();
+      if (drawer.hidden) return;
+      if (e.key === "Escape") { close(); return; }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const links = Array.from(drawer.querySelectorAll<HTMLAnchorElement>("[data-drawer-link]"));
+        if (!links.length) return;
+        const idx = links.indexOf(document.activeElement as HTMLAnchorElement);
+        const next = e.key === "ArrowDown"
+          ? (idx + 1) % links.length
+          : (idx - 1 + links.length) % links.length;
+        links[next].focus();
+      }
     });
 
     // Close en navigation Astro
@@ -321,6 +332,10 @@ const obedienceLabel = lang === "es"
   .primary-nav a:hover,
   .primary-nav a:focus-visible,
   .primary-nav a.is-active { color: var(--fg); }
+  .primary-nav a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
   .primary-nav a.is-active { background-size: 100% 1px; }
 
   .header-actions {
@@ -391,6 +406,7 @@ const obedienceLabel = lang === "es"
     position: relative;
     width: min(420px, 88vw);
     height: 100%;
+    padding-top: env(safe-area-inset-top);
     background: var(--ink-900);
     color: var(--ivory-50);
     display: flex;
@@ -399,6 +415,7 @@ const obedienceLabel = lang === "es"
     transition: transform var(--duration-slow) var(--ease-ceremonial);
     box-shadow: -16px 0 48px rgba(0, 0, 0, 0.4);
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .mobile-drawer[data-open="true"] .drawer-panel { transform: translateX(0); }
 

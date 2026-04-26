@@ -60,7 +60,7 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
 
 <section class="hero-temple">
   {/* Foto Templo — fondo */}
-  <img class="hero-bg" src={bgSrc} alt={bgAlt} fetchpriority="high" decoding="async" />
+  <img class="hero-bg" src={bgSrc} alt={bgAlt} width="1920" height="1280" fetchpriority="high" decoding="async" />
   <div class="hero-overlay" aria-hidden="true"></div>
 
   {/* Nastro tricolor vertical — signature visual del sitio */}
@@ -154,10 +154,10 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
     z-index: 1;
     background:
       linear-gradient(90deg,
-        rgba(15, 12, 18, 0.88) 0%,
-        rgba(15, 12, 18, 0.65) 40%,
-        rgba(15, 12, 18, 0.25) 70%,
-        rgba(15, 12, 18, 0.08) 100%);
+        rgba(15, 12, 18, 0.92) 0%,
+        rgba(15, 12, 18, 0.72) 40%,
+        rgba(15, 12, 18, 0.35) 70%,
+        rgba(15, 12, 18, 0.18) 100%);
   }
 
   /* Nastro tricolor vertical — pegado al edge izq, full height del hero */
@@ -293,21 +293,33 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
     align-items: center;
     gap: var(--space-2);
     color: var(--candela);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
     background-image: none;
+    border: 1px solid var(--accent);
+    padding: var(--space-2) var(--space-4);
     font-size: 0.85rem;
-    transition: color var(--duration-fast) var(--ease-ceremonial);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    transition:
+      background var(--duration-fast) var(--ease-ceremonial),
+      border-color var(--duration-fast) var(--ease-ceremonial),
+      color var(--duration-fast) var(--ease-ceremonial);
     margin-bottom: var(--space-8);
   }
-  .hero-cta:hover, .hero-cta:focus-visible { color: var(--accent-bright); }
+  .hero-cta:hover, .hero-cta:focus-visible {
+    color: var(--candela);
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
+    border-color: var(--accent-bright);
+  }
   .hero-bar {
     display: inline-block;
-    width: 56px;
+    width: 32px;
     height: 1px;
     background: currentColor;
     transition: width var(--duration-slow) var(--ease-ceremonial);
   }
   .hero-cta:hover .hero-bar,
-  .hero-cta:focus-visible .hero-bar { width: 88px; }
+  .hero-cta:focus-visible .hero-bar { width: 56px; }
 
   .hero-stamp {
     font-family: var(--font-mono);
@@ -381,7 +393,7 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
     .hero-scroll-cue { animation: none; }
   }
 
-  /* Mobile: nastro pasa a top horizontal 4px */
+  /* Mobile: nastro pasa a top horizontal 6px (mantener prominencia) */
   @media (max-width: 768px) {
     .nastro {
       top: 0;
@@ -389,7 +401,7 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
       right: 0;
       bottom: auto;
       width: auto;
-      height: 4px;
+      height: 6px;
       background: var(--tricolor-horizontal);
     }
     .nastro-fleuron { display: none; }

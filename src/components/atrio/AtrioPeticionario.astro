@@ -116,6 +116,11 @@ const labels = lang === "es"
     rate: labels.errorRate,
     missing: labels.errorMissing,
     tooShort: labels.errorTooShort,
+    sending: labels.sending,
+    submit: labels.submit,
+    charsRemaining: lang === "es" ? "faltan" : "mancano",
+    charsCount: lang === "es" ? "caracteres" : "caratteri",
+    blocked: lang === "es" ? "Solicitud bloqueada." : "Richiesta bloccata.",
   })}
 >
   <div class="atrio-stage" data-stage>
@@ -145,8 +150,8 @@ const labels = lang === "es"
         <legend class="cinzel step-title">{labels.step1}</legend>
 
         <div class="grid-2">
-          <label class="field"><span>{labels.firstName} *</span><input type="text" name="firstName" required minlength="2" maxlength="60" autocomplete="given-name" /></label>
-          <label class="field"><span>{labels.lastName} *</span><input type="text" name="lastName" required minlength="2" maxlength="60" autocomplete="family-name" /></label>
+          <label class="field"><span>{labels.firstName} *</span><input type="text" name="firstName" required aria-required="true" minlength="2" maxlength="60" autocomplete="given-name" /></label>
+          <label class="field"><span>{labels.lastName} *</span><input type="text" name="lastName" required aria-required="true" minlength="2" maxlength="60" autocomplete="family-name" /></label>
         </div>
 
         <div class="grid-2">
@@ -176,13 +181,13 @@ const labels = lang === "es"
         </div>
 
         <div class="grid-2">
-          <label class="field"><span>{labels.phone} *</span><input type="tel" name="phone" required autocomplete="tel" /></label>
-          <label class="field"><span>{labels.email} *</span><input type="email" name="email" required autocomplete="email" /></label>
+          <label class="field"><span>{labels.phone} *</span><input type="tel" name="phone" required aria-required="true" autocomplete="tel" /></label>
+          <label class="field"><span>{labels.email} *</span><input type="email" name="email" required aria-required="true" autocomplete="email" /></label>
         </div>
 
         <label class="field">
           <span>{labels.occupation} *</span>
-          <input type="text" name="occupation" required minlength="3" maxlength="120" />
+          <input type="text" name="occupation" required aria-required="true" minlength="3" maxlength="120" />
           <small>{labels.occupationHelp}</small>
         </label>
 
@@ -210,7 +215,7 @@ const labels = lang === "es"
 
         <label class="field">
           <span>{labels.whyPetition} *</span>
-          <textarea name="whyPetition" required minlength="200" maxlength="3000" rows="8"></textarea>
+          <textarea name="whyPetition" required aria-required="true" minlength="200" maxlength="3000" data-charcount="200" rows="8"></textarea>
           <small>{labels.whyPetitionHelp}</small>
         </label>
 
@@ -232,7 +237,7 @@ const labels = lang === "es"
 
         <div class="grid-2">
           <label class="field"><span>{labels.criminal} *</span>
-            <select name="criminalRecord" required>
+            <select name="criminalRecord" required aria-required="true">
               <option value="no">No</option>
               <option value="yes">{lang === "es" ? "Sí" : "Sì"}</option>
             </select>
@@ -253,7 +258,10 @@ const labels = lang === "es"
               ["sab", lang === "es" ? "Sáb" : "Sab"],
               ["dom", lang === "es" ? "Dom" : "Dom"],
             ].map(([val, lbl]) => (
-              <label class="check"><input type="checkbox" name="availability" value={val} /><span>{lbl}</span></label>
+              <label class="check" for={`avail-${val}`}>
+                <input type="checkbox" id={`avail-${val}`} name="availability" value={val} />
+                <span>{lbl}</span>
+              </label>
             ))}
           </div>
         </div>
@@ -276,12 +284,12 @@ const labels = lang === "es"
         </label>
 
         <label class="check check-block">
-          <input type="checkbox" name="declarationTruth" required />
+          <input type="checkbox" name="declarationTruth" required aria-required="true" />
           <span>{labels.declarationTruth}</span>
         </label>
 
         <label class="check check-block">
-          <input type="checkbox" name="dataConsent" required />
+          <input type="checkbox" name="dataConsent" required aria-required="true" />
           <span>
             {labels.dataConsent}{" "}
             <a href={lang === "es" ? "/es/legal/privacidad/" : "/it/legale/privacy/"} target="_blank" rel="noopener">{labels.privacyLink}</a>
@@ -300,11 +308,21 @@ const labels = lang === "es"
 
   {/* Pantalla de "Has sido escuchado" */}
   <div class="atrio-heard" data-heard hidden>
+    <svg class="heard-check" viewBox="0 0 80 80" width="80" height="80" aria-hidden="true">
+      <circle cx="40" cy="40" r="36" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M22 42 L34 54 L58 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="heard-check-path" />
+    </svg>
     <p class="heard-text cinzel">{labels.heard}</p>
   </div>
 </div>
 
 <script>
+  type I18n = {
+    generic: string; rate: string; missing: string; tooShort: string;
+    sending: string; submit: string; charsRemaining: string; charsCount: string;
+    blocked: string;
+  };
+
   function initAtrio() {
     const root = document.querySelector("[data-atrio]") as HTMLElement | null;
     if (!root || root.dataset.atrioInited === "1") return;
@@ -312,8 +330,8 @@ const labels = lang === "es"
 
     const formspreeUrl = root.dataset.formspreeUrl ?? "";
     const confirmationUrl = root.dataset.confirmationUrl ?? "/";
-    let errorMessages: { generic: string; rate: string; missing: string; tooShort: string } = { generic: "", rate: "", missing: "", tooShort: "" };
-    try { errorMessages = { ...errorMessages, ...JSON.parse(root.dataset.i18n ?? "{}") }; } catch {}
+    let i18n: I18n = { generic: "", rate: "", missing: "", tooShort: "", sending: "", submit: "", charsRemaining: "", charsCount: "", blocked: "" };
+    try { i18n = { ...i18n, ...JSON.parse(root.dataset.i18n ?? "{}") }; } catch {}
 
     const form = root.querySelector("#atrio-form") as HTMLFormElement | null;
     if (!form) return;
@@ -325,6 +343,48 @@ const labels = lang === "es"
 
     const startedInput = root.querySelector("[data-form-started]") as HTMLInputElement | null;
     if (startedInput) startedInput.value = String(Date.now());
+
+    // Char counters para textareas con data-charcount
+    root.querySelectorAll<HTMLTextAreaElement>("textarea[data-charcount]").forEach((ta) => {
+      const min = Number(ta.getAttribute("data-charcount") ?? "0");
+      const counterEl = document.createElement("small");
+      counterEl.className = "char-counter";
+      counterEl.setAttribute("aria-live", "polite");
+      ta.insertAdjacentElement("afterend", counterEl);
+      const update = () => {
+        const len = ta.value.length;
+        const remaining = Math.max(0, min - len);
+        if (len === 0) {
+          counterEl.textContent = `0 / ${min} ${i18n.charsCount}`;
+          counterEl.dataset.state = "empty";
+        } else if (remaining > 0) {
+          counterEl.textContent = `${len} / ${min} · ${i18n.charsRemaining} ${remaining}`;
+          counterEl.dataset.state = "below";
+        } else {
+          counterEl.textContent = `${len} ${i18n.charsCount} ✓`;
+          counterEl.dataset.state = "ok";
+        }
+      };
+      ta.addEventListener("input", update);
+      update();
+    });
+
+    // Inline validation per-field on blur
+    const inlineFields = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+      "input[required], textarea[required], select[required]"
+    );
+    inlineFields.forEach((el) => {
+      el.addEventListener("blur", () => {
+        if (!el.value) return;
+        if (!el.checkValidity()) el.classList.add("is-invalid");
+        else el.classList.remove("is-invalid");
+      });
+      el.addEventListener("input", () => {
+        if (el.classList.contains("is-invalid") && el.checkValidity()) {
+          el.classList.remove("is-invalid");
+        }
+      });
+    });
 
     let current = 1;
     function show(step: number) {
@@ -341,17 +401,40 @@ const labels = lang === "es"
       current = step;
     }
 
-    function validateStep(step: number) {
+    function showError(msg: string) {
+      if (!errorDisplay) return;
+      errorDisplay.hidden = false;
+      errorDisplay.textContent = msg;
+    }
+    function clearError() {
+      if (!errorDisplay) return;
+      errorDisplay.hidden = true;
+      errorDisplay.textContent = "";
+    }
+
+    function validateStep(step: number): boolean {
       const fieldset = root!.querySelector(`fieldset[data-step="${step}"]`);
       if (!fieldset) return false;
-      const required = fieldset.querySelectorAll("input[required], textarea[required], select[required]") as NodeListOf<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
+      const required = fieldset.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+        "input[required], textarea[required], select[required]"
+      );
+      const invalid: (HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement)[] = [];
       for (const el of required) {
         if (!el.checkValidity()) {
-          el.reportValidity();
-          return false;
+          el.classList.add("is-invalid");
+          invalid.push(el);
         }
       }
-      return true;
+      if (invalid.length === 0) {
+        clearError();
+        return true;
+      }
+      showError(i18n.missing);
+      const first = invalid[0];
+      first.scrollIntoView({ behavior: "smooth", block: "center" });
+      first.focus({ preventScroll: true });
+      first.reportValidity();
+      return false;
     }
 
     root.querySelectorAll("[data-next]").forEach((btn) => {
@@ -372,18 +455,26 @@ const labels = lang === "es"
 
       const submitBtn = root!.querySelector("[data-submit]") as HTMLButtonElement | null;
       if (!submitBtn) return;
-      submitBtn.disabled = true;
-      if (errorDisplay) { errorDisplay.hidden = true; errorDisplay.textContent = ""; }
 
-      if (!formspreeUrl) {
-        if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = errorMessages.generic; }
-        submitBtn.disabled = false;
+      // Honeypot triggered → block + show msg
+      const honeypot = form!.querySelector("[name=website]") as HTMLInputElement | null;
+      if (honeypot?.value) {
+        submitBtn.disabled = true;
+        showError(i18n.blocked);
         return;
       }
 
-      const honeypot = form!.querySelector("[name=website]") as HTMLInputElement | null;
-      if (honeypot?.value) {
-        if (stage) stage.style.opacity = "0.3";
+      const originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.classList.add("is-sending");
+      submitBtn.textContent = i18n.sending;
+      clearError();
+
+      if (!formspreeUrl) {
+        showError(i18n.generic);
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("is-sending");
+        submitBtn.textContent = originalLabel;
         return;
       }
 
@@ -400,9 +491,11 @@ const labels = lang === "es"
         });
         await res.json().catch(() => ({}));
         if (!res.ok) {
-          const msg = res.status === 429 ? errorMessages.rate : errorMessages.generic;
-          if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = msg; }
+          const msg = res.status === 429 ? i18n.rate : i18n.generic;
+          showError(msg);
           submitBtn.disabled = false;
+          submitBtn.classList.remove("is-sending");
+          submitBtn.textContent = originalLabel;
           return;
         }
 
@@ -418,15 +511,18 @@ const labels = lang === "es"
             requestAnimationFrame(() => {
               heardScreen.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
               heardScreen.style.opacity = "1";
+              heardScreen.classList.add("is-revealed");
             });
           }
           setTimeout(() => {
             window.location.href = confirmationUrl;
-          }, 2400);
+          }, 3200);
         }, 900);
       } catch (e) {
-        if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = errorMessages.generic; }
+        showError(i18n.generic);
         submitBtn.disabled = false;
+        submitBtn.classList.remove("is-sending");
+        submitBtn.textContent = originalLabel;
       }
     });
   }
@@ -501,6 +597,19 @@ const labels = lang === "es"
     outline: none;
     border-color: var(--gold-700);
   }
+  .field input.is-invalid, .field textarea.is-invalid, .field select.is-invalid {
+    border-color: #c97a78;
+    background: rgba(122, 46, 42, 0.08);
+  }
+  .char-counter {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-300);
+  }
+  .char-counter[data-state="below"] { color: #c97a78; }
+  .char-counter[data-state="ok"] { color: var(--gold-700); }
   .field textarea {
     resize: vertical;
     min-height: 6em;
@@ -584,8 +693,21 @@ const labels = lang === "es"
     color: var(--ink-900);
   }
   .submit-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: rgba(192, 155, 82, 0.08);
+  }
+  .submit-btn.is-sending {
     cursor: wait;
+    position: relative;
+    animation: sending-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes sending-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 0.85; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .submit-btn.is-sending { animation: none; }
   }
   .back-btn {
     border-color: var(--ink-500);
@@ -614,8 +736,26 @@ const labels = lang === "es"
   .atrio-heard {
     min-height: 80vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: var(--space-4);
+  }
+  .heard-check {
+    color: var(--gold-700);
+  }
+  .heard-check-path {
+    stroke-dasharray: 70;
+    stroke-dashoffset: 70;
+  }
+  .atrio-heard.is-revealed .heard-check-path {
+    animation: heard-check-draw 0.9s var(--ease-ceremonial) forwards;
+  }
+  @keyframes heard-check-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .atrio-heard.is-revealed .heard-check-path { animation: none; stroke-dashoffset: 0; }
   }
   .heard-text {
     font-size: clamp(2rem, 5vw, 4rem);
@@ -623,15 +763,14 @@ const labels = lang === "es"
     text-align: center;
   }
 
-  /* Step transition */
-  .step.is-active {
-    animation: step-in var(--duration-ritual) var(--ease-ceremonial);
-  }
-  @keyframes step-in {
-    from { opacity: 0; filter: blur(8px); transform: translateY(8px); }
-    to { opacity: 1; filter: blur(0); transform: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .step.is-active { animation: none; }
+  /* Step transition (motion guarded explícitamente) */
+  @media (prefers-reduced-motion: no-preference) {
+    .step.is-active {
+      animation: step-in var(--duration-ritual) var(--ease-ceremonial);
+    }
+    @keyframes step-in {
+      from { opacity: 0; filter: blur(8px); transform: translateY(8px); }
+      to { opacity: 1; filter: blur(0); transform: none; }
+    }
   }
 </style>

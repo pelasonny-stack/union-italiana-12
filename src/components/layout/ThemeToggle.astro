@@ -33,9 +33,17 @@ const { lang } = Astro.props;
 </button>
 
 <script>
+  const syncPressed = (btn: HTMLButtonElement) => {
+    const root = document.documentElement;
+    const current =
+      root.getAttribute("data-theme") ??
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    btn.setAttribute("aria-pressed", current === "dark" ? "true" : "false");
+  };
   const apply = () => {
     const btn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
     if (!btn) return;
+    syncPressed(btn);
     btn.addEventListener("click", () => {
       const root = document.documentElement;
       const current =
@@ -46,6 +54,7 @@ const { lang } = Astro.props;
       try {
         localStorage.setItem("theme", next);
       } catch (_) { /* ignore */ }
+      btn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
     });
   };
   apply();

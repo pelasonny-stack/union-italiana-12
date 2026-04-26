@@ -11,14 +11,11 @@ const path = Astro.url.pathname;
   {LOCALES.map((l, idx) => (
     <>
       {idx > 0 && <span aria-hidden="true">·</span>}
-      <a
-        href={l === lang ? "#" : alternateLocaleUrl(path, l)}
-        aria-current={l === lang ? "true" : undefined}
-        class={l === lang ? "is-active" : ""}
-        hreflang={l}
-      >
-        {l.toUpperCase()}
-      </a>
+      {l === lang ? (
+        <span class="is-active" aria-current="true">{l.toUpperCase()}</span>
+      ) : (
+        <a href={alternateLocaleUrl(path, l)} hreflang={l}>{l.toUpperCase()}</a>
+      )}
     </>
   ))}
 </div>
@@ -38,9 +35,9 @@ const path = Astro.url.pathname;
     color: var(--fg-muted);
     background-image: linear-gradient(var(--accent), var(--accent));
   }
-  .lang-switcher a.is-active {
+  .lang-switcher .is-active {
     color: var(--accent);
-    pointer-events: none;
+    background-image: none;
   }
   .lang-switcher span {
     color: var(--fg-subtle);

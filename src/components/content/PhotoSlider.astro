@@ -130,6 +130,8 @@ const id = `slider-${Math.random().toString(36).slice(2, 8)}`;
       root.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") next();
         if (e.key === "ArrowLeft") prev();
+        if (e.key === "Home") show(0);
+        if (e.key === "End") show(total - 1);
       });
 
       // Autoplay (respeta prefers-reduced-motion)
@@ -187,7 +189,7 @@ const id = `slider-${Math.random().toString(36).slice(2, 8)}`;
     position: absolute;
     inset: auto 0 0 0;
     padding: var(--space-3) var(--space-4);
-    background: linear-gradient(to top, rgba(11,11,15,0.85), transparent);
+    background: linear-gradient(to top, color-mix(in srgb, var(--notte) 85%, transparent), transparent);
     color: var(--ivory-50);
     font-family: var(--font-serif);
     font-style: italic;
@@ -210,8 +212,8 @@ const id = `slider-${Math.random().toString(36).slice(2, 8)}`;
     background: transparent;
     border: 1px solid rgba(192, 155, 82, 0.3);
     color: var(--gold-700);
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -231,14 +233,20 @@ const id = `slider-${Math.random().toString(36).slice(2, 8)}`;
     margin: 0;
   }
   .dot {
+    position: relative;
     background: transparent;
     border: 1px solid var(--gold-700);
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     padding: 0;
     cursor: pointer;
     transition: background-color var(--duration-fast);
+  }
+  .dot::before {
+    content: "";
+    position: absolute;
+    inset: -17px;
   }
   .dot[aria-current="true"] {
     background: var(--gold-700);

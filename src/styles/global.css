@@ -398,17 +398,21 @@ article.container-prose,
   list-style: none;
 }
 
+.container-prose ul,
+.container-prose ol {
+  padding-left: 1em;
+}
 .container-prose ul li,
 .container-prose ol li {
   position: relative;
-  padding-left: 1.75em;
+  padding-left: 1.25em;
   margin-bottom: 0.65em;
   line-height: 1.7;
 }
 .container-prose ul li::before {
   content: "⸫";
   position: absolute;
-  left: 0;
+  left: -0.85em;
   top: 0.05em;
   color: var(--accent);
   font-size: 0.9em;

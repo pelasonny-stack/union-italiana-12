@@ -20,15 +20,19 @@ const { note } = Astro.props;
   .stub-note {
     margin: var(--space-8) auto;
     max-width: var(--container-prose);
-    padding: var(--space-4) var(--space-6);
-    border-left: 2px solid var(--accent);
-    background: var(--bg-elevated);
-    color: var(--fg-muted);
+    padding: var(--space-5) var(--space-6);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    background: color-mix(in srgb, var(--bg-elevated) 80%, var(--accent) 6%);
+    color: var(--fg);
+    font-family: var(--font-serif);
     font-style: italic;
+    font-size: 1.05rem;
     display: flex;
-    gap: var(--space-3);
+    gap: var(--space-4);
     align-items: center;
+    text-align: left;
   }
-  .stub-glyph { color: var(--accent); flex-shrink: 0; }
-  .stub-note p { margin: 0; }
+  .stub-glyph { color: var(--accent); flex-shrink: 0; opacity: 0.85; }
+  .stub-note p { margin: 0; line-height: 1.55; }
 </style>

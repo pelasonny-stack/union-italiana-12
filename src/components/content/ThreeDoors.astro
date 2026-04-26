@@ -99,8 +99,9 @@ const { doors } = Astro.props;
     top: -1px;
     left: 50%;
     transform: translateX(-50%);
-    width: 88px;
-    height: 22px;
+    width: clamp(72px, 28%, 120px);
+    height: auto;
+    aspect-ratio: 88 / 22;
     color: var(--accent);
     transition: color var(--duration-slow) var(--ease-ceremonial);
   }

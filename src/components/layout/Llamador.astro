@@ -169,7 +169,7 @@ const i18n = lang === "es"
     const toggle = () => (root.dataset.open === "true" ? close() : open());
     const scheduleAutoCollapse = () => {
       if (collapseTimer) window.clearTimeout(collapseTimer);
-      collapseTimer = window.setTimeout(close, 15000);
+      collapseTimer = window.setTimeout(close, 8000);
     };
 
     knock.addEventListener("click", toggle);

@@ -1,18 +1,37 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MasonicGlyph from "../components/symbols/MasonicGlyph.astro";
-const lang = "es" as const;
+import type { Locale } from "../i18n/config";
+
+const path = Astro.url.pathname;
+const lang: Locale = path.startsWith("/it") ? "it" : "es";
+
+const copy = lang === "es"
+  ? {
+      title: "404",
+      description: "Página no encontrada",
+      quote: "\"Quien busca, encuentra; pero no siempre lo que buscaba.\"",
+      back: "Volver al inicio",
+      backHref: "/es/",
+    }
+  : {
+      title: "404",
+      description: "Pagina non trovata",
+      quote: "\"Chi cerca trova; ma non sempre ciò che cercava.\"",
+      back: "Tornare all'inizio",
+      backHref: "/it/",
+    };
 ---
 
-<BaseLayout lang={lang} title="404" description="Página no encontrada" noindex>
+<BaseLayout lang={lang} title={copy.title} description={copy.description} noindex>
   <section class="container container-prose" style="padding-block: var(--space-16); text-align: center;">
     <MasonicGlyph name="three-dots" size={48} class="acacia" />
     <h1 style="margin-top: var(--space-4)">404</h1>
     <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--fg-muted)">
-      "Quien busca, encuentra; pero no siempre lo que buscaba."
+      {copy.quote}
     </p>
     <p style="margin-top: var(--space-4)">
-      <a href="/es/">Volver al inicio</a>
+      <a href={copy.backHref}>{copy.back}</a>
     </p>
   </section>
 </BaseLayout>

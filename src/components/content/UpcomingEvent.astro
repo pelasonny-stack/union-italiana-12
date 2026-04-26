@@ -40,7 +40,7 @@ const labels = lang === "es"
         ? "Hoy"
         : diffDays === 1
         ? "Mañana"
-        : `Faltan ${toRoman(diffDays)} días`,
+        : `Faltan ${diffDays} días`,
       cta: "Inscribirse",
     }
   : {
@@ -49,7 +49,7 @@ const labels = lang === "es"
         ? "Oggi"
         : diffDays === 1
         ? "Domani"
-        : `Mancano ${toRoman(diffDays)} giorni`,
+        : `Mancano ${diffDays} giorni`,
       cta: "Iscriversi",
     };
 
