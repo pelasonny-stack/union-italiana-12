@@ -29,17 +29,14 @@ const labels = lang === "es"
       occupationHelp: "Pedimos detalle, no rótulo. \"Comerciante\" dice menos que \"comerciante minorista de instrumentos musicales desde 2014\".",
       // Step 2
       religious: "¿Profesa alguna religión o tradición filosófica?",
-      religiousHelp: "La masonería regular pide creencia en un Principio Creador, sin imponer dogma. Le pedimos que describa con sus palabras su posición personal. No se evalúa por contenido confesional, sino por sinceridad y reflexión. (mín. 200 caracteres)",
+      religiousHelp: "La masonería regular pide creencia en un Principio Creador, sin imponer dogma. Si quiere, describa con sus palabras su posición personal. No se evalúa por contenido confesional, sino por sinceridad.",
       howKnown: "¿Cómo conoció la masonería?",
-      howKnownHelp: "Lecturas, familia, encuentros, búsquedas personales. Sea concreto: títulos de libros, nombres si los recuerda, momentos. (mín. 300 caracteres)",
+      howKnownHelp: "Lecturas, familia, encuentros, búsquedas personales. Si lo desea, sea concreto: títulos de libros, nombres si los recuerda, momentos.",
       whyPetition: "¿Por qué peticiona?",
-      whyPetitionHelp: "Esta es la pregunta central. Le pedimos que escriba con calma. Una respuesta breve o genérica no permite evaluar su petición y suele dar lugar a una declinación sin entrevista. No hay respuesta correcta — hay respuesta auténtica. (mín. 800 caracteres)",
+      whyPetitionHelp: "Esta es la pregunta central. Le pedimos que escriba con calma. No hay respuesta correcta — hay respuesta auténtica. (mín. 200 caracteres)",
       whyLodge: "¿Por qué la Unión Italiana N°12 y no otra Logia?",
-      whyLodgeHelp: "Existen logias regulares en Buenos Aires con orientaciones diversas. ¿Qué lo trae específicamente a la nuestra? (mín. 300 caracteres)",
+      whyLodgeHelp: "Existen logias regulares en Buenos Aires con orientaciones diversas. ¿Qué lo trae específicamente a la nuestra?",
       // Step 3
-      ref1Name: "Referencia 1 — Nombre completo", ref1Contact: "Referencia 1 — Email o teléfono",
-      ref2Name: "Referencia 2 — Nombre completo", ref2Contact: "Referencia 2 — Email o teléfono",
-      refsHelp: "Dos personas de su entorno (no familiares) que puedan dar testimonio de su carácter. Pueden o no ser contactadas.",
       criminal: "¿Tiene antecedentes penales?",
       criminalDetail: "Si sí, describa brevemente",
       criminalHelp: "Una respuesta afirmativa no es automáticamente excluyente; una respuesta falsa, sí.",
@@ -79,16 +76,13 @@ const labels = lang === "es"
       occupation: "Professione od occupazione",
       occupationHelp: "Chiediamo dettaglio, non etichetta. \"Commerciante\" dice meno di \"commerciante al dettaglio di strumenti musicali dal 2014\".",
       religious: "Professa una religione o tradizione filosofica?",
-      religiousHelp: "La massoneria regolare richiede la credenza in un Principio Creatore, senza imporre alcun dogma. Le chiediamo di descrivere con parole proprie la sua posizione personale. Non si valuta per contenuto confessionale, ma per sincerità e riflessione. (min. 200 caratteri)",
+      religiousHelp: "La massoneria regolare richiede la credenza in un Principio Creatore, senza imporre alcun dogma. Se vuole, descriva con parole proprie la sua posizione personale. Non si valuta per contenuto confessionale, ma per sincerità.",
       howKnown: "Come ha conosciuto la massoneria?",
-      howKnownHelp: "Letture, famiglia, incontri, ricerche personali. Sia concreto: titoli di libri, nomi se ricorda, momenti. (min. 300 caratteri)",
+      howKnownHelp: "Letture, famiglia, incontri, ricerche personali. Se desidera, sia concreto: titoli di libri, nomi, momenti.",
       whyPetition: "Perché presenta domanda?",
-      whyPetitionHelp: "Questa è la domanda centrale. Le chiediamo di scrivere con calma. Una risposta breve o generica non permette di valutare la sua petizione e di solito porta a un rifiuto senza colloquio. Non c'è risposta corretta — c'è risposta autentica. (min. 800 caratteri)",
+      whyPetitionHelp: "Questa è la domanda centrale. Le chiediamo di scrivere con calma. Non c'è risposta corretta — c'è risposta autentica. (min. 200 caratteri)",
       whyLodge: "Perché la Unione Italiana N°12 e non un'altra Loggia?",
-      whyLodgeHelp: "Esistono logge regolari a Buenos Aires con orientamenti diversi. Cosa la porta specificamente alla nostra? (min. 300 caratteri)",
-      ref1Name: "Riferimento 1 — Nome completo", ref1Contact: "Riferimento 1 — Email o telefono",
-      ref2Name: "Riferimento 2 — Nome completo", ref2Contact: "Riferimento 2 — Email o telefono",
-      refsHelp: "Due persone del suo ambiente (non familiari) che possano testimoniare del suo carattere. Potrebbero o no essere contattate.",
+      whyLodgeHelp: "Esistono logge regolari a Buenos Aires con orientamenti diversi. Cosa la porta specificamente alla nostra?",
       criminal: "Ha precedenti penali?",
       criminalDetail: "Se sì, descriva brevemente",
       criminalHelp: "Una risposta affermativa non è automaticamente escludente; una risposta falsa, sì.",
@@ -156,28 +150,29 @@ const labels = lang === "es"
         </div>
 
         <div class="grid-2">
-          <label class="field"><span>{labels.dob} *</span><input type="date" name="dateOfBirth" required autocomplete="bday" /></label>
-          <label class="field"><span>{labels.nationality} *</span><input type="text" name="nationality" required maxlength="120" /></label>
+          <label class="field"><span>{labels.dob}</span><input type="date" name="dateOfBirth" autocomplete="bday" /></label>
+          <label class="field"><span>{labels.nationality}</span><input type="text" name="nationality" maxlength="120" /></label>
         </div>
 
         <div class="grid-2">
-          <label class="field"><span>{labels.docType} *</span>
-            <select name="documentType" required>
+          <label class="field"><span>{labels.docType}</span>
+            <select name="documentType">
+              <option value="">—</option>
               <option value="DNI">DNI</option>
               <option value="Passport">Passport</option>
               <option value="CarnetIT">Carta d'Identità (IT)</option>
               <option value="Other">{lang === "es" ? "Otro" : "Altro"}</option>
             </select>
           </label>
-          <label class="field"><span>{labels.docNumber} *</span><input type="text" name="documentNumber" required maxlength="40" /></label>
+          <label class="field"><span>{labels.docNumber}</span><input type="text" name="documentNumber" maxlength="40" /></label>
         </div>
 
-        <label class="field"><span>{labels.address} *</span><input type="text" name="address" required maxlength="200" autocomplete="street-address" /></label>
+        <label class="field"><span>{labels.address}</span><input type="text" name="address" maxlength="200" autocomplete="street-address" /></label>
 
         <div class="grid-3">
-          <label class="field"><span>{labels.city} *</span><input type="text" name="city" required autocomplete="address-level2" /></label>
-          <label class="field"><span>{labels.province} *</span><input type="text" name="province" required autocomplete="address-level1" /></label>
-          <label class="field"><span>{labels.country} *</span><input type="text" name="country" required autocomplete="country-name" value={lang === "it" ? "Italia" : "Argentina"} /></label>
+          <label class="field"><span>{labels.city}</span><input type="text" name="city" autocomplete="address-level2" /></label>
+          <label class="field"><span>{labels.province}</span><input type="text" name="province" autocomplete="address-level1" /></label>
+          <label class="field"><span>{labels.country}</span><input type="text" name="country" autocomplete="country-name" value={lang === "it" ? "Italia" : "Argentina"} /></label>
         </div>
 
         <div class="grid-2">
@@ -187,7 +182,7 @@ const labels = lang === "es"
 
         <label class="field">
           <span>{labels.occupation} *</span>
-          <input type="text" name="occupation" required minlength="3" maxlength="200" />
+          <input type="text" name="occupation" required minlength="3" maxlength="120" />
           <small>{labels.occupationHelp}</small>
         </label>
 
@@ -202,26 +197,26 @@ const labels = lang === "es"
         <legend class="cinzel step-title">{labels.step2}</legend>
 
         <label class="field">
-          <span>{labels.religious} *</span>
-          <textarea name="religiousPosition" required minlength="200" maxlength="2000" rows="5"></textarea>
+          <span>{labels.religious}</span>
+          <textarea name="religiousPosition" maxlength="1500" rows="5"></textarea>
           <small>{labels.religiousHelp}</small>
         </label>
 
         <label class="field">
-          <span>{labels.howKnown} *</span>
-          <textarea name="howKnownMasonry" required minlength="300" maxlength="3000" rows="6"></textarea>
+          <span>{labels.howKnown}</span>
+          <textarea name="howKnownMasonry" maxlength="1500" rows="5"></textarea>
           <small>{labels.howKnownHelp}</small>
         </label>
 
         <label class="field">
           <span>{labels.whyPetition} *</span>
-          <textarea name="whyPetition" required minlength="800" maxlength="5000" rows="10"></textarea>
+          <textarea name="whyPetition" required minlength="200" maxlength="3000" rows="8"></textarea>
           <small>{labels.whyPetitionHelp}</small>
         </label>
 
         <label class="field">
-          <span>{labels.whyLodge} *</span>
-          <textarea name="whyThisLodge" required minlength="300" maxlength="3000" rows="6"></textarea>
+          <span>{labels.whyLodge}</span>
+          <textarea name="whyThisLodge" maxlength="1500" rows="5"></textarea>
           <small>{labels.whyLodgeHelp}</small>
         </label>
 
@@ -236,26 +231,18 @@ const labels = lang === "es"
         <legend class="cinzel step-title">{labels.step3}</legend>
 
         <div class="grid-2">
-          <label class="field"><span>{labels.ref1Name} *</span><input type="text" name="reference1Name" required maxlength="80" /></label>
-          <label class="field"><span>{labels.ref1Contact} *</span><input type="text" name="reference1Contact" required maxlength="120" /></label>
-          <label class="field"><span>{labels.ref2Name} *</span><input type="text" name="reference2Name" required maxlength="80" /></label>
-          <label class="field"><span>{labels.ref2Contact} *</span><input type="text" name="reference2Contact" required maxlength="120" /></label>
-        </div>
-        <p class="help-block">{labels.refsHelp}</p>
-
-        <div class="grid-2">
           <label class="field"><span>{labels.criminal} *</span>
             <select name="criminalRecord" required>
               <option value="no">No</option>
               <option value="yes">{lang === "es" ? "Sí" : "Sì"}</option>
             </select>
           </label>
-          <label class="field"><span>{labels.criminalDetail}</span><input type="text" name="criminalRecordDetail" maxlength="2000" /></label>
+          <label class="field"><span>{labels.criminalDetail}</span><input type="text" name="criminalRecordDetail" maxlength="500" /></label>
         </div>
         <p class="help-block">{labels.criminalHelp}</p>
 
         <div class="field">
-          <span>{labels.availability} *</span>
+          <span>{labels.availability}</span>
           <div class="checkbox-row">
             {[
               ["lun", lang === "es" ? "Lun" : "Lun"],
@@ -272,10 +259,11 @@ const labels = lang === "es"
         </div>
 
         <label class="field">
-          <span>{labels.contribution} *</span>
-          <select name="contributionRange" required>
+          <span>{labels.contribution}</span>
+          <select name="contributionRange">
+            <option value="">—</option>
             <option value="minimo">{labels.contributionMin}</option>
-            <option value="medio" selected>{labels.contributionMid}</option>
+            <option value="medio">{labels.contributionMid}</option>
             <option value="amplio">{labels.contributionLarge}</option>
             <option value="prefiero-no-decir">{labels.contributionPnts}</option>
           </select>
@@ -284,7 +272,7 @@ const labels = lang === "es"
 
         <label class="field">
           <span>{labels.freeComment}</span>
-          <textarea name="freeComment" maxlength="3000" rows="4"></textarea>
+          <textarea name="freeComment" maxlength="1500" rows="4"></textarea>
         </label>
 
         <label class="check check-block">
