@@ -9,6 +9,16 @@ const { lang } = Astro.props;
 const base = `/${lang}`;
 const obedienceHref = lang === "es" ? `${base}/la-logia/auspicios/` : `${base}/la-loggia/auspici/`;
 
+// Año dinámico romano para el copyright
+const currentYear = new Date().getUTCFullYear();
+const toRoman = (n: number): string => {
+  const m: [number, string][] = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+  let s = ""; let r = n;
+  for (const [v, c] of m) { while (r >= v) { s += c; r -= v; } }
+  return s;
+};
+const copyYear = toRoman(currentYear);
+
 const links = lang === "es"
   ? {
       institutional: [
@@ -157,7 +167,7 @@ const links = lang === "es"
     <div class="container">
       <p class="lema-spaced">A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴</p>
       <hr class="tricolor-rule" />
-      <p class="footer-copy">© MMXXV (e∴v∴) · BUENOS AIRES · SUB ROSA</p>
+      <p class="footer-copy">© {copyYear} (e∴v∴) · BUENOS AIRES · SUB ROSA</p>
     </div>
   </div>
 </footer>

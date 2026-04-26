@@ -67,10 +67,13 @@ const obedienceLabel = lang === "es"
     <nav aria-label={navLabel} class="primary-nav">
       <ul>
         {items.map(({ href, key }) => {
-          const active = currentPath === href.replace(/\/$/, "");
+          const cleanHref = href.replace(/\/$/, "");
+          const exact = currentPath === cleanHref;
+          const subActive = cleanHref !== `/${lang}` && currentPath.startsWith(cleanHref + "/");
+          const active = exact || subActive;
           return (
             <li>
-              <a href={href} aria-current={active ? "page" : undefined} class={active ? "is-active" : ""}>
+              <a href={href} aria-current={exact ? "page" : undefined} class={active ? "is-active" : ""}>
                 {t(key, lang)}
               </a>
             </li>
@@ -137,12 +140,15 @@ const obedienceLabel = lang === "es"
     <nav class="drawer-nav" aria-label={navLabel}>
       <ul>
         {items.map(({ href, key, eyebrow }, i) => {
-          const active = currentPath === href.replace(/\/$/, "");
+          const cleanHref = href.replace(/\/$/, "");
+          const exact = currentPath === cleanHref;
+          const subActive = cleanHref !== `/${lang}` && currentPath.startsWith(cleanHref + "/");
+          const active = exact || subActive;
           return (
             <li style={`--i:${i};`}>
               <a
                 href={href}
-                aria-current={active ? "page" : undefined}
+                aria-current={exact ? "page" : undefined}
                 class={active ? "is-active" : ""}
                 data-drawer-link
               >

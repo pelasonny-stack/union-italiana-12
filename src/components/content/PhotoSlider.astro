@@ -106,7 +106,7 @@ function buildSrcset(src: string, ext: "webp" | "jpeg") {
       let current = Number(root.dataset.start ?? "0");
       const autoplay = Number(root.dataset.autoplay ?? "0");
       const total = slides.length;
-      let timer: number | undefined;
+      let timer: number | null = null;
 
       const show = (next: number) => {
         const target = ((next % total) + total) % total;
@@ -146,16 +146,24 @@ function buildSrcset(src: string, ext: "webp" | "jpeg") {
         if (e.key === "End") show(total - 1);
       });
 
-      // Autoplay (respeta prefers-reduced-motion)
+      // Autoplay (respeta prefers-reduced-motion + IntersectionObserver pause off-screen)
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (autoplay > 0 && !reduced) {
-        const start = () => { timer = window.setInterval(next, autoplay); };
-        const stop = () => { if (timer) window.clearInterval(timer); };
+        const start = () => { if (!timer) timer = window.setInterval(next, autoplay); };
+        const stop = () => { if (timer) { window.clearInterval(timer); timer = null; } };
         root.addEventListener("mouseenter", stop);
         root.addEventListener("mouseleave", start);
         root.addEventListener("focusin", stop);
         root.addEventListener("focusout", start);
-        start();
+        // Pausar cuando el slider está fuera del viewport
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => e.isIntersecting ? start() : stop());
+          }, { threshold: 0.25 });
+          io.observe(root);
+        } else {
+          start();
+        }
       }
     });
   };

@@ -1,0 +1,19 @@
+{
+  "name": "Respetable Logia Unión Italiana N°12",
+  "short_name": "Unión Italiana N°12",
+  "description": "Logia masónica regular de Buenos Aires desde 1858, bajo los auspicios de la Gran Logia de la Argentina de Libres y Aceptados Masones.",
+  "start_url": "/es/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0b0f",
+  "theme_color": "#0b0b0f",
+  "lang": "es-AR",
+  "dir": "ltr",
+  "categories": ["education", "books"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

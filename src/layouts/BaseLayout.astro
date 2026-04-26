@@ -50,6 +50,10 @@ const altUrl = new URL(altPath, Astro.site).toString();
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     {/* LCP preload — Hero del Templo (solo en home, WebP responsive) */}
@@ -81,6 +85,12 @@ const altUrl = new URL(altPath, Astro.site).toString();
     <meta property="og:locale" content={LOCALE_LANG_TAG[lang].replace("-", "_")} />
     <meta property="og:site_name" content={t("site.name" as UIKey, lang)} />
     {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />}
+
+    {/* Twitter / X cards */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />}
 
     <JsonLd lang={lang} type={schemaType} />
     <EventJsonLd lang={lang} />

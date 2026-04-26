@@ -40,25 +40,32 @@ const { lang } = Astro.props;
       (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     btn.setAttribute("aria-pressed", current === "dark" ? "true" : "false");
   };
+  const toggle = (btn: HTMLButtonElement) => {
+    const root = document.documentElement;
+    const current =
+      root.getAttribute("data-theme") ??
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (_) {}
+    btn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
+  };
   const apply = () => {
     const btn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
     if (!btn) return;
     syncPressed(btn);
-    btn.addEventListener("click", () => {
-      const root = document.documentElement;
-      const current =
-        root.getAttribute("data-theme") ??
-        (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      const next = current === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      try {
-        localStorage.setItem("theme", next);
-      } catch (_) { /* ignore */ }
-      btn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
-    });
+    btn.addEventListener("click", () => toggle(btn));
   };
   apply();
   document.addEventListener("astro:after-swap", apply);
+
+  // Atajo Alt+T para alternar tema
+  document.addEventListener("keydown", (e) => {
+    if (e.altKey && (e.key === "t" || e.key === "T")) {
+      const btn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+      if (btn) { e.preventDefault(); toggle(btn); }
+    }
+  });
 </script>
 
 <style>

@@ -105,6 +105,20 @@ const labels = lang === "es"
     };
 ---
 
+<noscript>
+  <div class="atrio-noscript">
+    <p>
+      {lang === "es"
+        ? "Este formulario requiere JavaScript para funcionar correctamente. Por favor, escriba directamente a "
+        : "Questo modulo richiede JavaScript per funzionare correttamente. Si prega di scrivere direttamente a "}
+      <a href="mailto:unionitaliana12@gmail.com">unionitaliana12@gmail.com</a>
+      {lang === "es"
+        ? " indicando los datos personales y los motivos de la petición."
+        : " indicando i dati personali e le motivazioni della petizione."}
+    </p>
+  </div>
+</noscript>
+
 <div
   class="atrio"
   data-atrio
@@ -435,6 +449,16 @@ const labels = lang === "es"
     };
     form.addEventListener("input", scheduleDump);
     form.addEventListener("change", scheduleDump);
+
+    // Auto-resize de todos los textareas según contenido
+    root.querySelectorAll<HTMLTextAreaElement>("textarea").forEach((ta) => {
+      const autoresize = () => {
+        ta.style.height = "auto";
+        ta.style.height = `${ta.scrollHeight + 2}px`;
+      };
+      ta.addEventListener("input", autoresize);
+      requestAnimationFrame(autoresize);
+    });
 
     // Char counters para textareas con data-charcount
     root.querySelectorAll<HTMLTextAreaElement>("textarea[data-charcount]").forEach((ta) => {
@@ -828,6 +852,18 @@ const labels = lang === "es"
     height: 1px;
     opacity: 0;
     pointer-events: none;
+  }
+
+  .atrio-noscript {
+    background: var(--travertino);
+    color: var(--inchiostro);
+    padding: var(--space-6);
+    border-left: 3px solid var(--vermiglio);
+    font-family: var(--font-serif);
+    font-style: italic;
+    text-align: center;
+    margin: var(--space-8) auto;
+    max-width: 60ch;
   }
 
   .atrio-restore {
