@@ -33,7 +33,7 @@ const SLUG_MAP_ES_TO_IT: Record<string, string> = {
   "principios": "principi",
   "glosario": "glossario",
   "biblioteca": "biblioteca",
-  "tenidas-blancas": "tornate-bianche",
+  "reuniones-blancas": "riunioni-bianche",
   "cultura": "cultura",
   "beneficencia": "beneficenza",
   "peticion": "petizione",

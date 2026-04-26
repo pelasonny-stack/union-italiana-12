@@ -1,20 +1,20 @@
 ---
 title: "Cultura italiana nell'Argentina del Centenario"
-translationKey: "tenida-cultura-italiana-2026-05"
+translationKey: "reunión-cultura-italiana-2026-05"
 date: 2026-05-14T20:30:00-03:00
 endDate: 2026-05-14T22:30:00-03:00
 location:
   venue: "Tempio Hijos del Trabajo"
   address: "San Antonio 814"
   city: "Barracas, CABA"
-kind: "tenida-blanca"
+kind: "reunión-blanca"
 isPublic: true
-excerpt: "Tornata bianca aperta al pubblico sull'eredità dell'immigrazione italiana nella cultura argentina del Centenario."
+excerpt: "Riunione aperta aperta al pubblico sull'eredità dell'immigrazione italiana nella cultura argentina del Centenario."
 draft: false
 ---
 
 La R∴L∴ Unione Italiana N°12 apre le porte del Tempio Hijos del Trabajo per una
-**tornata bianca** dedicata alla cultura italiana nell'Argentina del Centenario.
+**riunione aperta** dedicata alla cultura italiana nell'Argentina del Centenario.
 
 ## Programma
 

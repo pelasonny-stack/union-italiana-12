@@ -1,6 +1,6 @@
 ---
 /**
- * Sello de Obediencia — Gran Logia de la Argentina de L∴ y A∴ M∴.
+ * Sello de Afiliación — Gran Logia de la Argentina de L∴ y A∴ M∴.
  * Tratamiento "sello oficial enmarcado": doble border + corner marks.
  */
 import type { Locale } from "../../i18n/config";
@@ -10,15 +10,15 @@ const { lang, variant = "full" } = Astro.props;
 
 const text = lang === "es"
   ? {
-      seal: "Sello de Obediencia · MDCCCLVII—MMXXV",
-      under: "Bajo la obediencia de la",
+      seal: "Sello de Afiliación · MDCCCLVII—MMXXV",
+      under: "Afiliada a la",
       gla: "Gran Logia de la Argentina de Libres y Aceptados Masones",
       foundation: "Fundada el 11 · XII · MDCCCLVII",
       visit: "Visitar el sitio oficial →",
     }
   : {
-      seal: "Sigillo d'Obbedienza · MDCCCLVII—MMXXV",
-      under: "Sotto l'obbedienza della",
+      seal: "Sigillo di Affiliazione · MDCCCLVII—MMXXV",
+      under: "Affiliata alla",
       gla: "Gran Loggia dell'Argentina dei Liberi e Accettati Massoni",
       foundation: "Fondata l'11 · XII · MDCCCLVII",
       visit: "Visitare il sito ufficiale →",

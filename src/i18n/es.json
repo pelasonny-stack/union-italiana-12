@@ -1,6 +1,6 @@
 {
   "site.name": "Unión Italiana N°12",
-  "site.tagline": "Al Oriente de Buenos Aires, desde MDCCCLVIII",
+  "site.tagline": "Al Buenos Aires, desde MDCCCLVIII",
   "site.lema": "A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴",
 
   "nav.home": "Inicio",
@@ -20,7 +20,7 @@
   "nav.masonry.glossary": "Glosario",
   "nav.masonry.library": "Biblioteca",
 
-  "nav.activities.tenidas": "Tenidas blancas",
+  "nav.activities.reuniones": "Reuniones abiertas",
   "nav.activities.culture": "Cultura",
   "nav.activities.charity": "Beneficencia",
 
@@ -40,7 +40,7 @@
 
   "home.hero.eyebrow": "Respetable Logia",
   "home.hero.title": "Unión Italiana",
-  "home.hero.subtitle": "Sociedad iniciática, filantrópica, filosófica y progresista · al Oriente de Buenos Aires desde 1858",
+  "home.hero.subtitle": "Sociedad iniciática, filantrópica, filosófica y progresista · en Buenos Aires desde 1858",
   "home.hero.cta": "Recorrer el Templo",
   "home.three_doors.history": "Conocer la historia",
   "home.three_doors.masonry": "Comprender la Orden",
@@ -49,12 +49,12 @@
   "petition.cta": "Atrio del Peticionario",
   "petition.eyebrow": "Quien llama a las puertas",
   "petition.intro.heading": "Antes de seguir leyendo",
-  "petition.step.identity": "Umbral I — Identidad",
-  "petition.step.reflection": "Umbral II — Introspección",
-  "petition.step.word": "Umbral III — Palabra",
+  "petition.step.identity": "Etapa I — Identidad",
+  "petition.step.reflection": "Etapa II — Introspección",
+  "petition.step.word": "Etapa III — Palabra",
   "petition.next": "Continuar",
   "petition.back": "Atrás",
-  "petition.submit": "Golpear las puertas del Templo",
+  "petition.submit": "Enviar petición",
   "petition.heard": "Has sido escuchado.",
 
   "form.required": "Este campo es obligatorio.",
@@ -66,5 +66,5 @@
 
   "contact.subject.general": "Contacto general",
   "contact.subject.academy": "Investigación / academia",
-  "contact.subject.brother": "Hermano visitante"
+  "contact.subject.brother": "Miembro visitante"
 }

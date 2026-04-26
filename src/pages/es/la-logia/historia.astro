@@ -5,26 +5,26 @@ import Quote from "../../../components/content/Quote.astro";
 const lang = "es" as const;
 
 const milestones = [
-  { year: "1858 · 23·XII", title: "Fundación", text: "Se consagran los trabajos de la Logia bajo el nombre original de Unione Italiana, con sesiones en italiano. Primer Venerable Maestro: el Querido y Respetable Hermano José Salvarezza, médico genovés graduado en la Universidad de Buenos Aires (1866) y figura prominente de la colectividad italiana porteña." },
+  { year: "1858 · 23·XII", title: "Fundación", text: "Se inauguran las actividades de la Logia bajo el nombre original de Unione Italiana, con sesiones en italiano. Primer Presidente: el médico genovés José Salvarezza, médico genovés graduado en la Universidad de Buenos Aires (1866) y figura prominente de la colectividad italiana porteña." },
   { year: "1858 · año bisagra", title: "Mutual y Logia", text: "Cinco meses antes, el 18 de julio, había abierto sus puertas la Unione e Benevolenza —primera Sociedad Italiana de Mutuo Soccorso de Sudamérica— bajo el padrinazgo simbólico de Mazzini y Garibaldi. Mutual y Logia: dos manos de la misma comunidad italiana." },
   { year: "1867 · cólera", title: "Primera epidemia", text: "Salvarezza atiende sin cobrar a las víctimas de la epidemia de cólera, particularmente a los inmigrantes hacinados en La Boca y Barracas." },
-  { year: "1871 · 27·I — 11·VI", title: "Fiebre amarilla", text: "Se desata la epidemia que mata a 14.000 personas en Buenos Aires, 9.000 de ellas italianas. Los hermanos de la Logia se suman a la Comisión Popular presidida por Roque Pérez —Gran Maestro, fallecido en cumplimiento del deber. Salvarezza no se ausenta del frente sanitario." },
+  { year: "1871 · 27·I — 11·VI", title: "Fiebre amarilla", text: "Se desata la epidemia que mata a 14.000 personas en Buenos Aires, 9.000 de ellas italianas. Los miembros de la Logia se suman a la Comisión Popular presidida por Roque Pérez —Gran Maestro, fallecido en cumplimiento del deber. Salvarezza no se ausenta del frente sanitario." },
   { year: "1872 · Hospital Italiano", text: "Las logias italianas sostienen los años difíciles del Hospital Italiano —fundado en 1853 con piedra fundamental en 1854— en su consolidación institucional." },
-  { year: "1876—1877 · cisma", title: "Unione Italiana II", text: "Una mayoría de hermanos solicita el ingreso al Gran Oriente de Italia: el 23 de marzo de 1877 nace la Unione Italiana II. La fusión posterior reunirá más de 600 hermanos." },
+  { year: "1876—1877 · cisma", title: "Unione Italiana II", text: "Una mayoría de miembros solicita el ingreso al Gran Oriente de Italia: el 23 de marzo de 1877 nace la Unione Italiana II. La fusión posterior reunirá más de 600 miembros." },
   { year: "1882 · 19·XI", title: "Fundación de La Plata", text: "En la piedra fundamental de la nueva capital provincial se deposita un medallón de la Unione Italiana, junto a otros de logias contemporáneas. La obra es dirigida por Dardo Rocha, masón él mismo, con trazado de Pedro Benoit." },
   { year: "1898 · 5·VIII", title: "José Ingenieros", text: "El joven José Ingenieros, hijo del periodista siciliano Salvatore Ingegnieros, se inicia en la Logia Unión Italiana Primera Nº 90 —rama derivada del cisma— al alcanzar la mayoría de edad. Será Gran Hospitalario de la masonería argentina en 1901-1902 y autor de El hombre mediocre (1913)." },
-  { year: "Siglo XX", title: "Continuidad y silencio", text: "Las dos guerras mundiales, los sucesivos golpes y los años de la última dictadura ponen a prueba la regularidad de los trabajos. La Logia atraviesa períodos más visibles y otros más reservados." },
+  { year: "Siglo XX", title: "Continuidad y silencio", text: "Las dos guerras mundiales, los sucesivos golpes y los años de la última dictadura ponen a prueba la regularidad institucional. La Logia atraviesa períodos más visibles y otros más reservados." },
   { year: "1983 · 6·IV", title: "Disolución de Hijos del Trabajo", text: "Por Decreto 4228, la Gran Logia disuelve la R∴L∴ Hijos del Trabajo —fundada el 14 de mayo de 1882, consagrada en su templo de San Antonio 814 el 22 de junio de 1890— tras 101 años de vida." },
   { year: "2003", title: "Hijos del Trabajo Nº 74", text: "La Gran Logia autoriza el relevantamiento de columnas como R∴L∴ Hijos del Trabajo Nº 74, restituyendo la actividad ritual al templo histórico de Barracas." },
-  { year: "2014", title: "Refundación de la Unión Italiana N°12", text: "Un grupo de Maestros Masones, preocupados por la falta de presencia de la Orden en La Boca —núcleo histórico de la inmigración italiana—, solicita autorización para reinstaurar la Unión Italiana. La Logia retoma sus trabajos regulares en el mismo templo donde, casi siglo y medio antes, la colectividad italiana había levantado su tabernáculo." },
-  { year: "Hoy", title: "Al Or∴ de Buenos Aires", text: "Trabajamos los lunes en el histórico Templo Hijos del Trabajo, San Antonio 814, Barracas — bajo la obediencia de la Gran Logia de la Argentina de Libres y Aceptados Masones." },
+  { year: "2014", title: "Refundación de la Unión Italiana N°12", text: "Un grupo de masones, preocupados por la falta de presencia de la Orden en La Boca —núcleo histórico de la inmigración italiana—, solicita autorización para reinstaurar la Unión Italiana. La Logia retoma su actividad regular en el mismo templo donde, casi siglo y medio antes, la colectividad italiana había levantado su tabernáculo." },
+  { year: "Hoy", title: "En Buenos Aires", text: "Trabajamos los lunes en el histórico Templo Hijos del Trabajo, San Antonio 814, Barracas — afiliada a la Gran Logia de la Argentina de Libres y Aceptados Masones." },
 ];
 ---
 
 <BaseLayout
   lang={lang}
   title="Historia"
-  description="Historia documentada de la R∴L∴ Unión Italiana N°12: fundación 1858, primer VM José Salvarezza, fiebre amarilla, fundación de La Plata, José Ingenieros, refundación 2014."
+  description="Historia documentada de la R∴L∴ Unión Italiana N°12: fundación 1858, primer Presidente José Salvarezza, fiebre amarilla, fundación de La Plata, José Ingenieros, refundación 2014."
 >
   <PageHero
     eyebrow="1858 — 2025"

@@ -23,7 +23,7 @@ const eventos = defineCollection({
       address: z.string(),
       city: z.string(),
     }),
-    kind: z.enum(["tenida-blanca", "agape", "columna-instruccion", "evento-publico", "aniversario"]),
+    kind: z.enum(["reunión-blanca", "agape", "columna-instruccion", "evento-publico", "aniversario"]),
     isPublic: z.boolean().default(true),
     cover: z.string().optional(),
     excerpt: z.string().max(280),

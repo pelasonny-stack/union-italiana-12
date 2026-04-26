@@ -1,6 +1,6 @@
 {
   "site.name": "Unione Italiana N°12",
-  "site.tagline": "All'Oriente di Buenos Aires, dal MDCCCLVIII",
+  "site.tagline": "All'Buenos Aires, dal MDCCCLVIII",
   "site.lema": "A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴",
 
   "nav.home": "Home",
@@ -20,7 +20,7 @@
   "nav.masonry.glossary": "Glossario",
   "nav.masonry.library": "Biblioteca",
 
-  "nav.activities.tenidas": "Tornate bianche",
+  "nav.activities.reuniones": "Riunioni aperte",
   "nav.activities.culture": "Cultura",
   "nav.activities.charity": "Beneficenza",
 
@@ -40,7 +40,7 @@
 
   "home.hero.eyebrow": "Rispettabile Loggia",
   "home.hero.title": "Unione Italiana",
-  "home.hero.subtitle": "Società iniziatica, filantropica, filosofica e progressista · all'Oriente di Buenos Aires dal 1858",
+  "home.hero.subtitle": "Società iniziatica, filantropica, filosofica e progressista · a Buenos Aires dal 1858",
   "home.hero.cta": "Visitare il Tempio",
   "home.three_doors.history": "Conoscere la storia",
   "home.three_doors.masonry": "Comprendere l'Ordine",
@@ -49,12 +49,12 @@
   "petition.cta": "Atrio del Postulante",
   "petition.eyebrow": "Chi bussa alle porte",
   "petition.intro.heading": "Prima di proseguire",
-  "petition.step.identity": "Soglia I — Identità",
-  "petition.step.reflection": "Soglia II — Introspezione",
-  "petition.step.word": "Soglia III — Parola",
+  "petition.step.identity": "Tappa I — Identità",
+  "petition.step.reflection": "Tappa II — Introspezione",
+  "petition.step.word": "Tappa III — Parola",
   "petition.next": "Continua",
   "petition.back": "Indietro",
-  "petition.submit": "Bussare alle porte del Tempio",
+  "petition.submit": "Inviare la petizione",
   "petition.heard": "Sei stato ascoltato.",
 
   "form.required": "Questo campo è obbligatorio.",
@@ -66,5 +66,5 @@
 
   "contact.subject.general": "Contatto generale",
   "contact.subject.academy": "Ricerca / accademia",
-  "contact.subject.brother": "Fratello visitatore"
+  "contact.subject.brother": "Membro visitatore"
 }

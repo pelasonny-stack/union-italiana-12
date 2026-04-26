@@ -1,20 +1,20 @@
 ---
 title: "Cultura italiana en la Argentina del Centenario"
-translationKey: "tenida-cultura-italiana-2026-05"
+translationKey: "reunión-cultura-italiana-2026-05"
 date: 2026-05-14T20:30:00-03:00
 endDate: 2026-05-14T22:30:00-03:00
 location:
   venue: "Templo Hijos del Trabajo"
   address: "San Antonio 814"
   city: "Barracas, CABA"
-kind: "tenida-blanca"
+kind: "reunión-blanca"
 isPublic: true
-excerpt: "Tenida blanca abierta al público sobre el legado de la inmigración italiana en la cultura argentina del Centenario."
+excerpt: "Reunión abierta abierta al público sobre el legado de la inmigración italiana en la cultura argentina del Centenario."
 draft: false
 ---
 
 La R∴L∴ Unión Italiana N°12 abre las puertas del Templo Hijos del Trabajo para una
-**tenida blanca** dedicada a la cultura italiana en la Argentina del Centenario.
+**reunión abierta** dedicada a la cultura italiana en la Argentina del Centenario.
 
 ## Programa
 
