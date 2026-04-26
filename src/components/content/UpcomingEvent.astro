@@ -28,7 +28,7 @@ const toRoman = (n: number): string => {
 const dayOfMonth = String(eventDate.getUTCDate()).padStart(2, "0");
 const monthRoman = toRoman(eventDate.getUTCMonth() + 1);
 const yearRoman = toRoman(eventDate.getUTCFullYear());
-const dateStr = `${dayOfMonth}·${monthRoman}·${yearRoman}`;
+const dateStr = `${dayOfMonth}·${monthRoman}·${yearRoman} (e∴v∴)`;
 
 const title = lang === "it" ? event.title.it : event.title.es;
 const kind = lang === "it" ? event.kind.it : event.kind.es;

@@ -41,9 +41,9 @@ const year = today.getUTCFullYear();
 const sinceFoundation = year - 1858;
 const sinceRefounding = year - 2014;
 const masthead = lang === "es"
-  ? `VOLUMEN I · BUENOS AIRES · ${toRoman(year)}`
-  : `VOLUME I · BUENOS AIRES · ${toRoman(year)}`;
-const stamp = `${String(today.getUTCDate()).padStart(2, "0")} · ${toRoman(today.getUTCMonth() + 1)} · ${toRoman(year)} (e∴v∴) —  A∴ V∴ L∴`;
+  ? `VOLUMEN I · BUENOS AIRES · ${toRoman(year)} (e∴v∴)`
+  : `VOLUME I · BUENOS AIRES · ${toRoman(year)} (e∴v∴)`;
+const stamp = `${String(today.getUTCDate()).padStart(2, "0")} · ${toRoman(today.getUTCMonth() + 1)} · ${toRoman(year)} (e∴v∴) — ${year + 4000} A∴ V∴ L∴`;
 const anniversaries = lang === "es"
   ? `Año ${toRoman(sinceRefounding)} desde la refundación · ${toRoman(sinceFoundation)} desde la fundación`
   : `Anno ${toRoman(sinceRefounding)} dalla rifondazione · ${toRoman(sinceFoundation)} dalla fondazione`;

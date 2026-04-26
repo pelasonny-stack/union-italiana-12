@@ -24,11 +24,19 @@ const menuLabel = lang === "es" ? "Abrir menú" : "Apri menu";
 const closeLabel = lang === "es" ? "Cerrar menú" : "Chiudi menu";
 const navLabel = lang === "es" ? "Navegación principal" : "Navigazione principale";
 const obedienceLabel = lang === "es"
-  ? "Afiliada a de la Gran Logia de la Argentina"
-  : "Affiliata a della Gran Loggia dell'Argentina";
+  ? "Bajo los auspicios de la Gran Logia de la Argentina de Libres y Aceptados Masones"
+  : "Sotto gli auspici della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni";
 ---
 
 <header class="site-header">
+  {/* Banda institucional reglamentaria (Art. 5° a, b — RR.GG. GLA) */}
+  <div class="header-institutional" role="contentinfo">
+    <div class="container header-institutional-inner">
+      <span class="invocation cinzel">A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴</span>
+      <span class="auspices">{obedienceLabel}</span>
+    </div>
+  </div>
+
   <div class="container header-row">
     <a class="brand" href={`${base}/`} aria-label={t("site.name" as UIKey, lang)}>
       <img
@@ -217,6 +225,40 @@ const obedienceLabel = lang === "es"
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
     transition: padding var(--duration-normal) var(--ease-ceremonial);
+  }
+  .header-institutional {
+    background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+    font-size: 0.66rem;
+    line-height: 1.4;
+  }
+  .header-institutional-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    padding-block: 4px 6px;
+  }
+  .invocation {
+    letter-spacing: 0.32em;
+    color: var(--accent-bright);
+    flex-shrink: 0;
+  }
+  .auspices {
+    color: var(--fg-muted);
+    text-align: right;
+  }
+  @media (max-width: 700px) {
+    .header-institutional-inner {
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .auspices {
+      text-align: center;
+      font-size: 0.62rem;
+    }
   }
   .header-row {
     display: grid;
