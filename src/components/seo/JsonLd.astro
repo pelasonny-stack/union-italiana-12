@@ -1,7 +1,8 @@
 ---
 /**
- * JSON-LD Schema.org — Organization con parentOrganization GLA.
- * Inyectar en <head> de páginas relevantes (al menos Home y La Logia).
+ * JSON-LD Schema.org enriquecido para SEO.
+ * Organization + WebSite + ContactPoint + knowsAbout + GeoCoordinates.
+ * Inyecta en <head> de TODAS las páginas (vía BaseLayout).
  */
 import type { Locale } from "../../i18n/config";
 
@@ -9,23 +10,43 @@ interface Props { lang: Locale; type?: "Organization" | "WebSite" }
 const { lang, type = "Organization" } = Astro.props;
 
 const url = Astro.site?.toString() ?? "https://logiaunionitaliana12.com.ar/";
+const isES = lang === "es";
 
 const org = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${url}#organization`,
-  name: lang === "es" ? "Respetable Logia Unión Italiana N°12" : "Rispettabile Loggia Unione Italiana N°12",
-  alternateName: ["Unión Italiana N°12", "Unione Italiana 12", "R∴L∴ Unión Italiana N°12"],
+  name: isES ? "Respetable Logia Unión Italiana N°12" : "Rispettabile Loggia Unione Italiana N°12",
+  alternateName: [
+    "Unión Italiana N°12",
+    "Unione Italiana 12",
+    "R∴L∴ Unión Italiana N°12",
+    "Logia Unión Italiana 12",
+    "Logia Masónica Unión Italiana",
+  ],
   url,
-  logo: `${url}assets/logos/union-italiana-12-logo.png`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${url}assets/logos/union-italiana-12-logo.png`,
+    width: 512,
+    height: 512,
+  },
+  image: `${url}assets/templo/templo-1.jpeg`,
   foundingDate: "1858-12-23",
-  slogan: lang === "es" ? "Libertad, Igualdad, Fraternidad" : "Libertà, Uguaglianza, Fraternità",
-  description: lang === "es"
-    ? "Respetable Logia masónica fundada el 23 de diciembre de 1858 en el Oriente de Buenos Aires. De herencia italiana, bajo la obediencia de la Gran Logia de la Argentina de Libres y Aceptados Masones."
-    : "Rispettabile Loggia massonica fondata il 23 dicembre 1858 all'Oriente di Buenos Aires. Di eredità italiana, sotto l'obbedienza della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni.",
+  founder: {
+    "@type": "Person",
+    name: "José Salvarezza",
+    description: "Médico genovés, primer Venerable Maestro de la Logia",
+  },
+  slogan: isES ? "Libertad, Igualdad, Fraternidad" : "Libertà, Uguaglianza, Fraternità",
+  description: isES
+    ? "Logia masónica regular fundada el 23 de diciembre de 1858 en Buenos Aires. De herencia italiana, bajo la obediencia de la Gran Logia de la Argentina de Libres y Aceptados Masones. Trabaja en el histórico Templo Hijos del Trabajo de Barracas. Sociedad iniciática, filantrópica, filosófica y progresista."
+    : "Loggia massonica regolare fondata il 23 dicembre 1858 a Buenos Aires. Di eredità italiana, sotto l'obbedienza della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni. Lavora nel storico Tempio Hijos del Trabajo di Barracas.",
   parentOrganization: {
     "@type": "Organization",
+    "@id": "https://www.masoneria-argentina.org.ar/#organization",
     name: "Gran Logia de la Argentina de Libres y Aceptados Masones",
+    alternateName: ["GLA", "Gran Logia Argentina"],
     url: "https://www.masoneria-argentina.org.ar/",
     foundingDate: "1857-12-11",
   },
@@ -37,12 +58,54 @@ const org = {
       streetAddress: "San Antonio 814",
       addressLocality: "Barracas",
       addressRegion: "Ciudad Autónoma de Buenos Aires",
+      postalCode: "C1276",
       addressCountry: "AR",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: -34.640,
+      longitude: -58.379,
+    },
   },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: isES ? "consultas generales" : "informazioni generali",
+      email: "unionitaliana12@gmail.com",
+      availableLanguage: ["Spanish", "Italian"],
+      areaServed: ["AR", "IT"],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: isES ? "iniciación / peticionarios" : "iniziazione / postulanti",
+      email: "unionitaliana12@gmail.com",
+      url: `${url}${isES ? "es/iniciacion/" : "it/iniziazione/"}`,
+    },
+  ],
+  knowsAbout: [
+    "Masonería",
+    "Massoneria",
+    "Freemasonry",
+    "Risorgimento",
+    "José Ingenieros",
+    "Giuseppe Garibaldi",
+    "Inmigración italiana en Argentina",
+    "Gran Logia de la Argentina",
+    "Templo Hijos del Trabajo",
+    "Barracas",
+    "Filantropía masónica",
+    "Filosofía masónica",
+    "Iniciación masónica",
+    "Tenidas blancas",
+  ],
   sameAs: [
     "https://www.instagram.com/unionitaliana12/",
   ],
+  memberOf: {
+    "@type": "Organization",
+    name: "Gran Logia de la Argentina de Libres y Aceptados Masones",
+    url: "https://www.masoneria-argentina.org.ar/",
+  },
 };
 
 const site = {
@@ -51,8 +114,17 @@ const site = {
   "@id": `${url}#website`,
   url,
   name: org.name,
-  inLanguage: lang === "es" ? "es-AR" : "it-IT",
+  description: org.description,
+  inLanguage: isES ? "es-AR" : "it-IT",
   publisher: { "@id": `${url}#organization` },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${url}${isES ? "es" : "it"}/?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 const data = type === "WebSite" ? site : org;

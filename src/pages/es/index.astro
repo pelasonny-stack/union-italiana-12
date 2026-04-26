@@ -5,6 +5,7 @@ import PhotoSlider from "../../components/content/PhotoSlider.astro";
 import RotatingQuote from "../../components/content/RotatingQuote.astro";
 import ThreeDoors from "../../components/content/ThreeDoors.astro";
 import UpcomingEvent from "../../components/content/UpcomingEvent.astro";
+import ContactCTA from "../../components/content/ContactCTA.astro";
 import { t } from "../../i18n/ui";
 
 const lang = "es" as const;
@@ -21,8 +22,8 @@ const sliderPhotos = [
 
 <BaseLayout
   lang={lang}
-  title={t("site.name", lang)}
-  description="R∴L∴ Unión Italiana N°12 — al Oriente de Buenos Aires desde 1858. Bajo la obediencia de la Gran Logia de la Argentina. Trabaja en el Templo Hijos del Trabajo, Barracas."
+  title="Logia masónica regular de Buenos Aires"
+  description="R∴L∴ Unión Italiana N°12 — Logia masónica regular de Buenos Aires desde 1858. Sociedad iniciática, filantrópica, filosófica y progresista. Bajo la Gran Logia de la Argentina. Templo Hijos del Trabajo, Barracas. Iniciación, peticiones y contacto."
   schemaType="Organization"
 >
   <HeroTemple
@@ -63,6 +64,8 @@ const sliderPhotos = [
   />
 
   <RotatingQuote lang={lang} />
+
+  <ContactCTA lang={lang} variant="full" />
 </BaseLayout>
 
 <style>

@@ -1,0 +1,25 @@
+---
+/**
+ * JSON-LD FAQPage para rich snippets en Google.
+ * Aparece como acordeón expandible en resultados de búsqueda.
+ */
+interface Props {
+  faqs: Array<{ question: string; answer: string }>;
+}
+const { faqs } = Astro.props;
+
+const data = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />
