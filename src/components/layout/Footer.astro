@@ -6,7 +6,7 @@ import GLABadge from "./GLABadge.astro";
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 const base = `/${lang}`;
-const obedienceHref = lang === "es" ? `${base}/la-logia/obediencia/` : `${base}/la-loggia/obbedienza/`;
+const obedienceHref = lang === "es" ? `${base}/la-logia/auspicios/` : `${base}/la-loggia/auspici/`;
 
 const links = lang === "es"
   ? {
@@ -28,6 +28,7 @@ const links = lang === "es"
       legal: [
         { href: `${base}/legal/privacidad/`, label: t("footer.privacy" as UIKey, lang) },
         { href: `${base}/legal/terminos/`, label: t("footer.terms" as UIKey, lang) },
+        { href: `${base}/legal/aviso-reglamentario/`, label: "Aviso reglamentario (GLA)" },
       ],
     }
   : {
@@ -49,6 +50,7 @@ const links = lang === "es"
       legal: [
         { href: `${base}/legale/privacy/`, label: t("footer.privacy" as UIKey, lang) },
         { href: `${base}/legale/termini/`, label: t("footer.terms" as UIKey, lang) },
+        { href: `${base}/legale/avviso-regolamentare/`, label: "Avviso regolamentare (GLA)" },
       ],
     };
 ---

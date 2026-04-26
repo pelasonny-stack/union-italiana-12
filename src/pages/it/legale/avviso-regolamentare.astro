@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Avviso regolamentare"
+  description="Avviso regolamentare conforme al Reglamento Especial para la Publicación de Páginas Web en Internet della Gran Logia de la Argentina de Libres y Aceptados Masones."
+>
+  <PageHero
+    eyebrow="Regolamentazione GLA"
+    title="Avviso regolamentare"
+    subtitle="Conforme al Reglamento Especial de Publicación en Internet"
+    glyph="three-dots"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="lead drop-cap">
+      Questo sito web appartiene alla Rispettabile Loggia Unione Italiana N°12 e si pubblica
+      <strong>sotto gli auspici della Gran Loggia dell'Argentina dei Liberi e Accettati
+      Massoni</strong>, conforme al Reglamento Especial para la Publicación de Páginas Web
+      en Internet y Uso del Correo-e.
+    </p>
+
+    <h2>Disclaimer istituzionale (Art. 7°)</h2>
+    <blockquote>
+      <p>
+        Il contenuto di qualsiasi articolo e/o materiale di posta allegato è l'opinione, o
+        le opinioni degli autori, e non è in alcun modo interpretato come proveniente
+        dall'autorità Massonica in generale o di una Loggia in particolare, o dalla
+        Massoneria Universale. Ciascun autore contribuisce con la propria opinione. Essi
+        non sono portavoce ufficiali della Massoneria nella sua totalità.
+      </p>
+    </blockquote>
+
+    <h2>Responsabile della pubblicazione (Art. 7°, Art. 15°)</h2>
+    <p>
+      Responsabile istituzionale: <strong>Rispettabile Loggia Unione Italiana N°12</strong>.<br />
+      Posta elettronica ufficiale:
+      <a href="mailto:unionitaliana12@gmail.com">unionitaliana12@gmail.com</a>
+    </p>
+
+    <h2>Collegamento alla Gran Loggia (Art. 5° d)</h2>
+    <p>
+      <a
+        href="https://www.masoneria-argentina.org.ar/"
+        target="_blank"
+        rel="noopener external"
+      >Sito ufficiale della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni →</a>
+    </p>
+
+    <h2>Riserva della Gran Loggia (Art. 21°)</h2>
+    <p>
+      La Gran Loggia dell'Argentina, tramite la Segreteria di Internet, si riserva il
+      diritto di supervisionare, rivedere, conservare e/o sopprimere in qualsiasi momento
+      qualsiasi informazione che possa essere necessaria o inopportuna a giudizio delle
+      autorità dell'Ordine.
+    </p>
+
+    <h2>Convenzioni regolamentari</h2>
+    <ul>
+      <li>Le date formali sono citate con l'aggiunta <em>(e∴v∴)</em> conforme all'Art. 10°.</li>
+      <li>Le abbreviazioni seguono gli usi e costumi massonici conforme all'Art. 11°.</li>
+      <li>Questo sito non risponde a nome della Gran Loggia né della Massoneria in generale (Art. 17°).</li>
+      <li>Questo sito non divulga nomi né rivela l'ingresso di profani (Art. 18°).</li>
+    </ul>
+
+    <p style="margin-top: var(--space-8); font-style: italic; color: var(--fg-muted)">
+      A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴
+    </p>
+  </article>
+</BaseLayout>

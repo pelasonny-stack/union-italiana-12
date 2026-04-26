@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Aviso reglamentario"
+  description="Aviso reglamentario conforme al Reglamento Especial para la Publicación de Páginas Web en Internet de la Gran Logia de la Argentina de Libres y Aceptados Masones."
+>
+  <PageHero
+    eyebrow="Reglamentación GLA"
+    title="Aviso reglamentario"
+    subtitle="Conforme al Reglamento Especial de Publicación en Internet"
+    glyph="three-dots"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="lead drop-cap">
+      Este sitio web pertenece a la Respetable Logia Unión Italiana N°12 y se publica
+      <strong>bajo los auspicios de la Gran Logia de la Argentina de Libres y Aceptados
+      Masones</strong>, conforme al Reglamento Especial para la Publicación de Páginas Web
+      en Internet y Uso del Correo-e.
+    </p>
+
+    <h2>Disclaimer institucional (Art. 7°)</h2>
+    <blockquote>
+      <p>
+        El contenido de cualquier artículo, y/o material de correo adjunto es la opinión, o
+        las opiniones de los autores, y no es de manera alguna interpretado como siendo de la
+        autoridad Francmasónica en general o de una Logia en particular, o la Francmasonería
+        Universal. Cada autor contribuye, y es su propia opinión. Pues tales ellos no son
+        portavoces oficiales de la Francmasonería en su totalidad.
+      </p>
+    </blockquote>
+
+    <h2>Responsable de la publicación (Art. 7°, Art. 15°)</h2>
+    <p>
+      Responsable institucional: <strong>Respetable Logia Unión Italiana N°12</strong>.<br />
+      Correo electrónico oficial:
+      <a href="mailto:unionitaliana12@gmail.com">unionitaliana12@gmail.com</a>
+    </p>
+
+    <h2>Hipervínculo a la Gran Logia (Art. 5° d)</h2>
+    <p>
+      <a
+        href="https://www.masoneria-argentina.org.ar/"
+        target="_blank"
+        rel="noopener external"
+      >Sitio oficial de la Gran Logia de la Argentina de Libres y Aceptados Masones →</a>
+    </p>
+
+    <h2>Reserva de la Gran Logia (Art. 21°)</h2>
+    <p>
+      La Gran Logia de la Argentina, por intermedio de la Secretaría de Internet, se reserva
+      el derecho de supervisar, revisar, conservar y/o suprimir en cualquier momento cualquier
+      información que pueda ser necesaria o inconveniente a juicio de las autoridades de
+      la Orden.
+    </p>
+
+    <h2>Convenciones reglamentarias</h2>
+    <ul>
+      <li>Las fechas formales se citan con el agregado <em>(e∴v∴)</em> conforme al Art. 10°.</li>
+      <li>Las abreviaturas siguen los usos y costumbres masónicos conforme al Art. 11°.</li>
+      <li>Este sitio no responde en nombre de la Gran Logia ni de la Francmasonería en general (Art. 17°).</li>
+      <li>Este sitio no divulga nombres ni revela el ingreso de profanos (Art. 18°).</li>
+    </ul>
+
+    <p style="margin-top: var(--space-8); font-style: italic; color: var(--fg-muted)">
+      A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴
+    </p>
+  </article>
+</BaseLayout>
