@@ -1,0 +1,114 @@
+---
+/**
+ * Navegación al pie de páginas internas: ← Anterior · Índice · Siguiente →
+ * Útil en /masoneria/ y /la-logia/ donde hay sub-páginas en orden lectura.
+ */
+import type { Locale } from "../../i18n/config";
+
+interface NavLink { href: string; label: string }
+interface Props {
+  lang: Locale;
+  prev?: NavLink | null;
+  next?: NavLink | null;
+  index?: NavLink | null;
+}
+const { lang, prev = null, next = null, index = null } = Astro.props;
+const labels = lang === "es"
+  ? { prev: "Anterior", next: "Siguiente", index: "Índice" }
+  : { prev: "Precedente", next: "Successivo", index: "Indice" };
+---
+
+<nav class="nav-related" aria-label={labels.index}>
+  <div class="nav-related-rule" aria-hidden="true"></div>
+  <ul class="nav-related-grid">
+    <li class="nav-related-cell nav-related-prev">
+      {prev ? (
+        <a href={prev.href}>
+          <span class="nav-related-eyebrow overline">← {labels.prev}</span>
+          <span class="nav-related-label">{prev.label}</span>
+        </a>
+      ) : <span class="nav-related-empty" aria-hidden="true"></span>}
+    </li>
+    <li class="nav-related-cell nav-related-index">
+      {index ? (
+        <a href={index.href} class="cinzel">
+          {labels.index}
+        </a>
+      ) : <span aria-hidden="true">·</span>}
+    </li>
+    <li class="nav-related-cell nav-related-next">
+      {next ? (
+        <a href={next.href}>
+          <span class="nav-related-eyebrow overline">{labels.next} →</span>
+          <span class="nav-related-label">{next.label}</span>
+        </a>
+      ) : <span class="nav-related-empty" aria-hidden="true"></span>}
+    </li>
+  </ul>
+</nav>
+
+<style>
+  .nav-related {
+    max-width: var(--container-prose);
+    margin: var(--space-12) auto var(--space-6);
+    padding: 0 var(--space-3);
+  }
+  .nav-related-rule {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: var(--space-4);
+  }
+  .nav-related-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+  .nav-related-cell { min-width: 0; }
+  .nav-related-prev { text-align: left; }
+  .nav-related-index { text-align: center; }
+  .nav-related-next { text-align: right; }
+  .nav-related-eyebrow {
+    display: block;
+    color: var(--fg-muted);
+    font-size: 0.65rem;
+    margin-bottom: 2px;
+  }
+  .nav-related-label {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--fg);
+    line-height: 1.3;
+  }
+  .nav-related a {
+    background-image: none;
+    color: inherit;
+    transition: color var(--duration-fast);
+  }
+  .nav-related a:hover .nav-related-label,
+  .nav-related a:focus-visible .nav-related-label {
+    color: var(--accent);
+  }
+  .nav-related-index a {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-uppercase);
+    color: var(--fg-muted);
+  }
+  .nav-related-index a:hover, .nav-related-index a:focus-visible {
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .nav-related-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    .nav-related-cell { text-align: center; }
+  }
+</style>

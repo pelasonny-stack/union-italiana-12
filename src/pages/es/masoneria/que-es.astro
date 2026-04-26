@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 const lang = "es" as const;
 ---
 
@@ -64,6 +65,11 @@ const lang = "es" as const;
       la medida de su actuación. No son alegorías cerradas: cada miembro las recorre por su cuenta.
     </p>
 
+    <blockquote class="pull-quote">
+      <p>"Los masones son hombres morales y sociales, libres por nacimiento, de costumbres puras."</p>
+      <cite>— Constituciones de Anderson, 1723 (e∴v∴)</cite>
+    </blockquote>
+
     <h2>La regularidad — qué significa</h2>
     <p>
       Una logia regular es la que se constituye conforme a las antiguas tradiciones del oficio,
@@ -79,6 +85,12 @@ const lang = "es" as const;
       de masones argentinos del siglo XIX— para quien quiera profundizar.
     </p>
   </article>
+
+  <NavRelated
+    lang={lang}
+    index={{ href: "/es/masoneria/", label: "Masonería" }}
+    next={{ href: "/es/masoneria/principios/", label: "Principios" }}
+  />
 </BaseLayout>
 
 <style>

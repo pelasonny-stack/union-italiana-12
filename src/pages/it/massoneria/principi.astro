@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 const lang = "it" as const;
 ---
 
@@ -18,4 +19,11 @@ const lang = "it" as const;
     <h2>La questione del Grande Architetto dell'Universo</h2>
     <p>La massoneria regolare chiede a chi presenta domanda di affermare la sua credenza in un Principio Creatore, che chiama Grande Architetto dell'Universo. La formula è deliberatamente aperta: ogni membro la intende secondo la propria tradizione religiosa o filosofica.</p>
   </article>
+
+  <NavRelated
+    lang={lang}
+    prev={{ href: "/it/massoneria/cose/", label: "Cos'è la massoneria" }}
+    index={{ href: "/it/massoneria/", label: "Massoneria" }}
+    next={{ href: "/it/massoneria/glossario/", label: "Glossario" }}
+  />
 </BaseLayout>

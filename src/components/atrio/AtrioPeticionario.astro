@@ -313,6 +313,9 @@ const labels = lang === "es"
       <path d="M22 42 L34 54 L58 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="heard-check-path" />
     </svg>
     <p class="heard-text cinzel">{labels.heard}</p>
+    <p class="heard-countdown" data-countdown aria-live="polite">
+      {lang === "es" ? "Redirigiendo en " : "Reindirizzamento in "}<span data-countdown-num>3</span>
+    </p>
   </div>
 </div>
 
@@ -513,6 +516,17 @@ const labels = lang === "es"
               heardScreen.style.opacity = "1";
               heardScreen.classList.add("is-revealed");
             });
+          }
+          // Countdown visible 3...2...1
+          const countNum = root!.querySelector("[data-countdown-num]") as HTMLElement | null;
+          let n = 3;
+          if (countNum) {
+            countNum.textContent = String(n);
+            const tick = window.setInterval(() => {
+              n -= 1;
+              if (n <= 0) { window.clearInterval(tick); return; }
+              countNum.textContent = String(n);
+            }, 1000);
           }
           setTimeout(() => {
             window.location.href = confirmationUrl;
@@ -761,6 +775,13 @@ const labels = lang === "es"
     font-size: clamp(2rem, 5vw, 4rem);
     color: var(--gold-700);
     text-align: center;
+  }
+  .heard-countdown {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-300);
+    margin-top: var(--space-2);
   }
 
   /* Step transition (motion guarded explícitamente) */

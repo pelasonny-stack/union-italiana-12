@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 import PhotoSlider from "../../../components/content/PhotoSlider.astro";
 const lang = "it" as const;
 
@@ -63,4 +64,11 @@ const fotos = [
       conferenze culturali aperte.
     </p>
   </article>
+
+  <NavRelated
+    lang={lang}
+    prev={{ href: "/it/la-loggia/legame-italiano/", label: "Legame italiano" }}
+    index={{ href: "/it/la-loggia/", label: "La Loggia" }}
+    next={{ href: "/it/la-loggia/membri-illustri/", label: "Membri illustri" }}
+  />
 </BaseLayout>

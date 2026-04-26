@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 import Quote from "../../../components/content/Quote.astro";
 const lang = "es" as const;
 
@@ -87,6 +88,13 @@ const milestones = [
       <a href="mailto:unionitaliana12@gmail.com">unionitaliana12@gmail.com</a>.
     </p>
   </section>
+
+  <NavRelated
+    lang={lang}
+
+    index={{ href: "/es/la-logia/", label: "La Logia" }}
+    next={{ href: "/es/la-logia/vinculo-italiano/", label: "Vínculo italiano" }}
+  />
 </BaseLayout>
 
 <style>

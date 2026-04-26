@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 import Stub from "../../../components/content/Stub.astro";
 const lang = "es" as const;
 ---
@@ -32,4 +33,11 @@ const lang = "es" as const;
 
     <Stub note="Los enlaces a los PDF en dominio público se cargarán a medida que se digitalicen y verifiquen las versiones autorizadas." />
   </article>
+
+  <NavRelated
+    lang={lang}
+    prev={{ href: "/es/masoneria/glosario/", label: "Glosario" }}
+    index={{ href: "/es/masoneria/", label: "Masonería" }}
+
+  />
 </BaseLayout>

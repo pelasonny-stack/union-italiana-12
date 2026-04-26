@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 const lang = "it" as const;
 ---
 
@@ -49,7 +50,19 @@ const lang = "it" as const;
       <li>Non è segreta — ha riserve, non segreti</li>
       <li>Non è società di potere</li>
     </ul>
+
+    <blockquote class="pull-quote">
+      <p>"I massoni sono uomini morali e sociali, liberi per nascita, di costumi puri."</p>
+      <cite>— Costituzioni di Anderson, 1723 (e∴v∴)</cite>
+    </blockquote>
   </article>
+
+  <NavRelated
+    lang={lang}
+
+    index={{ href: "/it/massoneria/", label: "Massoneria" }}
+    next={{ href: "/it/massoneria/principi/", label: "Principi" }}
+  />
 </BaseLayout>
 
 <style>

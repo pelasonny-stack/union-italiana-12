@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 const lang = "es" as const;
 ---
 
@@ -50,4 +51,11 @@ const lang = "es" as const;
       activos del país que los acoge.
     </p>
   </article>
+
+  <NavRelated
+    lang={lang}
+    prev={{ href: "/es/masoneria/que-es/", label: "Qué es la masonería" }}
+    index={{ href: "/es/masoneria/", label: "Masonería" }}
+    next={{ href: "/es/masoneria/glosario/", label: "Glosario" }}
+  />
 </BaseLayout>

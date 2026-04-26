@@ -1,0 +1,108 @@
+---
+/**
+ * Mini-mapa SVG inline del barrio de Barracas con marcador en el Templo
+ * (San Antonio 814). ~3KB inline, sin requests externas. Decorativo + link a
+ * Google Maps abajo para "Cómo llegar".
+ */
+import type { Locale } from "../../i18n/config";
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const labels = lang === "es"
+  ? { title: "Ubicación", howTo: "Cómo llegar →", legend: "Templo Hijos del Trabajo · San Antonio 814 · Barracas" }
+  : { title: "Posizione", howTo: "Come arrivare →", legend: "Tempio Hijos del Trabajo · San Antonio 814 · Barracas" };
+
+const mapsHref = "https://www.google.com/maps/search/?api=1&query=San+Antonio+814,+Barracas,+CABA,+Argentina";
+---
+
+<figure class="minimap" aria-label={labels.title}>
+  <svg viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="minimap-svg">
+    {/* trama de calles del barrio (esquemática) */}
+    <rect width="280" height="180" fill="var(--bg-elevated, #f4efe6)" />
+
+    {/* río a la izquierda — Riachuelo */}
+    <path d="M 0 130 Q 30 125 60 132 T 110 130 L 110 180 L 0 180 Z" fill="currentColor" opacity="0.06" />
+    <text x="14" y="172" font-size="6" fill="currentColor" opacity="0.45" font-family="serif" font-style="italic">Riachuelo</text>
+
+    {/* avenidas principales — gruesas */}
+    <line x1="0" y1="60" x2="280" y2="60" stroke="currentColor" stroke-width="2" opacity="0.22" />
+    <line x1="170" y1="0" x2="170" y2="180" stroke="currentColor" stroke-width="2" opacity="0.22" />
+    <text x="178" y="14" font-size="5" fill="currentColor" opacity="0.5" font-family="sans-serif">Av. Montes de Oca</text>
+    <text x="6" y="55" font-size="5" fill="currentColor" opacity="0.5" font-family="sans-serif">Av. Brasil</text>
+
+    {/* grilla calles secundarias */}
+    {[20, 40, 80, 100, 120, 140].map((y) => (
+      <line x1="0" y1={y} x2="280" y2={y} stroke="currentColor" stroke-width="0.5" opacity="0.18" />
+    ))}
+    {[30, 60, 90, 120, 200, 230, 260].map((x) => (
+      <line x1={x} y1="0" x2={x} y2="180" stroke="currentColor" stroke-width="0.5" opacity="0.18" />
+    ))}
+
+    {/* manzanas tonalidades sutiles */}
+    <rect x="60" y="60" width="60" height="40" fill="currentColor" opacity="0.05" />
+    <rect x="200" y="40" width="40" height="40" fill="currentColor" opacity="0.05" />
+
+    {/* marcador del Templo — punto central, San Antonio 814 */}
+    <g transform="translate(110, 100)">
+      <circle r="14" fill="var(--vermiglio, #7e2a1e)" opacity="0.18" />
+      <circle r="8" fill="var(--vermiglio, #7e2a1e)" opacity="0.32" />
+      <circle r="4" fill="var(--vermiglio, #7e2a1e)" />
+      <circle r="2" fill="var(--candela, #f2e3c2)" />
+    </g>
+
+    {/* etiqueta del marker */}
+    <text x="110" y="80" text-anchor="middle" font-size="6.5" fill="var(--vermiglio, #7e2a1e)" font-family="serif" font-style="italic" font-weight="500">Templo</text>
+
+    {/* compass rose pequeña en esquina */}
+    <g transform="translate(254, 22)">
+      <circle r="10" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.4" />
+      <path d="M 0 -8 L 2 0 L 0 8 L -2 0 Z" fill="currentColor" opacity="0.55" />
+      <text x="0" y="-12" text-anchor="middle" font-size="4.5" fill="currentColor" opacity="0.55" font-family="serif">N</text>
+    </g>
+  </svg>
+
+  <figcaption class="minimap-caption">
+    <span class="overline minimap-legend">{labels.legend}</span>
+    <a
+      href={mapsHref}
+      target="_blank"
+      rel="noopener external"
+      class="minimap-link"
+    >{labels.howTo}</a>
+  </figcaption>
+</figure>
+
+<style>
+  .minimap {
+    margin: 0;
+    color: var(--fg-muted);
+  }
+  .minimap-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 280 / 180;
+    border: 1px solid var(--border);
+  }
+  .minimap-caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-top: var(--space-2);
+  }
+  .minimap-legend {
+    color: var(--fg-muted);
+    font-size: 0.65rem;
+    line-height: 1.4;
+  }
+  .minimap-link {
+    color: var(--accent);
+    font-size: 0.78rem;
+    align-self: flex-start;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+  }
+  .minimap-link:hover, .minimap-link:focus-visible { opacity: 0.7; }
+</style>

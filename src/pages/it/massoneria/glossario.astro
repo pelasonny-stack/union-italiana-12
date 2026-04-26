@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 const lang = "it" as const;
 
 const terms = [
@@ -34,6 +35,13 @@ const terms = [
       ))}
     </dl>
   </article>
+
+  <NavRelated
+    lang={lang}
+    prev={{ href: "/it/massoneria/principi/", label: "Principi" }}
+    index={{ href: "/it/massoneria/", label: "Massoneria" }}
+    next={{ href: "/it/massoneria/biblioteca/", label: "Biblioteca" }}
+  />
 </BaseLayout>
 
 <style>

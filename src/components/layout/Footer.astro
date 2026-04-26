@@ -2,6 +2,7 @@
 import type { Locale } from "../../i18n/config";
 import { t, type UIKey } from "../../i18n/ui";
 import GLABadge from "./GLABadge.astro";
+import MiniMapBarracas from "../content/MiniMapBarracas.astro";
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -114,15 +115,9 @@ const links = lang === "es"
         <span class="meta-label overline">{lang === "es" ? "Trabaja en el Templo" : "Lavora nel Tempio"}</span>
         <span class="meta-temple">Hijos del Trabajo</span>
         <span class="meta-line">San Antonio 814 · Barracas · CABA · Argentina</span>
-        <a
-          class="meta-map-link"
-          href="https://www.google.com/maps/search/?api=1&query=San+Antonio+814,+Barracas,+CABA,+Argentina"
-          target="_blank"
-          rel="noopener external"
-        >
-          <span class="meta-map-rule" aria-hidden="true"></span>
-          {lang === "es" ? "Ver en el mapa" : "Vedi sulla mappa"} →
-        </a>
+        <div class="meta-minimap">
+          <MiniMapBarracas lang={lang} />
+        </div>
       </address>
 
       <div class="meta-social">
@@ -281,28 +276,10 @@ const links = lang === "es"
     line-height: 1.3;
   }
   .meta-line { color: var(--fg-muted); }
-  .meta-map-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    margin-top: var(--space-2);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent);
-    background-image: none;
-    align-self: flex-start;
+  .meta-minimap {
+    margin-top: var(--space-3);
+    max-width: 280px;
   }
-  .meta-map-link:hover, .meta-map-link:focus-visible { color: var(--accent-bright); }
-  .meta-map-rule {
-    display: inline-block;
-    width: 16px;
-    height: 1px;
-    background: currentColor;
-    transition: width var(--duration-fast) var(--ease-ceremonial);
-  }
-  .meta-map-link:hover .meta-map-rule { width: 28px; }
 
   .meta-social {
     display: flex;

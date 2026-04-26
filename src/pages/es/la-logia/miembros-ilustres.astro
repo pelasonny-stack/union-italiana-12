@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 import Stub from "../../../components/content/Stub.astro";
 const lang = "es" as const;
 
@@ -68,6 +69,13 @@ const miembros = [
 
     <Stub note="La lista completa será publicada cuando el archivero de la Logia confirme los registros del siglo XIX. Cada perfil tendrá su propia página con biografía extendida y bibliografía." />
   </section>
+
+  <NavRelated
+    lang={lang}
+    prev={{ href: "/es/la-logia/templo/", label: "El Templo" }}
+    index={{ href: "/es/la-logia/", label: "La Logia" }}
+    next={{ href: "/es/la-logia/auspicios/", label: "Auspicios GLA" }}
+  />
 </BaseLayout>
 
 <style>

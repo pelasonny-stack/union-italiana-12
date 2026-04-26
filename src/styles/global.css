@@ -473,6 +473,36 @@ article.container-prose,
   margin-top: 0.5em;
 }
 
+/* Pull-quote editorial — entrega visual mayor que blockquote regular */
+.container-prose .pull-quote {
+  margin: 2.5em auto;
+  padding: 1.25em 0;
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  border-left: none;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  line-height: 1.4;
+  text-align: center;
+  color: var(--fg);
+  max-width: 38ch;
+}
+.container-prose .pull-quote::before {
+  content: "✦";
+  display: block;
+  text-align: center;
+  font-size: 0.6em;
+  color: var(--accent);
+  margin-bottom: 0.5em;
+  font-style: normal;
+}
+.container-prose .pull-quote cite,
+.container-prose .pull-quote footer {
+  text-align: center;
+  margin-top: 1em;
+}
+
 /* ── Code inline ── */
 
 .container-prose code {

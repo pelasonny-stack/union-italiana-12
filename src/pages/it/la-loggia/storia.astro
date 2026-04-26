@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import NavRelated from "../../../components/content/NavRelated.astro";
 import Quote from "../../../components/content/Quote.astro";
 const lang = "it" as const;
 
@@ -51,6 +52,13 @@ const milestones = [
   <section class="container container-prose" style="padding-block: var(--space-8);">
     <Quote text="Ogni uomo è figlio del suo lavoro." attribution="Motto del Tempio Hijos del Trabajo, Barracas" lang="it" />
   </section>
+
+  <NavRelated
+    lang={lang}
+
+    index={{ href: "/it/la-loggia/", label: "La Loggia" }}
+    next={{ href: "/it/la-loggia/legame-italiano/", label: "Legame italiano" }}
+  />
 </BaseLayout>
 
 <style>
