@@ -42,5 +42,19 @@ export default defineConfig({
 
   experimental: {
     contentIntellisense: true,
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data: https:",
+        "font-src 'self' data:",
+        "connect-src 'self' https://formspree.io https://cloudflareinsights.com",
+        "form-action 'self' https://formspree.io",
+        "frame-ancestors 'none'",
+        "base-uri 'self'",
+        "upgrade-insecure-requests",
+      ],
+      styleDirective: { resources: ["'self'", "'unsafe-inline'"] },
+      scriptDirective: { resources: ["'self'", "https://static.cloudflareinsights.com"] },
+    },
   },
 });

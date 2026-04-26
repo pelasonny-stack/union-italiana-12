@@ -111,7 +111,19 @@ const labels = lang === "es"
     };
 ---
 
-<div class="atrio" data-atrio data-lang={lang}>
+<div
+  class="atrio"
+  data-atrio
+  data-lang={lang}
+  data-formspree-url={FORMSPREE_URL}
+  data-confirmation-url={lang === "es" ? "/es/iniciacion/confirmacion/" : "/it/iniziazione/conferma/"}
+  data-i18n={JSON.stringify({
+    generic: labels.errorGeneric,
+    rate: labels.errorRate,
+    missing: labels.errorMissing,
+    tooShort: labels.errorTooShort,
+  })}
+>
   <div class="atrio-stage" data-stage>
     {/* ────────── Velas indicador ────────── */}
     <div class="velas-row" aria-hidden="true">
@@ -304,35 +316,36 @@ const labels = lang === "es"
   </div>
 </div>
 
-<script define:vars={{ formspreeUrl: FORMSPREE_URL, confirmationUrl: lang === "es" ? "/es/iniciacion/confirmacion/" : "/it/iniziazione/conferma/", errorMessages: {
-  generic: labels.errorGeneric,
-  rate: labels.errorRate,
-  missing: labels.errorMissing,
-  tooShort: labels.errorTooShort,
-} }}>
+<script>
   function initAtrio() {
-    const root = document.querySelector("[data-atrio]");
+    const root = document.querySelector("[data-atrio]") as HTMLElement | null;
     if (!root || root.dataset.atrioInited === "1") return;
     root.dataset.atrioInited = "1";
 
-    const form = root.querySelector("#atrio-form");
-    const steps = Array.from(root.querySelectorAll("fieldset[data-step]"));
-    const counter = root.querySelector("[data-step-current]");
-    const errorDisplay = root.querySelector("[data-error-display]");
-    const heardScreen = root.querySelector("[data-heard]");
-    const stage = root.querySelector("[data-stage]");
+    const formspreeUrl = root.dataset.formspreeUrl ?? "";
+    const confirmationUrl = root.dataset.confirmationUrl ?? "/";
+    let errorMessages: { generic: string; rate: string; missing: string; tooShort: string } = { generic: "", rate: "", missing: "", tooShort: "" };
+    try { errorMessages = { ...errorMessages, ...JSON.parse(root.dataset.i18n ?? "{}") }; } catch {}
 
-    const startedInput = root.querySelector("[data-form-started]");
+    const form = root.querySelector("#atrio-form") as HTMLFormElement | null;
+    if (!form) return;
+    const steps = Array.from(root.querySelectorAll("fieldset[data-step]")) as HTMLElement[];
+    const counter = root.querySelector("[data-step-current]") as HTMLElement | null;
+    const errorDisplay = root.querySelector("[data-error-display]") as HTMLElement | null;
+    const heardScreen = root.querySelector("[data-heard]") as HTMLElement | null;
+    const stage = root.querySelector("[data-stage]") as HTMLElement | null;
+
+    const startedInput = root.querySelector("[data-form-started]") as HTMLInputElement | null;
     if (startedInput) startedInput.value = String(Date.now());
 
     let current = 1;
-    function show(step) {
+    function show(step: number) {
       steps.forEach((el) => {
         const n = Number(el.getAttribute("data-step"));
         el.classList.toggle("is-active", n === step);
       });
       if (counter) counter.textContent = String(step);
-      root.querySelectorAll(".velas-row .vela").forEach((v, idx) => {
+      root!.querySelectorAll(".velas-row .vela").forEach((v, idx) => {
         v.classList.toggle("is-lit", idx < step);
         v.classList.toggle("is-out", idx >= step);
       });
@@ -340,10 +353,10 @@ const labels = lang === "es"
       current = step;
     }
 
-    function validateStep(step) {
-      const fieldset = root.querySelector(`fieldset[data-step="${step}"]`);
+    function validateStep(step: number) {
+      const fieldset = root!.querySelector(`fieldset[data-step="${step}"]`);
       if (!fieldset) return false;
-      const required = fieldset.querySelectorAll("input[required], textarea[required], select[required]");
+      const required = fieldset.querySelectorAll("input[required], textarea[required], select[required]") as NodeListOf<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
       for (const el of required) {
         if (!el.checkValidity()) {
           el.reportValidity();
@@ -369,7 +382,8 @@ const labels = lang === "es"
       ev.preventDefault();
       if (!validateStep(3)) return;
 
-      const submitBtn = root.querySelector("[data-submit]");
+      const submitBtn = root!.querySelector("[data-submit]") as HTMLButtonElement | null;
+      if (!submitBtn) return;
       submitBtn.disabled = true;
       if (errorDisplay) { errorDisplay.hidden = true; errorDisplay.textContent = ""; }
 
@@ -379,12 +393,13 @@ const labels = lang === "es"
         return;
       }
 
-      if (form.querySelector("[name=website]")?.value) {
-        stage.style.opacity = "0.3";
+      const honeypot = form!.querySelector("[name=website]") as HTMLInputElement | null;
+      if (honeypot?.value) {
+        if (stage) stage.style.opacity = "0.3";
         return;
       }
 
-      const fd = new FormData(form);
+      const fd = new FormData(form!);
       const availability = fd.getAll("availability").join(", ");
       fd.delete("availability");
       if (availability) fd.append("availability", availability);
@@ -403,16 +418,20 @@ const labels = lang === "es"
           return;
         }
 
-        stage.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
-        stage.style.opacity = "0";
+        if (stage) {
+          stage.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
+          stage.style.opacity = "0";
+        }
         setTimeout(() => {
-          stage.hidden = true;
-          heardScreen.hidden = false;
-          heardScreen.style.opacity = "0";
-          requestAnimationFrame(() => {
-            heardScreen.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
-            heardScreen.style.opacity = "1";
-          });
+          if (stage) stage.hidden = true;
+          if (heardScreen) {
+            heardScreen.hidden = false;
+            heardScreen.style.opacity = "0";
+            requestAnimationFrame(() => {
+              heardScreen.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
+              heardScreen.style.opacity = "1";
+            });
+          }
           setTimeout(() => {
             window.location.href = confirmationUrl;
           }, 2400);

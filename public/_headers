@@ -6,4 +6,3 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=()
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://forms.unionitaliana12.org.ar https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://forms.unionitaliana12.org.ar; frame-ancestors 'none'; base-uri 'self'; upgrade-insecure-requests
