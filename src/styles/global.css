@@ -563,10 +563,14 @@ article.container-prose,
 .container-prose code {
   font-family: var(--font-mono);
   font-size: 0.88em;
-  background: var(--travertino);
+  background: color-mix(in srgb, var(--bg-elevated) 70%, var(--accent) 18%);
   padding: 0.1em 0.35em;
   border-radius: 2px;
-  color: var(--vermiglio-profondo);
+  color: var(--vermiglio);
+}
+:root[data-theme="dark"] .container-prose code {
+  color: var(--candela);
+  background: color-mix(in srgb, var(--bg-elevated) 60%, var(--vermiglio) 20%);
 }
 
 /* ── HR como divisor ornamental ── */

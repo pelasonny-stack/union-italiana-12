@@ -95,7 +95,7 @@ const lang = "es" as const;
 
 <style>
   .eight-seconds {
-    background: var(--travertino);
+    background: color-mix(in srgb, var(--bg-elevated) 85%, var(--accent) 12%);
     border-left: 3px solid var(--accent);
     padding: var(--space-4) var(--space-6);
     margin-top: var(--space-8);
@@ -108,5 +108,6 @@ const lang = "es" as const;
     color: var(--fg);
     margin: 0;
   }
-  .es-text strong { color: var(--vermiglio); }
+  .es-text strong { color: var(--accent); }
+  :root[data-theme="dark"] .es-text strong { color: var(--accent-bright); }
 </style>
