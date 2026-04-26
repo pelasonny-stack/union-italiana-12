@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroTemple from "../../components/content/HeroTemple.astro";
+import PhotoSlider from "../../components/content/PhotoSlider.astro";
+import RotatingQuote from "../../components/content/RotatingQuote.astro";
+import ThreeDoors from "../../components/content/ThreeDoors.astro";
+import UpcomingEvent from "../../components/content/UpcomingEvent.astro";
+import { t } from "../../i18n/ui";
+
+const lang = "es" as const;
+
+// Hero ya muestra templo-3 (salón principal). Slider arranca con foto distinta
+// para no duplicar visualmente el primer impacto.
+const sliderPhotos = [
+  { src: "/assets/templo/templo-1.jpeg", alt: "Delta luminoso dorado con el Ojo de la Providencia", caption: "Delta Luminoso del Templo, sobre fondo bermellón" },
+  { src: "/assets/templo/templo-2.jpeg", alt: "Fachada del Templo Hijos del Trabajo en Barracas, estilo egipcio (1919)", caption: "Fachada egipcia del Templo Hijos del Trabajo — Francisco Cabot, 1919" },
+  { src: "/assets/templo/templo-4.jpeg", alt: "Detalle del techo y la araña principal del Templo", caption: "Bóveda celeste y araña principal del Templo" },
+  { src: "/assets/templo/templo-3.jpeg", alt: "Salón principal del Templo Hijos del Trabajo, vista general", caption: "Salón principal del Templo — bóveda celeste pintada al fresco" },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t("site.name", lang)}
+  description="R∴L∴ Unión Italiana N°12 — al Oriente de Buenos Aires desde 1858. Bajo la obediencia de la Gran Logia de la Argentina. Trabaja en el Templo Hijos del Trabajo, Barracas."
+  schemaType="Organization"
+>
+  <HeroTemple
+    lang={lang}
+    eyebrow={t("home.hero.eyebrow", lang)}
+    title={t("home.hero.title", lang)}
+    subtitle={t("home.hero.subtitle", lang)}
+    ctaLabel={t("home.hero.cta", lang)}
+    ctaHref="/es/la-logia/templo/"
+  />
+
+  <UpcomingEvent lang={lang} />
+
+  <section class="container container-narrow" style="padding-block: var(--space-12);">
+    <p class="lead drop-cap">
+      Desde el 23 de diciembre de 1858, en el Oriente de Buenos Aires, una Logia trabaja
+      en la herencia espiritual y cívica que dejaron los italianos llegados al Río de la Plata.
+      Su primer Venerable Maestro fue el médico José Salvarezza. Refundada en 2014 por un
+      grupo de Maestros Masones, la Unión Italiana N°12 sostiene hoy sus tenidas regulares
+      en el histórico Templo "Hijos del Trabajo", en Barracas, bajo la obediencia de la Gran
+      Logia de la Argentina de Libres y Aceptados Masones.
+    </p>
+  </section>
+
+  <section class="container" style="padding-bottom: var(--space-12);">
+    <PhotoSlider photos={sliderPhotos} aspect="16 / 9" autoplayMs={6000} />
+  </section>
+
+  <ThreeDoors
+    doors={[
+      { href: "/es/la-logia/historia/", glyph: "columns", eyebrow: "MDCCCLVIII — Hoy", title: t("home.three_doors.history", lang), text: "Una historia documentada, no mítica. Del Risorgimento a la refundación de 2014." },
+      { href: "/es/masoneria/que-es/", glyph: "delta", eyebrow: "Una Orden iniciática", title: t("home.three_doors.masonry", lang), text: "Qué es —y qué no es— la masonería regular. Sin secretos, con reservas." },
+      { href: "/es/iniciacion/", glyph: "square-compass", eyebrow: "Atrio del Peticionario", title: t("home.three_doors.initiation", lang), text: "Si llegó hasta aquí por algo más que curiosidad pasajera, pase y lea con atención." },
+    ]}
+  />
+
+  <RotatingQuote lang={lang} />
+</BaseLayout>
+
+<style>
+  .lead {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--fg);
+  }
+</style>

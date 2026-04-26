@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/content/PageHero.astro";
+import MasonicGlyph from "../../components/symbols/MasonicGlyph.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Contacto"
+  description="Tres canales de contacto con la R∴L∴ Unión Italiana N°12: contacto general, prensa, peticionarios."
+>
+  <PageHero eyebrow="Tres puertas" title="Contacto" glyph="three-dots" />
+
+  <section class="container" style="padding-block: var(--space-8);">
+    <div class="contact-grid">
+      <article class="contact-card">
+        <MasonicGlyph name="three-dots" size={32} />
+        <h3>Contacto general</h3>
+        <p>Para consultas que no encajen en las otras dos puertas.</p>
+        <a href="mailto:contacto@unionitaliana12.org.ar" class="overline" style="margin-top: var(--space-3); display: inline-block;">contacto@unionitaliana12.org.ar</a>
+      </article>
+
+      <article class="contact-card">
+        <MasonicGlyph name="letter-g" size={32} />
+        <h3>Prensa e investigación</h3>
+        <p>Periodistas, historiadores, académicos. Material disponible bajo solicitud.</p>
+        <a href="mailto:prensa@unionitaliana12.org.ar" class="overline" style="margin-top: var(--space-3); display: inline-block;">prensa@unionitaliana12.org.ar</a>
+      </article>
+
+      <article class="contact-card">
+        <MasonicGlyph name="square-compass" size={32} />
+        <h3>Peticionarios</h3>
+        <p>Si llegó hasta acá pensando en peticionar, le pedimos leer primero la página de Iniciación.</p>
+        <a href="/es/iniciacion/" class="overline" style="margin-top: var(--space-3); display: inline-block;">Ir a Iniciación →</a>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-card {
+    padding: var(--space-6);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--fg);
+  }
+  .contact-card h3 { margin-block: var(--space-2); font-size: var(--text-h5); font-family: var(--font-display); }
+  .contact-card p { color: var(--fg-muted); margin: 0; }
+</style>

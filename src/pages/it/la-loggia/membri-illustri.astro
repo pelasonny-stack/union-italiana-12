@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "it" as const;
+
+const miembros = [
+  { name: "José Ingenieros", years: "1877—1925", role: "Medico, sociologo, saggista. Iniziato nell'Unione Italiana seguendo il padre.", confirmed: true },
+  { name: "Salvatore Ingegnieros", years: "1850—1924", role: "Giornalista, socialista della prima ora, padre di José. Immigrato siciliano.", confirmed: true },
+  { name: "Giuseppe Garibaldi", years: "1807—1882", role: "Iniziato a Montevideo (1844). Ombra tutelare di ogni loggia italiana del Río de la Plata, non membro di questa Loggia.", confirmed: false },
+  { name: "Antonio Devoto", years: "1833—1916", role: "Banchiere, fondatore del Banco di Italia e Río de la Plata, mecenate della collettività italiana.", confirmed: false },
+];
+---
+
+<BaseLayout lang={lang} title="Membri illustri" description="Figure storiche della R∴L∴ Unione Italiana N°12.">
+  <PageHero eyebrow="Passato documentato" title="Membri illustri" subtitle="Solo persone defunte, solo membership documentata" glyph="letter-g" />
+  <section class="container" style="padding-block: var(--space-8);">
+    <ul class="miembros-grid">
+      {miembros.map(m => (
+        <li class="miembro-card">
+          <p class="overline">{m.years}{m.confirmed ? " · Membro confermato" : " · Legame culturale"}</p>
+          <h3>{m.name}</h3>
+          <p class="role">{m.role}</p>
+        </li>
+      ))}
+    </ul>
+    <Stub note="La lista completa sarà pubblicata quando l'archivista della Loggia confermerà i registri del XIX secolo." />
+  </section>
+</BaseLayout>
+
+<style>
+  .miembros-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); max-width: var(--container-default); margin: 0 auto; }
+  .miembro-card { padding: var(--space-6); background: var(--bg-elevated); border: 1px solid var(--border); }
+  .miembro-card h3 { margin: var(--space-1) 0; font-size: var(--text-h4); }
+  .miembro-card .role { color: var(--fg-muted); margin: 0; }
+</style>

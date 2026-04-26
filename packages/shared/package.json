@@ -1,0 +1,15 @@
+{
+  "name": "@union12/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schemas/petition": "./src/schemas/petition.ts",
+    "./schemas/contact": "./src/schemas/contact.ts",
+    "./i18n": "./src/i18n.ts"
+  },
+  "dependencies": {
+    "zod": "^3.25.76"
+  }
+}

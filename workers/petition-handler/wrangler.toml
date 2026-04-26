@@ -1,0 +1,32 @@
+name = "petition-handler"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Bindings — Cloudflare resources
+# kv_namespaces = [
+#   { binding = "RATE_LIMIT", id = "REPLACE_WITH_KV_ID" },
+#   { binding = "DEDUP",      id = "REPLACE_WITH_KV_ID" }
+# ]
+# r2_buckets = [
+#   { binding = "PETITIONS", bucket_name = "union12-petitions" }
+# ]
+
+# Variables públicas (no secrets)
+[vars]
+ALLOWED_ORIGINS = "https://unionitaliana12.org.ar,https://union-italiana-12.pages.dev"
+RATE_LIMIT_PER_HOUR = "3"
+RATE_LIMIT_PER_DAY = "10"
+
+# Secrets (configurar con: wrangler secret put <NAME>)
+# - INTERNAL_WORKER_TOKEN
+# - TURNSTILE_SECRET_KEY
+# - RESEND_API_KEY
+# - PETITION_ENCRYPTION_KEY  (32 bytes base64, AES-GCM)
+# - VENERABLE_EMAIL
+# - SECRETARY_EMAIL
+# - INVESTIGATORS_EMAIL  (alias o lista separada por coma)
+# - FROM_EMAIL  (e.g. peticiones@unionitaliana12.org.ar)
+
+[observability]
+enabled = true

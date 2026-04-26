@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="Política de privacidad" description="Cómo se tratan los datos personales en este sitio. Cumplimiento Ley 25.326 (Argentina) y RGPD/GDPR (UE).">
+  <PageHero eyebrow="Legal" title="Política de privacidad" glyph="three-dots" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="overline">Última actualización: 25 de abril de 2026</p>
+
+    <h2>1. Responsable del tratamiento</h2>
+    <p>
+      Respetable Logia Unión Italiana N°12 — asociación civil con personería jurídica
+      <strong>(a confirmar)</strong>. Domicilio:
+      <strong>(a confirmar)</strong>. Contacto del responsable:
+      <a href="mailto:datos@unionitaliana12.org.ar">datos@unionitaliana12.org.ar</a>.
+    </p>
+
+    <h2>2. Datos que recolectamos</h2>
+    <ul>
+      <li><strong>De navegación:</strong> ninguno por defecto. Empleamos analítica agregada
+        sin cookies ni identificadores persistentes (Cloudflare Web Analytics).</li>
+      <li><strong>Formulario de contacto:</strong> nombre, email, asunto, mensaje.</li>
+      <li><strong>Formulario de petición de iniciación (Atrio):</strong> los datos descritos
+        explícitamente en cada campo del formulario, incluyendo datos personales sensibles
+        en el sentido de la Ley 25.326 (motivación, antecedentes, etc.).</li>
+    </ul>
+
+    <h2>3. Finalidades</h2>
+    <p>
+      Cada dato se recolecta para una finalidad expresa: la motivación y los datos del
+      formulario de petición se utilizan exclusivamente para la investigación de la petición
+      por parte del Venerable Maestro, el Secretario y los hermanos investigadores designados.
+      No se utilizan para ningún otro fin, no se ceden a terceros, no se publican.
+    </p>
+
+    <h2>4. Base legal</h2>
+    <p>
+      Consentimiento expreso del titular (artículo 5 de la Ley 25.326). En el caso de
+      residentes en la Unión Europea, base jurídica del consentimiento (artículo 6.1.a
+      RGPD).
+    </p>
+
+    <h2>5. Conservación</h2>
+    <ul>
+      <li>Petición rechazada o retirada: <strong>conservación máxima 12 meses</strong>, luego destrucción cifrada.</li>
+      <li>Petición aceptada — peticionario iniciado: pasa al archivo interno de la Logia (no público).</li>
+      <li>Contactos generales: 24 meses.</li>
+    </ul>
+
+    <h2>6. Cesión a terceros</h2>
+    <p>
+      Ninguna. No se cede ningún dato a la obediencia, salvo el procedimiento estatutario
+      de alta de aprendiz una vez aceptada la petición e iniciada la persona, y siempre
+      con su consentimiento explícito.
+    </p>
+
+    <h2>7. Derechos del titular</h2>
+    <p>
+      Usted tiene derecho de acceso, rectificación, supresión y oposición sobre sus datos.
+      Para ejercerlos escriba a
+      <a href="mailto:datos@unionitaliana12.org.ar">datos@unionitaliana12.org.ar</a>.
+      Conserva además el derecho a recurrir ante la Agencia de Acceso a la Información
+      Pública (AAIP) o, si reside en la UE, ante la autoridad de control de su país.
+    </p>
+
+    <h2>8. Medidas de seguridad</h2>
+    <p>
+      Servidor con HTTPS y HSTS preload. Formulario protegido con Cloudflare Turnstile y
+      validación en múltiples capas. Datos del Atrio cifrados en tránsito (TLS 1.3) y en
+      reposo (cifrado AES-GCM aplicativo sobre almacenamiento Cloudflare R2). Acceso
+      restringido al Venerable Maestro y al Secretario.
+    </p>
+
+    <h2>9. Menores</h2>
+    <p>
+      Este sitio no se dirige a menores. No se recolectan datos de personas menores de 18
+      años bajo ninguna circunstancia.
+    </p>
+
+    <h2>10. Inscripción ante AAIP</h2>
+    <p>
+      Esta base de datos personales se encuentra <strong>(en proceso de inscripción)</strong>
+      ante la Agencia de Acceso a la Información Pública en el Registro Nacional de Bases
+      de Datos.
+    </p>
+  </article>
+</BaseLayout>

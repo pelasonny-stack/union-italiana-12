@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import GLABadge from "../../../components/layout/GLABadge.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Obediencia — Gran Logia de la Argentina"
+  description="La Respetable Logia Unión Italiana N°12 trabaja bajo la jurisdicción de la Gran Logia de la Argentina de Libres y Aceptados Masones, fundada el 11 de diciembre de 1857."
+>
+  <PageHero
+    eyebrow="Jurisdicción y regularidad"
+    title="Bajo obediencia de la Gran Logia"
+    subtitle="Ciencia · Justicia · Trabajo"
+    glyph="columns"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <div class="gla-prominent">
+      <GLABadge lang={lang} variant="full" />
+    </div>
+
+    <p class="drop-cap">
+      Toda Logia masónica regular trabaja en obediencia a una autoridad mayor que asegura
+      la continuidad de la tradición, el reconocimiento entre logias hermanas y el
+      cumplimiento de los antiguos límites del oficio. La Respetable Logia Unión Italiana
+      N°12 trabaja bajo la jurisdicción de la <strong>Gran Logia de la Argentina de Libres
+      y Aceptados Masones</strong>, con sede en el Palacio Cangallo, Tte. Perón 1242, Ciudad
+      Autónoma de Buenos Aires.
+    </p>
+
+    <h2>La Gran Logia de la Argentina</h2>
+    <p>
+      Constituida el <strong>11 de diciembre de 1857</strong> en Buenos Aires por figuras
+      que incluyeron a Domingo F. Sarmiento, José Roque Pérez, Miguel Valencia y Justo
+      José de Urquiza, la Gran Logia es el cuerpo soberano que agrupa a las logias regulares
+      de la Argentina. Fue, además, organización fundadora de la Confederación Masónica
+      Interamericana.
+    </p>
+    <p>
+      Su sede actual, conocida como <strong>Palacio Cangallo</strong>, fue diseñada por
+      Dardo Rocha y completada por el arquitecto italiano Francisco Tamburini. Inaugurado
+      el 3 de marzo de 1872, el edificio alberga nueve templos, entre ellos el Gran Templo.
+    </p>
+    <p>
+      Su lema —<em class="latin">Ciencia, Justicia, Trabajo</em>— ordena las virtudes que
+      la Orden propone a sus miembros: el cultivo del conocimiento, la rectitud en el
+      trato, y la dignidad del oficio bien hecho.
+    </p>
+
+    <h2>Qué significa "regular"</h2>
+    <p>
+      Una Logia regular es la que se constituye conforme a las antiguas tradiciones del
+      oficio, reconoce a las grandes logias hermanas reconocidas internacionalmente, y
+      trabaja en obediencia a una autoridad masónica que asegura esa continuidad. La
+      regularidad no es una etiqueta orgullosa: es la garantía de que un hermano de la
+      Unión Italiana N°12 puede sentarse a trabajar en cualquier logia regular del mundo
+      reconociendo —y siendo reconocido— como tal.
+    </p>
+
+    <h2>Autoridades</h2>
+    <ul>
+      <li><strong>Muy Respetable Gran Maestre:</strong> Pablo Lázaro</li>
+      <li><strong>Sede:</strong> Tte. Perón 1242 — Ciudad Autónoma de Buenos Aires</li>
+      <li><strong>Sitio oficial:</strong>
+        <a href="https://www.masoneria-argentina.org.ar/" target="_blank" rel="noopener external">masoneria-argentina.org.ar</a>
+      </li>
+      <li><strong>Contacto:</strong>
+        <a href="mailto:info@masoneria-argentina.org.ar">info@masoneria-argentina.org.ar</a>
+        · (011) 4382-2585
+      </li>
+    </ul>
+
+    <h2>Vínculo con la masonería italiana</h2>
+    <p>
+      Por su nombre y su origen, la Unión Italiana N°12 mantiene además vínculos vivos con
+      la masonería italiana. Históricamente con el <em>Grande Oriente d'Italia</em> y, más
+      recientemente, con la Delegación Magistral Argentina de la <em>Serenissima Gran
+      Loggia d'Italia</em>. Su pertenencia formal, sin embargo, es exclusivamente la Gran
+      Logia de la Argentina: la regularidad masónica no admite obediencias simultáneas.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .gla-prominent {
+    margin-block: var(--space-6) var(--space-8);
+  }
+</style>

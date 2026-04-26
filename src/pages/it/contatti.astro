@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/content/PageHero.astro";
+import MasonicGlyph from "../../components/symbols/MasonicGlyph.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Contatti" description="Tre canali di contatto con la R∴L∴ Unione Italiana N°12: contatto generale, stampa, postulanti.">
+  <PageHero eyebrow="Tre porte" title="Contatti" glyph="three-dots" />
+
+  <section class="container" style="padding-block: var(--space-8);">
+    <div class="contact-grid">
+      <article class="contact-card">
+        <MasonicGlyph name="three-dots" size={32} />
+        <h3>Contatto generale</h3>
+        <p>Per consultazioni che non rientrano nelle altre due porte.</p>
+        <a href="mailto:contacto@unionitaliana12.org.ar" class="overline" style="margin-top: var(--space-3); display: inline-block;">contacto@unionitaliana12.org.ar</a>
+      </article>
+      <article class="contact-card">
+        <MasonicGlyph name="letter-g" size={32} />
+        <h3>Stampa e ricerca</h3>
+        <p>Giornalisti, storici, accademici. Materiale disponibile su richiesta.</p>
+        <a href="mailto:prensa@unionitaliana12.org.ar" class="overline" style="margin-top: var(--space-3); display: inline-block;">prensa@unionitaliana12.org.ar</a>
+      </article>
+      <article class="contact-card">
+        <MasonicGlyph name="square-compass" size={32} />
+        <h3>Postulanti</h3>
+        <p>Se sta pensando di presentare domanda, le chiediamo di leggere prima la pagina di Iniziazione.</p>
+        <a href="/it/iniziazione/" class="overline" style="margin-top: var(--space-3); display: inline-block;">Vai a Iniziazione →</a>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-card { padding: var(--space-6); background: var(--bg-elevated); border: 1px solid var(--border); color: var(--fg); }
+  .contact-card h3 { margin-block: var(--space-2); font-size: var(--text-h5); font-family: var(--font-display); }
+  .contact-card p { color: var(--fg-muted); margin: 0; }
+</style>

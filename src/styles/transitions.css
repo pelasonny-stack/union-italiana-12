@@ -1,0 +1,49 @@
+/* View Transitions API — named transitions */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-slow, 600ms);
+  animation-timing-function: var(--ease-ceremonial, cubic-bezier(0.7, 0, 0.3, 1));
+}
+
+/* Atrio del peticionario — "puerta que se cierra" */
+::view-transition-old(atrio) {
+  animation: atrio-close var(--duration-ritual, 1200ms)
+    var(--ease-ceremonial, cubic-bezier(0.7, 0, 0.3, 1)) forwards;
+}
+::view-transition-new(atrio) {
+  animation: atrio-open var(--duration-ritual, 1200ms)
+    var(--ease-ceremonial, cubic-bezier(0.7, 0, 0.3, 1)) forwards;
+}
+
+@keyframes atrio-close {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+@keyframes atrio-open {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 200ms !important;
+  }
+}

@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Iniziazione"
+  description="Come iniziarsi nella R∴L∴ Unione Italiana N°12. Chi può presentare domanda, il processo, ciò che ci si aspetta dal postulante."
+>
+  <PageHero eyebrow="Chi bussa alle porte" title="Iniziarsi nell'Ordine" glyph="square-compass" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      Se è arrivato a questa pagina per curiosità passeggera, le chiediamo di leggere con
+      attenzione. Iniziarsi nella massoneria non è iscriversi a un'associazione: è assumere
+      un impegno di anni, di presenza regolare, di lavoro su sé stessi e di lealtà fraterna.
+      L'Ordine non recluta. Chi presenta domanda lo fa di propria iniziativa, senza essere
+      stato invitato, e sapendo che la sua petizione potrebbe non essere accettata.
+    </p>
+
+    <h2>Chi può presentare domanda?</h2>
+    <ul>
+      <li><strong>Maggiore di età</strong> (per uso tradizionale, 21 anni compiuti).</li>
+      <li><strong>Uomo libero e di buoni costumi</strong> — formula tradizionale.</li>
+      <li><strong>Professare credenza in un Principio Creatore</strong> — il Grande Architetto dell'Universo.</li>
+      <li><strong>Mezzi onesti di sussistenza</strong> e <strong>reputazione integra</strong>.</li>
+    </ul>
+
+    <h2>Il processo</h2>
+    <ol>
+      <li>Petizione attraverso l'Atrio.</li>
+      <li>Tre colloqui con fratelli investigatori.</li>
+      <li>Tavola degli investigatori presentata in Loggia.</li>
+      <li>Ballottaggio in scrutinio segreto.</li>
+      <li>Iniziazione, se favorevole.</li>
+    </ol>
+
+    <h2>Cosa ci si aspetta da lei</h2>
+    <ul>
+      <li>Presenza regolare alle tornate (in genere due al mese).</li>
+      <li>Studio personale e tavole scritte.</li>
+      <li>Quota mensile.</li>
+      <li>Discrezione.</li>
+      <li>Tempo: il primo grado dura, in uso, non meno di un anno.</li>
+    </ul>
+
+    <h2>Cosa la massoneria non le darà</h2>
+    <p>
+      Non è un club sociale, né una rete professionale. Se cerca contatti, opportunità di
+      affari o vantaggi materiali, non presenti domanda. L'Ordine punisce severamente l'uso
+      dei legami fraterni per fini personali.
+    </p>
+
+    <hr style="margin-block: var(--space-8); border: none; border-top: 1px solid var(--border);" />
+
+    <div class="atrio-cta">
+      <p class="overline">Atrio del Postulante</p>
+      <h2 style="font-size: var(--text-h3); margin-block: var(--space-2);">Deciso a bussare alla porta?</h2>
+      <p>
+        L'Atrio è lo spazio in cui il postulante formalizza la sua richiesta. Le ci vorranno
+        almeno venti minuti per completarlo con l'attenzione che merita. Se può, lo faccia
+        in silenzio.
+      </p>
+      <p style="margin-top: var(--space-4);">
+        <a href="/it/iniziazione/petizione/" class="atrio-btn cinzel">Entrare nell'Atrio →</a>
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .atrio-cta {
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent);
+  }
+  .atrio-btn {
+    display: inline-block;
+    padding: var(--space-2) var(--space-6);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background-image: none;
+    transition: background-color var(--duration-normal) var(--ease-ceremonial), color var(--duration-normal) var(--ease-ceremonial);
+    font-size: 0.85rem;
+  }
+  .atrio-btn:hover, .atrio-btn:focus-visible { background-color: var(--accent); color: var(--ink-900); }
+</style>

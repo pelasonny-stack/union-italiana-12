@@ -1,0 +1,41 @@
+---
+interface Props {
+  text: string;
+  attribution: string;
+  lang?: "es" | "it" | "la";
+}
+const { text, attribution, lang = "es" } = Astro.props;
+---
+
+<figure class="quote">
+  <blockquote lang={lang}>
+    <p>{text}</p>
+  </blockquote>
+  <figcaption>— {attribution}</figcaption>
+</figure>
+
+<style>
+  .quote {
+    margin: var(--space-8) auto;
+    max-width: var(--container-prose);
+    text-align: center;
+  }
+  blockquote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+    line-height: 1.4;
+    color: var(--fg);
+    margin: 0 0 var(--space-2);
+    quotes: '“' '”' '‘' '’';
+  }
+  blockquote p::before { content: open-quote; }
+  blockquote p::after { content: close-quote; }
+  figcaption {
+    font-family: var(--font-sans);
+    font-size: var(--text-body-sm);
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-uppercase);
+  }
+</style>

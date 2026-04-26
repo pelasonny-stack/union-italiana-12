@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MasonicGlyph from "../components/symbols/MasonicGlyph.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="404" description="Página no encontrada" noindex>
+  <section class="container container-prose" style="padding-block: var(--space-16); text-align: center;">
+    <MasonicGlyph name="three-dots" size={48} class="acacia" />
+    <h1 style="margin-top: var(--space-4)">404</h1>
+    <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--fg-muted)">
+      "Quien busca, encuentra; pero no siempre lo que buscaba."
+    </p>
+    <p style="margin-top: var(--space-4)">
+      <a href="/es/">Volver al Oriente</a>
+    </p>
+  </section>
+</BaseLayout>
+<style>
+  .acacia { color: var(--accent); margin: 0 auto; }
+</style>

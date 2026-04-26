@@ -1,0 +1,639 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme {
+  --color-pergamena: #efe7d2;
+  --color-vermiglio: #7e2a1e;
+  --color-vermiglio-profondo: #5a1b14;
+  --color-cinabro: #a33a26;
+  --color-oro-zecchino: #b8893c;
+  --color-oro-foglia: #d4a845;
+  --color-oro-antico: #7a5a2a;
+  --color-tri-verde: #2f5d3a;
+  --color-tri-rosso: #7a1f1f;
+  --color-inchiostro: #141014;
+  --color-notte: #0f0c12;
+  --color-candela: #f2e3c2;
+  --color-travertino: #e8e1d0;
+  --color-lapis-notte: #1b2540;
+  --color-lapis-cielo: #3d4d78;
+
+  /* legacy */
+  --color-ink-900: #141014;
+  --color-ink-800: #1a1a20;
+  --color-ink-700: #2c2c34;
+  --color-ink-600: #44444e;
+  --color-ink-500: #6b6b76;
+  --color-ink-400: #8e8e98;
+  --color-ink-300: #b5b5bd;
+  --color-ink-200: #d4d4d9;
+  --color-ink-100: #e8e6e0;
+  --color-ivory-50: #efe7d2;
+  --color-gold-600: #b8893c;
+  --color-gold-700: #d4a845;
+  --color-it-green: #2f5d3a;
+  --color-it-red: #7a1f1f;
+
+  --font-display: "Cormorant Garamond", Garamond, serif;
+  --font-cinzel: "Cinzel", "Trajan Pro", serif;
+  --font-serif: "EB Garamond", Garamond, serif;
+  --font-sans: "Inter", -apple-system, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-ornament: "IM Fell Flowers", "Cormorant Garamond", serif;
+}
+
+/* ── Web fonts (Google) — preconnect en BaseLayout ── */
+@font-face { font-display: swap; }
+
+/* ── Reset editorial ── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga", "calt", "onum";
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  position: relative;
+  transition:
+    background var(--duration-normal) var(--ease-ceremonial),
+    color var(--duration-normal) var(--ease-ceremonial);
+}
+
+/* Textura "Carta Verjurata" — apenas perceptible (4% opacity) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.227, 0 0 0 0 0.184, 0 0 0 0 0.149, 0 0 0 1 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+:root[data-theme="dark"] body::before {
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feGaussianBlur stdDeviation='0.4'/><feColorMatrix values='0 0 0 0 0.239, 0 0 0 0 0.302, 0 0 0 0 0.471, 0 0 0 1 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+
+/* Asegurar que el contenido va encima de la textura */
+body > * { position: relative; z-index: 1; }
+
+/* ── Tipografía editorial ── */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--fg);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw + 1rem, var(--text-h1));
+  letter-spacing: var(--tracking-tight);
+}
+h2 {
+  font-size: clamp(2rem, 3vw + 1rem, var(--text-h2));
+  letter-spacing: -0.02em;
+}
+h3 {
+  font-size: clamp(1.6rem, 2vw + 0.8rem, var(--text-h3));
+  letter-spacing: -0.015em;
+}
+h4 {
+  font-size: var(--text-h4);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+h5 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h5);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 0;
+}
+h6 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h6);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  margin: 0;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+/* Lemas latinos / citas masónicas */
+.latin,
+em.latin {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* Mayúsculas con respiración lapidaria */
+.overline {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-uppercase);
+  color: var(--fg-muted);
+}
+
+.cinzel {
+  font-family: var(--font-cinzel);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-cinzel);
+  font-weight: 500;
+}
+
+.cormorant-sc {
+  font-family: var(--font-display);
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+}
+
+/* Ornamento dingbat — para fleurons in-line */
+.fleuron {
+  font-family: var(--font-ornament);
+  color: var(--accent);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Drop cap iluminada — capitular nivel A (manuscrito) */
+.drop-cap-illuminated::first-letter {
+  font-family: var(--font-display);
+  font-size: 5.5em;
+  font-weight: 600;
+  line-height: 0.8;
+  float: left;
+  margin: 0.05em 0.18em 0.02em 0;
+  padding: 0.1em 0.18em;
+  background: var(--vermiglio);
+  color: var(--pergamena);
+  border: 1px solid var(--oro-zecchino);
+  box-shadow: inset 0 0 0 4px var(--vermiglio), inset 0 0 0 5px var(--oro-zecchino);
+}
+
+/* Drop cap sobria — capitular nivel B (editorial) */
+.drop-cap::first-letter,
+.drop-cap-simple::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.2em;
+  font-weight: 500;
+  float: left;
+  line-height: 0.85;
+  margin: 0.05em 0.12em 0 0;
+  color: var(--accent);
+}
+
+/* ── Dividers + ornamentos reutilizables ── */
+
+.tricolor-rule {
+  display: block;
+  width: 88px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--tricolor-horizontal);
+  border: none;
+}
+
+.tricolor-rule.is-large { width: 160px; height: 3px; }
+.tricolor-rule.is-full { width: 100%; height: 6px; }
+
+.gold-rule {
+  display: block;
+  width: 64px;
+  height: 1px;
+  margin: 0 auto;
+  background: var(--accent);
+  border: none;
+  opacity: 0.7;
+}
+
+.divider-fleuron {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-12) auto;
+  max-width: var(--container-narrow);
+  color: var(--accent);
+}
+.divider-fleuron::before,
+.divider-fleuron::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
+.divider-fleuron-glyph {
+  font-family: var(--font-ornament);
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+/* ── Links ── */
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--duration-fast) var(--ease-ceremonial);
+}
+
+a:hover,
+a:focus-visible {
+  background-size: 100% 1px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ── Containers ── */
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 4vw, 3rem);
+  max-width: var(--container-default);
+}
+
+.container-narrow { max-width: var(--container-narrow); }
+.container-prose { max-width: var(--container-prose); }
+
+/* ─────────────────────────────────────────────────────────────────
+   PROSA EDITORIAL — sistema aplicado a `.container-prose article` y
+   `article.container-prose`. Ritmo, jerarquía y respiración tipo
+   Adelphi / Iperborea / Stripe Press.
+   ───────────────────────────────────────────────────────────────── */
+
+.container-prose,
+article.container-prose,
+.container-prose article {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--fg);
+  hanging-punctuation: first last;
+}
+
+/* Párrafos: respiración + texto balanceado en heads */
+.container-prose p {
+  margin: 0 0 1.25em;
+  text-wrap: pretty;
+}
+
+/* Primer párrafo después de H1/H2: sin margin-top extra (los H ya separan) */
+.container-prose h1 + p,
+.container-prose h2 + p,
+.container-prose h3 + p,
+.container-prose h4 + p {
+  margin-top: 0;
+}
+
+/* Lead: el primer párrafo del article (cuando no se usa drop-cap explícita) */
+.container-prose > p:first-of-type,
+.container-prose article > p:first-of-type {
+  font-size: 1.25rem;
+  line-height: 1.65;
+  color: var(--fg);
+  margin-bottom: 1.5em;
+}
+
+/* ── Headings dentro de prosa ── */
+
+.container-prose h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  color: var(--fg);
+  margin: 2.5em 0 0.6em;
+  position: relative;
+  padding-top: 1em;
+  text-wrap: balance;
+}
+.container-prose h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.7;
+}
+.container-prose > h2:first-child,
+.container-prose article > h2:first-child {
+  margin-top: 0.5em;
+}
+
+.container-prose h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.25;
+  color: var(--fg);
+  margin: 2em 0 0.5em;
+  letter-spacing: -0.005em;
+}
+
+.container-prose h4 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-uppercase);
+  color: var(--accent);
+  margin: 1.75em 0 0.4em;
+}
+
+/* ── Énfasis ── */
+
+.container-prose strong {
+  font-weight: 600;
+  color: var(--vermiglio);
+}
+:root[data-theme="dark"] .container-prose strong {
+  color: var(--accent-bright);
+}
+.container-prose em {
+  font-style: italic;
+  color: inherit;
+}
+
+/* ── Listas ── */
+
+.container-prose ul,
+.container-prose ol {
+  margin: 0 0 1.5em;
+  padding-left: 0;
+  list-style: none;
+}
+
+.container-prose ul li,
+.container-prose ol li {
+  position: relative;
+  padding-left: 1.75em;
+  margin-bottom: 0.65em;
+  line-height: 1.7;
+}
+.container-prose ul li::before {
+  content: "⸫";
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  color: var(--accent);
+  font-size: 0.9em;
+  letter-spacing: 0;
+}
+.container-prose ol {
+  counter-reset: prose-ol;
+}
+.container-prose ol li {
+  counter-increment: prose-ol;
+}
+.container-prose ol li::before {
+  content: counter(prose-ol, upper-roman) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-family: var(--font-cinzel);
+  font-size: 0.85em;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  min-width: 1.5em;
+}
+
+/* Listas anidadas */
+.container-prose ul ul,
+.container-prose ul ol,
+.container-prose ol ul,
+.container-prose ol ol {
+  margin: 0.5em 0 0.5em;
+}
+
+/* ── Blockquote / pull quote ── */
+
+.container-prose blockquote {
+  margin: 2em 0;
+  padding: 0 0 0 1.5em;
+  border-left: 2px solid var(--accent);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--fg);
+  position: relative;
+}
+.container-prose blockquote p {
+  margin-bottom: 0.5em;
+}
+.container-prose blockquote cite,
+.container-prose blockquote footer {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-uppercase);
+  color: var(--fg-muted);
+  margin-top: 0.5em;
+}
+
+/* ── Code inline ── */
+
+.container-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--travertino);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+  color: var(--vermiglio-profondo);
+}
+
+/* ── HR como divisor ornamental ── */
+
+.container-prose hr {
+  border: none;
+  height: 1px;
+  background: none;
+  text-align: center;
+  margin: 3em auto;
+  position: relative;
+  overflow: visible;
+  max-width: 240px;
+}
+.container-prose hr::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
+.container-prose hr::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg);
+  padding: 0 0.6em;
+  color: var(--accent);
+  font-family: var(--font-ornament);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ── Links de cuerpo: subrayado más visible que el global ── */
+
+.container-prose a:not([class]) {
+  color: var(--vermiglio);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  font-weight: 500;
+}
+:root[data-theme="dark"] .container-prose a:not([class]) {
+  color: var(--accent-bright);
+}
+.container-prose a:not([class]):hover,
+.container-prose a:not([class]):focus-visible {
+  color: var(--accent);
+  background-size: 100% 2px;
+}
+
+/* ── Tablas ── */
+
+.container-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+.container-prose th,
+.container-prose td {
+  text-align: left;
+  padding: 0.6em 0.8em;
+  border-bottom: 1px solid var(--border);
+}
+.container-prose th {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-uppercase);
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+/* ── Definition lists (DL) base — overrideable ── */
+
+.container-prose dl:not(.glossary) {
+  margin: 1.5em 0;
+}
+.container-prose dl:not(.glossary) dt {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-uppercase);
+  color: var(--accent);
+  margin-top: 1em;
+}
+.container-prose dl:not(.glossary) dd {
+  margin: 0.25em 0 0 0;
+}
+
+/* ── Mobile refinements ── */
+@media (max-width: 640px) {
+  .container-prose,
+  article.container-prose,
+  .container-prose article {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .container-prose > p:first-of-type,
+  .container-prose article > p:first-of-type {
+    font-size: 1.15rem;
+  }
+}
+
+/* ── Image defaults ── */
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Form defaults ── */
+input, textarea, select, button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ── Skip link a11y ── */
+.skip-link {
+  position: absolute;
+  inset-inline-start: -9999px;
+  top: 0;
+  background: var(--inchiostro);
+  color: var(--pergamena);
+  padding: 0.75rem 1.25rem;
+  z-index: 1000;
+  border: 1px solid var(--accent);
+}
+.skip-link:focus {
+  inset-inline-start: 1rem;
+  top: 1rem;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--accent);
+  color: var(--inchiostro);
+}

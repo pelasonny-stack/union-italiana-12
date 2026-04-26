@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+const id = Astro.url.searchParams.get("id") ?? "";
+---
+
+<BaseLayout
+  lang={lang}
+  title="Abbiamo ricevuto la sua petizione"
+  description="Conferma di ricevimento di petizione — R∴L∴ Unione Italiana N°12"
+  noindex
+>
+  <PageHero eyebrow="Petizione ricevuta" title="Abbiamo ricevuto la sua petizione" glyph="three-dots" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La sua petizione sarà presentata alla prossima tornata regolare della Loggia, dove
+      verrà letta dal Maestro Venerabile e registrata. Nelle settimane successive, tre
+      fratelli investigatori saranno designati; uno di essi la contatterà, attraverso il
+      mezzo da lei indicato, per fissare il primo colloquio.
+    </p>
+    <p>
+      Se trascorrono più di sei settimane senza notizie, può scriverci a
+      <a href="mailto:peticiones@unionitaliana12.org.ar">peticiones@unionitaliana12.org.ar</a>
+      — i processi dell'Ordine sono lenti per disegno, ma non opachi.
+    </p>
+    <p>
+      Le chiediamo, in questo intervallo, di continuare a leggere. Nella sezione
+      <a href="/it/massoneria/biblioteca/">Biblioteca</a> di questo sito troverà testi che
+      potrà percorrere con frutto.
+    </p>
+    <p style="margin-top: var(--space-6); font-style: italic; color: var(--fg-muted)">
+      Riceva, con queste righe, il rispettoso saluto della Loggia.
+    </p>
+    {id && (
+      <p style="margin-top: var(--space-8); font-family: var(--font-mono); font-size: var(--text-caption); color: var(--fg-subtle)">
+        Identificatore di petizione: <code>{id}</code>
+      </p>
+    )}
+  </article>
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+
+const terms = [
+  { term: "Apprendista", def: "Primo grado della massoneria simbolica. Il suo lavoro è il dirozzamento della pietra grezza." },
+  { term: "Catena d'Unione", def: "Atto fraterno con cui si chiudono determinate tornate." },
+  { term: "Colonne Jakin e Boaz", def: "Le due colonne del portico del Tempio di Salomone (1 Re 7:21). Simbolizzano stabilità e forza." },
+  { term: "Costituzioni di Anderson", def: "Testo fondamentale della massoneria moderna (1723), redatto da James Anderson. Pubblico dominio." },
+  { term: "Grande Architetto dell'Universo (G∴A∴D∴U∴)", def: "Formula con cui la massoneria regolare nomina il Principio Creatore. Deliberatamente aperta." },
+  { term: "Gran Loggia", def: "Corpo sovrano che riunisce le logge di un territorio. La nostra Loggia lavora sotto la giurisdizione della Gran Loggia dell'Argentina." },
+  { term: "Loggia", def: "Sia il corpo dei massoni riuniti in lavoro regolare sia il luogo in cui si riuniscono." },
+  { term: "Maestro Massone", def: "Terzo grado della massoneria simbolica." },
+  { term: "Oriente", def: "Designa la città in cui si stabilisce una Loggia (\"Oriente di Buenos Aires\")." },
+  { term: "Tavola", def: "Lavoro scritto che un fratello elabora su un tema e presenta alla Loggia." },
+  { term: "Profano", def: "Designa chi non è stato iniziato. Dal latino pro fanum — \"davanti al tempio\"." },
+  { term: "Tornata", def: "Sessione di lavoro di una Loggia. Regolari (solo per massoni) e bianche (pubbliche)." },
+  { term: "Tornata bianca", def: "Sessione pubblica a cui la Loggia invita i non-massoni." },
+  { term: "Tolleranza", def: "Disposizione attiva a sostenere il dialogo tra uomini di convinzioni diverse." },
+  { term: "VITRIOL", def: "Acronimo latino: Visita Interiora Terrae Rectificando Invenies Occultum Lapidem. Antica formula alchemica adottata dalla massoneria." },
+];
+---
+
+<BaseLayout lang={lang} title="Glossario massonico" description="Quindici termini chiave della massoneria regolare.">
+  <PageHero eyebrow="Quindici termini" title="Glossario" glyph="three-dots" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <dl class="glossary">
+      {terms.map(({ term, def }) => (
+        <>
+          <dt>{term}</dt>
+          <dd>{def}</dd>
+        </>
+      ))}
+    </dl>
+  </article>
+</BaseLayout>
+
+<style>
+  .glossary { margin-top: var(--space-8); counter-reset: glossary; display: grid; grid-template-columns: 64px 1fr; column-gap: var(--space-3); }
+  .glossary dt { counter-increment: glossary; grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: baseline; font-family: var(--font-display); font-size: var(--text-h5); color: var(--fg); margin-top: var(--space-6); }
+  .glossary dt::before { content: counter(glossary, upper-roman) "."; grid-column: 1; font-family: var(--font-cinzel); font-size: 1.1rem; color: var(--accent); text-align: right; letter-spacing: 0.04em; }
+  .glossary dt > * { grid-column: 2; }
+  .glossary dt:first-of-type { margin-top: 0; }
+  .glossary dd { grid-column: 2; margin: var(--space-1) 0 var(--space-3); color: var(--fg-muted); font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.7; }
+  @media (max-width: 600px) {
+    .glossary { grid-template-columns: 1fr; }
+    .glossary dt { display: block; }
+    .glossary dt::before { display: inline; margin-right: 0.5em; }
+    .glossary dd { padding-left: 1em; }
+  }
+</style>

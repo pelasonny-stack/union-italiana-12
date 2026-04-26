@@ -1,0 +1,648 @@
+---
+import Vela from "../symbols/Vela.astro";
+import type { Locale } from "../../i18n/config";
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const TURNSTILE_SITEKEY =
+  import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? "1x00000000000000000000AA"; // dummy site key (always passes en dev)
+
+const labels = lang === "es"
+  ? {
+      step1: "Umbral I — Identidad",
+      step2: "Umbral II — Introspección",
+      step3: "Umbral III — Palabra",
+      next: "Cruzar el umbral",
+      back: "Volver atrás",
+      submit: "Golpear las puertas del Templo",
+      heard: "Has sido escuchado.",
+      sending: "Llamando…",
+      ofThree: "de tres",
+      // Step 1 fields
+      firstName: "Nombre", lastName: "Apellido",
+      dob: "Fecha de nacimiento", nationality: "Nacionalidad",
+      docType: "Tipo de documento", docNumber: "Número",
+      address: "Domicilio", city: "Ciudad", province: "Provincia", country: "País",
+      phone: "Teléfono", email: "Correo electrónico",
+      occupation: "Profesión u ocupación",
+      occupationHelp: "Pedimos detalle, no rótulo. \"Comerciante\" dice menos que \"comerciante minorista de instrumentos musicales desde 2014\".",
+      // Step 2
+      religious: "¿Profesa alguna religión o tradición filosófica?",
+      religiousHelp: "La masonería regular pide creencia en un Principio Creador, sin imponer dogma. Le pedimos que describa con sus palabras su posición personal. No se evalúa por contenido confesional, sino por sinceridad y reflexión. (mín. 200 caracteres)",
+      howKnown: "¿Cómo conoció la masonería?",
+      howKnownHelp: "Lecturas, familia, encuentros, búsquedas personales. Sea concreto: títulos de libros, nombres si los recuerda, momentos. (mín. 300 caracteres)",
+      whyPetition: "¿Por qué peticiona?",
+      whyPetitionHelp: "Esta es la pregunta central. Le pedimos que escriba con calma. Una respuesta breve o genérica no permite evaluar su petición y suele dar lugar a una declinación sin entrevista. No hay respuesta correcta — hay respuesta auténtica. (mín. 800 caracteres)",
+      whyLodge: "¿Por qué la Unión Italiana N°12 y no otra Logia?",
+      whyLodgeHelp: "Existen logias regulares en Buenos Aires con orientaciones diversas. ¿Qué lo trae específicamente a la nuestra? (mín. 300 caracteres)",
+      // Step 3
+      ref1Name: "Referencia 1 — Nombre completo", ref1Contact: "Referencia 1 — Email o teléfono",
+      ref2Name: "Referencia 2 — Nombre completo", ref2Contact: "Referencia 2 — Email o teléfono",
+      refsHelp: "Dos personas de su entorno (no familiares) que puedan dar testimonio de su carácter. Pueden o no ser contactadas.",
+      criminal: "¿Tiene antecedentes penales?",
+      criminalDetail: "Si sí, describa brevemente",
+      criminalHelp: "Una respuesta afirmativa no es automáticamente excluyente; una respuesta falsa, sí.",
+      availability: "Disponibilidad horaria — días en que podría asistir a tenidas (en general, una noche entre semana, dos veces al mes)",
+      contribution: "Capacidad de aporte mensual",
+      contributionHelp: "La cuota se acuerda según posibilidades reales. La Logia no rechaza por situación económica, pero sí por opacidad.",
+      contributionMin: "Mínimo (dificultades económicas)",
+      contributionMid: "Medio (situación estable)",
+      contributionLarge: "Amplio",
+      contributionPnts: "Prefiero no decir",
+      freeComment: "Comentario libre — lo que considere que no fue preguntado y debamos saber",
+      declarationTruth: "Declaro bajo juramento que toda la información provista es veraz, y que peticiono libremente, sin haber sido inducido por terceros.",
+      dataConsent: "He leído y acepto la Política de Privacidad. Autorizo el tratamiento de mis datos en los términos de la Ley 25.326. Conozco mi derecho a acceder, rectificar y suprimir.",
+      privacyLink: "Ver política de privacidad",
+      // Errors
+      errorGeneric: "El llamado no llegó. Reintente en unos minutos.",
+      errorRate: "Demasiados intentos. Intente más tarde.",
+      errorTurnstile: "No pudimos verificar la solicitud. Recargue e intente de nuevo.",
+      errorMissing: "Hay campos obligatorios sin completar.",
+      errorTooShort: "Algunas respuestas son demasiado breves para evaluarlas con seriedad.",
+    }
+  : {
+      step1: "Soglia I — Identità",
+      step2: "Soglia II — Introspezione",
+      step3: "Soglia III — Parola",
+      next: "Varcare la soglia",
+      back: "Tornare indietro",
+      submit: "Bussare alle porte del Tempio",
+      heard: "Sei stato ascoltato.",
+      sending: "Bussando…",
+      ofThree: "di tre",
+      firstName: "Nome", lastName: "Cognome",
+      dob: "Data di nascita", nationality: "Nazionalità",
+      docType: "Tipo di documento", docNumber: "Numero",
+      address: "Indirizzo", city: "Città", province: "Provincia", country: "Paese",
+      phone: "Telefono", email: "Email",
+      occupation: "Professione od occupazione",
+      occupationHelp: "Chiediamo dettaglio, non etichetta. \"Commerciante\" dice meno di \"commerciante al dettaglio di strumenti musicali dal 2014\".",
+      religious: "Professa una religione o tradizione filosofica?",
+      religiousHelp: "La massoneria regolare richiede la credenza in un Principio Creatore, senza imporre alcun dogma. Le chiediamo di descrivere con parole proprie la sua posizione personale. Non si valuta per contenuto confessionale, ma per sincerità e riflessione. (min. 200 caratteri)",
+      howKnown: "Come ha conosciuto la massoneria?",
+      howKnownHelp: "Letture, famiglia, incontri, ricerche personali. Sia concreto: titoli di libri, nomi se ricorda, momenti. (min. 300 caratteri)",
+      whyPetition: "Perché presenta domanda?",
+      whyPetitionHelp: "Questa è la domanda centrale. Le chiediamo di scrivere con calma. Una risposta breve o generica non permette di valutare la sua petizione e di solito porta a un rifiuto senza colloquio. Non c'è risposta corretta — c'è risposta autentica. (min. 800 caratteri)",
+      whyLodge: "Perché la Unione Italiana N°12 e non un'altra Loggia?",
+      whyLodgeHelp: "Esistono logge regolari a Buenos Aires con orientamenti diversi. Cosa la porta specificamente alla nostra? (min. 300 caratteri)",
+      ref1Name: "Riferimento 1 — Nome completo", ref1Contact: "Riferimento 1 — Email o telefono",
+      ref2Name: "Riferimento 2 — Nome completo", ref2Contact: "Riferimento 2 — Email o telefono",
+      refsHelp: "Due persone del suo ambiente (non familiari) che possano testimoniare del suo carattere. Potrebbero o no essere contattate.",
+      criminal: "Ha precedenti penali?",
+      criminalDetail: "Se sì, descriva brevemente",
+      criminalHelp: "Una risposta affermativa non è automaticamente escludente; una risposta falsa, sì.",
+      availability: "Disponibilità oraria — giorni in cui potrebbe assistere alle tornate (in genere, una sera infrasettimanale, due volte al mese)",
+      contribution: "Capacità di contributo mensile",
+      contributionHelp: "La quota si concorda secondo le possibilità reali. La Loggia non rifiuta per situazione economica, ma per opacità.",
+      contributionMin: "Minima (difficoltà economiche)",
+      contributionMid: "Media (situazione stabile)",
+      contributionLarge: "Ampia",
+      contributionPnts: "Preferisco non dire",
+      freeComment: "Commento libero — ciò che ritiene non sia stato chiesto e dobbiamo sapere",
+      declarationTruth: "Dichiaro sotto giuramento che tutte le informazioni fornite sono veritiere, e che presento domanda liberamente, senza essere stato indotto da terzi.",
+      dataConsent: "Ho letto e accetto la Politica sulla Privacy. Autorizzo il trattamento dei miei dati ai sensi della Legge 25.326. Conosco il mio diritto di accesso, rettifica e cancellazione.",
+      privacyLink: "Vedi politica sulla privacy",
+      errorGeneric: "Il colpo non è giunto. Riprovare tra qualche minuto.",
+      errorRate: "Troppi tentativi. Riprova più tardi.",
+      errorTurnstile: "Non possiamo verificare la richiesta. Ricarica e riprova.",
+      errorMissing: "Ci sono campi obbligatori non compilati.",
+      errorTooShort: "Alcune risposte sono troppo brevi per essere valutate con serietà.",
+    };
+---
+
+<div class="atrio" data-atrio data-lang={lang}>
+  <div class="atrio-stage" data-stage>
+    {/* ────────── Velas indicador ────────── */}
+    <div class="velas-row" aria-hidden="true">
+      <Vela size={42} lit={true} />
+      <Vela size={42} lit={false} class="vela-2" />
+      <Vela size={42} lit={false} class="vela-3" />
+    </div>
+
+    <p class="step-counter overline" data-step-counter>
+      <span data-step-current>1</span>
+      <span style="margin: 0 0.4em">/</span>
+      <span>3</span>
+      <span style="margin-left: 0.6em">{labels.ofThree}</span>
+    </p>
+
+    <form id="atrio-form" novalidate>
+      {/* honeypot — invisible para humanos */}
+      <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" class="honeypot" />
+      <input type="hidden" name="formStartedAt" value="" data-form-started />
+      <input type="hidden" name="preferredLanguage" value={lang} />
+      <input type="hidden" name="turnstileToken" value="" data-turnstile-token />
+
+      {/* ───────── UMBRAL I — IDENTIDAD ───────── */}
+      <fieldset class="step is-active" data-step="1">
+        <legend class="cinzel step-title">{labels.step1}</legend>
+
+        <div class="grid-2">
+          <label class="field"><span>{labels.firstName} *</span><input type="text" name="firstName" required minlength="2" maxlength="60" autocomplete="given-name" /></label>
+          <label class="field"><span>{labels.lastName} *</span><input type="text" name="lastName" required minlength="2" maxlength="60" autocomplete="family-name" /></label>
+        </div>
+
+        <div class="grid-2">
+          <label class="field"><span>{labels.dob} *</span><input type="date" name="dateOfBirth" required autocomplete="bday" /></label>
+          <label class="field"><span>{labels.nationality} *</span><input type="text" name="nationality" required maxlength="120" /></label>
+        </div>
+
+        <div class="grid-2">
+          <label class="field"><span>{labels.docType} *</span>
+            <select name="documentType" required>
+              <option value="DNI">DNI</option>
+              <option value="Passport">Passport</option>
+              <option value="CarnetIT">Carta d'Identità (IT)</option>
+              <option value="Other">{lang === "es" ? "Otro" : "Altro"}</option>
+            </select>
+          </label>
+          <label class="field"><span>{labels.docNumber} *</span><input type="text" name="documentNumber" required maxlength="40" /></label>
+        </div>
+
+        <label class="field"><span>{labels.address} *</span><input type="text" name="address" required maxlength="200" autocomplete="street-address" /></label>
+
+        <div class="grid-3">
+          <label class="field"><span>{labels.city} *</span><input type="text" name="city" required autocomplete="address-level2" /></label>
+          <label class="field"><span>{labels.province} *</span><input type="text" name="province" required autocomplete="address-level1" /></label>
+          <label class="field"><span>{labels.country} *</span><input type="text" name="country" required autocomplete="country-name" value={lang === "it" ? "Italia" : "Argentina"} /></label>
+        </div>
+
+        <div class="grid-2">
+          <label class="field"><span>{labels.phone} *</span><input type="tel" name="phone" required autocomplete="tel" /></label>
+          <label class="field"><span>{labels.email} *</span><input type="email" name="email" required autocomplete="email" /></label>
+        </div>
+
+        <label class="field">
+          <span>{labels.occupation} *</span>
+          <input type="text" name="occupation" required minlength="3" maxlength="200" />
+          <small>{labels.occupationHelp}</small>
+        </label>
+
+        <div class="step-nav">
+          <span></span>
+          <button type="button" class="next-btn cinzel" data-next>{labels.next} →</button>
+        </div>
+      </fieldset>
+
+      {/* ───────── UMBRAL II — INTROSPECCIÓN ───────── */}
+      <fieldset class="step" data-step="2">
+        <legend class="cinzel step-title">{labels.step2}</legend>
+
+        <label class="field">
+          <span>{labels.religious} *</span>
+          <textarea name="religiousPosition" required minlength="200" maxlength="2000" rows="5"></textarea>
+          <small>{labels.religiousHelp}</small>
+        </label>
+
+        <label class="field">
+          <span>{labels.howKnown} *</span>
+          <textarea name="howKnownMasonry" required minlength="300" maxlength="3000" rows="6"></textarea>
+          <small>{labels.howKnownHelp}</small>
+        </label>
+
+        <label class="field">
+          <span>{labels.whyPetition} *</span>
+          <textarea name="whyPetition" required minlength="800" maxlength="5000" rows="10"></textarea>
+          <small>{labels.whyPetitionHelp}</small>
+        </label>
+
+        <label class="field">
+          <span>{labels.whyLodge} *</span>
+          <textarea name="whyThisLodge" required minlength="300" maxlength="3000" rows="6"></textarea>
+          <small>{labels.whyLodgeHelp}</small>
+        </label>
+
+        <div class="step-nav">
+          <button type="button" class="back-btn" data-back>← {labels.back}</button>
+          <button type="button" class="next-btn cinzel" data-next>{labels.next} →</button>
+        </div>
+      </fieldset>
+
+      {/* ───────── UMBRAL III — PALABRA ───────── */}
+      <fieldset class="step" data-step="3">
+        <legend class="cinzel step-title">{labels.step3}</legend>
+
+        <div class="grid-2">
+          <label class="field"><span>{labels.ref1Name} *</span><input type="text" name="reference1Name" required maxlength="80" /></label>
+          <label class="field"><span>{labels.ref1Contact} *</span><input type="text" name="reference1Contact" required maxlength="120" /></label>
+          <label class="field"><span>{labels.ref2Name} *</span><input type="text" name="reference2Name" required maxlength="80" /></label>
+          <label class="field"><span>{labels.ref2Contact} *</span><input type="text" name="reference2Contact" required maxlength="120" /></label>
+        </div>
+        <p class="help-block">{labels.refsHelp}</p>
+
+        <div class="grid-2">
+          <label class="field"><span>{labels.criminal} *</span>
+            <select name="criminalRecord" required>
+              <option value="no">No</option>
+              <option value="yes">{lang === "es" ? "Sí" : "Sì"}</option>
+            </select>
+          </label>
+          <label class="field"><span>{labels.criminalDetail}</span><input type="text" name="criminalRecordDetail" maxlength="2000" /></label>
+        </div>
+        <p class="help-block">{labels.criminalHelp}</p>
+
+        <div class="field">
+          <span>{labels.availability} *</span>
+          <div class="checkbox-row">
+            {[
+              ["lun", lang === "es" ? "Lun" : "Lun"],
+              ["mar", lang === "es" ? "Mar" : "Mar"],
+              ["mie", lang === "es" ? "Mié" : "Mer"],
+              ["jue", lang === "es" ? "Jue" : "Gio"],
+              ["vie", lang === "es" ? "Vie" : "Ven"],
+              ["sab", lang === "es" ? "Sáb" : "Sab"],
+              ["dom", lang === "es" ? "Dom" : "Dom"],
+            ].map(([val, lbl]) => (
+              <label class="check"><input type="checkbox" name="availability" value={val} /><span>{lbl}</span></label>
+            ))}
+          </div>
+        </div>
+
+        <label class="field">
+          <span>{labels.contribution} *</span>
+          <select name="contributionRange" required>
+            <option value="minimo">{labels.contributionMin}</option>
+            <option value="medio" selected>{labels.contributionMid}</option>
+            <option value="amplio">{labels.contributionLarge}</option>
+            <option value="prefiero-no-decir">{labels.contributionPnts}</option>
+          </select>
+          <small>{labels.contributionHelp}</small>
+        </label>
+
+        <label class="field">
+          <span>{labels.freeComment}</span>
+          <textarea name="freeComment" maxlength="3000" rows="4"></textarea>
+        </label>
+
+        <label class="check check-block">
+          <input type="checkbox" name="declarationTruth" required />
+          <span>{labels.declarationTruth}</span>
+        </label>
+
+        <label class="check check-block">
+          <input type="checkbox" name="dataConsent" required />
+          <span>
+            {labels.dataConsent}{" "}
+            <a href={lang === "es" ? "/es/legal/privacidad/" : "/it/legale/privacy/"} target="_blank" rel="noopener">{labels.privacyLink}</a>
+          </span>
+        </label>
+
+        {/* Cloudflare Turnstile widget container */}
+        <div class="turnstile-wrap">
+          <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="dark" data-size="flexible"></div>
+        </div>
+
+        <div class="step-nav">
+          <button type="button" class="back-btn" data-back>← {labels.back}</button>
+          <button type="submit" class="submit-btn cinzel" data-submit>{labels.submit}</button>
+        </div>
+      </fieldset>
+
+      <p class="error-display" data-error-display role="alert" hidden></p>
+    </form>
+  </div>
+
+  {/* Pantalla de "Has sido escuchado" */}
+  <div class="atrio-heard" data-heard hidden>
+    <p class="heard-text cinzel">{labels.heard}</p>
+  </div>
+</div>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
+
+<script define:vars={{ workerUrl: import.meta.env.PUBLIC_PETITION_WORKER_URL ?? "https://forms.unionitaliana12.org.ar", confirmationUrl: lang === "es" ? "/es/iniciacion/confirmacion/" : "/it/iniziazione/conferma/", errorMessages: {
+  generic: labels.errorGeneric,
+  rate: labels.errorRate,
+  turnstile: labels.errorTurnstile,
+  missing: labels.errorMissing,
+  tooShort: labels.errorTooShort,
+} }}>
+  const root = document.querySelector("[data-atrio]");
+  if (!root) return;
+  const form = root.querySelector("#atrio-form");
+  const steps = Array.from(root.querySelectorAll("[data-step]"));
+  const counter = root.querySelector("[data-step-current]");
+  const errorDisplay = root.querySelector("[data-error-display]");
+  const heardScreen = root.querySelector("[data-heard]");
+  const stage = root.querySelector("[data-stage]");
+
+  // form started timestamp (anti-bot)
+  const startedInput = root.querySelector("[data-form-started]");
+  if (startedInput) startedInput.value = String(Date.now());
+
+  let current = 1;
+  function show(step) {
+    steps.forEach((el) => {
+      const n = Number(el.getAttribute("data-step"));
+      el.classList.toggle("is-active", n === step);
+    });
+    if (counter) counter.textContent = String(step);
+    // Velas
+    root.querySelectorAll(".velas-row .vela").forEach((v, idx) => {
+      v.classList.toggle("is-lit", idx < step);
+      v.classList.toggle("is-out", idx >= step);
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    current = step;
+  }
+
+  // Validación por paso
+  function validateStep(step) {
+    const fieldset = root.querySelector(`[data-step="${step}"]`);
+    if (!fieldset) return false;
+    const required = fieldset.querySelectorAll("input[required], textarea[required], select[required]");
+    for (const el of required) {
+      if (!el.checkValidity()) {
+        el.reportValidity();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  root.querySelectorAll("[data-next]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (!validateStep(current)) return;
+      if (current < 3) show(current + 1);
+    });
+  });
+  root.querySelectorAll("[data-back]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (current > 1) show(current - 1);
+    });
+  });
+
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    if (!validateStep(3)) return;
+
+    const submitBtn = root.querySelector("[data-submit]");
+    submitBtn.disabled = true;
+    if (errorDisplay) { errorDisplay.hidden = true; errorDisplay.textContent = ""; }
+
+    // Turnstile token
+    const tsField = form.querySelector("[name=cf-turnstile-response]") || form.querySelector("[data-turnstile-token]");
+    const turnstileToken = (form.querySelector("[name=cf-turnstile-response]") || {}).value || "";
+    form.querySelector("[data-turnstile-token]").value = turnstileToken;
+
+    // Build payload
+    const fd = new FormData(form);
+    const data = {};
+    for (const [k, v] of fd.entries()) {
+      if (k === "availability") {
+        if (!data.availability) data.availability = [];
+        data.availability.push(v);
+      } else if (k === "declarationTruth" || k === "dataConsent") {
+        data[k] = true;
+      } else if (k === "formStartedAt") {
+        data[k] = Number(v);
+      } else {
+        data[k] = v;
+      }
+    }
+    if (!data.availability) data.availability = [];
+
+    try {
+      const res = await fetch(`${workerUrl}/petition`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        credentials: "omit",
+        body: JSON.stringify(data),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok || !body.ok) {
+        const code = body.error || "generic";
+        const msg =
+          code === "rate_limited" ? errorMessages.rate :
+          code === "turnstile_failed" ? errorMessages.turnstile :
+          code === "invalid_data" ? errorMessages.tooShort :
+          errorMessages.generic;
+        if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = msg; }
+        submitBtn.disabled = false;
+        return;
+      }
+
+      // "Has sido escuchado" — pantalla negra ritual
+      stage.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
+      stage.style.opacity = "0";
+      setTimeout(() => {
+        stage.hidden = true;
+        heardScreen.hidden = false;
+        heardScreen.style.opacity = "0";
+        requestAnimationFrame(() => {
+          heardScreen.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
+          heardScreen.style.opacity = "1";
+        });
+        setTimeout(() => {
+          window.location.href = `${confirmationUrl}?id=${encodeURIComponent(body.petitionId)}`;
+        }, 2400);
+      }, 900);
+    } catch (e) {
+      if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = errorMessages.generic; }
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .atrio {
+    min-height: 100vh;
+    background: var(--ink-900);
+    color: var(--ivory-50);
+    padding: var(--space-8) var(--space-3);
+    font-family: var(--font-sans);
+  }
+  .atrio-stage {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .velas-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+  .step-counter {
+    text-align: center;
+    color: var(--gold-700);
+    margin-bottom: var(--space-6);
+  }
+
+  .step {
+    border: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+    display: none;
+  }
+  .step.is-active { display: block; }
+  .step-title {
+    font-size: var(--text-h4);
+    color: var(--gold-700);
+    margin-bottom: var(--space-6);
+    text-align: center;
+    width: 100%;
+  }
+
+  .field {
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+  .field span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--ink-200);
+    margin-bottom: var(--space-1);
+  }
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(192, 155, 82, 0.3);
+    color: var(--ivory-50);
+    padding: var(--space-2);
+    border-radius: 2px;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: border-color var(--duration-fast) var(--ease-ceremonial);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none;
+    border-color: var(--gold-700);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 6em;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+  }
+  .field small {
+    display: block;
+    margin-top: var(--space-1);
+    color: var(--ink-300);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3); }
+  @media (max-width: 640px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  .help-block {
+    color: var(--ink-300);
+    font-size: 0.8rem;
+    margin: calc(-1 * var(--space-2)) 0 var(--space-4);
+  }
+
+  .checkbox-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+  }
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(192, 155, 82, 0.3);
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .check input { width: auto; margin: 0; }
+  .check-block {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    background: transparent;
+    border: none;
+    padding: var(--space-2) 0;
+    font-size: 0.9rem;
+    color: var(--ink-200);
+  }
+  .check-block input { margin-top: 0.25rem; }
+  .check-block a { color: var(--gold-700); }
+
+  .turnstile-wrap { margin: var(--space-4) 0; }
+
+  .step-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(192, 155, 82, 0.2);
+  }
+
+  .next-btn, .submit-btn, .back-btn {
+    background: transparent;
+    color: var(--gold-700);
+    border: 1px solid var(--gold-700);
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition:
+      background-color var(--duration-normal) var(--ease-ceremonial),
+      color var(--duration-normal) var(--ease-ceremonial);
+  }
+  .next-btn:hover, .submit-btn:hover {
+    background: var(--gold-700);
+    color: var(--ink-900);
+  }
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+  .back-btn {
+    border-color: var(--ink-500);
+    color: var(--ink-300);
+  }
+  .back-btn:hover { color: var(--ivory-50); border-color: var(--ivory-50); }
+
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .error-display {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(122, 46, 42, 0.15);
+    border: 1px solid var(--it-red);
+    color: #f4cdc8;
+    font-size: 0.9rem;
+  }
+
+  .atrio-heard {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .heard-text {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--gold-700);
+    text-align: center;
+  }
+
+  /* Step transition */
+  .step.is-active {
+    animation: step-in var(--duration-ritual) var(--ease-ceremonial);
+  }
+  @keyframes step-in {
+    from { opacity: 0; filter: blur(8px); transform: translateY(8px); }
+    to { opacity: 1; filter: blur(0); transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .step.is-active { animation: none; }
+  }
+</style>

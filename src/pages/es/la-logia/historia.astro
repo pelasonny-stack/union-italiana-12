@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Quote from "../../../components/content/Quote.astro";
+const lang = "es" as const;
+
+const milestones = [
+  { year: "1858", title: "Fundación", text: "23 de diciembre. Un grupo de masones italianos y argentinos consagra los trabajos de la Logia con el nombre de Unione Italiana. Primer Venerable Maestro: Bro. José Salvarezza, médico y figura prominente de la comunidad italiana." },
+  { year: "1860—1880", title: "Risorgimento desde el Río de la Plata", text: "La Logia opera como refugio espiritual y operativo para masones italianos comprometidos con la unificación de la península y la causa republicana." },
+  { year: "1871", title: "Fiebre amarilla", text: "Los hermanos de la Logia participan, junto a la Comisión Popular, en la asistencia médica y la organización del socorro durante la epidemia de fiebre amarilla que devastó Buenos Aires." },
+  { year: "1872", title: "Hospital Italiano", text: "Hermanos de la Logia colaboran activamente en la gestación y consolidación del Hospital Italiano de Buenos Aires." },
+  { year: "1882", title: "Fundación de La Plata", text: "Masones de la Logia participan en el equipo dirigido por Dardo Rocha en la fundación de la nueva capital provincial." },
+  { year: "1898", title: "José Ingenieros", text: "El joven José Ingenieros es iniciado en la Logia Unión Italiana Primera N°90 (rama derivada). Continuará la obra publicística masónica iniciada por su padre Salvador (Salvatore Ingegnieros)." },
+  { year: "Siglo XX", title: "Continuidad y silencio", text: "Las dos guerras mundiales, los sucesivos golpes y los años de la última dictadura ponen a prueba la continuidad de los trabajos. La Logia atraviesa períodos más visibles y otros más reservados." },
+  { year: "2014", title: "Refundación", text: "Un grupo de Maestros Masones, preocupados por la falta de presencia de la Orden en La Boca, solicita autorización para reinstaurar la Unión Italiana N°12. La Logia retoma sus trabajos regulares." },
+  { year: "Hoy", title: "Templo Hijos del Trabajo", text: "Trabaja con regularidad en el histórico Templo Hijos del Trabajo, San Antonio 814, Barracas — bajo la obediencia de la Gran Logia de la Argentina de Libres y Aceptados Masones." },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title="Historia"
+  description="Historia documentada de la R∴L∴ Unión Italiana N°12: fundación 1858, primer VM José Salvarezza, fiebre amarilla, fundación de La Plata, José Ingenieros, refundación 2014."
+>
+  <PageHero
+    eyebrow="1858 — 2025"
+    title="Nuestra historia"
+    subtitle="Cento sessantasette anni di lavoro"
+    glyph="columns"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Respetable Logia Unión Italiana N°12 nació en plena efervescencia del Risorgimento,
+      cuando Italia aún no era una nación y miles de italianos cruzaban el Atlántico para
+      hacer otra. Su nombre es programático: <em>unión</em>, no Italia. La Logia ha sido,
+      desde entonces, espacio de encuentro entre la fraternidad masónica y la cultura
+      asociativa italiana en la Argentina.
+    </p>
+  </article>
+
+  {/* Línea de tiempo */}
+  <section class="timeline-section">
+    <div class="container container-narrow">
+      <ol class="timeline">
+        {milestones.map((m, i) => (
+          <li class="ti-item" style={`--i: ${i};`}>
+            <div class="ti-marker" aria-hidden="true">
+              <span class="ti-dot"></span>
+            </div>
+            <div class="ti-content">
+              <p class="overline ti-year">{m.year}</p>
+              <h3 class="ti-title">{m.title}</h3>
+              <p class="ti-text">{m.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="container container-prose" style="padding-block: var(--space-8);">
+    <Quote
+      text="Ogni uomo è figlio del suo lavoro."
+      attribution="Lema del Templo Hijos del Trabajo, Barracas"
+      lang="it"
+    />
+
+    <h2>Sobre el nombre y los nombres</h2>
+    <p>
+      Los archivos del XIX registran a la Logia como <em>Unione Italiana</em> (con la
+      grafía italiana). Las sesiones se sostuvieron originalmente en italiano. Una rama
+      derivada, la <em>Unión Italiana Primera N°90</em>, fue la que recibió a José
+      Ingenieros en 1898. La numeración actual —N°12— responde al ordenamiento de la Gran
+      Logia de la Argentina tras sus sucesivas reorganizaciones del siglo XX.
+    </p>
+
+    <h2>Material de archivo</h2>
+    <p style="font-style: italic; color: var(--fg-muted)">
+      Los documentos fundacionales, fotografías históricas y semblanzas de Venerables
+      Maestros se publicarán a medida que el archivo de la Logia se digitalice. Para
+      consultas académicas, escribir a
+      <a href="mailto:contacto@unionitaliana12.org.ar">contacto@unionitaliana12.org.ar</a>.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .timeline-section {
+    background: var(--bg-elevated);
+    border-block: 1px solid var(--border);
+    padding-block: var(--space-12);
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .ti-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+    position: relative;
+  }
+  .ti-marker {
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+  }
+  .ti-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--bg-elevated), 0 0 0 5px var(--border);
+  }
+  .ti-year {
+    color: var(--accent);
+    margin-bottom: var(--space-1);
+    font-family: var(--font-mono);
+    text-transform: none;
+    font-size: 0.85rem;
+  }
+  .ti-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h5);
+    font-weight: 500;
+    margin: 0 0 var(--space-1);
+  }
+  .ti-text {
+    color: var(--fg-muted);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* Reveal stagger */
+  @media (prefers-reduced-motion: no-preference) {
+    .ti-item {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: ti-reveal 600ms var(--ease-ceremonial) forwards;
+      animation-delay: calc(var(--i) * 80ms);
+    }
+    @keyframes ti-reveal {
+      to { opacity: 1; transform: none; }
+    }
+  }
+</style>

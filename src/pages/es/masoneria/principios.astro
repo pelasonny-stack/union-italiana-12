@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="Principios de la Orden" description="Libertad, Igualdad, Fraternidad, Tolerancia, y la cuestión del Gran Arquitecto del Universo.">
+  <PageHero eyebrow="Lo que articula la práctica" title="Principios" glyph="three-dots" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <h2>Libertad</h2>
+    <p>
+      La masonería pide a quien se inicia que sea libre — no en sentido jurídico
+      meramente, sino moral. Libre de servidumbres voluntarias, libre del temor a pensar.
+    </p>
+
+    <h2>Igualdad</h2>
+    <p>
+      Dentro del Templo, cesan las distinciones del mundo profano. Un hermano es un hermano,
+      cualquiera sea su origen, condición económica, profesión o jerarquía civil.
+    </p>
+
+    <h2>Fraternidad</h2>
+    <p>
+      No es afecto sentimental, sino lazo asumido. Implica obligaciones concretas:
+      asistencia, lealtad, defensa de la reputación del hermano ausente.
+    </p>
+
+    <h2>Tolerancia</h2>
+    <p>
+      No es indiferencia ni relativismo: es la disposición activa a sostener el diálogo
+      entre hombres de convicciones diversas, a partir del reconocimiento de la dignidad
+      común.
+    </p>
+
+    <h2>La cuestión del Gran Arquitecto del Universo</h2>
+    <p>
+      La masonería regular pide a quien peticiona que afirme su creencia en un Principio
+      Creador, al que llama Gran Arquitecto del Universo. La fórmula es deliberadamente
+      abierta: cada hermano la entiende según su tradición religiosa o filosófica. La Orden
+      no exige adhesión a ningún dogma, ni a ninguna confesión. Lo que pide es que el
+      hombre que se inicia no se considere a sí mismo el centro y la medida de todas las cosas.
+    </p>
+
+    <h2>Laicidad y compromiso cívico</h2>
+    <p>
+      La masonería argentina, históricamente, ha defendido la laicidad del Estado, la
+      educación pública y la separación entre poder civil y religioso. La Logia no toma
+      posición partidaria, pero los hermanos —cada uno por su cuenta— son ciudadanos
+      activos del país que los acoge.
+    </p>
+  </article>
+</BaseLayout>

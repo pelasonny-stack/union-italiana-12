@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Tornate bianche" description="Sessioni pubbliche della R∴L∴ Unione Italiana N°12.">
+  <PageHero eyebrow="Sessioni pubbliche" title="Tornate bianche" glyph="three-dots" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">Le tornate bianche sono sessioni pubbliche a cui la Loggia invita i non-massoni — di solito in occasione di una conferenza.</p>
+    <Stub note="Il calendario delle prossime tornate bianche sarà pubblicato a breve." />
+  </article>
+</BaseLayout>

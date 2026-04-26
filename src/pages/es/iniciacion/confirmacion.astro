@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+const id = Astro.url.searchParams.get("id") ?? "";
+---
+
+<BaseLayout
+  lang={lang}
+  title="Hemos recibido su petición"
+  description="Confirmación de recepción de petición — R∴L∴ Unión Italiana N°12"
+  noindex
+>
+  <PageHero eyebrow="Petición recibida" title="Hemos recibido su petición" glyph="three-dots" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      Su petición ingresará a la próxima reunión de tenida regular de la Logia, donde será
+      leída por el Venerable Maestro y registrada. En las semanas siguientes, tres hermanos
+      investigadores serán designados; uno de ellos se pondrá en contacto con usted, por el
+      medio que indicó, para concertar la primera entrevista.
+    </p>
+
+    <p>
+      Si entre el envío de esta petición y nuestro contacto transcurren más de seis semanas
+      sin novedad, puede escribirnos a
+      <a href="mailto:peticiones@unionitaliana12.org.ar">peticiones@unionitaliana12.org.ar</a>
+      — los procesos de la Orden son pausados por diseño, pero no opacos.
+    </p>
+
+    <p>
+      Le pedimos, en este intervalo, que continúe leyendo. Hay, en la sección
+      <a href="/es/masoneria/biblioteca/">Biblioteca</a> de este sitio, textos que puede
+      recorrer con provecho. Si su decisión madura, esas lecturas serán el primer trabajo.
+      Si su decisión se enfría, también habrá ganado algo.
+    </p>
+
+    <p style="margin-top: var(--space-6); font-style: italic; color: var(--fg-muted)">
+      Reciba, con esta línea, el saludo respetuoso de la Logia.
+    </p>
+
+    {id && (
+      <p style="margin-top: var(--space-8); font-family: var(--font-mono); font-size: var(--text-caption); color: var(--fg-subtle)">
+        Identificador de petición: <code>{id}</code>
+      </p>
+    )}
+  </article>
+</BaseLayout>

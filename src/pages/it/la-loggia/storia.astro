@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Quote from "../../../components/content/Quote.astro";
+const lang = "it" as const;
+
+const milestones = [
+  { year: "1858", title: "Fondazione", text: "23 dicembre. Un gruppo di massoni italiani e argentini consacra i lavori della Loggia con il nome di Unione Italiana. Primo Maestro Venerabile: Bro. José Salvarezza, medico e figura prominente della comunità italiana." },
+  { year: "1860—1880", title: "Risorgimento dal Río de la Plata", text: "La Loggia opera come rifugio spirituale e operativo per i massoni italiani impegnati nell'unificazione della penisola e nella causa repubblicana." },
+  { year: "1871", title: "Febbre gialla", text: "I fratelli della Loggia partecipano, insieme alla Commissione Popolare, all'assistenza medica durante l'epidemia di febbre gialla che devastò Buenos Aires." },
+  { year: "1872", title: "Ospedale Italiano", text: "Fratelli della Loggia collaborano attivamente alla gestazione e al consolidamento dell'Ospedale Italiano di Buenos Aires." },
+  { year: "1882", title: "Fondazione di La Plata", text: "Massoni della Loggia partecipano nell'équipe diretta da Dardo Rocha nella fondazione della nuova capitale provinciale." },
+  { year: "1898", title: "José Ingenieros", text: "Il giovane José Ingenieros è iniziato nella Loggia Unione Italiana Prima N°90. Continuerà l'opera pubblicistica massonica iniziata dal padre Salvatore Ingegnieros." },
+  { year: "XX secolo", title: "Continuità e silenzio", text: "Le due guerre mondiali, i successivi colpi di stato e gli anni dell'ultima dittatura mettono alla prova la continuità dei lavori." },
+  { year: "2014", title: "Rifondazione", text: "Un gruppo di Maestri Massoni, preoccupati per la mancanza di presenza dell'Ordine a La Boca, chiede l'autorizzazione per ristabilire l'Unione Italiana N°12." },
+  { year: "Oggi", title: "Tempio Hijos del Trabajo", text: "Lavora con regolarità nel storico Tempio Hijos del Trabajo, San Antonio 814, Barracas — sotto l'obbedienza della Gran Loggia dell'Argentina." },
+];
+---
+
+<BaseLayout lang={lang} title="Storia" description="Storia documentata della R∴L∴ Unione Italiana N°12: fondazione 1858, José Salvarezza, febbre gialla, fondazione di La Plata, José Ingenieros, rifondazione 2014.">
+  <PageHero eyebrow="1858 — 2025" title="La nostra storia" subtitle="Centosessantasette anni di lavoro" glyph="columns" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Rispettabile Loggia Unione Italiana N°12 nacque in piena effervescenza del
+      Risorgimento, quando l'Italia non era ancora una nazione e migliaia di italiani
+      attraversavano l'Atlantico per costruirne un'altra. Il suo nome è programmatico:
+      <em>unione</em>, non Italia.
+    </p>
+  </article>
+
+  <section class="timeline-section">
+    <div class="container container-narrow">
+      <ol class="timeline">
+        {milestones.map((m, i) => (
+          <li class="ti-item" style={`--i: ${i};`}>
+            <div class="ti-marker" aria-hidden="true">
+              <span class="ti-dot"></span>
+            </div>
+            <div class="ti-content">
+              <p class="overline ti-year">{m.year}</p>
+              <h3 class="ti-title">{m.title}</h3>
+              <p class="ti-text">{m.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="container container-prose" style="padding-block: var(--space-8);">
+    <Quote text="Ogni uomo è figlio del suo lavoro." attribution="Motto del Tempio Hijos del Trabajo, Barracas" lang="it" />
+  </section>
+</BaseLayout>
+
+<style>
+  .timeline-section { background: var(--bg-elevated); border-block: 1px solid var(--border); padding-block: var(--space-12); }
+  .timeline { list-style: none; padding: 0; margin: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 11px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .ti-item { display: grid; grid-template-columns: 24px 1fr; gap: var(--space-3); padding-block: var(--space-4); position: relative; }
+  .ti-marker { display: flex; justify-content: center; padding-top: 6px; }
+  .ti-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--bg-elevated), 0 0 0 5px var(--border); }
+  .ti-year { color: var(--accent); margin-bottom: var(--space-1); font-family: var(--font-mono); text-transform: none; font-size: 0.85rem; }
+  .ti-title { font-family: var(--font-display); font-size: var(--text-h5); font-weight: 500; margin: 0 0 var(--space-1); }
+  .ti-text { color: var(--fg-muted); margin: 0; line-height: 1.7; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ti-item { opacity: 0; transform: translateY(8px); animation: ti-reveal 600ms var(--ease-ceremonial) forwards; animation-delay: calc(var(--i) * 80ms); }
+    @keyframes ti-reveal { to { opacity: 1; transform: none; } }
+  }
+</style>

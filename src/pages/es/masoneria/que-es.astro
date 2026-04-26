@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Qué es la masonería"
+  description="Definición sobria de la masonería: orden iniciática, fraternal, filosófica. Lo que es y lo que no es. Sin mitologías ni teorías conspirativas."
+>
+  <PageHero eyebrow="Definición pública" title="Qué es la masonería" glyph="delta" />
+
+  <section id="en-ocho-segundos" class="eight-seconds container container-narrow">
+    <p class="overline" style="color: var(--accent); margin-bottom: var(--space-2)">En ocho segundos</p>
+    <p class="es-text">
+      <strong>La masonería es una orden iniciática y filosófica</strong> con tres siglos de continuidad.
+      No es religión, no es partido, no es secreta — sólo discreta. Trabaja con el simbolismo
+      del oficio de constructor para que cada hombre se mejore a sí mismo y contribuya a sus semejantes.
+    </p>
+  </section>
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      Conviene, antes de toda definición, despejar dos malentendidos persistentes. La masonería
+      no es una sociedad secreta: sus reuniones son privadas como lo son las de cualquier
+      institución que delibera en su sede, y su existencia, sus principios, su gobierno y su
+      literatura están públicamente disponibles desde 1717. Tampoco es una orden religiosa: no
+      impone credo alguno, no oficia sacramentos, no se interpone entre el hombre y el sentido
+      último que cada uno otorgue a su existencia.
+    </p>
+
+    <p>
+      Es, sí, una orden iniciática. Esto significa que se ingresa a ella por una ceremonia
+      —la iniciación— que no se cuenta porque no se entiende contándola; se entiende viviéndola.
+      Y significa, sobre todo, que el masón asume un método de trabajo sobre sí mismo. La
+      metáfora del oficio de constructor —la piedra bruta que el aprendiz debe pulir, el plano
+      que el maestro debe leer, el templo cuya edificación nunca termina— no es decoración
+      pintoresca: es la lengua precisa con que la Orden se piensa a sí misma desde hace tres siglos.
+    </p>
+
+    <h2>Lo que la masonería es</h2>
+    <ul>
+      <li><strong>Orden iniciática</strong>: se ingresa por una ceremonia, no por un trámite.</li>
+      <li><strong>Fraternal</strong>: sostiene un lazo entre sus miembros que excede la afinidad personal.</li>
+      <li><strong>Filosófica</strong>: trabaja con un método —el simbolismo del oficio— para pensar las cuestiones humanas fundamentales.</li>
+      <li><strong>Filantrópica</strong>: el deber de asistir al semejante es parte sustancial de su práctica.</li>
+    </ul>
+
+    <h2>Lo que la masonería no es</h2>
+    <ul>
+      <li><strong>No es religión</strong>: no impone dogma, no celebra culto, no se interpone entre el hombre y lo divino.</li>
+      <li><strong>No es partido</strong>: no toma posición sobre las controversias políticas del día.</li>
+      <li><strong>No es secta</strong>: no exige ruptura con la familia, la profesión, la confesión religiosa o la nacionalidad de quien se inicia.</li>
+      <li><strong>No es secreta</strong>: tiene reservas (la palabra exacta de Mackey), no secretos.</li>
+      <li><strong>No es sociedad de poder</strong>: usar los lazos masónicos para fines personales —negocios, ventajas, prestigio— está expresamente proscripto.</li>
+    </ul>
+
+    <h2>El método: el simbolismo del oficio</h2>
+    <p>
+      La masonería habla en imágenes: la piedra bruta, la escuadra, el compás, las columnas
+      del templo, el pavimento mosaico, el plano del arquitecto. Cada símbolo es una invitación
+      a pensar. La piedra bruta del aprendiz es su carácter sin trabajar; el compás del maestro,
+      la medida de su actuación. No son alegorías cerradas: cada hermano las recorre por su cuenta.
+    </p>
+
+    <h2>La regularidad — qué significa</h2>
+    <p>
+      Una logia regular es la que se constituye conforme a las antiguas tradiciones del oficio,
+      reconoce a las grandes logias hermanas reconocidas, y trabaja en obediencia a una autoridad
+      masónica que asegura esa continuidad. La Unión Italiana N°12 trabaja bajo la jurisdicción
+      de la Gran Logia de la Argentina de Libres y Aceptados Masones.
+    </p>
+
+    <h2>Para seguir leyendo</h2>
+    <p>
+      En la <a href="/es/masoneria/biblioteca/">biblioteca</a> de este sitio se encuentran textos
+      fundamentales en dominio público —desde las Constituciones de Anderson (1723) hasta obras
+      de masones argentinos del siglo XIX— para quien quiera profundizar.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .eight-seconds {
+    background: var(--travertino);
+    border-left: 3px solid var(--accent);
+    padding: var(--space-4) var(--space-6);
+    margin-top: var(--space-8);
+    scroll-margin-top: 96px;
+  }
+  .es-text {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--fg);
+    margin: 0;
+  }
+  .es-text strong { color: var(--vermiglio); }
+</style>

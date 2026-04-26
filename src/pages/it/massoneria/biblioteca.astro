@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Biblioteca" description="Testi massonici di pubblico dominio, bibliografia consigliata.">
+  <PageHero eyebrow="Letture" title="Biblioteca" glyph="letter-g" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <h2>Testi fondamentali</h2>
+    <ul>
+      <li><strong>Costituzioni di Anderson (1723)</strong> — pubblico dominio.</li>
+      <li><strong>The Symbolism of Freemasonry</strong> — Albert G. Mackey (1869).</li>
+      <li><strong>Manuale dell'Apprendista</strong> — Aldo Lavagnini.</li>
+    </ul>
+    <h2>Massoni argentini</h2>
+    <ul>
+      <li><strong>El hombre mediocre</strong> — José Ingenieros (1913).</li>
+      <li><strong>Las fuerzas morales</strong> — José Ingenieros (1925).</li>
+    </ul>
+    <Stub note="I link ai PDF di pubblico dominio saranno caricati man mano che si digitalizzano e si verificano le versioni autorizzate." />
+  </article>
+</BaseLayout>

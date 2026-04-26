@@ -1,0 +1,169 @@
+---
+/**
+ * Sello de Obediencia — Gran Logia de la Argentina de L∴ y A∴ M∴.
+ * Tratamiento "sello oficial enmarcado": doble border + corner marks.
+ */
+import type { Locale } from "../../i18n/config";
+
+interface Props { lang: Locale; variant?: "compact" | "full" }
+const { lang, variant = "full" } = Astro.props;
+
+const text = lang === "es"
+  ? {
+      seal: "Sello de Obediencia · MDCCCLVII—MMXXV",
+      under: "Bajo la obediencia de la",
+      gla: "Gran Logia de la Argentina de Libres y Aceptados Masones",
+      foundation: "Fundada el 11 · XII · MDCCCLVII",
+      visit: "Visitar el sitio oficial →",
+    }
+  : {
+      seal: "Sigillo d'Obbedienza · MDCCCLVII—MMXXV",
+      under: "Sotto l'obbedienza della",
+      gla: "Gran Loggia dell'Argentina dei Liberi e Accettati Massoni",
+      foundation: "Fondata l'11 · XII · MDCCCLVII",
+      visit: "Visitare il sito ufficiale →",
+    };
+---
+
+<div class={`gla-badge gla-${variant}`}>
+  {variant === "full" && <p class="gla-seal-overline cinzel">{text.seal}</p>}
+
+  <a
+    href="https://www.masoneria-argentina.org.ar/"
+    target="_blank"
+    rel="noopener external"
+    class="gla-link"
+    aria-label={`${text.under} ${text.gla}`}
+  >
+    {variant === "full" && (
+      <>
+        <span class="corner corner-tl" aria-hidden="true"></span>
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <span class="corner corner-br" aria-hidden="true"></span>
+      </>
+    )}
+
+    <img
+      src="/assets/logos/gran-logia-argentina-escudo.png"
+      alt="Escudo oficial de la Gran Logia de la Argentina"
+      width="80"
+      height="80"
+      class="gla-shield"
+      loading="lazy"
+      decoding="async"
+    />
+    <span class="gla-text">
+      <span class="overline gla-eyebrow">{text.under}</span>
+      <span class="gla-name cinzel">{text.gla}</span>
+      {variant === "full" && (
+        <>
+          <span class="gla-rule" aria-hidden="true"></span>
+          <span class="gla-foundation">{text.foundation}</span>
+          <span class="gla-visit">{text.visit}</span>
+        </>
+      )}
+    </span>
+  </a>
+</div>
+
+<style>
+  .gla-badge {
+    margin: 0 auto;
+    max-width: 720px;
+  }
+  .gla-seal-overline {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.7rem;
+    margin: 0 0 var(--space-3);
+    letter-spacing: 0.18em;
+  }
+  .gla-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-6);
+    background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+    border: 1px solid var(--accent);
+    color: var(--fg);
+    background-image: none;
+    transition:
+      border-color var(--duration-normal) var(--ease-ceremonial),
+      box-shadow var(--duration-normal) var(--ease-ceremonial);
+  }
+  .gla-link::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    pointer-events: none;
+  }
+  .gla-link:hover, .gla-link:focus-visible {
+    border-color: var(--accent-bright);
+    box-shadow: 0 0 0 1px var(--accent-bright), var(--shadow-elevated);
+  }
+
+  /* Corner marks SVG-like: 4 squares en esquinas */
+  .corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--accent);
+    pointer-events: none;
+  }
+  .corner-tl { top: -7px; left: -7px; border-right: none; border-bottom: none; }
+  .corner-tr { top: -7px; right: -7px; border-left: none; border-bottom: none; }
+  .corner-bl { bottom: -7px; left: -7px; border-right: none; border-top: none; }
+  .corner-br { bottom: -7px; right: -7px; border-left: none; border-top: none; }
+
+  .gla-shield {
+    flex-shrink: 0;
+    width: 80px;
+    height: auto;
+    object-fit: contain;
+  }
+  .gla-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    line-height: 1.3;
+  }
+  .gla-eyebrow {
+    color: var(--fg-muted);
+    font-size: 0.7rem;
+  }
+  .gla-name {
+    font-size: 0.95rem;
+    color: var(--fg);
+    line-height: 1.4;
+  }
+  .gla-rule {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: color-mix(in srgb, var(--accent) 40%, transparent);
+    margin-block: var(--space-1);
+  }
+  .gla-foundation {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--fg-muted);
+    letter-spacing: 0.05em;
+  }
+  .gla-visit {
+    color: var(--accent);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+
+  .gla-compact .gla-link { padding: var(--space-2) var(--space-3); gap: var(--space-2); }
+  .gla-compact .gla-shield { width: 44px; }
+  .gla-compact .gla-name { font-size: 0.8rem; }
+
+  @media (max-width: 600px) {
+    .gla-link { flex-direction: column; text-align: center; gap: var(--space-2); }
+    .gla-text { align-items: center; }
+  }
+</style>

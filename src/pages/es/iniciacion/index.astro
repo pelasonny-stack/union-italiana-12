@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Iniciación"
+  description="Cómo iniciarse en la R∴L∴ Unión Italiana N°12. Quién puede peticionar, el proceso, lo que se espera del peticionario."
+>
+  <PageHero
+    eyebrow="Quien llama a las puertas"
+    title="Iniciarse en la Orden"
+    glyph="square-compass"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      Si llegó a esta página por curiosidad pasajera, le pedimos que lea con atención.
+      Iniciarse en la masonería no es inscribirse en una asociación: es asumir un compromiso
+      de años, de presencia regular, de trabajo sobre uno mismo y de lealtad fraterna. La
+      Orden no recluta. Quien peticiona lo hace por decisión propia, sin haber sido invitado,
+      y sabiendo que su petición puede no ser aceptada. Si esto le parece desproporcionado,
+      probablemente lo sea para usted en este momento, y eso también es información valiosa.
+    </p>
+
+    <h2>¿Quién puede peticionar?</h2>
+    <ul>
+      <li><strong>Mayor de edad</strong> (en uso tradicional, 21 años cumplidos).</li>
+      <li><strong>Hombre libre y de buenas costumbres</strong> — fórmula tradicional. No se refiere a libertad jurídica meramente, sino a autonomía moral; "buenas costumbres" significa que la conducta del peticionario en la vida pública y privada resiste el escrutinio.</li>
+      <li><strong>Profesar creencia en un Principio Creador</strong> — el Gran Arquitecto del Universo. La fórmula es deliberadamente abierta: cada hermano la entiende según su propia tradición religiosa o filosófica.</li>
+      <li><strong>Medios honestos de subsistencia</strong>.</li>
+      <li><strong>Reputación intachable</strong>.</li>
+    </ul>
+
+    <h2>El proceso, sin eufemismos</h2>
+    <ol>
+      <li><strong>Petición.</strong> Usted completa el formulario del Atrio. Si su perfil es coherente, será contactado para una primera entrevista.</li>
+      <li><strong>Entrevistas.</strong> Tres hermanos investigadores designados por la Logia conversarán con usted por separado, en el plazo de varias semanas. Es un diálogo, no un examen.</li>
+      <li><strong>Plancha de los investigadores.</strong> Los tres hermanos elevan a la Logia un informe escrito.</li>
+      <li><strong>Balotaje.</strong> La Logia, en tenida regular, vota en escrutinio secreto.</li>
+      <li><strong>Iniciación.</strong> Si el balotaje es favorable, se fija fecha. La iniciación es una ceremonia que se vive, no que se explica de antemano.</li>
+    </ol>
+
+    <h2>Lo que se espera de usted</h2>
+    <ul>
+      <li>Asistencia regular a las tenidas (en general, dos por mes).</li>
+      <li>Estudio personal y elaboración de trabajos escritos (planchas).</li>
+      <li>Cuota mensual — la Logia se sostiene con el aporte de sus miembros.</li>
+      <li>Discreción: lo trabajado en Logia no se discute fuera de Logia.</li>
+      <li>Tiempo: el primer grado dura, en uso, no menos de un año.</li>
+    </ul>
+
+    <h2>Lo que la masonería no le va a dar</h2>
+    <p>
+      No es un club social, ni una red profesional, ni una asociación de beneficios. Si lo
+      que busca son contactos, oportunidades de negocio, prestigio social o ventajas
+      materiales, no peticione: no encontrará nada de eso, y en el camino le habrá hecho
+      perder tiempo a hermanos que están allí por otras razones. La Orden castiga severamente,
+      hasta con la expulsión, el uso de los lazos fraternos para fines personales.
+    </p>
+
+    <h2>Tiempos realistas</h2>
+    <ul>
+      <li>De la petición a la iniciación: <strong>entre 6 y 12 meses</strong>, según calendario de la Logia.</li>
+      <li>Del primer al segundo grado: no menos de un año.</li>
+      <li>Para llegar al grado de Maestro: tres años en condiciones óptimas.</li>
+    </ul>
+
+    <hr style="margin-block: var(--space-8); border: none; border-top: 1px solid var(--border);" />
+
+    <div class="atrio-cta">
+      <p class="overline">Atrio del Peticionario</p>
+      <h2 style="font-size: var(--text-h3); margin-block: var(--space-2);">¿Decidido a tocar a la puerta?</h2>
+      <p>
+        El Atrio es el espacio donde el peticionario formaliza su pedido. Le tomará al menos
+        veinte minutos completarlo con la atención que merece. Si puede, hágalo en silencio.
+      </p>
+      <p style="margin-top: var(--space-4);">
+        <a href="/es/iniciacion/peticion/" class="atrio-btn cinzel">Entrar al Atrio →</a>
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .atrio-cta {
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent);
+  }
+  .atrio-btn {
+    display: inline-block;
+    padding: var(--space-2) var(--space-6);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background-image: none;
+    transition:
+      background-color var(--duration-normal) var(--ease-ceremonial),
+      color var(--duration-normal) var(--ease-ceremonial);
+    font-size: 0.85rem;
+  }
+  .atrio-btn:hover, .atrio-btn:focus-visible {
+    background-color: var(--accent);
+    color: var(--ink-900);
+  }
+</style>

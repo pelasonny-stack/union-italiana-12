@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import PhotoSlider from "../../../components/content/PhotoSlider.astro";
+const lang = "it" as const;
+
+const fotos = [
+  { src: "/assets/templo/templo-3.jpeg", alt: "Sala principale del Tempio Hijos del Trabajo a Barracas, vista generale", caption: "Sala principale — pareti vermiglie, pavimento in pinotea, volta celeste affrescata" },
+  { src: "/assets/templo/templo-1.jpeg", alt: "Delta luminoso dorato con l'Occhio della Provvidenza", caption: "Delta Luminoso — l'Occhio della Provvidenza simbolizza la coscienza universale che illumina il lavoro massonico" },
+  { src: "/assets/templo/templo-4.jpeg", alt: "Dettaglio della volta celeste e del lampadario centrale del Tempio", caption: "Volta celeste e lampadario centrale — ogni tempio massonico ha soffitto azzurro con nubi" },
+  { src: "/assets/templo/templo-2.jpeg", alt: "Facciata del Tempio Hijos del Trabajo: architettura egizia con colonne papiriformi", caption: "Facciata egizia (1919, Francisco Cabot) — dichiarata di interesse culturale dalla Città di Buenos Aires nel 2002" },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title="Il Tempio — Hijos del Trabajo, Barracas"
+  description="Galleria del Tempio Hijos del Trabajo a Barracas, sede attuale della R∴L∴ Unione Italiana N°12."
+>
+  <PageHero
+    eyebrow="San Antonio 814 · Barracas, CABA"
+    title="Il Tempio"
+    subtitle="Hijos del Trabajo — dal 1882"
+    glyph="checkered"
+  />
+
+  <section class="container" style="padding-block: var(--space-8);">
+    <PhotoSlider photos={fotos} aspect="3 / 2" autoplayMs={8000} />
+  </section>
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Rispettabile Loggia Unione Italiana N°12 sostiene le sue tornate regolari nel
+      storico Tempio "Hijos del Trabajo", a San Antonio 814, quartiere di Barracas. È
+      uno dei pochi templi massonici di Buenos Aires con facciata visibile dalla strada
+      —e uno dei più singolari: architettura egizia del 1919, opera di Francisco Cabot.
+    </p>
+
+    <h2>Una breve storia dell'edificio</h2>
+    <p>
+      Il Tempio fu consacrato nel giugno 1890. La sua Loggia originale, anch'essa chiamata
+      <em>Hijos del Trabajo</em>, fu fondata nel 1882 e svolse un ruolo centrale nella
+      Barracas operaia —italiana in maggioranza— sostenendo associazioni mutualistiche.
+      La facciata egizia fu aggiunta nel 1919.
+    </p>
+    <p>
+      Dopo lo scioglimento della Loggia Hijos del Trabajo nel 1983, il Tempio rimase sotto
+      la giurisdizione della Gran Loggia. La rifondazione dell'Unione Italiana N°12 nel
+      2014 restituì a questo spazio sacro l'attività rituale regolare.
+    </p>
+
+    <h2>Lettura simbolica dello spazio</h2>
+    <ul>
+      <li><strong>Volta celeste affrescata</strong> — ricorda al massone che il suo lavoro avviene sotto il cielo.</li>
+      <li><strong>Delta Luminoso con l'Occhio della Provvidenza</strong> — il triangolo equilatero rinvia alla coscienza universale.</li>
+      <li><strong>Pareti vermiglie</strong> — colore tradizionale dei templi del Rito Scozzese.</li>
+      <li><strong>Colonne papiriformi</strong> della facciata — l'orientalismo del XIX lesse in Egitto la culla del simbolismo massonico.</li>
+    </ul>
+
+    <h2>Visita</h2>
+    <p>
+      Il Tempio apre al pubblico in occasioni speciali: tornate bianche, Notte dei Musei,
+      conferenze culturali aperte.
+    </p>
+  </article>
+</BaseLayout>

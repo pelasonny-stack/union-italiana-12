@@ -1,0 +1,71 @@
+{
+  "site.name": "Unión Italiana N°12",
+  "site.tagline": "Al Oriente de Buenos Aires, desde MDCCCLVIII",
+  "site.lema": "A∴ G∴ D∴ G∴ A∴ D∴ U∴",
+
+  "nav.home": "Inicio",
+  "nav.lodge": "La Logia",
+  "nav.masonry": "Masonería",
+  "nav.activities": "Actividades",
+  "nav.initiation": "Iniciación",
+  "nav.contact": "Contacto",
+
+  "nav.lodge.history": "Historia",
+  "nav.lodge.illustrious": "Miembros ilustres",
+  "nav.lodge.temple": "El Templo",
+  "nav.lodge.italian": "Vínculo italiano",
+
+  "nav.masonry.what": "Qué es la masonería",
+  "nav.masonry.principles": "Principios",
+  "nav.masonry.glossary": "Glosario",
+  "nav.masonry.library": "Biblioteca",
+
+  "nav.activities.tenidas": "Tenidas blancas",
+  "nav.activities.culture": "Cultura",
+  "nav.activities.charity": "Beneficencia",
+
+  "footer.institutional": "Institucional",
+  "footer.resources": "Recursos",
+  "footer.initiation": "Iniciación",
+  "footer.legal": "Legal",
+  "footer.privacy": "Política de privacidad",
+  "footer.terms": "Términos de uso",
+  "footer.cookies": "Cookies",
+  "footer.copyright": "A∴ G∴ D∴ G∴ A∴ D∴ U∴ — MMXXV",
+  "footer.foundation": "Fundada el 23 de diciembre de 1858",
+
+  "lang.switch": "Cambiar idioma",
+  "theme.toggle": "Cambiar tema",
+  "skip.to_content": "Saltar al contenido principal",
+
+  "home.hero.eyebrow": "Respetable Logia",
+  "home.hero.title": "Al Oriente de Buenos Aires",
+  "home.hero.subtitle": "Logia masónica regular · al Oriente de Buenos Aires desde 1858",
+  "home.hero.cta": "Recorrer el Templo",
+  "home.three_doors.history": "Conocer la historia",
+  "home.three_doors.masonry": "Comprender la Orden",
+  "home.three_doors.initiation": "Iniciar el camino",
+
+  "petition.cta": "Atrio del Peticionario",
+  "petition.eyebrow": "Quien llama a las puertas",
+  "petition.intro.heading": "Antes de seguir leyendo",
+  "petition.step.identity": "Umbral I — Identidad",
+  "petition.step.reflection": "Umbral II — Introspección",
+  "petition.step.word": "Umbral III — Palabra",
+  "petition.next": "Continuar",
+  "petition.back": "Atrás",
+  "petition.submit": "Golpear las puertas del Templo",
+  "petition.heard": "Has sido escuchado.",
+
+  "form.required": "Este campo es obligatorio.",
+  "form.error.generic": "Hubo un problema al enviar. Reintente en unos minutos.",
+  "form.error.rate_limited": "Demasiados intentos desde su conexión. Intente más tarde.",
+  "form.error.turnstile": "No pudimos verificar que sea una persona. Recargue e intente de nuevo.",
+  "form.error.timing": "El envío fue demasiado rápido. Tómese un momento.",
+  "form.success": "Hemos recibido su petición.",
+
+  "contact.subject.general": "Contacto general",
+  "contact.subject.press": "Prensa",
+  "contact.subject.academy": "Investigación / academia",
+  "contact.subject.brother": "Hermano visitante"
+}

@@ -1,0 +1,124 @@
+---
+/**
+ * Cita rotativa diaria — corpus filosófico-masónico.
+ * Determinista por día (mismo hash → misma cita), sin JS al cargar.
+ * Diferenciador #3 del plan de diseño.
+ */
+import type { Locale } from "../../i18n/config";
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const corpus = [
+  { es: "El hombre mediocre cree y el sabio piensa.", it: "L'uomo mediocre crede e il saggio pensa.", author: "José Ingenieros" },
+  { es: "Lavorate sempre per il bene dell'umanità.", it: "Lavorate sempre per il bene dell'umanità.", author: "Giuseppe Mazzini" },
+  { es: "Donde el hombre es libre, allí está la patria.", it: "Dov'è libertà, lì è patria.", author: "Giuseppe Mazzini" },
+  { es: "La libertad sin la luz no es libertad: es ceguera.", it: "La libertà senza la luce non è libertà: è cecità.", author: "Domingo F. Sarmiento" },
+  { es: "Hombre libre y de buenas costumbres.", it: "Uomo libero e di buoni costumi.", author: "Antiguo uso del oficio" },
+  { es: "Ordo Ab Chao.", it: "Ordo Ab Chao.", author: "Lema masónico", lang: "la" as const },
+  { es: "Audi, vide, tace.", it: "Audi, vide, tace.", author: "Antiguo deber del Aprendiz", lang: "la" as const },
+  { es: "Visita el interior de la tierra y, rectificando, hallarás la piedra oculta.", it: "Visita l'interno della terra e, rettificando, troverai la pietra occulta.", author: "VITRIOL" },
+  { es: "La fraternidad no se proclama: se prueba.", it: "La fraternità non si proclama: si dimostra.", author: "Tradición de Logia" },
+  { es: "Cada hombre es hijo del trabajo.", it: "Ogni uomo è figlio del suo lavoro.", author: "Lema del Templo de Barracas" },
+  { es: "Pensar bien para vivir mejor.", it: "Pensare bene per vivere meglio.", author: "José Ingenieros" },
+  { es: "Tolerancia activa, no indiferente.", it: "Tolleranza attiva, non indifferente.", author: "Tradición masónica" },
+];
+
+// Selección determinista por día del año (UTC) — misma cita por todo el día
+const today = new Date();
+const dayOfYear = Math.floor(
+  (today.getTime() - new Date(today.getUTCFullYear(), 0, 0).getTime()) / 86400000,
+);
+const idx = dayOfYear % corpus.length;
+const q = corpus[idx]!;
+const text = lang === "it" ? q.it : q.es;
+const quoteLang = q.lang ?? lang;
+
+// Año romano + Anno Verae Lucis (calendario masónico = año + 4000)
+const year = today.getFullYear();
+const av = year + 4000;
+const toRoman = (n: number) => {
+  const map: [number, string][] = [
+    [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
+    [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
+    [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"],
+  ];
+  let s = ""; let r = n;
+  for (const [v, c] of map) { while (r >= v) { s += c; r -= v; } }
+  return s;
+};
+const yearRoman = toRoman(year);
+const day = String(today.getUTCDate()).padStart(2, "0");
+const monthRoman = toRoman(today.getUTCMonth() + 1);
+---
+
+<aside class="rotating-quote" aria-label={lang === "es" ? "Cita del día" : "Citazione del giorno"}>
+  <div class="container container-narrow rq-inner">
+    <span class="rq-rule rq-rule-top" aria-hidden="true"></span>
+    <p class="overline rq-label">
+      {lang === "es" ? "Cita del día" : "Citazione del giorno"}
+      <span class="rq-date">· {yearRoman} · {day}·{monthRoman} · {av} A∴ V∴ L∴</span>
+    </p>
+    <blockquote class="rq-text" lang={quoteLang}>{text}</blockquote>
+    <span class="rq-rule rq-rule-mid" aria-hidden="true"></span>
+    <p class="rq-author cinzel">{q.author}</p>
+    <span class="rq-rule rq-rule-bot" aria-hidden="true"></span>
+  </div>
+</aside>
+
+<style>
+  .rotating-quote {
+    border-block: 1px solid var(--border);
+    background: var(--bg-elevated);
+    padding-block: var(--space-8);
+  }
+  .rq-inner { text-align: center; }
+  .rq-label { color: var(--fg-muted); margin-bottom: var(--space-3); }
+  .rq-date {
+    font-family: var(--font-mono);
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--fg-subtle);
+    font-size: 0.7rem;
+    margin-left: 0.5em;
+  }
+  .rq-text {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.35;
+    color: var(--fg);
+    margin: 0 auto var(--space-3);
+    font-style: italic;
+    max-width: 32ch;
+    padding-top: var(--space-2);
+  }
+  .rq-text::before {
+    content: "“";
+    position: absolute;
+    top: -0.55em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: var(--accent);
+    opacity: 0.22;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .rq-author {
+    font-size: 0.78rem;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+  .rq-rule {
+    display: block;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto;
+    opacity: 0.6;
+  }
+  .rq-rule-top { width: 32px; margin-bottom: var(--space-3); }
+  .rq-rule-mid { width: 16px; margin-block: var(--space-3); opacity: 0.4; }
+  .rq-rule-bot { width: 32px; margin-top: var(--space-3); }
+</style>

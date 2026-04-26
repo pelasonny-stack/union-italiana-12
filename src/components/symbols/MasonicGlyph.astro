@@ -1,0 +1,176 @@
+---
+/**
+ * Biblioteca de glifos masónicos. Estilo: línea fina, geometría exacta,
+ * eco editorial (Hypnerotomachia Poliphili 1499 / Otl Aicher).
+ *
+ * Uso:
+ *   <MasonicGlyph name="square-compass" size={48} />
+ *
+ * Reglas:
+ *   - stroke 1.5 sobre canvas 24x24 (escalable)
+ *   - currentColor → hereda color del padre (oro, ink, etc)
+ *   - aria-hidden por defecto (decorativos)
+ *   - sin sombras, sin gradientes, sin "wow"
+ */
+
+import type { GlyphName } from "./glyphs";
+
+interface Props {
+  name: GlyphName;
+  size?: number | string;
+  title?: string;
+  class?: string;
+}
+
+const { name, size = 24, title, class: cls = "" } = Astro.props;
+const labelled = !!title;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={!labelled}
+  role={labelled ? "img" : undefined}
+  class={`masonic-glyph ${cls}`}
+>
+  {title && <title>{title}</title>}
+
+  {name === "square-compass" && (
+    <>
+      {/* Compás */}
+      <path d="M12 3 L4 21" />
+      <path d="M12 3 L20 21" />
+      <circle cx="12" cy="3" r="0.8" fill="currentColor" />
+      {/* Escuadra superpuesta */}
+      <path d="M5 19 L19 19 L19 13" />
+    </>
+  )}
+
+  {name === "square" && (
+    <path d="M4 20 L20 20 L20 8" />
+  )}
+
+  {name === "compass" && (
+    <>
+      <path d="M12 3 L4 21" />
+      <path d="M12 3 L20 21" />
+      <circle cx="12" cy="3" r="0.8" fill="currentColor" />
+      <path d="M7 13 Q12 16 17 13" />
+    </>
+  )}
+
+  {name === "columns" && (
+    <>
+      {/* Columna izq Boaz */}
+      <rect x="4" y="6" width="4" height="14" />
+      <line x1="3" y1="6" x2="9" y2="6" />
+      <line x1="3" y1="20" x2="9" y2="20" />
+      <circle cx="6" cy="4" r="1.5" />
+      {/* Columna der Jakin */}
+      <rect x="16" y="6" width="4" height="14" />
+      <line x1="15" y1="6" x2="21" y2="6" />
+      <line x1="15" y1="20" x2="21" y2="20" />
+      <circle cx="18" cy="4" r="1.5" />
+    </>
+  )}
+
+  {name === "checkered" && (
+    <>
+      <rect x="3" y="3" width="6" height="6" fill="currentColor" />
+      <rect x="9" y="9" width="6" height="6" fill="currentColor" />
+      <rect x="15" y="15" width="6" height="6" fill="currentColor" />
+      <rect x="15" y="3" width="6" height="6" />
+      <rect x="3" y="15" width="6" height="6" />
+      <rect x="9" y="3" width="6" height="6" />
+      <rect x="3" y="9" width="6" height="6" />
+      <rect x="15" y="9" width="6" height="6" />
+      <rect x="9" y="15" width="6" height="6" />
+    </>
+  )}
+
+  {name === "delta" && (
+    <>
+      <path d="M12 3 L21 20 L3 20 Z" />
+      <circle cx="12" cy="14" r="0.9" fill="currentColor" />
+    </>
+  )}
+
+  {name === "acacia" && (
+    <>
+      <line x1="12" y1="3" x2="12" y2="21" />
+      <path d="M12 7 Q8 7 7 5" />
+      <path d="M12 7 Q16 7 17 5" />
+      <path d="M12 11 Q7 11 6 9" />
+      <path d="M12 11 Q17 11 18 9" />
+      <path d="M12 15 Q8 15 7 13" />
+      <path d="M12 15 Q16 15 17 13" />
+      <path d="M12 19 Q9 19 8 17" />
+      <path d="M12 19 Q15 19 16 17" />
+    </>
+  )}
+
+  {name === "apron" && (
+    <>
+      <path d="M5 11 L19 11 L19 21 L5 21 Z" />
+      <path d="M9 4 L15 4 L19 11 L5 11 Z" />
+    </>
+  )}
+
+  {name === "plumb-level" && (
+    <>
+      {/* Nivel (triángulo) */}
+      <path d="M3 6 L21 6 L12 18 Z" />
+      {/* Plomada */}
+      <line x1="12" y1="6" x2="12" y2="14" />
+      <circle cx="12" cy="15.5" r="1.5" fill="currentColor" />
+    </>
+  )}
+
+  {name === "sun-moon" && (
+    <>
+      {/* Sol izq */}
+      <circle cx="7" cy="12" r="3" fill="currentColor" />
+      <line x1="7" y1="3" x2="7" y2="5" />
+      <line x1="7" y1="19" x2="7" y2="21" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="11" y1="12" x2="13" y2="12" />
+      {/* Luna der */}
+      <path d="M21 12 A6 6 0 1 1 17 6 A4 4 0 1 0 21 12 Z" />
+    </>
+  )}
+
+  {name === "flaming-star" && (
+    <path d="M12 2 L14 9 L21 9 L15.5 13 L17.5 20 L12 16 L6.5 20 L8.5 13 L3 9 L10 9 Z" />
+  )}
+
+  {name === "three-dots" && (
+    <>
+      <circle cx="6" cy="18" r="1.4" fill="currentColor" />
+      <circle cx="12" cy="6" r="1.4" fill="currentColor" />
+      <circle cx="18" cy="18" r="1.4" fill="currentColor" />
+    </>
+  )}
+
+  {name === "letter-g" && (
+    <text
+      x="12"
+      y="18"
+      text-anchor="middle"
+      font-family="Cormorant Garamond, Garamond, serif"
+      font-style="italic"
+      font-size="20"
+      font-weight="500"
+      fill="currentColor"
+      stroke="none"
+    >
+      G
+    </text>
+  )}
+</svg>

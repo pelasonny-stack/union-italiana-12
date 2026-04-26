@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="Términos de uso" description="Términos de uso del sitio web de la R∴L∴ Unión Italiana N°12.">
+  <PageHero eyebrow="Legal" title="Términos de uso" glyph="three-dots" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <h2>1. Titularidad</h2>
+    <p>El sitio es titularidad de la Respetable Logia Unión Italiana N°12.</p>
+
+    <h2>2. Uso permitido</h2>
+    <p>
+      Lectura, citación con atribución, descarga de materiales en dominio público disponibles
+      en la Biblioteca. La reproducción comercial requiere autorización expresa.
+    </p>
+
+    <h2>3. Propiedad intelectual</h2>
+    <p>
+      Los textos editoriales originales se publican bajo licencia
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">
+        Creative Commons BY-NC-SA 4.0
+      </a>.
+      Los materiales históricos de dominio público se indican en cada caso.
+    </p>
+
+    <h2>4. Limitación de responsabilidad</h2>
+    <p>
+      La Logia no se responsabiliza por contenidos enlazados a sitios externos. La
+      información del sitio se ofrece de buena fe; ante imprecisiones, agradecemos el aviso a
+      <a href="mailto:contacto@unionitaliana12.org.ar">contacto@unionitaliana12.org.ar</a>.
+    </p>
+
+    <h2>5. Modificación</h2>
+    <p>Estos términos pueden modificarse. La fecha de la última actualización figura en la Política de privacidad.</p>
+
+    <h2>6. Jurisdicción</h2>
+    <p>Tribunales ordinarios de la Ciudad Autónoma de Buenos Aires.</p>
+  </article>
+</BaseLayout>

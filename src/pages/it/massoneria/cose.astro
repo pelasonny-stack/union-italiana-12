@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Cos'è la massoneria" description="Definizione sobria della massoneria: ordine iniziatico, fraterno, filosofico.">
+  <PageHero eyebrow="Definizione pubblica" title="Cos'è la massoneria" glyph="delta" />
+
+  <section id="in-otto-secondi" class="eight-seconds container container-narrow">
+    <p class="overline" style="color: var(--accent); margin-bottom: var(--space-2)">In otto secondi</p>
+    <p class="es-text">
+      <strong>La massoneria è un ordine iniziatico e filosofico</strong> con tre secoli di continuità.
+      Non è religione, non è partito, non è segreta — solo discreta. Lavora con il simbolismo
+      del mestiere di costruttore affinché ogni uomo si migliori e contribuisca ai suoi simili.
+    </p>
+  </section>
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      Conviene, prima di ogni definizione, chiarire due malintesi persistenti. La massoneria
+      non è una società segreta: le sue riunioni sono private come quelle di qualsiasi
+      istituzione che delibera nella propria sede, e la sua esistenza, i suoi principi, il
+      suo governo e la sua letteratura sono pubblicamente disponibili dal 1717. Non è
+      neppure un ordine religioso: non impone alcun credo, non celebra sacramenti, non si
+      interpone tra l'uomo e il senso ultimo che ciascuno attribuisce alla propria esistenza.
+    </p>
+    <p>
+      È, sì, un ordine iniziatico. Ciò significa che vi si entra attraverso una cerimonia —
+      l'iniziazione — che non si racconta perché non si comprende raccontandola; si comprende
+      vivendola. E significa, soprattutto, che il massone assume un metodo di lavoro su sé
+      stesso. La metafora del mestiere di costruttore — la pietra grezza che l'apprendista
+      deve levigare, il piano che il maestro deve leggere, il tempio la cui edificazione non
+      finisce mai — non è decorazione pittoresca: è la lingua precisa con cui l'Ordine si
+      pensa da tre secoli.
+    </p>
+    <h2>Cosa la massoneria è</h2>
+    <ul>
+      <li><strong>Ordine iniziatico</strong></li>
+      <li><strong>Fraterno</strong></li>
+      <li><strong>Filosofico</strong></li>
+      <li><strong>Filantropico</strong></li>
+    </ul>
+    <h2>Cosa la massoneria non è</h2>
+    <ul>
+      <li>Non è religione</li>
+      <li>Non è partito</li>
+      <li>Non è setta</li>
+      <li>Non è segreta — ha riserve, non segreti</li>
+      <li>Non è società di potere</li>
+    </ul>
+  </article>
+</BaseLayout>
+
+<style>
+  .eight-seconds {
+    background: var(--travertino);
+    border-left: 3px solid var(--accent);
+    padding: var(--space-4) var(--space-6);
+    margin-top: var(--space-8);
+    scroll-margin-top: 96px;
+  }
+  .es-text {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--fg);
+    margin: 0;
+  }
+  .es-text strong { color: var(--vermiglio); }
+</style>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="Biblioteca" description="Textos masónicos en dominio público, bibliografía recomendada, publicaciones de la Logia.">
+  <PageHero eyebrow="Lecturas" title="Biblioteca" subtitle="Per chi vuole approfondire" glyph="letter-g" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <h2>Textos fundacionales</h2>
+    <ul>
+      <li><strong>Constituciones de Anderson (1723)</strong> — texto fundacional de la masonería moderna. Dominio público.</li>
+      <li><strong>The Symbolism of Freemasonry</strong> — Albert G. Mackey (1869). Dominio público.</li>
+      <li><strong>Manual del Aprendiz</strong> — Aldo Lavagnini (varias ediciones). Trabajo introductorio clásico.</li>
+    </ul>
+
+    <h2>Masones argentinos</h2>
+    <ul>
+      <li><strong>El hombre mediocre</strong> — José Ingenieros (1913). Dominio público.</li>
+      <li><strong>Las fuerzas morales</strong> — José Ingenieros (1925, póstumo).</li>
+      <li><strong>Hacia una moral sin dogmas</strong> — José Ingenieros (1917).</li>
+    </ul>
+
+    <h2>Bibliografía académica</h2>
+    <ul>
+      <li>Lappas, Alcibíades — <em>La Masonería Argentina a través de sus hombres</em>.</li>
+      <li>Ferrer Benimeli, José — <em>Masonería e Inquisición en Latinoamérica</em>.</li>
+      <li>Devoto, Fernando — <em>Historia de la inmigración italiana en la Argentina</em>.</li>
+    </ul>
+
+    <Stub note="Los enlaces a los PDF en dominio público se cargarán a medida que se digitalicen y verifiquen las versiones autorizadas." />
+  </article>
+</BaseLayout>

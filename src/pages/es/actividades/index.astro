@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="Actividades" description="Tenidas blancas, conferencias culturales, beneficencia: lo que la R∴L∴ Unión Italiana N°12 hace en el mundo profano.">
+  <PageHero eyebrow="Lo visible" title="Actividades" subtitle="Quel che la Loggia fa nel mondo profano" glyph="acacia" />
+
+  <section class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Logia trabaja regularmente en tenidas reservadas a sus miembros. Pero parte de su
+      vida ocurre en público: tenidas blancas (sesiones abiertas), ciclos culturales, obra
+      de beneficencia. Estas son las puertas por donde el visitante puede asomarse al
+      trabajo de la Logia.
+    </p>
+
+    <ul class="act-grid">
+      <li><a href="/es/actividades/tenidas-blancas/">Tenidas blancas — calendario</a></li>
+      <li><a href="/es/actividades/cultura/">Ciclo cultural — conferencias y libros</a></li>
+      <li><a href="/es/actividades/beneficencia/">Beneficencia — obra social en curso</a></li>
+    </ul>
+
+    <Stub note="El calendario de actividades se actualiza mensualmente. Para inscribirse a una tenida blanca, escribir a contacto@unionitaliana12.org.ar." />
+  </section>
+</BaseLayout>
+
+<style>
+  .act-grid { list-style: none; padding: 0; margin-top: var(--space-6); }
+  .act-grid li { padding-block: var(--space-2); border-bottom: 1px solid var(--border); }
+</style>

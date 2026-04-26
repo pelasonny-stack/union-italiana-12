@@ -1,0 +1,496 @@
+---
+/**
+ * El Llamador — sello flotante ceremonial tipo aldaba.
+ * Reemplaza al FAB chat-bubble. Metáfora del peticionario que "golpea
+ * las puertas del Templo". Click expande dos chips: Contactarse + Atrio.
+ *
+ * Comportamiento:
+ *  - Aparece después de 200px de scroll (no tapa el hero).
+ *  - Pulse oro sutil cada 6s — respiración.
+ *  - Aldabazo (3 ondas concéntricas) una vez por sesión a los 30s.
+ *  - Click → expande chips hacia arriba con stagger.
+ *  - Oculto en /peticion/ (ya estás dentro del Atrio).
+ *  - Persiste entre View Transitions (transition:persist).
+ *  - ESC cierra · click fuera cierra · auto-collapse 8s sin interacción.
+ */
+import type { Locale } from "../../i18n/config";
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const base = `/${lang}`;
+const i18n = lang === "es"
+  ? {
+      label: "Llamar a las puertas del Templo",
+      tooltip: "Llamar a la puerta",
+      contact: "Contactarse",
+      contactDesc: "Tres canales: general, prensa, peticionarios",
+      petition: "Atrio del Peticionario",
+      petitionDesc: "Iniciar el camino · XXIII umbrales",
+      contactHref: `${base}/contacto/`,
+      petitionHref: `${base}/iniciacion/peticion/`,
+      hideOnPaths: ["/iniciacion/peticion", "/iniciacion/confirmacion"],
+    }
+  : {
+      label: "Bussare alle porte del Tempio",
+      tooltip: "Bussare alla porta",
+      contact: "Contattare",
+      contactDesc: "Tre canali: generale, stampa, postulanti",
+      petition: "Atrio del Postulante",
+      petitionDesc: "Iniziare il cammino · XXIII soglie",
+      contactHref: `${base}/contatti/`,
+      petitionHref: `${base}/iniziazione/petizione/`,
+      hideOnPaths: ["/iniziazione/petizione", "/iniziazione/conferma"],
+    };
+---
+
+<aside
+  class="llamador"
+  data-llamador
+  data-hide-paths={i18n.hideOnPaths.join(",")}
+  aria-label={i18n.label}
+  transition:persist="llamador"
+>
+  {/* Chips secundarios — visibles cuando expanded */}
+  <div class="llamador-chips" data-chips role="menu" aria-hidden="true">
+    <a
+      href={i18n.contactHref}
+      class="chip"
+      role="menuitem"
+      data-chip
+      style="--chip-i: 0"
+    >
+      <span class="chip-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="6" width="18" height="13" />
+          <path d="M3 7 L12 14 L21 7" />
+        </svg>
+      </span>
+      <span class="chip-text">
+        <span class="chip-title cinzel">{i18n.contact}</span>
+        <span class="chip-desc">{i18n.contactDesc}</span>
+      </span>
+    </a>
+
+    <a
+      href={i18n.petitionHref}
+      class="chip chip-primary"
+      role="menuitem"
+      data-chip
+      style="--chip-i: 1"
+    >
+      <span class="chip-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3 L4 21" />
+          <path d="M12 3 L20 21" />
+          <circle cx="12" cy="3" r="0.8" fill="currentColor" />
+          <path d="M5 19 L19 19 L19 13" />
+        </svg>
+      </span>
+      <span class="chip-text">
+        <span class="chip-title cinzel">{i18n.petition}</span>
+        <span class="chip-desc">{i18n.petitionDesc}</span>
+      </span>
+    </a>
+  </div>
+
+  {/* Tooltip desktop solo */}
+  <span class="llamador-tooltip" aria-hidden="true">{i18n.tooltip}</span>
+
+  {/* Aldaba — sello principal */}
+  <button
+    type="button"
+    class="llamador-knock"
+    data-knock
+    aria-label={i18n.label}
+    aria-expanded="false"
+    aria-controls="llamador-chips"
+  >
+    {/* Ondas del aldabazo (animan una vez por sesión) */}
+    <span class="knock-wave" aria-hidden="true"></span>
+    <span class="knock-wave knock-wave-2" aria-hidden="true"></span>
+    <span class="knock-wave knock-wave-3" aria-hidden="true"></span>
+
+    {/* Borde decorativo doble (corner-marks tipo sello) */}
+    <span class="knock-frame" aria-hidden="true"></span>
+
+    {/* Icono aldaba — mano sosteniendo anillo, SVG custom */}
+    <svg class="knock-icon" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      {/* Placa superior del aldabón */}
+      <rect x="11" y="4" width="10" height="3" rx="0.5" />
+      {/* Anillo principal */}
+      <ellipse cx="16" cy="15" rx="7" ry="5.5" />
+      <ellipse cx="16" cy="15" rx="4.5" ry="3.5" />
+      {/* Sombra interior anillo */}
+      <line x1="16" y1="7" x2="16" y2="9.5" />
+      {/* Botón inferior (donde golpea) */}
+      <circle cx="16" cy="24" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="16" cy="24" r="3.2" />
+    </svg>
+  </button>
+</aside>
+
+<script>
+  const init = () => {
+    const root = document.querySelector<HTMLElement>("[data-llamador]");
+    if (!root || root.dataset.bound === "true") return;
+    root.dataset.bound = "true";
+
+    const knock = root.querySelector<HTMLButtonElement>("[data-knock]");
+    const chipsWrap = root.querySelector<HTMLElement>("[data-chips]");
+    const chips = root.querySelectorAll<HTMLElement>("[data-chip]");
+    const hidePaths = (root.dataset.hidePaths ?? "").split(",").filter(Boolean);
+
+    if (!knock || !chipsWrap) return;
+
+    // Hide on /peticion/ and /confirmacion/
+    const path = location.pathname.replace(/\/$/, "");
+    if (hidePaths.some((p) => path.endsWith(p))) {
+      root.style.display = "none";
+      return;
+    }
+
+    let collapseTimer: number | undefined;
+
+    const open = () => {
+      root.dataset.open = "true";
+      knock.setAttribute("aria-expanded", "true");
+      chipsWrap.setAttribute("aria-hidden", "false");
+      const first = chips[0] as HTMLAnchorElement | undefined;
+      first?.focus();
+      scheduleAutoCollapse();
+    };
+    const close = () => {
+      root.dataset.open = "false";
+      knock.setAttribute("aria-expanded", "false");
+      chipsWrap.setAttribute("aria-hidden", "true");
+      if (collapseTimer) window.clearTimeout(collapseTimer);
+    };
+    const toggle = () => (root.dataset.open === "true" ? close() : open());
+    const scheduleAutoCollapse = () => {
+      if (collapseTimer) window.clearTimeout(collapseTimer);
+      collapseTimer = window.setTimeout(close, 15000);
+    };
+
+    knock.addEventListener("click", toggle);
+    chipsWrap.addEventListener("mouseenter", scheduleAutoCollapse);
+    chipsWrap.addEventListener("focusin", scheduleAutoCollapse);
+
+    // ESC cierra
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && root.dataset.open === "true") {
+        close();
+        knock.focus();
+      }
+    });
+    // Click fuera cierra
+    document.addEventListener("click", (e) => {
+      if (root.dataset.open !== "true") return;
+      if (!root.contains(e.target as Node)) close();
+    });
+
+    // Mostrar después de 200px scroll
+    const onScroll = () => {
+      const visible = window.scrollY > 200;
+      root.dataset.visible = String(visible);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Tooltip persistente 3s al primer mount por sesión
+    const TOOLTIP_KEY = "llamador-tooltip-shown";
+    if (!sessionStorage.getItem(TOOLTIP_KEY)) {
+      const showTooltipWhenVisible = () => {
+        if (root.dataset.visible !== "true") {
+          window.setTimeout(showTooltipWhenVisible, 500);
+          return;
+        }
+        root.dataset.tooltipForce = "true";
+        window.setTimeout(() => { root.dataset.tooltipForce = "false"; }, 3000);
+        sessionStorage.setItem(TOOLTIP_KEY, "1");
+      };
+      window.setTimeout(showTooltipWhenVisible, 1500);
+    }
+
+    // Aldabazo (3 ondas) una vez por sesión a los 30s
+    const KEY = "llamador-knocked";
+    if (!sessionStorage.getItem(KEY)) {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduced) {
+        window.setTimeout(() => {
+          if (root.dataset.visible !== "true") return;
+          root.dataset.knocking = "true";
+          window.setTimeout(() => { root.dataset.knocking = "false"; }, 2400);
+          sessionStorage.setItem(KEY, "1");
+        }, 30000);
+      } else {
+        sessionStorage.setItem(KEY, "1");
+      }
+    }
+  };
+
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>
+
+<style>
+  .llamador {
+    position: fixed;
+    bottom: clamp(20px, 4vw, 32px);
+    right: clamp(20px, 4vw, 32px);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-2);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+    transition:
+      opacity var(--duration-slow) var(--ease-ceremonial),
+      transform var(--duration-slow) var(--ease-ceremonial);
+  }
+  .llamador[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* ── Chips ── */
+  .llamador-chips {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: stretch;
+    width: 300px;
+    max-width: calc(100vw - 88px);
+    pointer-events: none;
+  }
+  .chip {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent);
+    color: var(--fg);
+    background-image: none;
+    box-shadow: var(--shadow-elevated);
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition:
+      opacity var(--duration-normal) var(--ease-ceremonial),
+      transform var(--duration-normal) var(--ease-ceremonial),
+      border-color var(--duration-fast),
+      background var(--duration-fast);
+    pointer-events: none;
+  }
+  .llamador[data-open="true"] .chip {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: calc(var(--chip-i, 0) * 80ms + 100ms);
+  }
+  .chip:hover, .chip:focus-visible {
+    border-color: var(--accent-bright);
+    background: color-mix(in srgb, var(--accent) 8%, var(--bg-elevated));
+  }
+  .chip-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    flex-shrink: 0;
+  }
+  .chip-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.2;
+  }
+  .chip-title {
+    font-size: 0.78rem;
+    color: var(--fg);
+  }
+  .chip-desc {
+    font-size: 0.7rem;
+    color: var(--fg-muted);
+    font-family: var(--font-sans);
+  }
+  .chip-primary {
+    background: var(--vermiglio);
+    color: var(--candela);
+    border-color: var(--accent-bright);
+  }
+  .chip-primary .chip-icon {
+    color: var(--accent-bright);
+    border-color: color-mix(in srgb, var(--accent-bright) 50%, transparent);
+  }
+  .chip-primary .chip-title { color: var(--candela); }
+  .chip-primary .chip-desc { color: color-mix(in srgb, var(--candela) 75%, transparent); }
+  .chip-primary:hover { background: var(--vermiglio-profondo); }
+
+  /* ── Tooltip desktop ── */
+  .llamador-tooltip {
+    position: absolute;
+    right: 80px;
+    bottom: 22px;
+    padding: 6px 10px;
+    background: var(--inchiostro);
+    color: var(--candela);
+    font-family: var(--font-cinzel);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(8px);
+    pointer-events: none;
+    transition: opacity var(--duration-fast), transform var(--duration-fast);
+  }
+  .llamador-tooltip::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    background: var(--inchiostro);
+  }
+  .llamador-knock:hover ~ .llamador-tooltip,
+  .llamador-knock:focus-visible ~ .llamador-tooltip,
+  .llamador[data-tooltip-force="true"] .llamador-tooltip {
+    opacity: 1;
+    transform: none;
+  }
+  .llamador[data-open="true"] .llamador-tooltip { opacity: 0 !important; }
+  @media (max-width: 768px) {
+    .llamador-tooltip { display: none; }
+  }
+
+  /* ── Sello principal — la aldaba ── */
+  .llamador-knock {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    background: var(--vermiglio);
+    color: var(--candela);
+    cursor: pointer;
+    pointer-events: auto;
+    display: grid;
+    place-items: center;
+    transition:
+      transform var(--duration-normal) var(--ease-ceremonial),
+      background var(--duration-normal) var(--ease-ceremonial),
+      box-shadow var(--duration-normal) var(--ease-ceremonial);
+    box-shadow:
+      0 4px 16px rgba(20, 16, 20, 0.25),
+      0 0 0 4px color-mix(in srgb, var(--bg) 40%, transparent),
+      inset 0 1px 2px rgba(255, 255, 255, 0.15),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    animation: knock-breathe 6s ease-in-out infinite;
+  }
+  .llamador-knock:hover, .llamador-knock:focus-visible {
+    transform: scale(1.06);
+    background: var(--vermiglio-profondo);
+    box-shadow:
+      0 6px 24px rgba(20, 16, 20, 0.35),
+      0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent),
+      0 0 24px color-mix(in srgb, var(--accent) 30%, transparent),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
+  .llamador[data-open="true"] .llamador-knock {
+    background: var(--vermiglio-profondo);
+    transform: rotate(-90deg);
+  }
+
+  /* Borde decorativo interno (segundo anillo) */
+  .knock-frame {
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+    pointer-events: none;
+  }
+
+  .knock-icon {
+    width: 30px;
+    height: 30px;
+    color: var(--candela);
+    transition: transform var(--duration-normal) var(--ease-ceremonial);
+  }
+  .llamador-knock:hover .knock-icon {
+    transform: translateY(-1px);
+  }
+  .llamador[data-open="true"] .knock-icon {
+    transform: rotate(45deg);
+    opacity: 0.7;
+  }
+
+  /* Respiración pulse muy sutil */
+  @keyframes knock-breathe {
+    0%, 100% {
+      box-shadow:
+        0 4px 16px rgba(20, 16, 20, 0.25),
+        0 0 0 4px color-mix(in srgb, var(--bg) 40%, transparent),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      box-shadow:
+        0 4px 16px rgba(20, 16, 20, 0.25),
+        0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent),
+        0 0 32px color-mix(in srgb, var(--accent) 18%, transparent),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Ondas concéntricas (aldabazo) */
+  .knock-wave {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .llamador[data-knocking="true"] .knock-wave {
+    animation: knock-ring 1.6s var(--ease-ceremonial) forwards;
+  }
+  .llamador[data-knocking="true"] .knock-wave-2 {
+    animation-delay: 0.25s;
+  }
+  .llamador[data-knocking="true"] .knock-wave-3 {
+    animation-delay: 0.5s;
+  }
+  @keyframes knock-ring {
+    0%   { opacity: 0.7; transform: scale(1); border-width: 2px; }
+    100% { opacity: 0; transform: scale(2.4); border-width: 0.5px; }
+  }
+
+  /* Mobile: chip más compacto */
+  @media (max-width: 480px) {
+    .llamador-chips { width: 260px; }
+    .chip-desc { display: none; }
+    .llamador-knock { width: 56px; height: 56px; }
+    .knock-icon { width: 26px; height: 26px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .llamador-knock { animation: none; }
+    .llamador, .chip, .knock-icon, .llamador-knock,
+    .knock-wave { animation: none !important; transition: opacity 200ms !important; }
+    .llamador[data-open="true"] .llamador-knock { transform: none; }
+  }
+</style>

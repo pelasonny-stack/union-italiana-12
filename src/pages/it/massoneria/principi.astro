@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Principi dell'Ordine" description="Libertà, Uguaglianza, Fraternità, Tolleranza, e la questione del Grande Architetto dell'Universo.">
+  <PageHero eyebrow="Ciò che articola la pratica" title="Principi" glyph="three-dots" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <h2>Libertà</h2>
+    <p>La massoneria chiede a chi si inizia di essere libero — non in senso meramente giuridico, ma morale. Libero da servitù volontarie, libero dal timore di pensare.</p>
+    <h2>Uguaglianza</h2>
+    <p>All'interno del Tempio cessano le distinzioni del mondo profano. Un fratello è un fratello, qualunque sia la sua origine.</p>
+    <h2>Fraternità</h2>
+    <p>Non è affetto sentimentale, ma legame assunto. Implica obblighi concreti: assistenza, lealtà, difesa della reputazione del fratello assente.</p>
+    <h2>Tolleranza</h2>
+    <p>Non è indifferenza né relativismo: è la disposizione attiva a sostenere il dialogo tra uomini di convinzioni diverse, a partire dal riconoscimento della dignità comune.</p>
+    <h2>La questione del Grande Architetto dell'Universo</h2>
+    <p>La massoneria regolare chiede a chi presenta domanda di affermare la sua credenza in un Principio Creatore, che chiama Grande Architetto dell'Universo. La formula è deliberatamente aperta: ogni fratello la intende secondo la propria tradizione religiosa o filosofica.</p>
+  </article>
+</BaseLayout>

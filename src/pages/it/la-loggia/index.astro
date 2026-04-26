@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="La Loggia" description="La Rispettabile Loggia Unione Italiana N°12: storia, membri illustri, tempio e legame italiano.">
+  <PageHero eyebrow="Chi siamo" title="La Loggia" subtitle="Quattro secoli di lavoro continuo dell'oficio" glyph="columns" />
+  <section class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Rispettabile Loggia Unione Italiana N°12 lavora regolarmente dal 23 dicembre 1858.
+      Quattro sezioni permettono di ripercorrere il suo passato, i suoi membri storici, lo
+      spazio fisico in cui si riunisce, e la trama italiana che la sostiene.
+    </p>
+    <ul class="lodge-index">
+      <li><a href="/it/la-loggia/storia/">Storia — fondazione 1858, José Salvarezza, rifondazione 2014</a></li>
+      <li><a href="/it/la-loggia/tempio/">Il Tempio — Hijos del Trabajo, Barracas (galleria)</a></li>
+      <li><a href="/it/la-loggia/membri-illustri/">Membri illustri — Ingenieros, Salvarezza e altri</a></li>
+      <li><a href="/it/la-loggia/legame-italiano/">Il legame italiano — Mazzini, febbre gialla, Ospedale Italiano, La Plata</a></li>
+      <li><a href="/it/la-loggia/obbedienza/">Obbedienza — Gran Loggia dell'Argentina</a></li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .lodge-index { list-style: none; padding: 0; margin-top: var(--space-6); }
+  .lodge-index li { padding-block: var(--space-2); border-bottom: 1px solid var(--border); }
+</style>

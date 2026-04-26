@@ -1,0 +1,246 @@
+---
+/**
+ * Slider sobrio de fotografías — sin autoplay, navegación por puntos y flechas.
+ * Crossfade de 1.2s, ritmo ceremonial. View Transitions friendly.
+ * Uso: <PhotoSlider photos={[{src,alt,caption}]} />
+ */
+
+interface Photo {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  photos: Photo[];
+  aspect?: string; /* default 16/9 */
+  autoplayMs?: number; /* opcional */
+  startIndex?: number;
+}
+
+const {
+  photos,
+  aspect = "16 / 9",
+  autoplayMs = 0,
+  startIndex = 0,
+} = Astro.props;
+
+const id = `slider-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<section
+  class="photo-slider"
+  data-slider
+  data-autoplay={autoplayMs}
+  data-start={startIndex}
+  style={`--aspect: ${aspect};`}
+  id={id}
+  aria-roledescription="carousel"
+>
+  <div class="slides" data-slides>
+    {photos.map((p, i) => (
+      <figure
+        class="slide"
+        data-slide
+        data-active={i === startIndex ? "true" : "false"}
+        aria-hidden={i === startIndex ? "false" : "true"}
+      >
+        <img
+          src={p.src}
+          alt={p.alt}
+          loading={i === startIndex ? "eager" : "lazy"}
+          decoding="async"
+          fetchpriority={i === startIndex ? "high" : "auto"}
+        />
+        {p.caption && (
+          <figcaption class="caption">
+            <span class="caption-inner">{p.caption}</span>
+          </figcaption>
+        )}
+      </figure>
+    ))}
+  </div>
+
+  <div class="slider-controls">
+    <button type="button" class="slider-arrow" data-prev aria-label="Anterior">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 4 L7 12 L15 20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <ol class="slider-dots" data-dots>
+      {photos.map((_, i) => (
+        <li>
+          <button
+            type="button"
+            class="dot"
+            data-dot={i}
+            aria-label={`Ir a imagen ${i + 1}`}
+            aria-current={i === startIndex ? "true" : undefined}
+          ></button>
+        </li>
+      ))}
+    </ol>
+    <button type="button" class="slider-arrow" data-next aria-label="Siguiente">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 4 L17 12 L9 20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</section>
+
+<script>
+  const init = () => {
+    document.querySelectorAll<HTMLElement>("[data-slider]").forEach((root) => {
+      if (root.dataset.bound === "true") return;
+      root.dataset.bound = "true";
+      const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-slide]"));
+      const dots = Array.from(root.querySelectorAll<HTMLElement>("[data-dot]"));
+      let current = Number(root.dataset.start ?? "0");
+      const autoplay = Number(root.dataset.autoplay ?? "0");
+      const total = slides.length;
+      let timer: number | undefined;
+
+      const show = (next: number) => {
+        const target = ((next % total) + total) % total;
+        slides.forEach((s, i) => {
+          const active = i === target;
+          s.dataset.active = String(active);
+          s.setAttribute("aria-hidden", String(!active));
+        });
+        dots.forEach((d, i) => {
+          if (i === target) d.setAttribute("aria-current", "true");
+          else d.removeAttribute("aria-current");
+        });
+        current = target;
+      };
+
+      const next = () => show(current + 1);
+      const prev = () => show(current - 1);
+
+      root.querySelector("[data-next]")?.addEventListener("click", next);
+      root.querySelector("[data-prev]")?.addEventListener("click", prev);
+      dots.forEach((d, i) => d.addEventListener("click", () => show(i)));
+
+      // Touch swipe
+      let startX = 0;
+      const slidesEl = root.querySelector<HTMLElement>("[data-slides]");
+      slidesEl?.addEventListener("touchstart", (e) => { startX = e.touches[0]?.clientX ?? 0; }, { passive: true });
+      slidesEl?.addEventListener("touchend", (e) => {
+        const dx = (e.changedTouches[0]?.clientX ?? 0) - startX;
+        if (Math.abs(dx) > 50) (dx < 0 ? next : prev)();
+      });
+
+      // Keyboard
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      });
+
+      // Autoplay (respeta prefers-reduced-motion)
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (autoplay > 0 && !reduced) {
+        const start = () => { timer = window.setInterval(next, autoplay); };
+        const stop = () => { if (timer) window.clearInterval(timer); };
+        root.addEventListener("mouseenter", stop);
+        root.addEventListener("mouseleave", start);
+        root.addEventListener("focusin", stop);
+        root.addEventListener("focusout", start);
+        start();
+      }
+    });
+  };
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>
+
+<style>
+  .photo-slider {
+    position: relative;
+    background: var(--ink-900);
+    overflow: hidden;
+  }
+  .slides {
+    position: relative;
+    aspect-ratio: var(--aspect);
+    width: 100%;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transform: scale(1.02);
+    transition:
+      opacity var(--duration-ritual) var(--ease-ceremonial),
+      transform var(--duration-ritual) var(--ease-ceremonial);
+    pointer-events: none;
+  }
+  .slide[data-active="true"] {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--space-3) var(--space-4);
+    background: linear-gradient(to top, rgba(11,11,15,0.85), transparent);
+    color: var(--ivory-50);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .caption-inner {
+    display: inline-block;
+    max-width: 60ch;
+  }
+  .slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    background: var(--ink-900);
+  }
+  .slider-arrow {
+    background: transparent;
+    border: 1px solid rgba(192, 155, 82, 0.3);
+    color: var(--gold-700);
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color var(--duration-fast), color var(--duration-fast);
+  }
+  .slider-arrow:hover, .slider-arrow:focus-visible {
+    border-color: var(--gold-700);
+    color: var(--ivory-50);
+  }
+  .slider-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .dot {
+    background: transparent;
+    border: 1px solid var(--gold-700);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color var(--duration-fast);
+  }
+  .dot[aria-current="true"] {
+    background: var(--gold-700);
+  }
+</style>

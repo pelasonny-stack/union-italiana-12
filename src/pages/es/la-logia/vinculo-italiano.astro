@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Quote from "../../../components/content/Quote.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="El vínculo italiano" description="Del Risorgimento a la Buenos Aires del siglo XXI: el hilo italiano de la Unión Italiana N°12.">
+  <PageHero eyebrow="Risorgimento → Río de la Plata" title="El hilo italiano" subtitle="Del Ottocento a la Buenos Aires de hoy" glyph="acacia" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La italianidad de esta Logia no es decorativa. Atraviesa su nombre, su origen, sus
+      miembros fundadores y la trama política y cultural en la que nació. Esta página
+      reconstruye —de manera deliberadamente sobria— ese hilo.
+    </p>
+
+    <h2>Mazzini, Garibaldi y la masonería italiana del Ottocento</h2>
+    <p>
+      La masonería del Ottocento italiano fue inseparable del proceso de unificación
+      nacional. Giuseppe Mazzini, fundador de la Giovine Italia, y Giuseppe Garibaldi,
+      figura tutelar del Risorgimento, eran masones reconocidos. La Loggia "Carbonaria"
+      y luego la masonería propiamente dicha proveyeron una red transnacional de discusión
+      política, fraternidad militante y exilio refugiado.
+    </p>
+
+    <Quote text="L'unità d'Italia è la più grande delle questioni: è una questione religiosa." attribution="Giuseppe Mazzini" lang="it" />
+
+    <h2>La inmigración italiana en Argentina (1850-1930)</h2>
+    <p>
+      Entre 1857 y 1930, más de 2,3 millones de italianos arribaron a Argentina. Trajeron
+      consigo una cultura asociativa madura: mutuales (Unione e Benevolenza, Patria e
+      Lavoro), sociedades de socorros mutuos, escuelas de lengua italiana, periódicos en
+      italiano, hospitales étnicos. Las logias italianas de Buenos Aires —Italia, Unión
+      Italiana, Roma, Sette Colli, Leonardo da Vinci— forman parte indistinguible de ese
+      ecosistema.
+    </p>
+
+    <h2>La Unión Italiana N°12 en ese ecosistema</h2>
+    <p>
+      Fundada en 1858 con José Salvarezza —médico— como primer Venerable Maestro, la Logia
+      fue uno de los focos donde la masonería argentina y la diáspora italiana se cruzaron.
+      Tres episodios documentan ese cruce:
+    </p>
+    <ul>
+      <li><strong>Epidemia de fiebre amarilla (1871):</strong> hermanos de la Logia
+        participaron de la Comisión Popular y de los cuerpos médicos voluntarios que
+        asistieron a la población durante la peor crisis sanitaria de la Buenos Aires del XIX.</li>
+      <li><strong>Fundación del Hospital Italiano (1872):</strong> hermanos de la Logia
+        colaboraron en su gestación y en el sostén económico de los primeros años.</li>
+      <li><strong>Fundación de la Ciudad de La Plata (1882):</strong> masones de la Logia
+        participaron en el equipo dirigido por Dardo Rocha, masón él mismo, en el diseño
+        y trazado de la nueva capital provincial. El italiano Francisco Tamburini, quien
+        completó la sede de la Gran Logia (Palacio Cangallo), pertenece a este mismo
+        ecosistema italo-masónico de la Buenos Aires del Centenario.</li>
+    </ul>
+    <p>
+      A esto se suma la contribución, en 1889, al monumento al ex Gran Maestro italiano
+      Giuseppe Petroni, y la presencia constante en las instituciones de la colectividad:
+      <em>Unione e Benevolenza</em>, <em>Patria e Lavoro</em>, escuelas de lengua italiana,
+      sociedades de socorros mutuos.
+    </p>
+
+    <h2>Hermanamientos y vínculos contemporáneos</h2>
+    <p>
+      La Logia mantiene intercambios con logias del Grande Oriente d'Italia y con la
+      Delegación Magistral Argentina de la Serenissima Gran Loggia d'Italia. Hermanos
+      visitantes italianos son recibidos en tenida con frecuencia.
+    </p>
+
+    <Stub note="Esta sección será ampliada con la lista de hermanamientos vigentes y un mapa interactivo de logias italianas en Argentina, una vez confirmados con el Venerable Maestro." />
+  </article>
+</BaseLayout>

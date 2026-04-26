@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="Ciclo cultural" description="Conferencias, presentaciones de libros, ciclos temáticos abiertos al público.">
+  <PageHero eyebrow="Cultura" title="Ciclo cultural" glyph="letter-g" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Logia organiza, alternando con sus tenidas regulares, encuentros culturales
+      abiertos al público sobre historia, filosofía, literatura, masonería y cultura
+      italo-argentina. Las invitaciones se anuncian aquí.
+    </p>
+    <Stub note="Próximas conferencias: en preparación." />
+  </article>
+</BaseLayout>

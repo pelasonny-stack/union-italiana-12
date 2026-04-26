@@ -1,0 +1,71 @@
+{
+  "site.name": "Unione Italiana N°12",
+  "site.tagline": "All'Oriente di Buenos Aires, dal MDCCCLVIII",
+  "site.lema": "A∴ G∴ D∴ G∴ A∴ D∴ U∴",
+
+  "nav.home": "Home",
+  "nav.lodge": "La Loggia",
+  "nav.masonry": "Massoneria",
+  "nav.activities": "Attività",
+  "nav.initiation": "Iniziazione",
+  "nav.contact": "Contatti",
+
+  "nav.lodge.history": "Storia",
+  "nav.lodge.illustrious": "Membri illustri",
+  "nav.lodge.temple": "Il Tempio",
+  "nav.lodge.italian": "Legame italiano",
+
+  "nav.masonry.what": "Cos'è la massoneria",
+  "nav.masonry.principles": "Principi",
+  "nav.masonry.glossary": "Glossario",
+  "nav.masonry.library": "Biblioteca",
+
+  "nav.activities.tenidas": "Tornate bianche",
+  "nav.activities.culture": "Cultura",
+  "nav.activities.charity": "Beneficenza",
+
+  "footer.institutional": "Istituzionale",
+  "footer.resources": "Risorse",
+  "footer.initiation": "Iniziazione",
+  "footer.legal": "Legale",
+  "footer.privacy": "Politica sulla privacy",
+  "footer.terms": "Termini d'uso",
+  "footer.cookies": "Cookie",
+  "footer.copyright": "A∴ G∴ D∴ G∴ A∴ D∴ U∴ — MMXXV",
+  "footer.foundation": "Fondata il 23 dicembre 1858",
+
+  "lang.switch": "Cambia lingua",
+  "theme.toggle": "Cambia tema",
+  "skip.to_content": "Vai al contenuto principale",
+
+  "home.hero.eyebrow": "Rispettabile Loggia",
+  "home.hero.title": "All'Oriente di Buenos Aires",
+  "home.hero.subtitle": "Loggia massonica regolare · all'Oriente di Buenos Aires dal 1858",
+  "home.hero.cta": "Visitare il Tempio",
+  "home.three_doors.history": "Conoscere la storia",
+  "home.three_doors.masonry": "Comprendere l'Ordine",
+  "home.three_doors.initiation": "Iniziare il cammino",
+
+  "petition.cta": "Atrio del Postulante",
+  "petition.eyebrow": "Chi bussa alle porte",
+  "petition.intro.heading": "Prima di proseguire",
+  "petition.step.identity": "Soglia I — Identità",
+  "petition.step.reflection": "Soglia II — Introspezione",
+  "petition.step.word": "Soglia III — Parola",
+  "petition.next": "Continua",
+  "petition.back": "Indietro",
+  "petition.submit": "Bussare alle porte del Tempio",
+  "petition.heard": "Sei stato ascoltato.",
+
+  "form.required": "Questo campo è obbligatorio.",
+  "form.error.generic": "C'è stato un problema. Riprova tra qualche minuto.",
+  "form.error.rate_limited": "Troppi tentativi dalla tua connessione. Riprova più tardi.",
+  "form.error.turnstile": "Non possiamo verificare che tu sia una persona. Ricarica e riprova.",
+  "form.error.timing": "L'invio è stato troppo rapido. Prenditi un momento.",
+  "form.success": "Abbiamo ricevuto la tua petizione.",
+
+  "contact.subject.general": "Contatto generale",
+  "contact.subject.press": "Stampa",
+  "contact.subject.academy": "Ricerca / accademia",
+  "contact.subject.brother": "Fratello visitatore"
+}

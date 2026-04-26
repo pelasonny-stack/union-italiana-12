@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Quote from "../../../components/content/Quote.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Il legame italiano" description="Dal Risorgimento alla Buenos Aires del XXI secolo: il filo italiano della Unione Italiana N°12.">
+  <PageHero eyebrow="Risorgimento → Río de la Plata" title="Il filo italiano" subtitle="Dall'Ottocento alla Buenos Aires di oggi" glyph="acacia" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">L'italianità di questa Loggia non è decorativa. Attraversa il suo nome, la sua origine, i suoi membri fondatori e la trama politica e culturale in cui è nata.</p>
+    <h2>Mazzini, Garibaldi e la massoneria italiana dell'Ottocento</h2>
+    <p>La massoneria dell'Ottocento italiano fu inseparabile dal processo di unificazione nazionale. Mazzini e Garibaldi erano massoni riconosciuti.</p>
+    <Quote text="L'unità d'Italia è la più grande delle questioni: è una questione religiosa." attribution="Giuseppe Mazzini" lang="it" />
+    <h2>L'immigrazione italiana in Argentina (1850-1930)</h2>
+    <p>Tra il 1857 e il 1930, oltre 2,3 milioni di italiani arrivarono in Argentina. Portarono con sé una cultura associativa matura: mutue (Unione e Benevolenza, Patria e Lavoro), società di mutuo soccorso, scuole di lingua italiana, ospedali etnici.</p>
+    <h2>Gemellaggi e legami contemporanei</h2>
+    <p>La Loggia mantiene scambi con logge del Grande Oriente d'Italia e con la Delegazione Magistrale Argentina della Serenissima Gran Loggia d'Italia.</p>
+    <Stub note="Questa sezione sarà ampliata con la lista dei gemellaggi vigenti, una volta confermati dal Maestro Venerabile." />
+  </article>
+</BaseLayout>

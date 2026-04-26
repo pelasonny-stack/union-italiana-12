@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="La Logia"
+  description="La Respetable Logia Unión Italiana N°12: historia, miembros ilustres, templo y vínculo italiano."
+>
+  <PageHero
+    eyebrow="Quienes somos"
+    title="La Logia"
+    subtitle="Quattro secoli di lavoro continuo dell'oficio"
+    glyph="columns"
+  />
+  <section class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Respetable Logia Unión Italiana N°12 trabaja regularmente desde el 23 de
+      diciembre de 1858. Cuatro secciones permiten recorrer su pasado, sus miembros
+      históricos, el espacio físico donde se reúne, y la trama italiana que la sostiene.
+    </p>
+    <ul class="lodge-index">
+      <li><a href="/es/la-logia/historia/">Historia — fundación 1858, José Salvarezza, refundación 2014</a></li>
+      <li><a href="/es/la-logia/templo/">El Templo — Hijos del Trabajo, Barracas (galería)</a></li>
+      <li><a href="/es/la-logia/miembros-ilustres/">Miembros ilustres — Ingenieros, Salvarezza y otros</a></li>
+      <li><a href="/es/la-logia/vinculo-italiano/">El vínculo italiano — Mazzini, fiebre amarilla, Hospital Italiano, La Plata</a></li>
+      <li><a href="/es/la-logia/obediencia/">Obediencia — Gran Logia de la Argentina</a></li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .lodge-index { list-style: none; padding: 0; margin-top: var(--space-6); }
+  .lodge-index li { padding-block: var(--space-2); border-bottom: 1px solid var(--border); }
+</style>

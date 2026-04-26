@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroTemple from "../../components/content/HeroTemple.astro";
+import PhotoSlider from "../../components/content/PhotoSlider.astro";
+import RotatingQuote from "../../components/content/RotatingQuote.astro";
+import ThreeDoors from "../../components/content/ThreeDoors.astro";
+import UpcomingEvent from "../../components/content/UpcomingEvent.astro";
+import { t } from "../../i18n/ui";
+
+const lang = "it" as const;
+
+// Hero mostra templo-3 (sala principale). Slider parte da foto diversa
+// per non duplicare l'impatto visivo iniziale.
+const sliderPhotos = [
+  { src: "/assets/templo/templo-1.jpeg", alt: "Delta luminoso dorato con l'Occhio della Provvidenza", caption: "Delta Luminoso del Tempio, su fondo vermiglio" },
+  { src: "/assets/templo/templo-2.jpeg", alt: "Facciata del Tempio Hijos del Trabajo a Barracas, stile egizio (1919)", caption: "Facciata egizia del Tempio Hijos del Trabajo — Francisco Cabot, 1919" },
+  { src: "/assets/templo/templo-4.jpeg", alt: "Dettaglio del soffitto e del lampadario principale del Tempio", caption: "Volta celeste e lampadario principale del Tempio" },
+  { src: "/assets/templo/templo-3.jpeg", alt: "Sala principale del Tempio Hijos del Trabajo, vista generale", caption: "Sala principale del Tempio — volta celeste affrescata" },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t("site.name", lang)}
+  description="R∴L∴ Unione Italiana N°12 — all'Oriente di Buenos Aires dal 1858. Sotto l'obbedienza della Gran Loggia dell'Argentina. Lavora nel Tempio Hijos del Trabajo, Barracas."
+  schemaType="Organization"
+>
+  <HeroTemple
+    lang={lang}
+    eyebrow={t("home.hero.eyebrow", lang)}
+    title={t("home.hero.title", lang)}
+    subtitle={t("home.hero.subtitle", lang)}
+    ctaLabel={t("home.hero.cta", lang)}
+    ctaHref="/it/la-loggia/tempio/"
+  />
+
+  <UpcomingEvent lang={lang} />
+
+  <section class="container container-narrow" style="padding-block: var(--space-12);">
+    <p class="lead drop-cap">
+      Dal 23 dicembre 1858, all'Oriente di Buenos Aires, una Loggia lavora sull'eredità
+      spirituale e civica lasciata dagli italiani giunti al Río de la Plata. Il suo primo
+      Maestro Venerabile fu il medico José Salvarezza. Rifondata nel 2014 da un gruppo
+      di Maestri Massoni, l'Unione Italiana N°12 sostiene oggi le sue tornate regolari
+      nel storico Tempio "Hijos del Trabajo", a Barracas, sotto l'obbedienza della Gran
+      Loggia dell'Argentina dei Liberi e Accettati Massoni.
+    </p>
+  </section>
+
+  <section class="container" style="padding-bottom: var(--space-12);">
+    <PhotoSlider photos={sliderPhotos} aspect="16 / 9" autoplayMs={6000} />
+  </section>
+
+  <ThreeDoors
+    doors={[
+      { href: "/it/la-loggia/storia/", glyph: "columns", eyebrow: "MDCCCLVIII — Oggi", title: t("home.three_doors.history", lang), text: "Una storia documentata, non mitica. Dal Risorgimento alla rifondazione del 2014." },
+      { href: "/it/massoneria/cose/", glyph: "delta", eyebrow: "Un Ordine iniziatico", title: t("home.three_doors.masonry", lang), text: "Cos'è —e cosa non è— la massoneria regolare. Senza segreti, con riserve." },
+      { href: "/it/iniziazione/", glyph: "square-compass", eyebrow: "Atrio del Postulante", title: t("home.three_doors.initiation", lang), text: "Se è arrivato qui per qualcosa più che curiosità passeggera, entri e legga con attenzione." },
+    ]}
+  />
+
+  <RotatingQuote lang={lang} />
+</BaseLayout>
+
+<style>
+  .lead {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--fg);
+  }
+</style>

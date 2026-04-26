@@ -1,0 +1,48 @@
+---
+import { LOCALES, alternateLocaleUrl, type Locale } from "../../i18n/config";
+import { t, type UIKey } from "../../i18n/ui";
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<div class="lang-switcher" role="group" aria-label={t("lang.switch" as UIKey, lang)}>
+  {LOCALES.map((l, idx) => (
+    <>
+      {idx > 0 && <span aria-hidden="true">·</span>}
+      <a
+        href={l === lang ? "#" : alternateLocaleUrl(path, l)}
+        aria-current={l === lang ? "true" : undefined}
+        class={l === lang ? "is-active" : ""}
+        hreflang={l}
+      >
+        {l.toUpperCase()}
+      </a>
+    </>
+  ))}
+</div>
+
+<style>
+  .lang-switcher {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-uppercase);
+    font-weight: 600;
+  }
+  .lang-switcher a {
+    color: var(--fg-muted);
+    background-image: linear-gradient(var(--accent), var(--accent));
+  }
+  .lang-switcher a.is-active {
+    color: var(--accent);
+    pointer-events: none;
+  }
+  .lang-switcher span {
+    color: var(--fg-subtle);
+  }
+</style>

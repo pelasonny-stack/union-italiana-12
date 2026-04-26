@@ -1,0 +1,53 @@
+---
+import MasonicGlyph from "../symbols/MasonicGlyph.astro";
+import type { GlyphName } from "../symbols/glyphs";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  glyph?: GlyphName;
+}
+
+const { eyebrow, title, subtitle, glyph = "three-dots" } = Astro.props;
+---
+
+<header class="page-hero">
+  <div class="container container-narrow">
+    <MasonicGlyph name={glyph} size={44} class="ph-glyph" />
+    <span class="ph-rule" aria-hidden="true"></span>
+    <p class="overline" style="margin-top: var(--space-2)">{eyebrow}</p>
+    <h1 class="ph-title">{title}</h1>
+    {subtitle && <p class="ph-subtitle latin">{subtitle}</p>}
+    <hr class="tricolor-rule ph-tricolor" aria-hidden="true" />
+  </div>
+</header>
+
+<style>
+  .page-hero {
+    padding-block: clamp(80px, 12vh, 140px) clamp(48px, 6vh, 80px);
+    text-align: center;
+  }
+  .ph-glyph { color: var(--accent); margin: 0 auto; }
+  .ph-rule {
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+    margin: var(--space-3) auto var(--space-2);
+    opacity: 0.7;
+  }
+  .ph-title {
+    margin-block: var(--space-2) var(--space-3);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .ph-subtitle {
+    color: var(--accent);
+    font-size: 1.25rem;
+    margin: 0 0 var(--space-6);
+  }
+  .ph-tricolor {
+    width: 88px;
+    margin: var(--space-4) auto 0;
+  }
+</style>

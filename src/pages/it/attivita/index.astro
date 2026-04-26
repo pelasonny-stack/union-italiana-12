@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Attività" description="Tornate bianche, conferenze culturali, beneficenza.">
+  <PageHero eyebrow="Il visibile" title="Attività" glyph="acacia" />
+  <section class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">La Loggia lavora regolarmente in tornate riservate ai suoi membri. Ma parte della sua vita avviene in pubblico: tornate bianche, cicli culturali, opera di beneficenza.</p>
+    <ul class="act-grid">
+      <li><a href="/it/attivita/tornate-bianche/">Tornate bianche — calendario</a></li>
+      <li><a href="/it/attivita/cultura/">Ciclo culturale</a></li>
+      <li><a href="/it/attivita/beneficenza/">Beneficenza</a></li>
+    </ul>
+    <Stub note="Per iscriversi a una tornata bianca, scrivere a contacto@unionitaliana12.org.ar." />
+  </section>
+</BaseLayout>
+
+<style>
+  .act-grid { list-style: none; padding: 0; margin-top: var(--space-6); }
+  .act-grid li { padding-block: var(--space-2); border-bottom: 1px solid var(--border); }
+</style>

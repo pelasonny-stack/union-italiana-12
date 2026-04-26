@@ -1,0 +1,178 @@
+/* ─────────────────────────────────────────────────────────────────
+   Design tokens v2 — R∴L∴ Unión Italiana N°12
+   Paleta "Pompeii / Aldus / Cosmati": pergamena de manuscrito,
+   bermellón pompeiano del Templo Hijos del Trabajo, oro florín
+   florentino, tricolor bibliográfico (no Ferrari).
+   ───────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Neutros base (warm, no aséptico) ── */
+  --pergamena: #efe7d2;       /* default bg — papel verjurado de Aldus 1502 */
+  --pergamena-elev: #f6f1e4;   /* surface elevada (cards) */
+  --travertino: #e8e1d0;       /* surface secundaria, dividers cálidos */
+  --travertino-300: #d8d0bf;   /* borders sobre claro */
+  --inchiostro: #141014;       /* tinta principal — ferrogálica, no negro puro */
+  --ombra: #3a2f26;            /* tinta secundaria, captions, metadata */
+
+  /* ── Modo Nocturno ── */
+  --notte: #0f0c12;            /* fondo Templo Nocturno — soplo violáceo */
+  --notte-elev: #1a141c;       /* surfaces elevadas en Nocturno */
+  --candela: #f2e3c2;          /* tinta sobre Nocturno — cera de vela */
+
+  /* ── Color del Templo (bermellón pompeiano) ── */
+  --vermiglio: #7e2a1e;        /* bermellón fresco — Villa dei Misteri */
+  --vermiglio-profondo: #5a1b14;
+  --cinabro: #a33a26;          /* solo Delta y elementos sagrados puntuales */
+
+  /* ── Oro renacentista (sistema de tres oros) ── */
+  --oro-zecchino: #b8893c;     /* oro principal — florín florentino */
+  --oro-foglia: #d4a845;       /* highlights, hover, pan de oro Botticelli */
+  --oro-antico: #7a5a2a;       /* oro patinado para sobre claros sin chillar */
+
+  /* ── Tricolor bibliográfico (saturación bajada, luminancia controlada) ── */
+  --tri-verde: #2f5d3a;        /* verde botánico — Primavera de Botticelli */
+  --tri-bianco: #efe7d2;       /* = pergamena. El blanco ES el papel. */
+  --tri-rosso: #7a1f1f;        /* rojo cardenalicio — encuadernación Adelphi */
+
+  /* ── Lapis (reservado, archivo/footnotes) ── */
+  --lapis-notte: #1b2540;
+  --lapis-cielo: #3d4d78;
+
+  /* ── Compatibilidad backwards (mientras migro componentes) ── */
+  --ink-900: var(--inchiostro);
+  --ink-800: #1a1a20;
+  --ink-700: #2c2c34;
+  --ink-600: #44444e;
+  --ink-500: #6b6b76;
+  --ink-400: #8e8e98;
+  --ink-300: #b5b5bd;
+  --ink-200: #d4d4d9;
+  --ink-100: #e8e6e0;
+  --ivory-50: var(--pergamena);
+  --gold-600: var(--oro-zecchino);
+  --gold-700: var(--oro-foglia);
+  --lapis-700: var(--lapis-notte);
+  --terracotta-500: var(--vermiglio);
+  --travertine-200: var(--travertino);
+  --it-green: var(--tri-verde);
+  --it-red: var(--tri-rosso);
+
+  /* ── Semánticos (reutilizan tokens, disciplina Vignelli) ── */
+  --success: var(--tri-verde);
+  --warning: var(--oro-zecchino);
+  --error: var(--tri-rosso);
+  --info: var(--lapis-cielo);
+
+  /* ── Tokens semánticos por modo (default: claro = Pergamino) ── */
+  --bg: var(--pergamena);
+  --bg-elevated: var(--pergamena-elev);
+  --bg-subtle: var(--travertino);
+  --fg: var(--inchiostro);
+  --fg-muted: var(--ombra);
+  --fg-subtle: #6b5a48;
+  --border: var(--travertino-300);
+  --accent: var(--oro-zecchino);
+  --accent-bright: var(--oro-foglia);
+  --link: var(--lapis-notte);
+
+  /* ── Gradientes reutilizables ── */
+  --tricolor-vertical: linear-gradient(180deg,
+    var(--tri-verde) 0% 33.33%,
+    var(--tri-bianco) 33.33% 66.66%,
+    var(--tri-rosso) 66.66% 100%);
+  --tricolor-horizontal: linear-gradient(90deg,
+    var(--tri-verde) 0% 33.33%,
+    var(--tri-bianco) 33.33% 66.66%,
+    var(--tri-rosso) 66.66% 100%);
+
+  /* ── Tipografía ── */
+  --font-display: "Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --font-cinzel: "Cinzel", "Trajan Pro", serif;
+  --font-serif: "EB Garamond", "Garamond", serif;
+  --font-sans: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --font-ornament: "IM Fell Flowers", "Cormorant Garamond", serif;
+
+  /* Escala modular 1.333 (Perfect Fourth) — base 16.5px */
+  --text-display: 7.625rem;    /* 122px hero */
+  --text-h1: 5.733rem;          /* 92px */
+  --text-h2: 4.301rem;          /* 69px */
+  --text-h3: 3.226rem;          /* 52px */
+  --text-h4: 2.421rem;          /* 39px */
+  --text-h5: 1.815rem;          /* 29px */
+  --text-h6: 1.36rem;           /* 22px */
+  --text-body-lg: 1.125rem;     /* 18px */
+  --text-body: 1.03rem;         /* 16.5px */
+  --text-body-sm: 0.844rem;     /* 13.5px */
+  --text-caption: 0.75rem;      /* 12px */
+
+  /* Letter spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-uppercase: 0.18em;
+  --tracking-cinzel: 0.2em;     /* Cinzel obligatorio +200 milesimos */
+
+  /* ── Spacing (base 8px) ── */
+  --space-0: 0;
+  --space-0_5: 0.25rem;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-24: 12rem;
+  --space-32: 16rem;
+
+  /* ── Containers ── */
+  --container-prose: 680px;
+  --container-narrow: 960px;
+  --container-default: 1320px;
+  --container-wide: 1440px;
+
+  /* ── Motion ── */
+  --ease-ceremonial: cubic-bezier(0.7, 0, 0.3, 1);
+  --duration-fast: 250ms;
+  --duration-normal: 400ms;
+  --duration-slow: 600ms;
+  --duration-ritual: 1200ms;
+
+  /* ── Otros ── */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --shadow-card: 0 1px 2px rgba(20, 16, 20, 0.04), 0 8px 24px -8px rgba(20, 16, 20, 0.08);
+  --shadow-elevated: 0 24px 48px -16px rgba(20, 16, 20, 0.18);
+  --shadow-gold: 0 0 32px rgba(184, 137, 60, 0.20);
+}
+
+/* Modo oscuro = "Templo Nocturno con Velas" */
+:root[data-theme="dark"] {
+  --bg: var(--notte);
+  --bg-elevated: var(--notte-elev);
+  --bg-subtle: #221b22;
+  --fg: var(--candela);
+  --fg-muted: #c9b89a;
+  --fg-subtle: #8a7a60;
+  --border: #3a2d3a;
+  --accent: var(--oro-foglia);
+  --accent-bright: #e6c068;
+  --link: #8aa3d6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: var(--notte);
+    --bg-elevated: var(--notte-elev);
+    --bg-subtle: #221b22;
+    --fg: var(--candela);
+    --fg-muted: #c9b89a;
+    --fg-subtle: #8a7a60;
+    --border: #3a2d3a;
+    --accent: var(--oro-foglia);
+    --accent-bright: #e6c068;
+    --link: #8aa3d6;
+  }
+}

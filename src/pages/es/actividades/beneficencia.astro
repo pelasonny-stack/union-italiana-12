@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "es" as const;
+---
+
+<BaseLayout lang={lang} title="Beneficencia" description="Obra social de la R∴L∴ Unión Italiana N°12. Discreción y deber.">
+  <PageHero eyebrow="Obra social" title="Beneficencia" glyph="acacia" />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La beneficencia masónica es un deber, no una virtud declamada. La Logia destina cada
+      año recursos a obra social — siempre en silencio, siempre en respeto a la dignidad
+      de quien recibe.
+    </p>
+    <p>
+      Por la naturaleza de esta tradición, no publicamos nombres de beneficiarios ni
+      detalles individuales. La memoria anual de actividades, en cifras agregadas, se
+      pone a disposición de los hermanos de logias hermanas y de la obediencia.
+    </p>
+    <Stub note="La memoria 2025 será publicada al cierre del ejercicio anual de la Logia." />
+  </article>
+</BaseLayout>

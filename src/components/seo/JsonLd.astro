@@ -1,0 +1,62 @@
+---
+/**
+ * JSON-LD Schema.org — Organization con parentOrganization GLA.
+ * Inyectar en <head> de páginas relevantes (al menos Home y La Logia).
+ */
+import type { Locale } from "../../i18n/config";
+
+interface Props { lang: Locale; type?: "Organization" | "WebSite" }
+const { lang, type = "Organization" } = Astro.props;
+
+const url = Astro.site?.toString() ?? "https://unionitaliana12.org.ar/";
+
+const org = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${url}#organization`,
+  name: lang === "es" ? "Respetable Logia Unión Italiana N°12" : "Rispettabile Loggia Unione Italiana N°12",
+  alternateName: ["Unión Italiana N°12", "Unione Italiana 12", "R∴L∴ Unión Italiana N°12"],
+  url,
+  logo: `${url}assets/logos/union-italiana-12-logo.png`,
+  foundingDate: "1858-12-23",
+  slogan: lang === "es" ? "Libertad, Igualdad, Fraternidad" : "Libertà, Uguaglianza, Fraternità",
+  description: lang === "es"
+    ? "Respetable Logia masónica fundada el 23 de diciembre de 1858 en el Oriente de Buenos Aires. De herencia italiana, bajo la obediencia de la Gran Logia de la Argentina de Libres y Aceptados Masones."
+    : "Rispettabile Loggia massonica fondata il 23 dicembre 1858 all'Oriente di Buenos Aires. Di eredità italiana, sotto l'obbedienza della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni.",
+  parentOrganization: {
+    "@type": "Organization",
+    name: "Gran Logia de la Argentina de Libres y Aceptados Masones",
+    url: "https://www.masoneria-argentina.org.ar/",
+    foundingDate: "1857-12-11",
+  },
+  location: {
+    "@type": "Place",
+    name: "Templo Hijos del Trabajo",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "San Antonio 814",
+      addressLocality: "Barracas",
+      addressRegion: "Ciudad Autónoma de Buenos Aires",
+      addressCountry: "AR",
+    },
+  },
+  sameAs: [
+    "https://www.instagram.com/unionitaliana/",
+    "https://www.facebook.com/Uni%C3%B3n-Italiana-N12",
+  ],
+};
+
+const site = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${url}#website`,
+  url,
+  name: org.name,
+  inLanguage: lang === "es" ? "es-AR" : "it-IT",
+  publisher: { "@id": `${url}#organization` },
+};
+
+const data = type === "WebSite" ? site : org;
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />

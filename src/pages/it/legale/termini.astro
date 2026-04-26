@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout lang={lang} title="Termini d'uso" description="Termini d'uso del sito della R∴L∴ Unione Italiana N°12.">
+  <PageHero eyebrow="Legale" title="Termini d'uso" glyph="three-dots" />
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <h2>1. Titolarità</h2>
+    <p>Il sito è di proprietà della Rispettabile Loggia Unione Italiana N°12.</p>
+    <h2>2. Uso consentito</h2>
+    <p>Lettura, citazione con attribuzione, download di materiali di pubblico dominio.</p>
+    <h2>3. Proprietà intellettuale</h2>
+    <p>Testi editoriali originali sotto licenza CC BY-NC-SA 4.0.</p>
+    <h2>4. Limitazione di responsabilità</h2>
+    <p>La Loggia non risponde dei contenuti collegati a siti esterni.</p>
+    <h2>5. Giurisdizione</h2>
+    <p>Tribunali ordinari della Città Autonoma di Buenos Aires.</p>
+  </article>
+</BaseLayout>

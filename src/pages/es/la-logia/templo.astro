@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import PhotoSlider from "../../../components/content/PhotoSlider.astro";
+const lang = "es" as const;
+
+const fotos = [
+  { src: "/assets/templo/templo-3.jpeg", alt: "Salón principal del Templo Hijos del Trabajo en Barracas, vista general del piso, las paredes rojas y la bóveda celeste pintada al fresco", caption: "Salón principal — paredes en bermellón, piso de pinotea, bóveda celeste con nubes pintadas" },
+  { src: "/assets/templo/templo-1.jpeg", alt: "Delta luminoso dorado con el Ojo de la Providencia en el centro, sobre fondo rojo con estrellas", caption: "Delta Luminoso — el Ojo de la Providencia simboliza la conciencia universal que ilumina el trabajo masónico" },
+  { src: "/assets/templo/templo-4.jpeg", alt: "Detalle de la bóveda celeste pintada y la araña principal de cristal del Templo", caption: "Bóveda celeste y araña central — todo templo masónico tiene techo azul con nubes, recordando el lugar del hombre bajo el cielo" },
+  { src: "/assets/templo/templo-2.jpeg", alt: "Fachada del Templo Hijos del Trabajo: arquitectura egipcia con columnas papiriformes, frontispicio con la inscripción HIJOS DEL TRABAJO y tableros con escuadra y compás", caption: "Fachada egipcia (1919, Francisco Cabot) — declarada de interés cultural por la Ciudad de Buenos Aires en 2002" },
+];
+---
+
+<BaseLayout
+  lang={lang}
+  title="El Templo — Hijos del Trabajo, Barracas"
+  description="Galería del Templo Hijos del Trabajo en Barracas, sede actual de la R∴L∴ Unión Italiana N°12. Arquitectura egipcia (1919) declarada de interés cultural."
+>
+  <PageHero
+    eyebrow="San Antonio 814 · Barracas, CABA"
+    title="El Templo"
+    subtitle="Hijos del Trabajo — desde 1882"
+    glyph="checkered"
+  />
+
+  <section class="container" style="padding-block: var(--space-8);">
+    <PhotoSlider photos={fotos} aspect="3 / 2" autoplayMs={8000} />
+  </section>
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <p class="drop-cap">
+      La Respetable Logia Unión Italiana N°12 sostiene sus tenidas regulares en el
+      histórico Templo "Hijos del Trabajo", en San Antonio 814, barrio de Barracas. Es uno
+      de los pocos templos masónicos de Buenos Aires con fachada visible desde la calle
+      —y uno de los más singulares: arquitectura egipcia de 1919, obra de Francisco Cabot,
+      con frontispicio que lleva la inscripción <strong>HIJOS DEL TRABAJO</strong> bajo el
+      lema <em>Trabajo · Ciencia · Virtud</em>.
+    </p>
+
+    <h2>Una breve historia del edificio</h2>
+    <p>
+      El Templo fue consagrado en junio de 1890. Su Logia original, también llamada
+      <em>Hijos del Trabajo</em>, fue fundada en 1882 y desempeñó un papel central en el
+      Barracas obrero —italiano en su mayoría— sosteniendo asociaciones mutuales y
+      cobijando reuniones sindicales y de ayuda mutua. La fachada egipcia, exótica para
+      Buenos Aires, fue añadida en 1919 cuando el orientalismo masónico estaba en su apogeo.
+    </p>
+    <p>
+      Tras la disolución de la Logia Hijos del Trabajo en 1983, el Templo permaneció bajo
+      jurisdicción de la Gran Logia. La refundación de la Unión Italiana N°12 en 2014
+      devolvió a este espacio sagrado la actividad ritual regular —cerrando un círculo
+      histórico: una logia italo-argentina trabajando en el templo levantado por la
+      colectividad italiana de Barracas hace casi siglo y medio.
+    </p>
+
+    <h2>Lectura simbólica del espacio</h2>
+    <p>
+      Cada elemento que se ve en estas fotografías es a la vez funcional y simbólico:
+    </p>
+    <ul>
+      <li><strong>Bóveda celeste pintada al fresco</strong> — recuerda al masón que su
+        trabajo ocurre bajo el cielo, no fuera de él. Las nubes y los astros señalan que
+        la verdad última excede toda explicación humana.</li>
+      <li><strong>Delta Luminoso</strong> con el Ojo de la Providencia — el triángulo
+        equilátero refiere a la conciencia universal; el ojo, a la atención que ningún
+        gesto del iniciado escapa.</li>
+      <li><strong>Paredes en bermellón</strong> — color tradicional de los templos del
+        Rito Escocés, evoca el calor del trabajo interior y, simbólicamente, la sangre
+        del compromiso fraterno.</li>
+      <li><strong>Columnas papiriformes</strong> de la fachada — el orientalismo del XIX
+        leyó en Egipto la cuna del simbolismo masónico, una tesis que la masonería moderna
+        matiza pero conserva como evocación.</li>
+      <li><strong>Arañas y candelabros</strong> — la luz de las velas era, en el siglo XIX,
+        la única posible en una tenida nocturna; hoy se conserva en momentos rituales
+        precisos como signo de continuidad con la tradición.</li>
+    </ul>
+
+    <h2>Visita</h2>
+    <p>
+      El Templo abre al público en ocasiones especiales: tenidas blancas, Noche de los
+      Museos, conferencias culturales abiertas. Las fechas se anuncian en la sección
+      <a href="/es/actividades/tenidas-blancas/">Tenidas blancas</a> y en las redes sociales
+      de la Logia.
+    </p>
+  </article>
+</BaseLayout>

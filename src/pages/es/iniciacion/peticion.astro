@@ -1,0 +1,13 @@
+---
+import AtrioLayout from "../../../layouts/AtrioLayout.astro";
+import AtrioPeticionario from "../../../components/atrio/AtrioPeticionario.astro";
+const lang = "es" as const;
+---
+
+<AtrioLayout
+  lang={lang}
+  title="Atrio del Peticionario · Unión Italiana N°12"
+  description="Petición formal de iniciación en la Respetable Logia Unión Italiana N°12."
+>
+  <AtrioPeticionario lang={lang} />
+</AtrioLayout>

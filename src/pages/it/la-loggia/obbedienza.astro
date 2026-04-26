@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import GLABadge from "../../../components/layout/GLABadge.astro";
+const lang = "it" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title="Obbedienza — Gran Loggia dell'Argentina"
+  description="La Rispettabile Loggia Unione Italiana N°12 lavora sotto la giurisdizione della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni, fondata l'11 dicembre 1857."
+>
+  <PageHero
+    eyebrow="Giurisdizione e regolarità"
+    title="Sotto l'obbedienza della Gran Loggia"
+    subtitle="Scienza · Giustizia · Lavoro"
+    glyph="columns"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <div class="gla-prominent">
+      <GLABadge lang={lang} variant="full" />
+    </div>
+
+    <p class="drop-cap">
+      Ogni Loggia massonica regolare lavora in obbedienza a un'autorità maggiore che assicura
+      la continuità della tradizione e il riconoscimento tra logge sorelle. La Rispettabile
+      Loggia Unione Italiana N°12 lavora sotto la giurisdizione della <strong>Gran Loggia
+      dell'Argentina dei Liberi e Accettati Massoni</strong>, con sede nel Palazzo Cangallo,
+      Tte. Perón 1242, Città Autonoma di Buenos Aires.
+    </p>
+
+    <h2>La Gran Loggia dell'Argentina</h2>
+    <p>
+      Costituita l'<strong>11 dicembre 1857</strong> a Buenos Aires da figure che inclusero
+      Domingo F. Sarmiento, José Roque Pérez, Miguel Valencia e Justo José de Urquiza, la
+      Gran Loggia è il corpo sovrano che riunisce le logge regolari dell'Argentina. Fu,
+      inoltre, organizzazione fondatrice della Confederazione Massonica Interamericana.
+    </p>
+    <p>
+      La sua sede attuale, conosciuta come <strong>Palazzo Cangallo</strong>, fu progettata
+      da Dardo Rocha e completata dall'architetto italiano Francisco Tamburini. Inaugurato
+      il 3 marzo 1872, l'edificio ospita nove templi, tra cui il Gran Tempio.
+    </p>
+    <p>
+      Il suo motto —<em class="latin">Scienza, Giustizia, Lavoro</em>— ordina le virtù che
+      l'Ordine propone ai suoi membri.
+    </p>
+
+    <h2>Cosa significa "regolare"</h2>
+    <p>
+      Una Loggia regolare è quella che si costituisce conforme alle antiche tradizioni del
+      mestiere, riconosce le grandi logge sorelle riconosciute internazionalmente, e lavora
+      in obbedienza a un'autorità massonica che assicura tale continuità.
+    </p>
+
+    <h2>Autorità</h2>
+    <ul>
+      <li><strong>Rispettabilissimo Gran Maestro:</strong> Pablo Lázaro</li>
+      <li><strong>Sede:</strong> Tte. Perón 1242 — Città Autonoma di Buenos Aires</li>
+      <li><strong>Sito ufficiale:</strong>
+        <a href="https://www.masoneria-argentina.org.ar/" target="_blank" rel="noopener external">masoneria-argentina.org.ar</a>
+      </li>
+      <li><strong>Contatto:</strong>
+        <a href="mailto:info@masoneria-argentina.org.ar">info@masoneria-argentina.org.ar</a>
+        · (011) 4382-2585
+      </li>
+    </ul>
+
+    <h2>Legame con la massoneria italiana</h2>
+    <p>
+      Per il suo nome e la sua origine, l'Unione Italiana N°12 mantiene anche legami vivi
+      con la massoneria italiana — storicamente con il <em>Grande Oriente d'Italia</em> e,
+      più recentemente, con la Delegazione Magistrale Argentina della <em>Serenissima Gran
+      Loggia d'Italia</em>. La sua appartenenza formale, tuttavia, è esclusivamente la Gran
+      Loggia dell'Argentina.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .gla-prominent { margin-block: var(--space-6) var(--space-8); }
+</style>

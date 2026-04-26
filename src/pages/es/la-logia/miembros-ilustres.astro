@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+const lang = "es" as const;
+
+const miembros = [
+  {
+    name: "José Salvarezza",
+    years: "siglo XIX",
+    role: "Médico de la colectividad italiana, primer Venerable Maestro de la Logia (1858). Figura prominente de la asistencia médica durante la fiebre amarilla de 1871.",
+    confirmed: true,
+  },
+  {
+    name: "José Ingenieros",
+    years: "1877—1925",
+    role: "Médico, psiquiatra, sociólogo y ensayista. Iniciado en 1898 en la Unión Italiana Primera N°90 siguiendo a su padre. Autor de El hombre mediocre y Las fuerzas morales.",
+    confirmed: true,
+  },
+  {
+    name: "Salvador Ingenieros",
+    yearsFull: "Salvatore Ingegnieros, 1850—1924",
+    years: "1850—1924",
+    role: "Periodista, socialista de primera hora, inmigrante siciliano, padre de José. Coredactor de la Revista Masónica.",
+    confirmed: true,
+  },
+  {
+    name: "Giuseppe Garibaldi",
+    years: "1807—1882",
+    role: "Iniciado en Montevideo (1844). Sombra tutelar de toda logia italiana del Río de la Plata. Vínculo cultural, no miembro de esta Logia.",
+    confirmed: false,
+  },
+  {
+    name: "Antonio Devoto",
+    years: "1833—1916",
+    role: "Banquero, fundador del Banco de Italia y Río de la Plata, mecenas de la colectividad italiana en Buenos Aires.",
+    confirmed: false,
+  },
+  {
+    name: "Francisco Tamburini",
+    years: "1846—1890",
+    role: "Arquitecto italiano, completó el Palacio Cangallo —sede de la Gran Logia— iniciado por Dardo Rocha. Autor también de la Casa Rosada y el Teatro Colón.",
+    confirmed: false,
+  },
+];
+---
+
+<BaseLayout lang={lang} title="Miembros ilustres" description="Figuras históricas de la R∴L∴ Unión Italiana N°12: José Ingenieros, Salvador Ingenieros, y otros vinculados culturalmente.">
+  <PageHero eyebrow="Pasado documentado" title="Miembros ilustres" subtitle="Sólo personas fallecidas, sólo membresía documentada" glyph="letter-g" />
+
+  <section class="container" style="padding-block: var(--space-8);">
+    <p class="container-prose" style="margin: 0 auto var(--space-8);">
+      Cada perfil cita fuentes verificables. Las personas marcadas como <em>vinculadas culturalmente</em>
+      no fueron miembros formales de esta Logia, pero pertenecen al ecosistema masónico
+      italo-argentino del que somos parte.
+    </p>
+
+    <ul class="miembros-grid">
+      {miembros.map(m => (
+        <li class="miembro-card">
+          <p class="overline">{m.years}{m.confirmed ? " · Miembro confirmado" : " · Vínculo cultural"}</p>
+          <h3>{m.name}</h3>
+          {"yearsFull" in m && <p class="alt-name">{m.yearsFull}</p>}
+          <p class="role">{m.role}</p>
+        </li>
+      ))}
+    </ul>
+
+    <Stub note="La lista completa será publicada cuando el archivero de la Logia confirme los registros del siglo XIX. Cada perfil tendrá su propia página con biografía extendida y bibliografía." />
+  </section>
+</BaseLayout>
+
+<style>
+  .miembros-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    max-width: var(--container-default);
+    margin: 0 auto;
+  }
+  .miembro-card {
+    padding: var(--space-6);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+  }
+  .miembro-card h3 { margin: var(--space-1) 0; font-size: var(--text-h4); }
+  .miembro-card .alt-name { color: var(--fg-subtle); font-style: italic; font-size: 0.85rem; margin: 0 0 var(--space-2); }
+  .miembro-card .role { color: var(--fg-muted); margin: 0; }
+</style>

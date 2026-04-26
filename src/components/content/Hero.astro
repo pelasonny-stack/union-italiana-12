@@ -1,0 +1,99 @@
+---
+import MasonicGlyph from "../symbols/MasonicGlyph.astro";
+import type { Locale } from "../../i18n/config";
+
+interface Props {
+  lang: Locale;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { eyebrow, title, subtitle, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <MasonicGlyph name="three-dots" size={28} class="hero-glyph" />
+      <p class="overline" style="margin-top: var(--space-2)">{eyebrow}</p>
+      <h1 class="hero-title">{title}</h1>
+      <p class="hero-subtitle latin">{subtitle}</p>
+      <div class="hero-cta-row">
+        <a href={ctaHref} class="cta">
+          <span class="cta-bar" aria-hidden="true"></span>
+          <span class="cta-label cinzel">{ctaLabel}</span>
+          <span class="cta-bar" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <MasonicGlyph name="columns" size={280} class="hero-columns" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(var(--space-8), 10vw, var(--space-24));
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+  .hero-text { max-width: 60ch; }
+  .hero-glyph { color: var(--accent); }
+  .hero-title {
+    font-size: clamp(3rem, 7vw, 6rem);
+    margin-block: var(--space-2) var(--space-3);
+    letter-spacing: var(--tracking-tight);
+  }
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: var(--space-6);
+  }
+  .hero-cta-row { display: flex; }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    color: var(--fg);
+    background-image: none;
+    transition: color var(--duration-fast) var(--ease-ceremonial);
+  }
+  .cta:hover, .cta:focus-visible { color: var(--accent); }
+  .cta-bar {
+    display: inline-block;
+    width: 36px;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--duration-normal) var(--ease-ceremonial);
+  }
+  .cta:hover .cta-bar, .cta:focus-visible .cta-bar { width: 56px; }
+  .cta-label {
+    font-size: 0.85rem;
+  }
+
+  .hero-art {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+  .hero-columns { width: 80%; height: auto; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-art { order: -1; opacity: 0.5; }
+    .hero-columns { width: 50%; }
+  }
+</style>
