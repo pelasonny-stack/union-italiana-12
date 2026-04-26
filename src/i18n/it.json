@@ -7,7 +7,7 @@
   "nav.lodge": "La Loggia",
   "nav.masonry": "Massoneria",
   "nav.activities": "Attività",
-  "nav.initiation": "Iniziazione",
+  "nav.initiation": "Ingresso",
   "nav.contact": "Contatti",
 
   "nav.lodge.history": "Storia",
@@ -26,7 +26,7 @@
 
   "footer.institutional": "Istituzionale",
   "footer.resources": "Risorse",
-  "footer.initiation": "Iniziazione",
+  "footer.initiation": "Ingresso",
   "footer.legal": "Legale",
   "footer.privacy": "Politica sulla privacy",
   "footer.terms": "Termini d'uso",
@@ -40,11 +40,11 @@
 
   "home.hero.eyebrow": "Rispettabile Loggia",
   "home.hero.title": "Unione Italiana",
-  "home.hero.subtitle": "Società iniziatica, filantropica, filosofica e progressista · a Buenos Aires dal 1858 (e∴v∴)",
+  "home.hero.subtitle": "Società filantropica, filosofica e progressista · a Buenos Aires dal 1858 (e∴v∴)",
   "home.hero.cta": "Visitare il Tempio",
   "home.three_doors.history": "Conoscere la storia",
   "home.three_doors.masonry": "Comprendere l'Ordine",
-  "home.three_doors.initiation": "Iniziare il cammino",
+  "home.three_doors.initiation": "Cominciare il cammino",
 
   "petition.cta": "Atrio del Postulante",
   "petition.eyebrow": "Chi bussa alle porte",

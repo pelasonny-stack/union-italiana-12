@@ -12,10 +12,10 @@ const base = `/${lang}`;
 const items: Array<{ href: string; key: UIKey; eyebrow?: string }> = [
   { href: `${base}/`, key: "nav.home" },
   { href: `${base}/${lang === "es" ? "la-logia" : "la-loggia"}/`, key: "nav.lodge", eyebrow: "1858" },
-  { href: `${base}/${lang === "es" ? "masoneria" : "massoneria"}/`, key: "nav.masonry", eyebrow: lang === "es" ? "Orden iniciática" : "Ordine iniziatico" },
+  { href: `${base}/${lang === "es" ? "masoneria" : "massoneria"}/`, key: "nav.masonry", eyebrow: lang === "es" ? "Orden filosófica" : "Ordine filosofico" },
   // Actividades temporalmente deshabilitadas
   // { href: `${base}/${lang === "es" ? "actividades" : "attivita"}/`, key: "nav.activities", eyebrow: lang === "es" ? "Reuniones abiertas" : "Riunioni aperte" },
-  { href: `${base}/${lang === "es" ? "iniciacion" : "iniziazione"}/`, key: "nav.initiation", eyebrow: lang === "es" ? "Atrio del Peticionario" : "Atrio del Postulante" },
+  { href: `${base}/${lang === "es" ? "ingreso" : "ingresso"}/`, key: "nav.initiation", eyebrow: lang === "es" ? "Atrio del Peticionario" : "Atrio del Postulante" },
   { href: `${base}/${lang === "es" ? "contacto" : "contatti"}/`, key: "nav.contact" },
 ];
 

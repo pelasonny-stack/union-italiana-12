@@ -7,7 +7,7 @@
   "nav.lodge": "La Logia",
   "nav.masonry": "Masonería",
   "nav.activities": "Actividades",
-  "nav.initiation": "Iniciación",
+  "nav.initiation": "Ingreso",
   "nav.contact": "Contacto",
 
   "nav.lodge.history": "Historia",
@@ -26,7 +26,7 @@
 
   "footer.institutional": "Institucional",
   "footer.resources": "Recursos",
-  "footer.initiation": "Iniciación",
+  "footer.initiation": "Ingreso",
   "footer.legal": "Legal",
   "footer.privacy": "Política de privacidad",
   "footer.terms": "Términos de uso",
@@ -40,11 +40,11 @@
 
   "home.hero.eyebrow": "Respetable Logia",
   "home.hero.title": "Unión Italiana",
-  "home.hero.subtitle": "Sociedad iniciática, filantrópica, filosófica y progresista · en Buenos Aires desde 1858 (e∴v∴)",
+  "home.hero.subtitle": "Sociedad filantrópica, filosófica y progresista · en Buenos Aires desde 1858 (e∴v∴)",
   "home.hero.cta": "Recorrer el Templo",
   "home.three_doors.history": "Conocer la historia",
   "home.three_doors.masonry": "Comprender la Orden",
-  "home.three_doors.initiation": "Iniciar el camino",
+  "home.three_doors.initiation": "Comenzar el camino",
 
   "petition.cta": "Atrio del Peticionario",
   "petition.eyebrow": "Quien llama a las puertas",

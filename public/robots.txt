@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /es/iniciacion/confirmacion
-Disallow: /it/iniziazione/conferma
+Disallow: /es/ingreso/confirmacion
+Disallow: /it/ingresso/conferma
 
 Sitemap: https://logiaunionitaliana12.com.ar/sitemap-index.xml

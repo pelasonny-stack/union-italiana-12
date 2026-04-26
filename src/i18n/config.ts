@@ -20,7 +20,7 @@ const SLUG_MAP_ES_TO_IT: Record<string, string> = {
   "la-logia": "la-loggia",
   "masoneria": "massoneria",
   "actividades": "attivita",
-  "iniciacion": "iniziazione",
+  "ingreso": "ingresso",
   "contacto": "contatti",
   "legal": "legale",
   // Subpáginas
