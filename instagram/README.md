@@ -23,8 +23,7 @@ instagram/output/highlights/   → 6 PNG cuadrados (covers de highlights)
 
 ## Cuenta y bio
 
-Handle sugerido: **@unionitaliana** (ya existe, link en footer del sitio).
-Si está tomado o querés refrescar: **@unionitaliana12** o **@logia.unionitaliana**.
+Handle: **@unionitaliana12** — https://www.instagram.com/unionitaliana12/
 
 ### Bio (texto exacto, 150 chars max)
 
