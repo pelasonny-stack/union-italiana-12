@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import PlanchaFooter from "../../../components/content/PlanchaFooter.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const all = await getCollection("planchas", ({ id, data }) => id.startsWith("es/") && !data.draft);
+  return all.map((p) => ({
+    params: { slug: p.id.replace("es/", "").replace(/\.(md|mdx)$/, "") },
+    props: { entry: p },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const lang = "es" as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title={entry.data.title}
+  description={entry.data.excerpt}
+>
+  <PageHero
+    eyebrow="Plancha"
+    title={entry.data.title}
+    glyph="three-dots"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    <Content />
+  </article>
+
+  <PlanchaFooter
+    lang={lang}
+    author={entry.data.author}
+    authorSymbolic={entry.data.authorSymbolic}
+    date={entry.data.date}
+    sources={entry.data.sources}
+  />
+</BaseLayout>

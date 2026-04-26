@@ -42,6 +42,7 @@ const SLUG_MAP_ES_TO_IT: Record<string, string> = {
   "terminos": "termini",
   "aviso-reglamentario": "avviso-regolamentare",
   "blog": "notizie",
+  "planchas": "tavole",
 };
 
 const SLUG_MAP_IT_TO_ES: Record<string, string> = Object.fromEntries(

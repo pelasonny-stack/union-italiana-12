@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/content/PageHero.astro";
+import Stub from "../../../components/content/Stub.astro";
+import { getCollection } from "astro:content";
+
+const lang = "it" as const;
+const all = await getCollection("planchas", ({ id, data }) => id.startsWith("it/") && !data.draft);
+const sorted = all.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  lang={lang}
+  title="Tavole — lavori pubblicati"
+  description="Lavori scritti pubblicati dalla R∴L∴ Unione Italiana N°12 conforme all'Art. 7° del Regolamento di Pubblicazione della Gran Loggia dell'Argentina."
+>
+  <PageHero
+    eyebrow="Lavori scritti"
+    title="Tavole"
+    subtitle="Studi e riflessioni pubblicate conforme al regolamento"
+    glyph="three-dots"
+  />
+
+  <article class="container container-prose" style="padding-block: var(--space-8);">
+    {sorted.length === 0 ? (
+      <Stub note="Ancora nessuna tavola pubblicata su questo sito. Quando appariranno, ogni lavoro avrà ai piedi la firma responsabile, le fonti citate e l'avviso regolamentare conforme all'Art. 7° del Regolamento Speciale di Pubblicazione di Pagine Web in Internet della Gran Loggia dell'Argentina." />
+    ) : (
+      <ul class="tavola-list">
+        {sorted.map((p) => (
+          <li>
+            <a href={`/it/tavole/${p.id.replace("it/", "").replace(/\.(md|mdx)$/, "")}/`}>
+              <span class="overline">{p.data.date.getUTCFullYear()} (e∴v∴)</span>
+              <span class="cinzel tavola-title">{p.data.title}</span>
+              <span class="tavola-excerpt">{p.data.excerpt}</span>
+              <span class="tavola-author">— {p.data.author}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .tavola-list { list-style: none; padding: 0; margin: 0; }
+  .tavola-list li {
+    border-top: 1px solid var(--border);
+    padding-block: var(--space-4);
+  }
+  .tavola-list li:last-child { border-bottom: 1px solid var(--border); }
+  .tavola-list a {
+    display: grid;
+    gap: var(--space-1);
+    background-image: none;
+  }
+  .tavola-title { font-size: 1.15rem; color: var(--fg); }
+  .tavola-excerpt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--fg-muted);
+    font-size: 0.95rem;
+  }
+  .tavola-author {
+    font-size: 0.78rem;
+    color: var(--fg-muted);
+    font-family: var(--font-mono);
+  }
+</style>

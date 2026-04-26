@@ -49,10 +49,20 @@ const planchas = defineCollection({
     title: z.string(),
     translationKey: z.string(),
     date: z.coerce.date(),
-    author: z.string(),
-    degree: z.enum(["aprendiz", "companero", "maestro", "general"]).default("general"),
+    // Art 7°: nombre de la Logia (responsable institucional) o nombre simbólico del H autor
+    author: z.string().default("R∴L∴ Unión Italiana N°12"),
+    authorSymbolic: z.boolean().default(false),
     topic: z.array(z.string()).default([]),
     excerpt: z.string().max(400),
+    // Art 7°: indicar escrupulosamente fuentes citadas
+    sources: z
+      .array(z.object({
+        title: z.string(),
+        author: z.string().optional(),
+        year: z.number().optional(),
+        url: z.string().url().optional(),
+      }))
+      .default([]),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),

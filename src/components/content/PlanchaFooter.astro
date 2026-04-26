@@ -1,0 +1,150 @@
+---
+/**
+ * PlanchaFooter — pie reglamentario obligatorio (Art 7° GLA) para cada plancha
+ * publicada: firma responsable + disclaimer literal + fuentes (si las hay).
+ */
+import type { Locale } from "../../i18n/config";
+
+interface Source {
+  title: string;
+  author?: string;
+  year?: number;
+  url?: string;
+}
+
+interface Props {
+  lang: Locale;
+  author: string;
+  authorSymbolic?: boolean;
+  date: Date;
+  sources?: Source[];
+}
+const { lang, author, authorSymbolic = false, date, sources = [] } = Astro.props;
+
+const day = String(date.getUTCDate()).padStart(2, "0");
+const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+const year = date.getUTCFullYear();
+const dateStr = `${day}·${month}·${year} (e∴v∴)`;
+
+const labels = lang === "es"
+  ? {
+      signedBy: "Firma responsable",
+      symbolicNote: "Nombre simbólico conforme al uso masónico",
+      sourcesTitle: "Fuentes citadas",
+      disclaimer: "El contenido de cualquier artículo, y/o material de correo adjunto es la opinión, o las opiniones de los autores, y no es de manera alguna interpretado como siendo de la autoridad Francmasónica en general o de una Logia en particular, o la Francmasonería Universal. Cada autor contribuye, y es su propia opinión. Pues tales ellos no son portavoces oficiales de la Francmasonería en su totalidad.",
+    }
+  : {
+      signedBy: "Firma responsabile",
+      symbolicNote: "Nome simbolico conforme all'uso massonico",
+      sourcesTitle: "Fonti citate",
+      disclaimer: "Il contenuto di qualsiasi articolo e/o materiale di posta allegato è l'opinione, o le opinioni degli autori, e non è in alcun modo interpretato come proveniente dall'autorità Massonica in generale o di una Loggia in particolare, o dalla Massoneria Universale. Ciascun autore contribuisce con la propria opinione. Essi non sono portavoce ufficiali della Massoneria nella sua totalità.",
+    };
+---
+
+<footer class="plancha-footer" aria-label={labels.disclaimer.slice(0, 60) + "…"}>
+  <div class="plancha-rule" aria-hidden="true"></div>
+
+  {sources.length > 0 && (
+    <section class="plancha-sources">
+      <h3 class="overline">{labels.sourcesTitle}</h3>
+      <ol>
+        {sources.map((s) => (
+          <li>
+            {s.author && <span class="src-author">{s.author}</span>}
+            {s.author && ", "}
+            <em>{s.title}</em>
+            {s.year && <span class="src-year">, {s.year} (e∴v∴)</span>}
+            {s.url && <>. <a href={s.url} target="_blank" rel="noopener external">{s.url}</a></>}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <section class="plancha-signature">
+    <span class="overline">{labels.signedBy}</span>
+    <p class="plancha-author">
+      <strong>{author}</strong>
+      {authorSymbolic && <small class="symbolic-note">— {labels.symbolicNote}</small>}
+    </p>
+    <time class="plancha-date" datetime={date.toISOString()}>{dateStr}</time>
+  </section>
+
+  <section class="plancha-disclaimer">
+    <p>{labels.disclaimer}</p>
+  </section>
+</footer>
+
+<style>
+  .plancha-footer {
+    max-width: var(--container-prose);
+    margin: var(--space-12) auto var(--space-8);
+    padding: 0 var(--space-3);
+  }
+  .plancha-rule {
+    height: 1px;
+    background: var(--accent);
+    margin-bottom: var(--space-6);
+  }
+  .plancha-sources {
+    margin-bottom: var(--space-6);
+  }
+  .plancha-sources h3 {
+    color: var(--fg-muted);
+    margin: 0 0 var(--space-2);
+  }
+  .plancha-sources ol {
+    list-style: decimal;
+    padding-left: 1.5em;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--fg);
+  }
+  .plancha-sources li {
+    margin-bottom: var(--space-1);
+    line-height: 1.5;
+  }
+  .src-author { font-variant: small-caps; }
+  .src-year { color: var(--fg-muted); }
+
+  .plancha-signature {
+    margin-bottom: var(--space-6);
+    padding: var(--space-4);
+    background: var(--bg-elevated);
+    border-left: 2px solid var(--accent);
+  }
+  .plancha-author {
+    margin: var(--space-1) 0 var(--space-2);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  .symbolic-note {
+    display: block;
+    font-style: normal;
+    font-size: 0.72rem;
+    color: var(--fg-muted);
+    margin-top: 4px;
+  }
+  .plancha-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--fg-muted);
+  }
+
+  .plancha-disclaimer {
+    padding: var(--space-4);
+    background: color-mix(in srgb, var(--bg) 92%, var(--accent) 8%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .plancha-disclaimer p {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    font-style: italic;
+    color: var(--fg-muted);
+    text-align: justify;
+  }
+</style>
