@@ -73,6 +73,13 @@ const contactHref = lang === "es" ? "/es/contacto/" : "/it/contatti/";
       </div>
       <a href={event.rsvpUrl ?? contactHref} class="ue-cta cinzel">{labels.cta} →</a>
     </div>
+    <div class="container ue-authnote">
+      <small>
+        {lang === "es"
+          ? "Reunión autorizada por la Gran Logia de la Argentina conforme al Art. 9° del Reglamento."
+          : "Riunione autorizzata dalla Gran Loggia dell'Argentina conforme all'Art. 9° del Regolamento."}
+      </small>
+    </div>
   </aside>
 )}
 
@@ -158,6 +165,17 @@ const contactHref = lang === "es" ? "/es/contacto/" : "/it/contatti/";
 
   @media (prefers-reduced-motion: reduce) {
     .ue-pulse { animation: none; }
+  }
+  .ue-authnote {
+    padding-bottom: 6px;
+  }
+  .ue-authnote small {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--fg-subtle);
+    font-style: italic;
+    text-align: center;
+    opacity: 0.85;
   }
   @media (max-width: 720px) {
     .ue-meta, .ue-cta { font-size: 0.7rem; }

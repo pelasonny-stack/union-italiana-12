@@ -29,11 +29,19 @@ const obedienceLabel = lang === "es"
 ---
 
 <header class="site-header">
-  {/* Banda institucional reglamentaria (Art. 5° a, b — RR.GG. GLA) */}
+  {/* Banda institucional reglamentaria (Art. 5° a, b, d — RR.GG. GLA) */}
   <div class="header-institutional" role="contentinfo">
     <div class="container header-institutional-inner">
       <span class="invocation cinzel">A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴</span>
-      <span class="auspices">{obedienceLabel}</span>
+      <a
+        href="https://www.masoneria-argentina.org.ar/"
+        target="_blank"
+        rel="noopener external"
+        class="auspices-link"
+        aria-label={obedienceLabel}
+      >
+        <span class="auspices">{obedienceLabel}</span>
+      </a>
     </div>
   </div>
 
@@ -245,8 +253,16 @@ const obedienceLabel = lang === "es"
     color: var(--accent-bright);
     flex-shrink: 0;
   }
-  .auspices {
+  .auspices-link {
     color: var(--fg-muted);
+    background-image: none;
+    text-decoration: none;
+    transition: color var(--duration-fast);
+  }
+  .auspices-link:hover, .auspices-link:focus-visible {
+    color: var(--accent-bright);
+  }
+  .auspices {
     text-align: right;
   }
   @media (max-width: 700px) {
