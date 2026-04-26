@@ -40,3 +40,5 @@ test-results/
 # Wrangler
 .wrangler/
 .github/workflows/
+.firebase/
+firebase-debug.log

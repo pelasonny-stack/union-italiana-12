@@ -7,6 +7,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/postbuild-base.mjs",
+    "build:firebase": "DEPLOY_TARGET=firebase astro build",
+    "deploy:firebase": "pnpm build:firebase && firebase deploy --only hosting",
     "preview": "astro preview",
     "check": "astro check",
     "format": "prettier --write .",

@@ -3,13 +3,18 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
-const SITE_URL = process.env.SITE_URL ?? "https://pelasonny-stack.github.io";
-const BASE = process.env.BASE_PATH ?? "/union-italiana-12";
+// Dual deploy:
+// - GitHub Pages (default): SITE=pelasonny-stack.github.io + base=/union-italiana-12 + outDir=docs
+// - Firebase Hosting (DEPLOY_TARGET=firebase): SITE=unionitaliana12.com.ar + base=/ + outDir=dist
+const isFirebase = process.env.DEPLOY_TARGET === "firebase";
+const SITE_URL = process.env.SITE_URL ??
+  (isFirebase ? "https://unionitaliana12.com.ar" : "https://pelasonny-stack.github.io");
+const BASE = process.env.BASE_PATH ?? (isFirebase ? "/" : "/union-italiana-12");
 
 export default defineConfig({
   site: SITE_URL,
   base: BASE,
-  outDir: "./docs",
+  outDir: isFirebase ? "./dist" : "./docs",
   trailingSlash: "always",
   output: "static",
   prefetch: { defaultStrategy: "viewport" },
