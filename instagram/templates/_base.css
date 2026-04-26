@@ -1,0 +1,286 @@
+/* Base styles compartidos — paleta + tipografías del sitio */
+:root {
+  --pergamena: #efe7d2;
+  --pergamena-elev: #f6f1e4;
+  --travertino: #e8e1d0;
+  --inchiostro: #141014;
+  --vermiglio: #7e2a1e;
+  --vermiglio-profondo: #5a1b14;
+  --oro-zecchino: #b8893c;
+  --oro-foglia: #d4a845;
+  --tri-verde: #2f5d3a;
+  --tri-rosso: #7a1f1f;
+  --notte: #0f0c12;
+  --candela: #f2e3c2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@font-face {
+  font-family: "Cormorant";
+  src: local("Cormorant Garamond"), local("CormorantGaramond-Regular");
+  font-display: swap;
+}
+
+body {
+  width: 1080px;
+  height: 1080px;
+  font-family: "Cormorant Garamond", "EB Garamond", Garamond, serif;
+  background: var(--pergamena);
+  color: var(--inchiostro);
+  position: relative;
+  overflow: hidden;
+}
+
+body.story { height: 1920px; }
+body.highlight { width: 1080px; height: 1080px; }
+
+/* Textura papel verjurata sutil */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.227, 0 0 0 0 0.184, 0 0 0 0 0.149, 0 0 0 1 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+
+/* Nastro tricolor vertical signature */
+.nastro {
+  position: absolute;
+  top: 0;
+  left: 56px;
+  bottom: 0;
+  width: 8px;
+  z-index: 2;
+  background: linear-gradient(180deg,
+    var(--tri-verde) 0% 33.33%,
+    var(--pergamena) 33.33% 66.66%,
+    var(--tri-rosso) 66.66% 100%);
+  box-shadow: 0 0 0 1px rgba(15,12,18,0.12);
+}
+
+.nastro-fleuron {
+  position: absolute;
+  left: 60px;
+  top: 33%;
+  width: 24px;
+  height: 24px;
+  background: var(--pergamena);
+  border: 1px solid var(--oro-zecchino);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--oro-zecchino);
+  font-size: 18px;
+  z-index: 3;
+  transform: translateX(-50%);
+}
+
+/* Layout principal */
+.frame {
+  position: absolute;
+  inset: 80px 80px 80px 110px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/* Header — logo + número */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.header img.shield {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+.header .meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.header .meta .name {
+  font-family: "Cinzel", serif;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  color: var(--inchiostro);
+  font-weight: 500;
+}
+.header .meta .num {
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--oro-zecchino);
+  margin-top: 2px;
+}
+
+/* Tipografía */
+.eyebrow {
+  font-family: -apple-system, "Inter", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: var(--oro-zecchino);
+  margin-bottom: 24px;
+}
+
+.cinzel-caps {
+  font-family: "Cinzel", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+}
+
+.title-display {
+  font-family: "Cormorant Garamond", Garamond, serif;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--inchiostro);
+}
+
+.subtitle-italic {
+  font-family: "EB Garamond", Garamond, serif;
+  font-style: italic;
+  color: var(--vermiglio);
+}
+
+/* Footer post */
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 24px;
+  border-top: 1px solid rgba(20,16,20,0.15);
+}
+.footer .handle {
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--vermiglio);
+}
+.footer .stamp {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: rgba(58,47,38,0.6);
+  text-align: right;
+}
+
+/* Variantes de fondo */
+body.dark {
+  background: var(--notte);
+  color: var(--candela);
+}
+body.dark .header .meta .name { color: var(--candela); }
+body.dark .header .meta .num { color: var(--oro-foglia); }
+body.dark .eyebrow { color: var(--oro-foglia); }
+body.dark .title-display { color: var(--candela); }
+body.dark .subtitle-italic { color: var(--oro-foglia); }
+body.dark .footer { border-top-color: rgba(242,227,194,0.15); }
+body.dark .footer .handle { color: var(--oro-foglia); }
+body.dark .footer .stamp { color: rgba(242,227,194,0.4); }
+body.dark .nastro-fleuron { background: var(--notte); }
+
+body.vermiglio {
+  background: var(--vermiglio);
+  color: var(--candela);
+}
+body.vermiglio .header .meta .name { color: var(--candela); }
+body.vermiglio .header .meta .num { color: var(--oro-foglia); }
+body.vermiglio .eyebrow { color: var(--oro-foglia); }
+body.vermiglio .title-display { color: var(--candela); }
+body.vermiglio .subtitle-italic { color: var(--oro-foglia); }
+body.vermiglio .footer { border-top-color: rgba(242,227,194,0.2); }
+body.vermiglio .footer .handle { color: var(--oro-foglia); }
+body.vermiglio .footer .stamp { color: rgba(242,227,194,0.5); }
+body.vermiglio .nastro-fleuron { background: var(--vermiglio); }
+
+/* Tricolor rule horizontal */
+.tricolor-rule {
+  display: block;
+  width: 88px;
+  height: 2px;
+  background: linear-gradient(90deg,
+    var(--tri-verde) 0% 33.33%,
+    var(--pergamena) 33.33% 66.66%,
+    var(--tri-rosso) 66.66% 100%);
+  border: none;
+  margin: 24px 0;
+}
+body.dark .tricolor-rule, body.vermiglio .tricolor-rule {
+  background: linear-gradient(90deg,
+    var(--tri-verde) 0% 33.33%,
+    var(--candela) 33.33% 66.66%,
+    var(--tri-rosso) 66.66% 100%);
+}
+
+/* Photo overlay variant */
+.photo-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.photo-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(15,12,18,0.85) 0%,
+    rgba(15,12,18,0.65) 50%,
+    rgba(15,12,18,0.45) 100%);
+}
+body.with-photo {
+  background: var(--notte);
+  color: var(--candela);
+}
+body.with-photo .header .meta .name { color: var(--candela); }
+body.with-photo .header .meta .num { color: var(--oro-foglia); }
+body.with-photo .eyebrow { color: var(--oro-foglia); }
+body.with-photo .title-display { color: var(--candela); }
+body.with-photo .subtitle-italic { color: var(--oro-foglia); }
+body.with-photo .footer { border-top-color: rgba(242,227,194,0.2); }
+body.with-photo .footer .handle { color: var(--oro-foglia); }
+body.with-photo .footer .stamp { color: rgba(242,227,194,0.5); }
+
+/* Highlights covers — circular look */
+body.highlight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--inchiostro);
+}
+body.highlight .nastro,
+body.highlight .nastro-fleuron { display: none; }
+body.highlight .frame {
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+}
+body.highlight .glyph {
+  width: 380px;
+  height: 380px;
+  color: var(--oro-foglia);
+}
+body.highlight .label {
+  position: absolute;
+  bottom: 120px;
+  font-family: "Cinzel", serif;
+  font-size: 32px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--oro-foglia);
+}
