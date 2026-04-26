@@ -29,6 +29,11 @@ const {
   bgAlt = "Interior del Templo Hijos del Trabajo, sede actual de la Logia",
 } = Astro.props;
 
+const bgBase = bgSrc.replace(/\.(jpe?g|png|webp)$/i, "");
+const bgSrcsetWebp = [480, 960, 1440, 1920].map((w) => `${bgBase}-${w}w.webp ${w}w`).join(", ");
+const bgSrcsetJpeg = [480, 960, 1440, 1920].map((w) => `${bgBase}-${w}w.jpeg ${w}w`).join(", ");
+const bgSizes = "100vw";
+
 // Datestamp ceremonial — año romano + Anno Verae Lucis
 const today = new Date();
 const toRoman = (n: number): string => {
@@ -60,7 +65,11 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
 
 <section class="hero-temple">
   {/* Foto Templo — fondo */}
-  <img class="hero-bg" src={bgSrc} alt={bgAlt} width="1920" height="1280" fetchpriority="high" decoding="async" />
+  <picture class="hero-picture">
+    <source type="image/webp" srcset={bgSrcsetWebp} sizes={bgSizes} />
+    <source type="image/jpeg" srcset={bgSrcsetJpeg} sizes={bgSizes} />
+    <img class="hero-bg" src={bgSrc} alt={bgAlt} width="1920" height="1280" fetchpriority="high" decoding="async" />
+  </picture>
   <div class="hero-overlay" aria-hidden="true"></div>
 
   {/* Nastro tricolor vertical — signature visual del sitio */}
@@ -133,6 +142,12 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
     isolation: isolate;
   }
 
+  .hero-picture {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+  }
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -140,7 +155,6 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
     height: 100%;
     object-fit: cover;
     object-position: 65% center;
-    z-index: 0;
     filter: contrast(1.05) saturate(0.9);
     animation: hero-zoom 24s var(--ease-ceremonial) both;
   }

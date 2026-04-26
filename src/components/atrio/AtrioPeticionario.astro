@@ -138,6 +138,15 @@ const labels = lang === "es"
       <span style="margin-left: 0.6em">{labels.ofThree}</span>
     </p>
 
+    <div class="atrio-restore" data-restore-banner hidden role="status">
+      <span class="overline">{lang === "es" ? "Borrador encontrado" : "Bozza trovata"}</span>
+      <p>{lang === "es" ? "Continuamos donde lo dejaste." : "Riprendiamo da dove eri."}</p>
+      <div class="atrio-restore-actions">
+        <button type="button" data-restore-confirm class="restore-btn">{lang === "es" ? "Restaurar" : "Ripristinare"}</button>
+        <button type="button" data-restore-discard class="restore-btn restore-btn-ghost">{lang === "es" ? "Empezar de nuevo" : "Ricominciare"}</button>
+      </div>
+    </div>
+
     <form id="atrio-form" novalidate>
       {/* honeypot — invisible para humanos */}
       <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" class="honeypot" />
@@ -347,6 +356,86 @@ const labels = lang === "es"
     const startedInput = root.querySelector("[data-form-started]") as HTMLInputElement | null;
     if (startedInput) startedInput.value = String(Date.now());
 
+    // ─────── Save-draft sessionStorage ───────
+    const DRAFT_KEY = "atrio-draft-v1";
+    const DRAFT_MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24h
+    const restoreBanner = root.querySelector("[data-restore-banner]") as HTMLElement | null;
+    const restoreConfirm = root.querySelector("[data-restore-confirm]") as HTMLButtonElement | null;
+    const restoreDiscard = root.querySelector("[data-restore-discard]") as HTMLButtonElement | null;
+
+    const dumpDraft = () => {
+      try {
+        const data: Record<string, unknown> = {};
+        const fd = new FormData(form);
+        const availabilityArr: string[] = [];
+        for (const [k, v] of fd.entries()) {
+          if (k === "availability") {
+            availabilityArr.push(String(v));
+          } else if (typeof v === "string") {
+            data[k] = v;
+          }
+        }
+        if (availabilityArr.length) data.availability = availabilityArr;
+        // Checkboxes singletons
+        ["declarationTruth", "dataConsent"].forEach((name) => {
+          const cb = form.querySelector<HTMLInputElement>(`[name="${name}"]`);
+          if (cb) data[name] = cb.checked;
+        });
+        sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ ts: Date.now(), data }));
+      } catch {}
+    };
+
+    const restoreDraft = (data: Record<string, unknown>) => {
+      Object.entries(data).forEach(([k, v]) => {
+        const els = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[name="${k}"]`);
+        if (!els.length) return;
+        if (Array.isArray(v) && k === "availability") {
+          els.forEach((el) => {
+            if (el instanceof HTMLInputElement && el.type === "checkbox") {
+              el.checked = v.includes(el.value);
+            }
+          });
+        } else if (typeof v === "boolean" && els[0] instanceof HTMLInputElement && els[0].type === "checkbox") {
+          els[0].checked = v;
+        } else if (typeof v === "string" && els[0]) {
+          (els[0] as HTMLInputElement).value = v;
+          els[0].dispatchEvent(new Event("input", { bubbles: true }));
+        }
+      });
+    };
+
+    const clearDraft = () => { try { sessionStorage.removeItem(DRAFT_KEY); } catch {} };
+
+    // Detectar draft fresco al inicio
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as { ts: number; data: Record<string, unknown> };
+        if (Date.now() - parsed.ts < DRAFT_MAX_AGE_MS && restoreBanner) {
+          restoreBanner.hidden = false;
+          restoreConfirm?.addEventListener("click", () => {
+            restoreDraft(parsed.data);
+            restoreBanner.hidden = true;
+          });
+          restoreDiscard?.addEventListener("click", () => {
+            clearDraft();
+            restoreBanner.hidden = true;
+          });
+        } else {
+          clearDraft();
+        }
+      }
+    } catch {}
+
+    // Persistir on every input/change (debounced)
+    let dumpTimer: number | null = null;
+    const scheduleDump = () => {
+      if (dumpTimer) window.clearTimeout(dumpTimer);
+      dumpTimer = window.setTimeout(dumpDraft, 600);
+    };
+    form.addEventListener("input", scheduleDump);
+    form.addEventListener("change", scheduleDump);
+
     // Char counters para textareas con data-charcount
     root.querySelectorAll<HTMLTextAreaElement>("textarea[data-charcount]").forEach((ta) => {
       const min = Number(ta.getAttribute("data-charcount") ?? "0");
@@ -434,9 +523,11 @@ const labels = lang === "es"
       }
       showError(i18n.missing);
       const first = invalid[0];
-      first.scrollIntoView({ behavior: "smooth", block: "center" });
-      first.focus({ preventScroll: true });
-      first.reportValidity();
+      if (first) {
+        first.scrollIntoView({ behavior: "smooth", block: "center" });
+        first.focus({ preventScroll: true });
+        first.reportValidity();
+      }
       return false;
     }
 
@@ -502,6 +593,7 @@ const labels = lang === "es"
           return;
         }
 
+        clearDraft();
         if (stage) {
           stage.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
           stage.style.opacity = "0";
@@ -737,6 +829,44 @@ const labels = lang === "es"
     opacity: 0;
     pointer-events: none;
   }
+
+  .atrio-restore {
+    margin-bottom: var(--space-6);
+    padding: var(--space-4);
+    border: 1px solid var(--gold-700);
+    border-left-width: 3px;
+    background: rgba(192, 155, 82, 0.06);
+    color: var(--ivory-50);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .atrio-restore .overline {
+    color: var(--gold-700);
+    font-size: 0.7rem;
+  }
+  .atrio-restore p {
+    margin: 0;
+    font-style: italic;
+    font-family: var(--font-serif);
+  }
+  .atrio-restore-actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .restore-btn {
+    background: transparent;
+    border: 1px solid var(--gold-700);
+    color: var(--gold-700);
+    padding: var(--space-1) var(--space-3);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background var(--duration-fast), color var(--duration-fast);
+  }
+  .restore-btn:hover { background: var(--gold-700); color: var(--ink-900); }
+  .restore-btn-ghost { border-color: var(--ink-500); color: var(--ink-300); }
+  .restore-btn-ghost:hover { background: var(--ink-500); color: var(--ivory-50); }
 
   .error-display {
     margin-top: var(--space-4);

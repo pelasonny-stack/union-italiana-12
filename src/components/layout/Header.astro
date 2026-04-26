@@ -213,10 +213,10 @@ const obedienceLabel = lang === "es"
         const links = Array.from(drawer.querySelectorAll<HTMLAnchorElement>("[data-drawer-link]"));
         if (!links.length) return;
         const idx = links.indexOf(document.activeElement as HTMLAnchorElement);
-        const next = e.key === "ArrowDown"
+        const nextIdx = e.key === "ArrowDown"
           ? (idx + 1) % links.length
           : (idx - 1 + links.length) % links.length;
-        links[next].focus();
+        links[nextIdx]?.focus();
       }
     });
 

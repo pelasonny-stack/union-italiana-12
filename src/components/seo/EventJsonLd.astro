@@ -1,0 +1,50 @@
+---
+/**
+ * Schema.org Event para próxima Reunión abierta (cuando isPublic=true).
+ * Lee de upcoming-event.json. Si no aplica, no inyecta nada.
+ */
+import event from "../../data/upcoming-event.json";
+import type { Locale } from "../../i18n/config";
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+
+const eventDate = new Date(event.date);
+const now = new Date();
+const isFuture = eventDate.getTime() > now.getTime();
+const shouldRender = event.isPublic && isFuture;
+
+const url = Astro.site?.toString() ?? "https://logiaunionitaliana12.com.ar/";
+const title = lang === "it" ? event.title.it : event.title.es;
+
+const data = shouldRender ? {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: title,
+  startDate: event.date,
+  endDate: (event as Record<string, unknown>).endDate ?? undefined,
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  location: {
+    "@type": "Place",
+    name: "Templo Hijos del Trabajo",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "San Antonio 814",
+      addressLocality: "Barracas",
+      addressRegion: "Ciudad Autónoma de Buenos Aires",
+      postalCode: "C1276",
+      addressCountry: "AR",
+    },
+  },
+  organizer: {
+    "@type": "Organization",
+    name: "Respetable Logia Unión Italiana N°12",
+    url,
+  },
+  isAccessibleForFree: true,
+  inLanguage: lang === "es" ? "es-AR" : "it-IT",
+} : null;
+---
+
+{data && <script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />}

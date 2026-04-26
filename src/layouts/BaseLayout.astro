@@ -6,6 +6,7 @@ import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import Llamador from "../components/layout/Llamador.astro";
 import JsonLd from "../components/seo/JsonLd.astro";
+import EventJsonLd from "../components/seo/EventJsonLd.astro";
 import { LOCALE_LANG_TAG, type Locale, alternateLocaleUrl } from "../i18n/config";
 import { t, type UIKey } from "../i18n/ui";
 
@@ -51,9 +52,17 @@ const altUrl = new URL(altPath, Astro.site).toString();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    {/* LCP preload — Hero del Templo (solo en home) */}
+    {/* LCP preload — Hero del Templo (solo en home, WebP responsive) */}
     {Astro.url.pathname === "/es/" || Astro.url.pathname === "/it/" ? (
-      <link rel="preload" as="image" href="/assets/templo/templo-3.jpeg" fetchpriority="high" />
+      <link
+        rel="preload"
+        as="image"
+        href="/assets/templo/templo-3-1440w.webp"
+        imagesrcset="/assets/templo/templo-3-480w.webp 480w, /assets/templo/templo-3-960w.webp 960w, /assets/templo/templo-3-1440w.webp 1440w, /assets/templo/templo-3-1920w.webp 1920w"
+        imagesizes="100vw"
+        type="image/webp"
+        fetchpriority="high"
+      />
     ) : null}
 
     {/* Web fonts — pesos podados (~150KB ahorrados vs full set) */}
@@ -74,6 +83,7 @@ const altUrl = new URL(altPath, Astro.site).toString();
     {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />}
 
     <JsonLd lang={lang} type={schemaType} />
+    <EventJsonLd lang={lang} />
 
     {/* Theme inicial — sin flash */}
     <script is:inline>
