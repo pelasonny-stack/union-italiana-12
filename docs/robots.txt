@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /es/iniciacion/confirmacion
+Disallow: /it/iniziazione/conferma
+
+Sitemap: https://unionitaliana12.org.ar/sitemap-index.xml

@@ -6,7 +6,7 @@
   "description": "Sitio web de la R∴L∴ Unión Italiana N°12 — Oriente de Buenos Aires, desde 1858",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/postbuild-base.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "format": "prettier --write .",

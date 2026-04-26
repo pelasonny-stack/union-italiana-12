@@ -3,11 +3,14 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
-const SITE_URL = process.env.SITE_URL ?? "https://unionitaliana12.org.ar";
+const SITE_URL = process.env.SITE_URL ?? "https://pelasonny-stack.github.io";
+const BASE = process.env.BASE_PATH ?? "/union-italiana-12";
 
 export default defineConfig({
   site: SITE_URL,
-  trailingSlash: "ignore",
+  base: BASE,
+  outDir: "./docs",
+  trailingSlash: "always",
   output: "static",
   prefetch: { defaultStrategy: "viewport" },
 
