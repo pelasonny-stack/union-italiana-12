@@ -144,12 +144,23 @@ const links = lang === "es"
     </div>
   </div>
 
+  {/* ───── Disclaimer reglamentario (Art. 7° Reglamento GLA) ───── */}
+  <div class="footer-disclaimer">
+    <div class="container">
+      <p>
+        {lang === "es"
+          ? "El contenido de cualquier artículo, y/o material de correo adjunto es la opinión, o las opiniones de los autores, y no es de manera alguna interpretado como siendo de la autoridad Francmasónica en general o de una Logia en particular, o la Francmasonería Universal. Cada autor contribuye, y es su propia opinión. Pues tales ellos no son portavoces oficiales de la Francmasonería en su totalidad."
+          : "Il contenuto di qualsiasi articolo e/o materiale di posta allegato è l'opinione, o le opinioni degli autori, e non è in alcun modo interpretato come proveniente dall'autorità Massonica in generale o di una Loggia in particolare, o dalla Massoneria Universale. Ciascun autore contribuisce con la propria opinione. Essi non sono portavoce ufficiali della Massoneria nella sua totalità."}
+      </p>
+    </div>
+  </div>
+
   {/* ───── Baseline ───── */}
   <div class="footer-baseline">
     <div class="container">
       <p class="lema-spaced">A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴</p>
       <hr class="tricolor-rule" />
-      <p class="footer-copy">© MMXXV · BUENOS AIRES · SUB ROSA</p>
+      <p class="footer-copy">© MMXXV (e∴v∴) · BUENOS AIRES · SUB ROSA</p>
     </div>
   </div>
 </footer>
@@ -334,6 +345,22 @@ const links = lang === "es"
   .footer-social a:hover::before {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+
+  /* ── Disclaimer reglamentario ── */
+  .footer-disclaimer {
+    border-top: 1px solid var(--border);
+    padding-block: var(--space-5);
+    background: color-mix(in srgb, var(--bg) 92%, var(--accent) 8%);
+  }
+  .footer-disclaimer p {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    text-align: justify;
+    max-width: 78ch;
+    margin: 0 auto;
+    font-style: italic;
   }
 
   /* ── Baseline ── */

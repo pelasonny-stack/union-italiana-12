@@ -71,13 +71,20 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
   <div class="hero-temple-inner container">
     <div class="hero-text">
       <span class="hero-rule" aria-hidden="true"></span>
+      <p class="hero-invocation cinzel" aria-label="A la Gloria del Gran Arquitecto del Universo">A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴</p>
       <p class="hero-masthead">{masthead}</p>
 
       <h1 class="hero-h1">
         <span class="cinzel hero-eyebrow-line">{lang === "es" ? "RESPETABLE LOGIA" : "RISPETTABILE LOGGIA"}</span>
         <span class="hero-name">{title}</span>
-        <span class="cinzel hero-num">N° XII · MDCCCLVIII</span>
+        <span class="cinzel hero-num">N° XII · MDCCCLVIII (e∴v∴)</span>
       </h1>
+
+      <p class="hero-auspices cinzel">
+        {lang === "es"
+          ? "Bajo los auspicios de la Gran Logia de la Argentina de Libres y Aceptados Masones"
+          : "Sotto gli auspici della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni"}
+      </p>
 
       <p class="hero-subtitle latin">{subtitle}</p>
 
@@ -189,6 +196,15 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
     margin-bottom: var(--space-2);
   }
 
+  .hero-invocation {
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    color: var(--accent-bright);
+    text-align: center;
+    opacity: 0.85;
+    margin: 0 0 var(--space-2);
+  }
+
   .hero-masthead {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -196,6 +212,15 @@ const wordmarkTwo = titleParts.slice(-1).join(" ");    // última palabra
     color: var(--candela);
     opacity: 0.72;
     margin: 0 0 var(--space-4);
+  }
+
+  .hero-auspices {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--accent-bright);
+    opacity: 0.85;
+    margin: 0 0 var(--space-4);
+    max-width: 56ch;
   }
 
   .hero-h1 {
