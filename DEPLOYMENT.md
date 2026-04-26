@@ -3,7 +3,7 @@
 ## Componentes a desplegar
 
 1. **Sitio Astro** → Cloudflare Pages
-2. **Worker `petition-handler`** → Cloudflare Workers (subdominio `forms.unionitaliana12.org.ar`)
+2. **Worker `petition-handler`** → Cloudflare Workers (subdominio `forms.logiaunionitaliana12.com.ar`)
 
 ---
 
@@ -21,8 +21,8 @@
 4. Variables de entorno (en el dashboard):
    - `NODE_VERSION` = `22`
    - `PUBLIC_TURNSTILE_SITEKEY` = sitekey real de Turnstile
-   - `PUBLIC_PETITION_WORKER_URL` = `https://forms.unionitaliana12.org.ar`
-5. Custom domain: `unionitaliana12.org.ar` y `www.unionitaliana12.org.ar` (con redirect a apex).
+   - `PUBLIC_PETITION_WORKER_URL` = `https://forms.logiaunionitaliana12.com.ar`
+5. Custom domain: `logiaunionitaliana12.com.ar` y `www.logiaunionitaliana12.com.ar` (con redirect a apex).
 
 ### Deploys posteriores
 
@@ -63,10 +63,10 @@ openssl rand -base64 32 | pnpm exec wrangler secret put INTERNAL_WORKER_TOKEN
 openssl rand -base64 32 | pnpm exec wrangler secret put PETITION_ENCRYPTION_KEY
 
 # Direcciones de email
-pnpm exec wrangler secret put VENERABLE_EMAIL          # ej: venerable@unionitaliana12.org.ar
-pnpm exec wrangler secret put SECRETARY_EMAIL          # ej: secretario@unionitaliana12.org.ar
-pnpm exec wrangler secret put INVESTIGATORS_EMAIL      # ej: investigadores@unionitaliana12.org.ar (puede ser CSV)
-pnpm exec wrangler secret put FROM_EMAIL               # ej: peticiones@unionitaliana12.org.ar
+pnpm exec wrangler secret put VENERABLE_EMAIL          # ej: venerable@logiaunionitaliana12.com.ar
+pnpm exec wrangler secret put SECRETARY_EMAIL          # ej: secretario@logiaunionitaliana12.com.ar
+pnpm exec wrangler secret put INVESTIGATORS_EMAIL      # ej: investigadores@logiaunionitaliana12.com.ar (puede ser CSV)
+pnpm exec wrangler secret put FROM_EMAIL               # ej: peticiones@logiaunionitaliana12.com.ar
 ```
 
 El mismo `INTERNAL_WORKER_TOKEN` debe configurarse como variable en CF Pages para que el sitio pueda autenticar requests al Worker.
@@ -84,16 +84,16 @@ O vía GitHub Actions: push a `main` con cambios en `workers/petition-handler/**
 ### Custom domain del Worker
 
 En CF Workers → petition-handler → Triggers → Custom Domains:
-- Agregar `forms.unionitaliana12.org.ar`.
+- Agregar `forms.logiaunionitaliana12.com.ar`.
 
 ### Email — DKIM / SPF / DMARC
 
-En el DNS del dominio `unionitaliana12.org.ar`:
+En el DNS del dominio `logiaunionitaliana12.com.ar`:
 
 ```
 TXT @       v=spf1 include:resend.com -all
-TXT _dmarc  v=DMARC1; p=reject; rua=mailto:dmarc@unionitaliana12.org.ar
-TXT resend._domainkey.unionitaliana12.org.ar  (valor que da Resend)
+TXT _dmarc  v=DMARC1; p=reject; rua=mailto:dmarc@logiaunionitaliana12.com.ar
+TXT resend._domainkey.logiaunionitaliana12.com.ar  (valor que da Resend)
 ```
 
 Verificar el dominio en el dashboard de Resend antes de enviar.
@@ -104,15 +104,15 @@ Verificar el dominio en el dashboard de Resend antes de enviar.
 
 ```sh
 # Sitio
-curl -I https://unionitaliana12.org.ar/                    # 302 → /es/
-curl -I https://unionitaliana12.org.ar/es/                 # 200 + headers CSP/HSTS
-curl -I https://unionitaliana12.org.ar/it/                 # 200
+curl -I https://logiaunionitaliana12.com.ar/                    # 302 → /es/
+curl -I https://logiaunionitaliana12.com.ar/es/                 # 200 + headers CSP/HSTS
+curl -I https://logiaunionitaliana12.com.ar/it/                 # 200
 
 # Worker — método incorrecto
-curl -I https://forms.unionitaliana12.org.ar/petition      # 405
+curl -I https://forms.logiaunionitaliana12.com.ar/petition      # 405
 
 # Worker — origen inválido
-curl -X POST https://forms.unionitaliana12.org.ar/petition \
+curl -X POST https://forms.logiaunionitaliana12.com.ar/petition \
   -H "origin: https://evil.example" \
   -H "content-type: application/json" \
   -d '{}'                                                   # 403

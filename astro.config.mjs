@@ -5,10 +5,10 @@ import tailwindcss from "@tailwindcss/vite";
 
 // Dual deploy:
 // - GitHub Pages (default): SITE=pelasonny-stack.github.io + base=/union-italiana-12 + outDir=docs
-// - Firebase Hosting (DEPLOY_TARGET=firebase): SITE=unionitaliana12.com.ar + base=/ + outDir=dist
+// - Firebase Hosting (DEPLOY_TARGET=firebase): SITE=logiaunionitaliana12.com.ar + base=/ + outDir=dist
 const isFirebase = process.env.DEPLOY_TARGET === "firebase";
 const SITE_URL = process.env.SITE_URL ??
-  (isFirebase ? "https://unionitaliana12.com.ar" : "https://pelasonny-stack.github.io");
+  (isFirebase ? "https://logiaunionitaliana12.com.ar" : "https://pelasonny-stack.github.io");
 const BASE = process.env.BASE_PATH ?? (isFirebase ? "/" : "/union-italiana-12");
 
 export default defineConfig({

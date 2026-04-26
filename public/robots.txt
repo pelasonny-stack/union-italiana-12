@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /es/iniciacion/confirmacion
 Disallow: /it/iniziazione/conferma
 
-Sitemap: https://unionitaliana12.org.ar/sitemap-index.xml
+Sitemap: https://logiaunionitaliana12.com.ar/sitemap-index.xml

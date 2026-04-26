@@ -14,7 +14,7 @@ compatibility_flags = ["nodejs_compat"]
 
 # Variables públicas (no secrets)
 [vars]
-ALLOWED_ORIGINS = "https://unionitaliana12.org.ar,https://union-italiana-12.pages.dev"
+ALLOWED_ORIGINS = "https://logiaunionitaliana12.com.ar,https://union-italiana-12.pages.dev"
 RATE_LIMIT_PER_HOUR = "3"
 RATE_LIMIT_PER_DAY = "10"
 
