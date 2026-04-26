@@ -25,8 +25,6 @@ const ip = (req: Request): string =>
 
 const subjectRoute = (env: Env, subject: string): string => {
   switch (subject) {
-    case "prensa":
-      return env.SECRETARY_EMAIL;
     case "academia":
       return env.SECRETARY_EMAIL;
     case "hermano-visitante":

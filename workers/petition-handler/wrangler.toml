@@ -26,7 +26,7 @@ RATE_LIMIT_PER_DAY = "10"
 # - VENERABLE_EMAIL
 # - SECRETARY_EMAIL
 # - INVESTIGATORS_EMAIL  (alias o lista separada por coma)
-# - FROM_EMAIL  (e.g. peticiones@unionitaliana12.org.ar)
+# - FROM_EMAIL  (e.g. unionitaliana12@gmail.com)
 
 [observability]
 enabled = true

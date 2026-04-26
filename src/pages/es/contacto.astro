@@ -8,24 +8,17 @@ const lang = "es" as const;
 <BaseLayout
   lang={lang}
   title="Contacto"
-  description="Tres canales de contacto con la R∴L∴ Unión Italiana N°12: contacto general, prensa, peticionarios."
+  description="Dos canales de contacto con la R∴L∴ Unión Italiana N°12: contacto general y peticionarios."
 >
-  <PageHero eyebrow="Tres puertas" title="Contacto" glyph="three-dots" />
+  <PageHero eyebrow="Dos puertas" title="Contacto" glyph="three-dots" />
 
   <section class="container" style="padding-block: var(--space-8);">
     <div class="contact-grid">
       <article class="contact-card">
         <MasonicGlyph name="three-dots" size={32} />
         <h3>Contacto general</h3>
-        <p>Para consultas que no encajen en las otras dos puertas.</p>
-        <a href="mailto:contacto@unionitaliana12.org.ar" class="overline" style="margin-top: var(--space-3); display: inline-block;">contacto@unionitaliana12.org.ar</a>
-      </article>
-
-      <article class="contact-card">
-        <MasonicGlyph name="letter-g" size={32} />
-        <h3>Prensa e investigación</h3>
-        <p>Periodistas, historiadores, académicos. Material disponible bajo solicitud.</p>
-        <a href="mailto:prensa@unionitaliana12.org.ar" class="overline" style="margin-top: var(--space-3); display: inline-block;">prensa@unionitaliana12.org.ar</a>
+        <p>Consultas, visitas, hermanos visitantes, prensa, investigación académica.</p>
+        <a href="mailto:unionitaliana12@gmail.com" class="overline" style="margin-top: var(--space-3); display: inline-block;">unionitaliana12@gmail.com</a>
       </article>
 
       <article class="contact-card">
@@ -41,10 +34,12 @@ const lang = "es" as const;
 <style>
   .contact-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
+    max-width: 880px;
+    margin: 0 auto;
   }
-  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
   .contact-card {
     padding: var(--space-6);
     background: var(--bg-elevated);
