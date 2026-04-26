@@ -310,121 +310,122 @@ const labels = lang === "es"
   missing: labels.errorMissing,
   tooShort: labels.errorTooShort,
 } }}>
-  const root = document.querySelector("[data-atrio]");
-  if (!root) return;
-  const form = root.querySelector("#atrio-form");
-  const steps = Array.from(root.querySelectorAll("[data-step]"));
-  const counter = root.querySelector("[data-step-current]");
-  const errorDisplay = root.querySelector("[data-error-display]");
-  const heardScreen = root.querySelector("[data-heard]");
-  const stage = root.querySelector("[data-stage]");
+  function initAtrio() {
+    const root = document.querySelector("[data-atrio]");
+    if (!root || root.dataset.atrioInited === "1") return;
+    root.dataset.atrioInited = "1";
 
-  // form started timestamp (anti-bot)
-  const startedInput = root.querySelector("[data-form-started]");
-  if (startedInput) startedInput.value = String(Date.now());
+    const form = root.querySelector("#atrio-form");
+    const steps = Array.from(root.querySelectorAll("fieldset[data-step]"));
+    const counter = root.querySelector("[data-step-current]");
+    const errorDisplay = root.querySelector("[data-error-display]");
+    const heardScreen = root.querySelector("[data-heard]");
+    const stage = root.querySelector("[data-stage]");
 
-  let current = 1;
-  function show(step) {
-    steps.forEach((el) => {
-      const n = Number(el.getAttribute("data-step"));
-      el.classList.toggle("is-active", n === step);
-    });
-    if (counter) counter.textContent = String(step);
-    // Velas
-    root.querySelectorAll(".velas-row .vela").forEach((v, idx) => {
-      v.classList.toggle("is-lit", idx < step);
-      v.classList.toggle("is-out", idx >= step);
-    });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    current = step;
-  }
+    const startedInput = root.querySelector("[data-form-started]");
+    if (startedInput) startedInput.value = String(Date.now());
 
-  // Validación por paso
-  function validateStep(step) {
-    const fieldset = root.querySelector(`[data-step="${step}"]`);
-    if (!fieldset) return false;
-    const required = fieldset.querySelectorAll("input[required], textarea[required], select[required]");
-    for (const el of required) {
-      if (!el.checkValidity()) {
-        el.reportValidity();
-        return false;
-      }
-    }
-    return true;
-  }
-
-  root.querySelectorAll("[data-next]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (!validateStep(current)) return;
-      if (current < 3) show(current + 1);
-    });
-  });
-  root.querySelectorAll("[data-back]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (current > 1) show(current - 1);
-    });
-  });
-
-  form.addEventListener("submit", async (ev) => {
-    ev.preventDefault();
-    if (!validateStep(3)) return;
-
-    const submitBtn = root.querySelector("[data-submit]");
-    submitBtn.disabled = true;
-    if (errorDisplay) { errorDisplay.hidden = true; errorDisplay.textContent = ""; }
-
-    if (!formspreeUrl) {
-      if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = errorMessages.generic; }
-      submitBtn.disabled = false;
-      return;
-    }
-
-    // Honeypot client-side: si el campo "website" tiene contenido, abortar silenciosamente
-    if (form.querySelector("[name=website]")?.value) {
-      stage.style.opacity = "0.3";
-      return;
-    }
-
-    // FormData → Formspree (acepta multipart o urlencoded; mantenemos FormData para arrays)
-    const fd = new FormData(form);
-    // Formato availability como string legible en el email
-    const availability = fd.getAll("availability").join(", ");
-    fd.delete("availability");
-    if (availability) fd.append("availability", availability);
-
-    try {
-      const res = await fetch(formspreeUrl, {
-        method: "POST",
-        headers: { "Accept": "application/json" },
-        body: fd,
+    let current = 1;
+    function show(step) {
+      steps.forEach((el) => {
+        const n = Number(el.getAttribute("data-step"));
+        el.classList.toggle("is-active", n === step);
       });
-      const body = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        const msg = res.status === 429 ? errorMessages.rate : errorMessages.generic;
-        if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = msg; }
+      if (counter) counter.textContent = String(step);
+      root.querySelectorAll(".velas-row .vela").forEach((v, idx) => {
+        v.classList.toggle("is-lit", idx < step);
+        v.classList.toggle("is-out", idx >= step);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      current = step;
+    }
+
+    function validateStep(step) {
+      const fieldset = root.querySelector(`fieldset[data-step="${step}"]`);
+      if (!fieldset) return false;
+      const required = fieldset.querySelectorAll("input[required], textarea[required], select[required]");
+      for (const el of required) {
+        if (!el.checkValidity()) {
+          el.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    root.querySelectorAll("[data-next]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (!validateStep(current)) return;
+        if (current < 3) show(current + 1);
+      });
+    });
+    root.querySelectorAll("[data-back]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (current > 1) show(current - 1);
+      });
+    });
+
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      if (!validateStep(3)) return;
+
+      const submitBtn = root.querySelector("[data-submit]");
+      submitBtn.disabled = true;
+      if (errorDisplay) { errorDisplay.hidden = true; errorDisplay.textContent = ""; }
+
+      if (!formspreeUrl) {
+        if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = errorMessages.generic; }
         submitBtn.disabled = false;
         return;
       }
 
-      stage.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
-      stage.style.opacity = "0";
-      setTimeout(() => {
-        stage.hidden = true;
-        heardScreen.hidden = false;
-        heardScreen.style.opacity = "0";
-        requestAnimationFrame(() => {
-          heardScreen.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
-          heardScreen.style.opacity = "1";
+      if (form.querySelector("[name=website]")?.value) {
+        stage.style.opacity = "0.3";
+        return;
+      }
+
+      const fd = new FormData(form);
+      const availability = fd.getAll("availability").join(", ");
+      fd.delete("availability");
+      if (availability) fd.append("availability", availability);
+
+      try {
+        const res = await fetch(formspreeUrl, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: fd,
         });
+        await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const msg = res.status === 429 ? errorMessages.rate : errorMessages.generic;
+          if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = msg; }
+          submitBtn.disabled = false;
+          return;
+        }
+
+        stage.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
+        stage.style.opacity = "0";
         setTimeout(() => {
-          window.location.href = confirmationUrl;
-        }, 2400);
-      }, 900);
-    } catch (e) {
-      if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = errorMessages.generic; }
-      submitBtn.disabled = false;
-    }
-  });
+          stage.hidden = true;
+          heardScreen.hidden = false;
+          heardScreen.style.opacity = "0";
+          requestAnimationFrame(() => {
+            heardScreen.style.transition = "opacity 1.2s var(--ease-ceremonial, ease-in-out)";
+            heardScreen.style.opacity = "1";
+          });
+          setTimeout(() => {
+            window.location.href = confirmationUrl;
+          }, 2400);
+        }, 900);
+      } catch (e) {
+        if (errorDisplay) { errorDisplay.hidden = false; errorDisplay.textContent = errorMessages.generic; }
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  initAtrio();
+  document.addEventListener("astro:page-load", initAtrio);
 </script>
 
 <style>
