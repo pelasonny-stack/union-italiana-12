@@ -3,13 +3,17 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
-const SITE_URL = process.env.SITE_URL ?? "https://pelasonny-stack.github.io";
-const BASE = process.env.BASE_PATH ?? "/union-italiana-12";
+// Soporta dual deploy:
+// - GitHub Pages (default actual): SITE_URL + BASE_PATH = "/union-italiana-12", outDir = "./docs"
+// - Netlify (cuando DEPLOY_TARGET=netlify): root path, outDir = "./dist"
+const isNetlify = process.env.DEPLOY_TARGET === "netlify" || process.env.NETLIFY === "true";
+const SITE_URL = process.env.SITE_URL ?? (isNetlify ? "https://union-italiana-12.netlify.app" : "https://pelasonny-stack.github.io");
+const BASE = process.env.BASE_PATH ?? (isNetlify ? "/" : "/union-italiana-12");
 
 export default defineConfig({
   site: SITE_URL,
   base: BASE,
-  outDir: "./docs",
+  outDir: isNetlify ? "./dist" : "./docs",
   trailingSlash: "always",
   output: "static",
   prefetch: { defaultStrategy: "viewport" },

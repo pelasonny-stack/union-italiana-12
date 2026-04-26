@@ -6,10 +6,34 @@
     <meta name="robots" content="noindex" />
     <title>Panel · Unión Italiana N°12</title>
     <link rel="icon" type="image/svg+xml" href="/union-italiana-12/favicon.svg" />
+    <style>
+      body { font-family: -apple-system, system-ui, sans-serif; }
+      .nf-loading {
+        position: fixed; inset: 0; display: flex; align-items: center;
+        justify-content: center; background: #f4efe6; color: #141014;
+      }
+    </style>
   </head>
   <body>
-    <!-- Sveltia CMS — admin estático para editar contenido del repo via GitHub.
-         Login: GitHub OAuth (necesita una OAuth App configurada — ver docs/ADMIN.md) -->
-    <script type="module" src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <div class="nf-loading">Cargando panel…</div>
+
+    <!-- Netlify Identity widget — handles login user/pass -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- Decap CMS (anteriormente Netlify CMS) — admin estático -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+    <script>
+      // Auto-redirect después del confirm token (signup invitation)
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

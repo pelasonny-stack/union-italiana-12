@@ -1,18 +1,21 @@
-# Sveltia CMS — config
-# Docs: https://github.com/sveltia/sveltia-cms
+# Decap CMS — config para Netlify Identity + Git Gateway
+# Login: email + password (gestionado por Netlify Identity)
+# Commits: vía Git Gateway proxy (no requiere PAT del usuario)
 
 backend:
-  name: github
-  repo: pelasonny-stack/union-italiana-12
+  name: git-gateway
   branch: main
-  base_url: https://api.netlify.com  # OAuth proxy default — opcional, ver docs/ADMIN.md
+  squash_merges: true
 
-site_url: https://pelasonny-stack.github.io/union-italiana-12/
-display_url: https://pelasonny-stack.github.io/union-italiana-12/
+site_url: https://union-italiana-12.netlify.app
+display_url: https://union-italiana-12.netlify.app
+logo_url: /assets/logos/union-italiana-12-logo.png
 
 publish_mode: simple
 media_folder: public/assets/uploads
 public_folder: /assets/uploads
+
+locale: es
 
 i18n:
   structure: multiple_folders
@@ -28,13 +31,12 @@ collections:
     delete: true
     slug: "{{year}}-{{month}}-{{slug}}"
     i18n: true
-    editor:
-      preview: false
+    summary: "{{title}} — {{date | date('DD/MM/YYYY')}}"
     fields:
       - { name: title, label: Título, widget: string, i18n: true }
-      - { name: translationKey, label: Translation Key (mismo en ambos idiomas), widget: string, i18n: duplicate, hint: "ej. tenida-cultura-italiana-2026-05" }
+      - { name: translationKey, label: "Translation Key (mismo en ES e IT)", widget: string, i18n: duplicate, hint: "Ej: tenida-cultura-italiana-2026-05" }
       - { name: date, label: Fecha y hora, widget: datetime, i18n: duplicate }
-      - { name: endDate, label: Fecha y hora de cierre, widget: datetime, required: false, i18n: duplicate }
+      - { name: endDate, label: Fecha de cierre, widget: datetime, required: false, i18n: duplicate }
       - name: location
         label: Ubicación
         widget: object
@@ -43,11 +45,11 @@ collections:
           - { name: venue, label: Templo / Lugar, widget: string }
           - { name: address, label: Dirección, widget: string }
           - { name: city, label: Ciudad, widget: string }
-      - { name: kind, label: Tipo, widget: select, options: [tenida-blanca, agape, columna-instruccion, evento-publico, aniversario], i18n: duplicate }
+      - { name: kind, label: Tipo, widget: select, options: ["tenida-blanca", "agape", "columna-instruccion", "evento-publico", "aniversario"], i18n: duplicate }
       - { name: isPublic, label: Visible al público, widget: boolean, default: true, i18n: duplicate }
       - { name: cover, label: Imagen de portada, widget: image, required: false, i18n: duplicate }
-      - { name: excerpt, label: Resumen breve (máx 280 caracteres), widget: text, i18n: true }
-      - { name: draft, label: Borrador (no publicar todavía), widget: boolean, default: false, i18n: duplicate }
+      - { name: excerpt, label: "Resumen breve (máx 280 caracteres)", widget: text, i18n: true }
+      - { name: draft, label: "Borrador (no publicar todavía)", widget: boolean, default: false, i18n: duplicate }
       - { name: body, label: Cuerpo, widget: markdown, i18n: true }
 
   - name: blog
@@ -65,9 +67,9 @@ collections:
       - { name: updatedDate, label: Última actualización, widget: datetime, required: false, i18n: duplicate }
       - { name: author, label: Autor, widget: string, default: "R∴L∴ Unión Italiana N°12", i18n: true }
       - { name: tags, label: Tags, widget: list, default: [], i18n: duplicate }
-      - { name: category, label: Categoría, widget: select, options: [cronica, efemerides, semblanzas, cultura, lecturas, archivo], default: cronica, i18n: duplicate }
+      - { name: category, label: Categoría, widget: select, options: ["cronica", "efemerides", "semblanzas", "cultura", "lecturas", "archivo"], default: "cronica", i18n: duplicate }
       - { name: cover, label: Imagen de portada, widget: image, required: false, i18n: duplicate }
-      - { name: excerpt, label: Resumen breve, widget: text, i18n: true }
+      - { name: excerpt, label: Resumen, widget: text, i18n: true }
       - { name: draft, label: Borrador, widget: boolean, default: false, i18n: duplicate }
       - { name: body, label: Cuerpo, widget: markdown, i18n: true }
 
@@ -84,14 +86,14 @@ collections:
             label: Título
             widget: object
             fields:
-              - { name: es, label: Título · Español, widget: string }
-              - { name: it, label: Título · Italiano, widget: string }
+              - { name: es, label: "Título · Español", widget: string }
+              - { name: it, label: "Título · Italiano", widget: string }
           - name: kind
             label: Tipo
             widget: object
             fields:
-              - { name: es, label: Tipo · Español, widget: string, default: "Tenida blanca" }
-              - { name: it, label: Tipo · Italiano, widget: string, default: "Tornata bianca" }
-          - { name: location, label: Ubicación (texto libre), widget: string, default: "Templo Hijos del Trabajo · Barracas" }
-          - { name: speaker, label: Expositor / Hno. invitado, widget: string, required: false }
-          - { name: rsvpUrl, label: URL de inscripción (opcional), widget: string, required: false }
+              - { name: es, label: "Tipo · Español", widget: string, default: "Tenida blanca" }
+              - { name: it, label: "Tipo · Italiano", widget: string, default: "Tornata bianca" }
+          - { name: location, label: Ubicación, widget: string, default: "Templo Hijos del Trabajo · Barracas" }
+          - { name: speaker, label: Expositor, widget: string, required: false }
+          - { name: rsvpUrl, label: URL de inscripción, widget: string, required: false }
