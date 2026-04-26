@@ -55,7 +55,7 @@
 - Label social: `Seguici`
 
 ### Baseline
-- Lema: `A∴ G∴ D∴ G∴ A∴ D∴ U∴`
+- Lema: `A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴`
 - Copyright: `© MMXXV · BUENOS AIRES · SUB ROSA`
 
 ---

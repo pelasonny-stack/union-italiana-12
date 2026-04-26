@@ -31,7 +31,7 @@ Handle: **@unionitaliana12** — https://www.instagram.com/unionitaliana12/
 R∴L∴ Unión Italiana N°XII · MDCCCLVIII
 Sociedad iniciática · Or∴ de Buenos Aires
 Templo Hijos del Trabajo · Barracas
-A∴G∴D∴G∴A∴D∴U∴
+A∴L∴G∴D∴G∴A∴D∴U∴
 ```
 
 ### Link en bio
@@ -130,7 +130,7 @@ Sociedad iniciática, filantrópica, filosófica y progresista — al Oriente de
 
 Trabajamos los lunes en el histórico Templo Hijos del Trabajo, en Barracas, bajo la obediencia de la Gran Logia de la Argentina de Libres y Aceptados Masones.
 
-A∴ G∴ D∴ G∴ A∴ D∴ U∴
+A∴ L∴ G∴ D∴ G∴ A∴ D∴ U∴
 
 —
 
