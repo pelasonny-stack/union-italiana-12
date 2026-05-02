@@ -4,7 +4,12 @@ import PageHero from "../../../components/content/PageHero.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Massoneria" description="Cos'è la massoneria, i suoi principi, glossario, biblioteca pubblica.">
+<BaseLayout
+  lang={lang}
+  title="Massoneria — Cos'è, Principi, Glossario e Biblioteca"
+  description="Cos'è la massoneria: ordine filosofico regolare. Principi, glossario di termini, biblioteca pubblica. Materiali sobri senza miti né cospirazioni."
+  breadcrumb={[{ name: "Massoneria", url: "/it/massoneria/" }]}
+>
   <PageHero eyebrow="Un Ordine filosofico" title="Massoneria" subtitle="Senza segreti, con riserve" glyph="delta" />
   <section class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">

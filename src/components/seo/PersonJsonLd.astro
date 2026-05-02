@@ -1,0 +1,62 @@
+---
+/**
+ * JSON-LD Person para miembros ilustres y figuras históricas.
+ * Genera un Graph @type=Person por cada persona pasada en `people`.
+ */
+interface PersonInput {
+  name: string;
+  givenName?: string;
+  familyName?: string;
+  alternateName?: string;
+  birthDate?: string;
+  deathDate?: string;
+  birthPlace?: string;
+  description: string;
+  jobTitle?: string;
+  nationality?: string[];
+  knownFor?: string[];
+  sameAs?: string[];
+  image?: string;
+  affiliation?: string;
+}
+
+interface Props {
+  people: PersonInput[];
+  pageUrl: string;
+}
+
+const { people, pageUrl } = Astro.props;
+const url = Astro.site?.toString() ?? "https://logiaunionitaliana12.com.ar/";
+
+const data = {
+  "@context": "https://schema.org",
+  "@graph": people.map((p) => {
+    const slug = p.name.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+    const personData: Record<string, unknown> = {
+      "@type": "Person",
+      "@id": `${pageUrl}#${slug}`,
+      name: p.name,
+      description: p.description,
+    };
+    if (p.givenName) personData.givenName = p.givenName;
+    if (p.familyName) personData.familyName = p.familyName;
+    if (p.alternateName) personData.alternateName = p.alternateName;
+    if (p.birthDate) personData.birthDate = p.birthDate;
+    if (p.deathDate) personData.deathDate = p.deathDate;
+    if (p.birthPlace) personData.birthPlace = { "@type": "Place", name: p.birthPlace };
+    if (p.jobTitle) personData.jobTitle = p.jobTitle;
+    if (p.nationality) personData.nationality = p.nationality;
+    if (p.knownFor) personData.knownForCreativeWork = p.knownFor.map((w) => ({ "@type": "CreativeWork", name: w }));
+    if (p.sameAs) personData.sameAs = p.sameAs;
+    if (p.image) personData.image = p.image;
+    if (p.affiliation) {
+      personData.affiliation = { "@type": "Organization", name: p.affiliation };
+    } else {
+      personData.affiliation = { "@id": `${url}#organization` };
+    }
+    return personData;
+  }),
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />

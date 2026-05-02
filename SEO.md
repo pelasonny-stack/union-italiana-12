@@ -7,22 +7,47 @@ Mientras tanto: https://logiaunionitaliana12.pelasonny-stack.workers.dev/
 
 ## Lo que YA está hecho en el código
 
-✅ JSON-LD Organization completo (nombre, fundación, dirección, geo, contactPoint, knowsAbout, parentOrganization GLA)
-✅ JSON-LD WebSite con SearchAction
-✅ JSON-LD FAQPage en /iniciacion/ (8 preguntas frecuentes — Google muestra como acordeón en resultados)
-✅ Meta titles + descriptions optimizados con keywords (logia masónica BA, masonería italiana, etc)
-✅ Sitemap XML automático en /sitemap-index.xml
-✅ Hreflang ES/IT (Google sabe que son traducciones)
-✅ OpenGraph (preview en redes)
+### Foundation (sprint 1)
+✅ JSON-LD Organization enriquecido (10 alternateName, 31 keywords, areaServed AR/IT, hasCredential GLA, foundingLocation, knowsLanguage, founder Person)
+✅ JSON-LD Place del Templo Hijos del Trabajo separado (con address, geo, hasMap, yearBuilt, isAccessibleForFree, image gallery)
+✅ JSON-LD WebSite con SearchAction + Speakable + inLanguage array
+✅ JSON-LD FAQPage en /ingreso/ (rich result acordeón)
+✅ JSON-LD Article en historia, templo, que-es, principios, glosario, biblioteca, miembros-ilustres, vinculo-italiano + IT (datePublished, dateModified, section, keywords, speakable)
+✅ JSON-LD BreadcrumbList en TODAS las páginas profundidad ≥ 2 (CTR +20-25% en SERP)
+✅ JSON-LD Person (@graph) en miembros-ilustres con 6 figuras (Salvarezza, José Ingenieros, Salvador Ingenieros, Garibaldi, Roque Pérez, Tamburini) — sameAs Wikipedia + Wikidata para Ingenieros y Garibaldi
+✅ Meta titles 60-65 chars con keywords + branded en TODAS las 51 páginas (ES + IT)
+✅ Meta descriptions 150-160 chars con CTA implícito
+✅ Sitemap XML con priority + changefreq + lastmod por path (home 1.0, ingreso 0.9, pillar 0.8, secciones 0.7, planchas 0.6)
+✅ Sitemap excluye /confirmacion/, /legal/ del crawl (filter)
+✅ Hreflang ES/IT + x-default
+✅ Open Graph completo (image:width/height/type/alt + secure_url + locale:alternate)
+✅ Twitter cards (image + image:alt)
 ✅ robots.txt permisivo + sitemap declarado
-✅ HTTPS con HSTS
+✅ HTTPS con HSTS + CSP completa
+✅ 301 server-side redirect / → /es/ (eliminada meta-refresh client-side)
 ✅ Headings semánticos H1-H4 jerárquicos
 ✅ Imágenes con alt text descriptivo
 ✅ ContactCTA prominente al final de Home + Iniciación
+✅ LCP preload Hero WebP responsive
 
 ---
 
-## Lo que tenés que hacer — 5 pasos
+## Pendiente off-page (lo que falta para "masoneria argentina")
+
+⏳ **Crear OG image branded 1200x630** (logo + texto + Delta Luminoso, no foto cruda) — `/public/assets/og/og-default.jpg`
+⏳ **Backlink GLA** (`masoneria-argentina.org.ar`) — solicitar listado como logia regular en directorio
+⏳ **Wikipedia ES** — crear/editar artículo "Unión Italiana N°12" con fuentes verificables (Salvarezza, refundación 2014, Templo Hijos del Trabajo)
+⏳ **Press outreach Tier 1**: La Nación cultura, Infobae, Buenos Aires Herald — pitch "patrimonio + masonería + jóvenes"
+⏳ **buenosaires.gob.ar/cultura** — Templo Hijos del Trabajo declarado de interés cultural, pedir listado oficial
+⏳ **Logias hermanas argentinas** — intercambio de footer links
+⏳ **Google Search Console** — verificar dominio + submit sitemap
+⏳ **Bing Webmaster Tools** — submit sitemap
+⏳ **Google Business Profile** (si VM acepta exponer dirección física) — domina pack local "masonería Buenos Aires"
+⏳ **Cadencia de contenido**: 1 plancha/efeméride/post por mes — cada URL nueva = keyword cola larga capturada
+
+---
+
+## Pasos inmediatos (acción del VM/Secretaría)
 
 ### 1. Google Search Console (lo más importante)
 

@@ -7,8 +7,16 @@ const lang = "es" as const;
 
 <BaseLayout
   lang={lang}
-  title="Qué es la masonería"
-  description="Definición sobria de la masonería: orden filosófica, fraternal, filosófica. Lo que es y lo que no es. Sin mitologías ni teorías conspirativas."
+  title="Qué Es La Masonería — Definición Sobria de la Orden Regular"
+  description="Qué es la masonería: orden filosófica, fraternal, NO secreta. Método del oficio en simbolismo. Lo que es y lo que NO es. Sin conspiraciones ni mitologías."
+  breadcrumb={[
+    { name: "Masonería", url: "/es/masoneria/" },
+    { name: "Qué es", url: "/es/masoneria/que-es/" },
+  ]}
+  article={{
+    section: "Filosofía",
+    keywords: ["qué es la masonería", "definición masonería", "filosofía masónica", "orden filosófica", "francmasonería"],
+  }}
 >
   <PageHero eyebrow="Definición pública" title="Qué es la masonería" glyph="delta" />
 

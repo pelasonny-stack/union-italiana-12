@@ -7,7 +7,19 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Il legame italiano" description="Dal Risorgimento alla Buenos Aires del XXI secolo: il filo italiano della Unione Italiana N°12.">
+<BaseLayout
+  lang={lang}
+  title="Legame Italiano — Risorgimento, Mazzini, Garibaldi e Buenos Aires"
+  description="Dal Risorgimento al Plata: Mazzini, Garibaldi, immigrazione italiana, Hospital Italiano, fondazione La Plata. Unione Italiana N°12 erede di quella storia."
+  breadcrumb={[
+    { name: "La Loggia", url: "/it/la-loggia/" },
+    { name: "Legame italiano", url: "/it/la-loggia/legame-italiano/" },
+  ]}
+  article={{
+    section: "Storia e Cultura",
+    keywords: ["mazzini buenos aires", "garibaldi massoneria argentina", "risorgimento argentina", "immigrazione italiana argentina", "unione e benevolenza"],
+  }}
+>
   <PageHero eyebrow="Risorgimento → Río de la Plata" title="Il filo italiano" subtitle="Dall'Ottocento alla Buenos Aires di oggi" glyph="acacia" />
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">L'italianità di questa Loggia non è decorativa. Attraversa il suo nome, la sua origine, i suoi membri fondatori e la trama politica e culturale in cui è nata.</p>

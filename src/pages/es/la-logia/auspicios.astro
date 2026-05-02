@@ -8,8 +8,12 @@ const lang = "es" as const;
 
 <BaseLayout
   lang={lang}
-  title="Afiliación — Gran Logia de la Argentina"
-  description="La Respetable Logia Unión Italiana N°12 trabaja bajo la jurisdicción de la Gran Logia de la Argentina de Libres y Aceptados Masones, fundada el 11 de diciembre de 1857 (e∴v∴)."
+  title="Afiliación GLA — Regularidad Masónica Argentina"
+  description="Unión Italiana N°12 afiliada a la Gran Logia de la Argentina (fundada 1857). Regularidad masónica internacional, jurisdicción y autoridades."
+  breadcrumb={[
+    { name: "La Logia", url: "/es/la-logia/" },
+    { name: "Afiliación GLA", url: "/es/la-logia/auspicios/" },
+  ]}
 >
   <PageHero
     eyebrow="Jurisdicción y regularidad"

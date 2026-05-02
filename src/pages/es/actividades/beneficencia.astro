@@ -5,7 +5,15 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "es" as const;
 ---
 
-<BaseLayout lang={lang} title="Beneficencia" description="Obra social de la R∴L∴ Unión Italiana N°12. Discreción y deber.">
+<BaseLayout
+  lang={lang}
+  title="Beneficencia — Filantropía Masónica Unión Italiana"
+  description="Obra de beneficencia y filantropía masónica de Unión Italiana N°12. Tradición de servicio desde 1858: epidemias, Hospital Italiano, ayuda comunitaria."
+  breadcrumb={[
+    { name: "Actividades", url: "/es/actividades/" },
+    { name: "Beneficencia", url: "/es/actividades/beneficencia/" },
+  ]}
+>
   <PageHero eyebrow="Obra social" title="Beneficencia" glyph="acacia" />
 
   <article class="container container-prose" style="padding-block: var(--space-8);">

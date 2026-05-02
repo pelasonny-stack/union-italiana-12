@@ -5,7 +5,12 @@ import MasonicGlyph from "../../components/symbols/MasonicGlyph.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Contatti" description="Due canali di contatto con la R∴L∴ Unione Italiana N°12: contatto generale e postulanti.">
+<BaseLayout
+  lang={lang}
+  title="Contatti — Loggia Massonica Unione Italiana Buenos Aires"
+  description="Contatto con la R∴L∴ Unione Italiana N°12: domande generali (unionitaliana12@gmail.com) e postulanti. Loggia massonica regolare, Barracas, Buenos Aires."
+  breadcrumb={[{ name: "Contatti", url: "/it/contatti/" }]}
+>
   <PageHero eyebrow="Due porte" title="Contatti" glyph="three-dots" />
 
   <section class="container" style="padding-block: var(--space-8);">

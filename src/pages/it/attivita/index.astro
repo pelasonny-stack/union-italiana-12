@@ -5,7 +5,12 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Attività" description="Riunioni aperte, conferenze culturali, beneficenza.">
+<BaseLayout
+  lang={lang}
+  title="Attività — Riunioni Aperte, Cultura, Beneficenza"
+  description="Attività pubbliche di Unione Italiana N°12: riunioni aperte (tornate bianche), cicli culturali e opera di beneficenza. Agenda e partecipazione."
+  breadcrumb={[{ name: "Attività", url: "/it/attivita/" }]}
+>
   <PageHero eyebrow="Il visibile" title="Attività" glyph="acacia" />
   <section class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">La Loggia lavora regolarmente in riunioni riservate ai suoi membri. Ma parte della sua vita avviene in pubblico: riunioni aperte, cicli culturali, opera di beneficenza.</p>

@@ -5,7 +5,12 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "es" as const;
 ---
 
-<BaseLayout lang={lang} title="Actividades" description="Reuniones abiertas, conferencias culturales, beneficencia: lo que la R∴L∴ Unión Italiana N°12 hace en el mundo profano.">
+<BaseLayout
+  lang={lang}
+  title="Actividades — Reuniones Abiertas, Cultura, Beneficencia"
+  description="Actividades públicas de Unión Italiana N°12: reuniones abiertas (tenidas blancas), ciclos culturales y obra de beneficencia. Agenda y participación."
+  breadcrumb={[{ name: "Actividades", url: "/es/actividades/" }]}
+>
   <PageHero eyebrow="Lo visible" title="Actividades" subtitle="Quel che la Loggia fa nel mondo profano" glyph="acacia" />
 
   <section class="container container-prose" style="padding-block: var(--space-8);">

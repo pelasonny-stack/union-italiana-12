@@ -7,6 +7,8 @@ import Footer from "../components/layout/Footer.astro";
 import Llamador from "../components/layout/Llamador.astro";
 import JsonLd from "../components/seo/JsonLd.astro";
 import EventJsonLd from "../components/seo/EventJsonLd.astro";
+import BreadcrumbJsonLd from "../components/seo/BreadcrumbJsonLd.astro";
+import ArticleJsonLd from "../components/seo/ArticleJsonLd.astro";
 import { LOCALE_LANG_TAG, type Locale, alternateLocaleUrl } from "../i18n/config";
 import { t, type UIKey } from "../i18n/ui";
 
@@ -15,15 +17,40 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogImageAlt?: string;
   noindex?: boolean;
   schemaType?: "Organization" | "WebSite";
+  /** Si true, no agrega "· R∴L∴ Unión Italiana N°12" al title — usar cuando title ya está branded. */
+  noTitleSuffix?: boolean;
+  /** Breadcrumb items (sin home, se prepende automáticamente). Si se omite, no se inyecta breadcrumb schema. */
+  breadcrumb?: Array<{ name: string; url: string }>;
+  /** Article schema opcional para páginas de contenido (historia, qué-es, biblioteca). */
+  article?: { datePublished?: string; dateModified?: string; section?: string; keywords?: string[] };
 }
 
-const { lang, title, description, ogImage = "/assets/templo/templo-1.jpeg", noindex = false, schemaType = "WebSite" } = Astro.props;
-const fullTitle = title === t("site.name", lang) ? title : `${title} · ${t("site.name", lang)}`;
+const {
+  lang,
+  title,
+  description,
+  ogImage = "/assets/templo/templo-1.jpeg",
+  ogImageAlt,
+  noindex = false,
+  schemaType = "WebSite",
+  noTitleSuffix = false,
+  breadcrumb,
+  article,
+} = Astro.props;
+const siteName = t("site.name", lang);
+const fullTitle = noTitleSuffix || title === siteName || title.includes("Unión Italiana") || title.includes("Unione Italiana")
+  ? title
+  : `${title} · ${siteName}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const altPath = alternateLocaleUrl(Astro.url.pathname, lang === "es" ? "it" : "es");
 const altUrl = new URL(altPath, Astro.site).toString();
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
+const finalOgAlt = ogImageAlt ?? (lang === "es"
+  ? "Templo Hijos del Trabajo de Barracas — R∴L∴ Unión Italiana N°12"
+  : "Tempio Hijos del Trabajo di Barracas — R∴L∴ Unione Italiana N°12");
 ---
 
 <!doctype html>
@@ -78,22 +105,54 @@ const altUrl = new URL(altPath, Astro.site).toString();
     />
 
     {/* Open Graph */}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={LOCALE_LANG_TAG[lang].replace("-", "_")} />
-    <meta property="og:site_name" content={t("site.name" as UIKey, lang)} />
-    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />}
+    <meta property="og:locale:alternate" content={lang === "es" ? "it_IT" : "es_AR"} />
+    <meta property="og:site_name" content={siteName} />
+    {ogImageUrl && (
+      <>
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:secure_url" content={ogImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:alt" content={finalOgAlt} />
+      </>
+    )}
 
     {/* Twitter / X cards */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />}
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta name="twitter:image:alt" content={finalOgAlt} />}
 
     <JsonLd lang={lang} type={schemaType} />
     <EventJsonLd lang={lang} />
+    {breadcrumb && breadcrumb.length > 0 && (
+      <BreadcrumbJsonLd
+        items={[
+          { name: lang === "es" ? "Inicio" : "Home", url: lang === "es" ? "/es/" : "/it/" },
+          ...breadcrumb,
+        ]}
+      />
+    )}
+    {article && (
+      <ArticleJsonLd
+        lang={lang}
+        title={title}
+        description={description}
+        canonical={canonical}
+        ogImage={ogImageUrl}
+        datePublished={article.datePublished}
+        dateModified={article.dateModified}
+        section={article.section}
+        keywords={article.keywords}
+      />
+    )}
 
     {/* Theme inicial — sin flash */}
     <script is:inline>

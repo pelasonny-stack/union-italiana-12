@@ -1,7 +1,7 @@
 ---
 /**
  * JSON-LD Schema.org enriquecido para SEO.
- * Organization + WebSite + ContactPoint + knowsAbout + GeoCoordinates.
+ * Organization + WebSite + Place del Templo + ContactPoint + knowsAbout + GeoCoordinates + Speakable.
  * Inyecta en <head> de TODAS las páginas (vía BaseLayout).
  */
 import type { Locale } from "../../i18n/config";
@@ -12,6 +12,39 @@ const { lang, type = "Organization" } = Astro.props;
 const url = Astro.site?.toString() ?? "https://logiaunionitaliana12.com.ar/";
 const isES = lang === "es";
 
+const templePlace = {
+  "@type": "Place",
+  "@id": `${url}#templo-hijos-del-trabajo`,
+  name: "Templo Hijos del Trabajo",
+  alternateName: ["Templo masónico de Barracas", "Tempio Figli del Lavoro"],
+  description: isES
+    ? "Templo masónico histórico de Barracas. Arquitectura egipcia diseñada por Francisco Cabot (1919). Sitio de Interés Cultural de la Ciudad Autónoma de Buenos Aires."
+    : "Tempio massonico storico di Barracas. Architettura egizia progettata da Francisco Cabot (1919). Sito di Interesse Culturale della Città Autonoma di Buenos Aires.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "San Antonio 814",
+    addressLocality: "Barracas",
+    addressRegion: "Ciudad Autónoma de Buenos Aires",
+    postalCode: "C1276",
+    addressCountry: "AR",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -34.640,
+    longitude: -58.379,
+  },
+  hasMap: "https://www.google.com/maps?q=San+Antonio+814,+Barracas,+CABA",
+  image: [
+    `${url}assets/templo/templo-1.jpeg`,
+    `${url}assets/templo/templo-2.jpeg`,
+    `${url}assets/templo/templo-3.jpeg`,
+    `${url}assets/templo/templo-4.jpeg`,
+  ],
+  isAccessibleForFree: true,
+  publicAccess: false,
+  yearBuilt: "1919",
+};
+
 const org = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -20,9 +53,14 @@ const org = {
   alternateName: [
     "Unión Italiana N°12",
     "Unione Italiana 12",
+    "Unione Italiana N°12",
     "R∴L∴ Unión Italiana N°12",
+    "R.L. Unión Italiana N°12",
     "Logia Unión Italiana 12",
     "Logia Masónica Unión Italiana",
+    "Loggia Massonica Unione Italiana",
+    "Logia regular Buenos Aires",
+    "Logia regular Argentina",
   ],
   url,
   logo: {
@@ -33,15 +71,32 @@ const org = {
   },
   image: `${url}assets/templo/templo-1.jpeg`,
   foundingDate: "1858-12-23",
+  foundingLocation: {
+    "@type": "Place",
+    name: "Buenos Aires, Argentina",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Buenos Aires",
+      addressCountry: "AR",
+    },
+  },
   founder: {
     "@type": "Person",
+    "@id": `${url}#josé-salvarezza`,
     name: "José Salvarezza",
-    description: "Médico genovés, primer Presidente de la Logia",
+    givenName: "José",
+    familyName: "Salvarezza",
+    jobTitle: isES ? "Médico, primer Presidente de la Logia" : "Medico, primo Presidente della Loggia",
+    description: isES
+      ? "Médico genovés graduado en la Universidad de Buenos Aires (1866). Primer Presidente de la Unión Italiana. Asistió sin cobrar a los enfermos durante el cólera de 1867 y la fiebre amarilla de 1871."
+      : "Medico genovese laureato all'Università di Buenos Aires (1866). Primo Presidente dell'Unione Italiana. Assisté gratuitamente i malati durante il colera del 1867 e la febbre gialla del 1871.",
+    nationality: ["IT", "AR"],
+    birthPlace: { "@type": "Place", name: "Genova, Italia" },
   },
   slogan: isES ? "Libertad, Igualdad, Fraternidad" : "Libertà, Uguaglianza, Fraternità",
   description: isES
     ? "Logia masónica regular fundada el 23 de diciembre de 1858 (e∴v∴) en Buenos Aires. De herencia italiana, afiliada a la Gran Logia de la Argentina de Libres y Aceptados Masones. Trabaja en el histórico Templo Hijos del Trabajo de Barracas. Sociedad filantrópica, filosófica y progresista."
-    : "Loggia massonica regolare fondata il 23 dicembre 1858 (e∴v∴) a Buenos Aires. Di eredità italiana, affiliata alla Gran Loggia dell'Argentina dei Liberi e Accettati Massoni. Lavora nel storico Tempio Hijos del Trabajo di Barracas.",
+    : "Loggia massonica regolare fondata il 23 dicembre 1858 (e∴v∴) a Buenos Aires. Di eredità italiana, affiliata alla Gran Loggia dell'Argentina dei Liberi e Accettati Massoni. Lavora nello storico Tempio Hijos del Trabajo di Barracas.",
   parentOrganization: {
     "@type": "Organization",
     "@id": "https://www.masoneria-argentina.org.ar/#organization",
@@ -50,23 +105,12 @@ const org = {
     url: "https://www.masoneria-argentina.org.ar/",
     foundingDate: "1857-12-11",
   },
-  location: {
-    "@type": "Place",
-    name: "Templo Hijos del Trabajo",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "San Antonio 814",
-      addressLocality: "Barracas",
-      addressRegion: "Ciudad Autónoma de Buenos Aires",
-      postalCode: "C1276",
-      addressCountry: "AR",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: -34.640,
-      longitude: -58.379,
-    },
+  memberOf: {
+    "@type": "Organization",
+    name: "Gran Logia de la Argentina de Libres y Aceptados Masones",
+    url: "https://www.masoneria-argentina.org.ar/",
   },
+  location: templePlace,
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -80,32 +124,63 @@ const org = {
       contactType: isES ? "ingreso / peticionarios" : "ingresso / postulanti",
       email: "unionitaliana12@gmail.com",
       url: `${url}${isES ? "es/ingreso/" : "it/ingresso/"}`,
+      availableLanguage: ["Spanish", "Italian"],
     },
   ],
   knowsAbout: [
     "Masonería",
     "Massoneria",
     "Freemasonry",
+    "Francmasonería",
+    "Francmasoneria",
+    "Logia masónica regular",
+    "Loggia massonica regolare",
+    "Filosofía masónica",
+    "Filosofia massonica",
+    "Iniciación masónica",
+    "Iniziazione massonica",
     "Risorgimento",
     "José Ingenieros",
+    "José Salvarezza",
+    "Salvador Ingenieros",
     "Giuseppe Garibaldi",
+    "Giuseppe Mazzini",
     "Inmigración italiana en Argentina",
+    "Immigrazione italiana in Argentina",
+    "Unione e Benevolenza",
     "Gran Logia de la Argentina",
     "Templo Hijos del Trabajo",
+    "Hospital Italiano de Buenos Aires",
     "Barracas",
+    "La Boca",
+    "Buenos Aires",
     "Filantropía masónica",
-    "Filosofía masónica",
-    "Ingreso masónica",
+    "Filantropia massonica",
     "Reuniones abiertas",
+    "Riunioni aperte",
+    "Tenidas blancas",
   ],
+  knowsLanguage: [
+    { "@type": "Language", name: "Spanish", alternateName: "es-AR" },
+    { "@type": "Language", name: "Italian", alternateName: "it-IT" },
+  ],
+  areaServed: [
+    { "@type": "Country", name: "Argentina", identifier: "AR" },
+    { "@type": "Country", name: "Italia", identifier: "IT" },
+  ],
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    name: isES ? "Logia Masónica Regular" : "Loggia Massonica Regolare",
+    credentialCategory: isES ? "Regularidad masónica internacional" : "Regolarità massonica internazionale",
+    recognizedBy: {
+      "@type": "Organization",
+      name: "Gran Logia de la Argentina de Libres y Aceptados Masones",
+      url: "https://www.masoneria-argentina.org.ar/",
+    },
+  },
   sameAs: [
     "https://www.instagram.com/unionitaliana12/",
   ],
-  memberOf: {
-    "@type": "Organization",
-    name: "Gran Logia de la Argentina de Libres y Aceptados Masones",
-    url: "https://www.masoneria-argentina.org.ar/",
-  },
 };
 
 const site = {
@@ -114,8 +189,9 @@ const site = {
   "@id": `${url}#website`,
   url,
   name: org.name,
+  alternateName: org.alternateName,
   description: org.description,
-  inLanguage: isES ? "es-AR" : "it-IT",
+  inLanguage: ["es-AR", "it-IT"],
   publisher: { "@id": `${url}#organization` },
   potentialAction: {
     "@type": "SearchAction",
@@ -124,6 +200,11 @@ const site = {
       urlTemplate: `${url}${isES ? "es" : "it"}/?q={search_term_string}`,
     },
     "query-input": "required name=search_term_string",
+  },
+  // Speakable: bloque hero para asistentes de voz (Google Assistant, Alexa).
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".lead", ".hero-subtitle"],
   },
 };
 

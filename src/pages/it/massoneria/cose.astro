@@ -5,7 +5,19 @@ import NavRelated from "../../../components/content/NavRelated.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Cos'è la massoneria" description="Definizione sobria della massoneria: ordine filosofico, fraterno, filosofico.">
+<BaseLayout
+  lang={lang}
+  title="Cos'è La Massoneria — Definizione Sobria dell'Ordine Regolare"
+  description="Cos'è la massoneria: ordine filosofico, fraterno, NON segreto. Metodo del mestiere in simbolismo. Quel che è e quel che NON è. Senza cospirazioni né miti."
+  breadcrumb={[
+    { name: "Massoneria", url: "/it/massoneria/" },
+    { name: "Cos'è", url: "/it/massoneria/cose/" },
+  ]}
+  article={{
+    section: "Filosofia",
+    keywords: ["cos'è la massoneria", "definizione massoneria", "filosofia massonica", "ordine filosofico"],
+  }}
+>
   <PageHero eyebrow="Definizione pubblica" title="Cos'è la massoneria" glyph="delta" />
 
   <section id="in-otto-secondi" class="eight-seconds container container-narrow">

@@ -23,7 +23,19 @@ const terms = [
 ];
 ---
 
-<BaseLayout lang={lang} title="Glossario massonico" description="Quindici termini chiave della massoneria regolare.">
+<BaseLayout
+  lang={lang}
+  title="Glossario Massonico — 15 Termini Chiave Definiti Pubblicamente"
+  description="Glossario massonico: 15 termini (Apprendista, Maestro, Loggia, Delta Luminoso, Costituzioni di Anderson, G∴A∴D∴U∴). Definizioni pubbliche verificabili."
+  breadcrumb={[
+    { name: "Massoneria", url: "/it/massoneria/" },
+    { name: "Glossario", url: "/it/massoneria/glossario/" },
+  ]}
+  article={{
+    section: "Glossario",
+    keywords: ["glossario massoneria", "termini massonici", "vocabolario massonico", "delta luminoso", "costituzioni di anderson"],
+  }}
+>
   <PageHero eyebrow="Quindici termini" title="Glossario" glyph="three-dots" />
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <dl class="glossary">

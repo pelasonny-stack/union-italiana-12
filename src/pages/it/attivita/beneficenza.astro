@@ -5,7 +5,15 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Beneficenza" description="Opera sociale della R∴L∴ Unione Italiana N°12. Discrezione e dovere.">
+<BaseLayout
+  lang={lang}
+  title="Beneficenza — Filantropia Massonica Unione Italiana"
+  description="Opera di beneficenza e filantropia massonica di Unione Italiana N°12. Tradizione di servizio dal 1858: epidemie, Hospital Italiano, aiuto alla comunità."
+  breadcrumb={[
+    { name: "Attività", url: "/it/attivita/" },
+    { name: "Beneficenza", url: "/it/attivita/beneficenza/" },
+  ]}
+>
   <PageHero eyebrow="Opera sociale" title="Beneficenza" glyph="acacia" />
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">La beneficenza massonica è un dovere, non una virtù declamata. La Loggia destina ogni anno risorse a opera sociale — sempre in silenzio, sempre nel rispetto della dignità di chi riceve.</p>

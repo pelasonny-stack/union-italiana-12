@@ -5,7 +5,15 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Riunioni aperte" description="Sessioni pubbliche della R∴L∴ Unione Italiana N°12.">
+<BaseLayout
+  lang={lang}
+  title="Riunioni Aperte — Tornate Bianche Pubbliche Buenos Aires"
+  description="Riunioni aperte (tornate bianche) di Unione Italiana N°12: sessioni pubbliche al Tempio Hijos del Trabajo, Barracas. Calendario, iscrizione, relatori."
+  breadcrumb={[
+    { name: "Attività", url: "/it/attivita/" },
+    { name: "Riunioni aperte", url: "/it/attivita/riunioni-aperte/" },
+  ]}
+>
   <PageHero eyebrow="Sessioni pubbliche" title="Riunioni aperte" glyph="three-dots" />
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">Le riunioni aperte sono sessioni pubbliche a cui la Loggia invita i non-massoni — di solito in occasione di una conferenza.</p>

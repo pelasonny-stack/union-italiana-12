@@ -6,7 +6,19 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Biblioteca" description="Testi massonici di pubblico dominio, bibliografia consigliata.">
+<BaseLayout
+  lang={lang}
+  title="Biblioteca Massonica — Anderson, Ingenieros, Mackey, Lavagnini"
+  description="Biblioteca massonica: Costituzioni di Anderson (1723), José Ingenieros, Mackey, Lavagnini. Testi di pubblico dominio, bibliografia consigliata, download."
+  breadcrumb={[
+    { name: "Massoneria", url: "/it/massoneria/" },
+    { name: "Biblioteca", url: "/it/massoneria/biblioteca/" },
+  ]}
+  article={{
+    section: "Biblioteca",
+    keywords: ["biblioteca massoneria", "testi massonici", "costituzioni di anderson", "josé ingenieros libri", "bibliografia massonica"],
+  }}
+>
   <PageHero eyebrow="Letture" title="Biblioteca" glyph="letter-g" />
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <h2>Testi fondamentali</h2>

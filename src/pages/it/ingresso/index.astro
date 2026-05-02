@@ -1,14 +1,44 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
+import FAQJsonLd from "../../../components/seo/FAQJsonLd.astro";
 const lang = "it" as const;
+
+const faqs = [
+  {
+    question: "Quali sono i requisiti per diventare massone nell'Unione Italiana N°12?",
+    answer: "Essere uomo libero e di buoni costumi, maggiore di età (18 anni in uso GLA, 21 in uso tradizionale), professare credenza in un Principio Creatore (Grande Architetto dell'Universo), avere intelligenza e cultura per comprendere le virtù massoniche, mezzi onesti di sussistenza e reputazione integra.",
+  },
+  {
+    question: "Come si presenta domanda di ingresso alla massoneria?",
+    answer: "La candidatura nasce sempre dall'interessato, non per invito. Nell'Unione Italiana N°12 si compila il modulo dell'Atrio del Postulante (23 campi in 3 soglie). Se il profilo è coerente, si contatta per un primo colloquio. Il processo dalla petizione all'ingresso dura tra 6 e 12 mesi.",
+  },
+  {
+    question: "La massoneria è segreta?",
+    answer: "No. È una società discreta, non segreta. I suoi principi, governo, letteratura ed esistenza sono pubblicamente disponibili dal 1717 (e∴v∴). Quel che si mantiene riservato sono certi elementi rituali (segni, tocchi, parole di riconoscimento), non l'istituzione in sé.",
+  },
+  {
+    question: "La massoneria è una religione?",
+    answer: "No. La massoneria non è una religione, non impone alcun dogma, non officia sacramenti. Chiede credenza in un Principio Creatore (Grande Architetto dell'Universo) — formula deliberatamente aperta che ogni membro interpreta secondo la propria tradizione religiosa o filosofica.",
+  },
+  {
+    question: "Quale tradizione massonica segue l'Unione Italiana N°12?",
+    answer: "Siamo affiliati alla Gran Loggia dell'Argentina dei Liberi e Accettati Massoni, fondata nel 1857 (e∴v∴). È l'unica federazione massonica regolare riconosciuta internazionalmente in Argentina, membro fondatore della Confederazione Massonica Interamericana.",
+  },
+  {
+    question: "Dove si riunisce la Loggia?",
+    answer: "Nel Tempio Hijos del Trabajo, San Antonio 814, Barracas, Buenos Aires. Architettura egizia (1919) di Francisco Cabot, dichiarato Sito di Interesse Culturale dalla Città Autonoma di Buenos Aires nel 2002.",
+  },
+];
 ---
 
 <BaseLayout
   lang={lang}
-  title="Ingresso"
-  description="Come iniziarsi nella R∴L∴ Unione Italiana N°12. Chi può presentare domanda, il processo, ciò che ci si aspetta dal postulante."
+  title="Come Diventare Massone Buenos Aires — Ingresso Unione Italiana N°12"
+  description="Come diventare massone in Argentina: requisiti (18+, libero pensatore), processo (petizione → colloqui → ballottaggio), 6-12 mesi. Atrio del Postulante aperto."
+  breadcrumb={[{ name: "Ingresso", url: "/it/ingresso/" }]}
 >
+  <FAQJsonLd faqs={faqs} />
   <PageHero eyebrow="Chi bussa alle porte" title="Iniziarsi nell'Ordine" glyph="square-compass" />
 
   <article class="container container-prose" style="padding-block: var(--space-8);">

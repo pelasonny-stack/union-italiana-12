@@ -13,7 +13,19 @@ const miembros = [
 ];
 ---
 
-<BaseLayout lang={lang} title="Membri illustri" description="Figure storiche della R∴L∴ Unione Italiana N°12.">
+<BaseLayout
+  lang={lang}
+  title="Membri Illustri — José Ingenieros, Salvarezza, Garibaldi"
+  description="Membri illustri di Unione Italiana N°12: José Salvarezza (medico fondatore 1858), José Ingenieros (filosofo, L'uomo mediocre), Salvatore Ingegnieros, Garibaldi."
+  breadcrumb={[
+    { name: "La Loggia", url: "/it/la-loggia/" },
+    { name: "Membri illustri", url: "/it/la-loggia/membri-illustri/" },
+  ]}
+  article={{
+    section: "Biografie",
+    keywords: ["josé ingenieros massone", "josé salvarezza medico", "salvatore ingegnieros", "garibaldi massone", "massoni argentini illustri"],
+  }}
+>
   <PageHero eyebrow="Passato documentato" title="Membri illustri" subtitle="Solo persone defunte, solo membership documentata" glyph="letter-g" />
   <section class="container" style="padding-block: var(--space-8);">
     <ul class="miembros-grid">

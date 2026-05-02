@@ -11,8 +11,9 @@ const sorted = all.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 
 <BaseLayout
   lang={lang}
-  title="Tavole — lavori pubblicati"
-  description="Lavori scritti pubblicati dalla R∴L∴ Unione Italiana N°12 conforme all'Art. 7° del Regolamento di Pubblicazione della Gran Loggia dell'Argentina."
+  title="Tavole Massoniche — Lavori Scritti Pubblicati"
+  description="Tavole massoniche di Unione Italiana N°12: studi, riflessioni e lavori scritti pubblicati conforme al Regolamento della Gran Loggia dell'Argentina."
+  breadcrumb={[{ name: "Tavole", url: "/it/tavole/" }]}
 >
   <PageHero
     eyebrow="Lavori scritti"

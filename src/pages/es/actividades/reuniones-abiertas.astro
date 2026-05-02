@@ -5,7 +5,15 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "es" as const;
 ---
 
-<BaseLayout lang={lang} title="Reuniones abiertas" description="Sesiones públicas de la R∴L∴ Unión Italiana N°12. Calendario, inscripción, expositores.">
+<BaseLayout
+  lang={lang}
+  title="Reuniones Abiertas — Tenidas Blancas Públicas Buenos Aires"
+  description="Reuniones abiertas (tenidas blancas) de Unión Italiana N°12: sesiones públicas en Templo Hijos del Trabajo, Barracas. Calendario, inscripción, expositores."
+  breadcrumb={[
+    { name: "Actividades", url: "/es/actividades/" },
+    { name: "Reuniones abiertas", url: "/es/actividades/reuniones-abiertas/" },
+  ]}
+>
   <PageHero eyebrow="Sesiones públicas" title="Reuniones abiertas" subtitle="Aperte al mondo profano" glyph="three-dots" />
 
   <article class="container container-prose" style="padding-block: var(--space-8);">

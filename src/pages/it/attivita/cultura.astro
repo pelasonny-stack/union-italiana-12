@@ -5,7 +5,15 @@ import Stub from "../../../components/content/Stub.astro";
 const lang = "it" as const;
 ---
 
-<BaseLayout lang={lang} title="Ciclo culturale" description="Conferenze e presentazioni di libri.">
+<BaseLayout
+  lang={lang}
+  title="Ciclo Culturale — Conferenze e Presentazioni Pubbliche"
+  description="Ciclo culturale di Unione Italiana N°12: conferenze, presentazioni di libri, cicli tematici aperti al pubblico al Tempio Hijos del Trabajo."
+  breadcrumb={[
+    { name: "Attività", url: "/it/attivita/" },
+    { name: "Ciclo culturale", url: "/it/attivita/cultura/" },
+  ]}
+>
   <PageHero eyebrow="Cultura" title="Ciclo culturale" glyph="letter-g" />
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">La Loggia organizza, alternando con le sue riunioni interne, incontri culturali aperti al pubblico.</p>

@@ -5,7 +5,19 @@ import NavRelated from "../../../components/content/NavRelated.astro";
 const lang = "es" as const;
 ---
 
-<BaseLayout lang={lang} title="Principios de la Orden" description="Libertad, Igualdad, Fraternidad, Tolerancia, y la cuestión del Gran Arquitecto del Universo.">
+<BaseLayout
+  lang={lang}
+  title="Principios Masónicos — Libertad, Igualdad, Fraternidad, Tolerancia"
+  description="Principios masónicos: Libertad, Igualdad, Fraternidad, Tolerancia. Gran Arquitecto del Universo. Laicidad y compromiso cívico en la masonería argentina."
+  breadcrumb={[
+    { name: "Masonería", url: "/es/masoneria/" },
+    { name: "Principios", url: "/es/masoneria/principios/" },
+  ]}
+  article={{
+    section: "Filosofía",
+    keywords: ["principios masonería", "libertad igualdad fraternidad masones", "gran arquitecto del universo", "tolerancia masónica", "laicidad masónica"],
+  }}
+>
   <PageHero eyebrow="Lo que articula la práctica" title="Principios" glyph="three-dots" />
 
   <article class="container container-prose" style="padding-block: var(--space-8);">
