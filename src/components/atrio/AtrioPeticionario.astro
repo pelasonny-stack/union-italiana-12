@@ -783,18 +783,87 @@ const labels = lang === "es"
     font-size: 0.85rem;
   }
   .check input { width: auto; margin: 0; }
+
+  /* Checkboxes de declaración / consentimiento — visibilidad reforzada */
   .check-block {
     display: flex;
     align-items: flex-start;
-    gap: var(--space-2);
-    background: transparent;
-    border: none;
-    padding: var(--space-2) 0;
-    font-size: 0.9rem;
-    color: var(--ink-200);
+    gap: var(--space-3);
+    background: rgba(192, 155, 82, 0.06);
+    border: 1px solid rgba(192, 155, 82, 0.45);
+    padding: var(--space-4);
+    margin-block: var(--space-3);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--fg);
+    cursor: pointer;
+    border-radius: 2px;
+    transition:
+      background-color var(--duration-normal) var(--ease-ceremonial),
+      border-color var(--duration-normal) var(--ease-ceremonial);
   }
-  .check-block input { margin-top: 0.25rem; }
-  .check-block a { color: var(--gold-700); }
+  .check-block:hover {
+    background: rgba(192, 155, 82, 0.12);
+    border-color: var(--gold-700);
+  }
+  .check-block:has(input:checked) {
+    background: rgba(192, 155, 82, 0.14);
+    border-color: var(--gold-700);
+  }
+  .check-block:has(input:focus-visible) {
+    outline: 2px solid var(--gold-700);
+    outline-offset: 2px;
+  }
+  .check-block input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    margin-top: 2px;
+    border: 2px solid var(--gold-700);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: background-color var(--duration-fast) var(--ease-ceremonial);
+  }
+  .check-block input[type="checkbox"]:checked {
+    background: var(--gold-700);
+  }
+  .check-block input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid var(--bg-base, #0b0b0f);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .check-block input[type="checkbox"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(192, 155, 82, 0.35);
+  }
+  .check-block > span {
+    flex: 1;
+  }
+  .check-block a {
+    color: var(--gold-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .check-block a:hover {
+    color: var(--gold-600, var(--gold-700));
+    text-decoration-thickness: 2px;
+  }
+  /* Marcador "obligatorio" sutil */
+  .check-block:has(input[required])::before {
+    content: "·";
+    position: absolute;
+    color: transparent;
+  }
 
 
   .step-nav {
