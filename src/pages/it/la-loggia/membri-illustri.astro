@@ -3,41 +3,158 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
 import NavRelated from "../../../components/content/NavRelated.astro";
 import Stub from "../../../components/content/Stub.astro";
+import PersonJsonLd from "../../../components/seo/PersonJsonLd.astro";
 const lang = "it" as const;
+const pageUrl = "https://logiaunionitaliana12.com.ar/it/la-loggia/membri-illustri/";
 
 const miembros = [
-  { name: "José Ingenieros", years: "1877 (e∴v∴)—1925", role: "Medico, sociologo, saggista. Iniziato nell'Unione Italiana seguendo il padre.", confirmed: true },
-  { name: "Salvatore Ingegnieros", years: "1850 (e∴v∴)—1924", role: "Giornalista, socialista della prima ora, padre di José. Immigrato siciliano.", confirmed: true },
-  { name: "Giuseppe Garibaldi", years: "1807 (e∴v∴)—1882 (e∴v∴)", role: "Iniziato a Montevideo (1844 (e∴v∴)). Ombra tutelare di ogni loggia italiana del Río de la Plata, non membro di questa Loggia.", confirmed: false },
-  { name: "Antonio Devoto", years: "1833 (e∴v∴)—1916", role: "Banchiere, fondatore del Banco di Italia e Río de la Plata, mecenate della collettività italiana.", confirmed: false },
+  {
+    name: "José Salvarezza",
+    years: "secolo XIX",
+    role: "Medico genovese, laureato all'Università di Buenos Aires (1866 (e∴v∴)). Primo Presidente dell'Unione Italiana (1858 (e∴v∴)) e cofondatore dell'Unione e Benevolenza (luglio 1858 (e∴v∴)). Assisté gratuitamente le vittime delle epidemie di colera (1867 (e∴v∴)) e febbre gialla (1871 (e∴v∴)) a La Boca e Barracas. Nel 1873 (e∴v∴) fu Garante d'Amicizia per il Grande Oriente.",
+    confirmed: true,
+  },
+  {
+    name: "José Ingenieros",
+    years: "1877 (e∴v∴)—1925 (e∴v∴)",
+    role: "Medico, psichiatra, sociologo e saggista. Nato Giuseppe a Palermo, arrivò a Buenos Aires nel 1885 (e∴v∴) con il padre. Iniziato il 5 agosto 1898 (e∴v∴) nella Loggia Unione Italiana Prima N°90 —ramo derivato dallo scisma— al raggiungimento della maggiore età. Gran Ospedaliere della Gran Loggia Argentina nel 1901-1902 (e∴v∴). Autore di L'uomo mediocre (1913 (e∴v∴)), Verso una morale senza dogmi (1917 (e∴v∴)) e Le forze morali (1925 (e∴v∴), postumo).",
+    confirmed: true,
+  },
+  {
+    name: "Salvatore Ingegnieros",
+    yearsFull: "Salvatore Ingegnieros Napolitano, 1850 (e∴v∴)—1922 (e∴v∴)",
+    years: "1850 (e∴v∴)—1922 (e∴v∴)",
+    role: "Cappellaio artigiano di Palermo, Sicilia. Giornalista socialista, perseguitato in Italia. Cofondatore nel 1867 (e∴v∴) della loggia 'Giorgio Washington' prima di emigrare. Arrivò a Buenos Aires nel settembre 1885 (e∴v∴). Fondò e diresse per anni la Rivista Massonica (che nel 1904-1905 (e∴v∴) cambiò nome in La Catena di Unione). Tornò in Sicilia nel 1916 (e∴v∴). Padre di José Ingenieros.",
+    confirmed: true,
+  },
+  {
+    name: "Giuseppe Garibaldi",
+    years: "1807 (e∴v∴)—1882 (e∴v∴)",
+    role: "Eroe del Risorgimento italiano. Iniziato a Montevideo nell'agosto 1844 (e∴v∴). Fondò una loggia a Gualeguay, Entre Ríos (1857 (e∴v∴)). Gran Maestro del Grande Oriente d'Italia (1867 (e∴v∴)). Ombra tutelare di ogni loggia italiana del Río de la Plata. Legame culturale, non membro di questa Loggia.",
+    confirmed: false,
+  },
+  {
+    name: "Roque Pérez",
+    years: "1815 (e∴v∴)—1871 (e∴v∴)",
+    role: "Gran Maestro della massoneria argentina. Presiedette la Commissione Popolare durante la febbre gialla del 1871 (e∴v∴); morì in adempimento del dovere assistendo le vittime. Legame civico istituzionale con Unione Italiana, non membro formale.",
+    confirmed: false,
+  },
+  {
+    name: "Francesco Tamburini",
+    years: "1846 (e∴v∴)—1891 (e∴v∴)",
+    role: "Architetto italiano nato ad Ascoli Piceno, arrivò a Buenos Aires nel 1881 (e∴v∴). Ispettore Generale di Architettura Nazionale dal 1883 (e∴v∴). Completò il Palazzo Cangallo (sede attuale della Gran Loggia, inaugurato nel 1872 (e∴v∴)), firmò l'ampliamento della Casa Rosada, il Teatro Colón nella sua prima fase, l'Ospedale Militare e il Dipartimento Centrale di Polizia. Massone confermato.",
+    confirmed: false,
+  },
+];
+
+const personSchemas = [
+  {
+    name: "José Salvarezza",
+    givenName: "José",
+    familyName: "Salvarezza",
+    birthPlace: "Genova, Italia",
+    nationality: ["IT", "AR"],
+    jobTitle: "Medico, primo Presidente dell'Unione Italiana",
+    description: "Medico genovese laureato all'Università di Buenos Aires (1866 (e∴v∴)). Primo Presidente della R∴L∴ Unione Italiana N°12 (1858 (e∴v∴)) e cofondatore dell'Unione e Benevolenza. Assisté gratuitamente le vittime del colera (1867 (e∴v∴)) e della febbre gialla (1871 (e∴v∴)).",
+  },
+  {
+    name: "José Ingenieros",
+    givenName: "José",
+    familyName: "Ingenieros",
+    alternateName: "Giuseppe Ingegnieros",
+    birthDate: "1877-04-24",
+    deathDate: "1925-10-31",
+    birthPlace: "Palermo, Italia",
+    nationality: ["IT", "AR"],
+    jobTitle: "Medico, psichiatra, sociologo, saggista, massone",
+    description: "Filosofo e saggista argentino di origine italiana. Iniziato massone il 5 agosto 1898 (e∴v∴) nella Loggia Unione Italiana Prima N°90. Gran Ospedaliere della Gran Loggia Argentina (1901-1902 (e∴v∴)). Autore di L'uomo mediocre (1913 (e∴v∴)) e Le forze morali (1925 (e∴v∴)).",
+    knownFor: ["L'uomo mediocre", "Verso una morale senza dogmi", "Le forze morali", "Sociologia argentina"],
+    sameAs: ["https://it.wikipedia.org/wiki/José_Ingenieros", "https://www.wikidata.org/wiki/Q1356112"],
+  },
+  {
+    name: "Salvatore Ingegnieros",
+    alternateName: "Salvatore Ingegnieros Napolitano",
+    birthDate: "1850-01-01",
+    deathDate: "1922-12-31",
+    birthPlace: "Palermo, Sicilia, Italia",
+    nationality: ["IT", "AR"],
+    jobTitle: "Giornalista, editore, massone",
+    description: "Cappellaio artigiano di Palermo. Giornalista socialista perseguitato in Italia. Cofondatore nel 1867 (e∴v∴) della loggia 'Giorgio Washington'. Arrivò a Buenos Aires nel 1885 (e∴v∴). Fondò e diresse la Rivista Massonica (poi La Catena di Unione, 1904-1905 (e∴v∴)). Padre di José Ingenieros.",
+  },
+  {
+    name: "Giuseppe Garibaldi",
+    givenName: "Giuseppe",
+    familyName: "Garibaldi",
+    birthDate: "1807-07-04",
+    deathDate: "1882-06-02",
+    birthPlace: "Nizza",
+    nationality: ["IT"],
+    jobTitle: "Militare, politico, massone",
+    description: "Eroe del Risorgimento italiano. Iniziato massone a Montevideo nell'agosto 1844 (e∴v∴). Fondò una loggia a Gualeguay, Entre Ríos (1857 (e∴v∴)). Gran Maestro del Grande Oriente d'Italia (1867 (e∴v∴)).",
+    sameAs: ["https://it.wikipedia.org/wiki/Giuseppe_Garibaldi", "https://www.wikidata.org/wiki/Q34433"],
+  },
+  {
+    name: "Roque Pérez",
+    givenName: "Roque",
+    familyName: "Pérez",
+    birthDate: "1815-08-16",
+    deathDate: "1871-04-08",
+    nationality: ["AR"],
+    jobTitle: "Giurista, Gran Maestro della massoneria argentina",
+    description: "Gran Maestro della massoneria argentina. Presiedette la Commissione Popolare durante la febbre gialla del 1871 (e∴v∴); morì in adempimento del dovere assistendo le vittime.",
+    sameAs: ["https://es.wikipedia.org/wiki/Roque_P%C3%A9rez_(masonería)"],
+  },
+  {
+    name: "Francesco Tamburini",
+    givenName: "Francesco",
+    familyName: "Tamburini",
+    alternateName: "Francisco Tamburini",
+    birthDate: "1846-03-01",
+    deathDate: "1891-05-04",
+    birthPlace: "Ascoli Piceno, Italia",
+    nationality: ["IT", "AR"],
+    jobTitle: "Architetto, Ispettore Generale di Architettura Nazionale",
+    description: "Architetto italiano. Arrivò a Buenos Aires nel 1881 (e∴v∴). Ispettore Generale di Architettura Nazionale dal 1883 (e∴v∴). Completò il Palazzo Cangallo (sede della Gran Loggia), firmò l'ampliamento della Casa Rosada e il Teatro Colón. Massone confermato.",
+    sameAs: ["https://es.wikipedia.org/wiki/Francisco_Tamburini"],
+  },
 ];
 ---
 
 <BaseLayout
   lang={lang}
   title="Membri Illustri — José Ingenieros, Salvarezza, Garibaldi"
-  description="Membri illustri di Unione Italiana N°12: José Salvarezza (fondatore 1858 e∴v∴), José Ingenieros (filosofo, L'uomo mediocre), Salvatore Ingegnieros, Garibaldi."
+  description="Membri illustri di Unione Italiana N°12: José Salvarezza (fondatore 1858 (e∴v∴)), José Ingenieros (filosofo, L'uomo mediocre), Salvatore Ingegnieros, Garibaldi e altri."
   breadcrumb={[
     { name: "La Loggia", url: "/it/la-loggia/" },
     { name: "Membri illustri", url: "/it/la-loggia/membri-illustri/" },
   ]}
   article={{
     section: "Biografie",
-    keywords: ["josé ingenieros massone", "josé salvarezza medico", "salvatore ingegnieros", "garibaldi massone", "massoni argentini illustri"],
+    keywords: ["josé ingenieros massone", "josé salvarezza medico", "salvatore ingegnieros", "francesco tamburini architetto", "garibaldi massone", "massoni argentini illustri"],
   }}
 >
-  <PageHero eyebrow="Passato documentato" title="Membri illustri" subtitle="Solo persone defunte, solo membership documentata" glyph="letter-g" />
+  <PersonJsonLd people={personSchemas} pageUrl={pageUrl} />
+  <PageHero eyebrow="Passato documentato" title="Membri illustri" subtitle="Solo persone defunte, solo appartenenza documentata" glyph="letter-g" />
+
   <section class="container" style="padding-block: var(--space-8);">
+    <p class="container-prose" style="margin: 0 auto var(--space-8);">
+      Ogni profilo cita fonti verificabili. Le persone segnate come <em>legame culturale</em>
+      non furono membri formali di questa Loggia, ma appartengono all'ecosistema massonico
+      italo-argentino di cui facciamo parte.
+    </p>
+
     <ul class="miembros-grid">
       {miembros.map(m => (
         <li class="miembro-card">
           <p class="overline">{m.years}{m.confirmed ? " · Membro confermato" : " · Legame culturale"}</p>
           <h3>{m.name}</h3>
+          {"yearsFull" in m && <p class="alt-name">{m.yearsFull}</p>}
           <p class="role">{m.role}</p>
         </li>
       ))}
     </ul>
-    <Stub note="La lista completa sarà pubblicata quando l'archivista della Loggia confermerà i registri del XIX secolo." />
+
+    <Stub note="La lista completa sarà pubblicata quando l'archivista della Loggia confermerà i registri del XIX secolo. Ogni profilo avrà la sua pagina con biografia estesa e bibliografia." />
   </section>
 
   <NavRelated
@@ -49,8 +166,21 @@ const miembros = [
 </BaseLayout>
 
 <style>
-  .miembros-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); max-width: var(--container-default); margin: 0 auto; }
-  .miembro-card { padding: var(--space-6); background: var(--bg-elevated); border: 1px solid var(--border); }
+  .miembros-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    max-width: var(--container-default);
+    margin: 0 auto;
+  }
+  .miembro-card {
+    padding: var(--space-6);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+  }
   .miembro-card h3 { margin: var(--space-1) 0; font-size: var(--text-h4); }
+  .miembro-card .alt-name { color: var(--fg-subtle); font-style: italic; font-size: 0.85rem; margin: 0 0 var(--space-2); }
   .miembro-card .role { color: var(--fg-muted); margin: 0; }
 </style>

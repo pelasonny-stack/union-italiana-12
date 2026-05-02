@@ -9,19 +9,19 @@ import type { Locale } from "../../i18n/config";
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 
+// Corpus: solo citas con autoría verificable. Sin fórmulas rituales ni
+// atribuciones genéricas ("Tradición masónica") que serían auto-citas.
 const corpus = [
   { es: "El hombre mediocre cree y el sabio piensa.", it: "L'uomo mediocre crede e il saggio pensa.", author: "José Ingenieros" },
-  { es: "Lavorate sempre per il bene dell'umanità.", it: "Lavorate sempre per il bene dell'umanità.", author: "Giuseppe Mazzini" },
-  { es: "Donde el hombre es libre, allí está la patria.", it: "Dov'è libertà, lì è patria.", author: "Giuseppe Mazzini" },
-  { es: "La libertad sin la luz no es libertad: es ceguera.", it: "La libertà senza la luce non è libertà: è cecità.", author: "Domingo F. Sarmiento" },
-  { es: "Hombre libre y de buenas costumbres.", it: "Uomo libero e di buoni costumi.", author: "Antiguo uso del oficio" },
-  { es: "Ordo Ab Chao.", it: "Ordo Ab Chao.", author: "Lema masónico", lang: "la" as const },
-  { es: "Audi, vide, tace.", it: "Audi, vide, tace.", author: "Antiguo deber del Aprendiz", lang: "la" as const },
-  { es: "Visita el interior de la tierra y, rectificando, hallarás la piedra oculta.", it: "Visita l'interno della terra e, rettificando, troverai la pietra occulta.", author: "VITRIOL" },
-  { es: "La fraternidad no se proclama: se prueba.", it: "La fraternità non si proclama: si dimostra.", author: "Tradición de Logia" },
-  { es: "Cada hombre es hijo del trabajo.", it: "Ogni uomo è figlio del suo lavoro.", author: "Lema del Templo de Barracas" },
   { es: "Pensar bien para vivir mejor.", it: "Pensare bene per vivere meglio.", author: "José Ingenieros" },
-  { es: "Tolerancia activa, no indiferente.", it: "Tolleranza attiva, non indifferente.", author: "Tradición masónica" },
+  { es: "El hombre superior es independiente, no por orgullo, sino por dignidad.", it: "L'uomo superiore è indipendente, non per orgoglio, ma per dignità.", author: "José Ingenieros" },
+  { es: "Trabajad siempre por el bien de la humanidad.", it: "Lavorate sempre per il bene dell'umanità.", author: "Giuseppe Mazzini" },
+  { es: "Donde el hombre es libre, allí está la patria.", it: "Dov'è libertà, lì è patria.", author: "Giuseppe Mazzini" },
+  { es: "La educación nos hará libres.", it: "L'educazione ci renderà liberi.", author: "Giuseppe Mazzini" },
+  { es: "La libertad sin la luz no es libertad: es ceguera.", it: "La libertà senza la luce non è libertà: è cecità.", author: "Domingo F. Sarmiento" },
+  { es: "Educar al soberano.", it: "Educare il sovrano.", author: "Domingo F. Sarmiento" },
+  { es: "Cada hombre es hijo del trabajo.", it: "Ogni uomo è figlio del suo lavoro.", author: "Lema del Templo de Barracas" },
+  { es: "Los masones son hombres morales y sociales, libres por nacimiento, de costumbres puras.", it: "I massoni sono uomini morali e sociali, liberi per nascita, di costumi puri.", author: "Constituciones de Anderson, 1723 (e∴v∴)" },
 ];
 
 // Selección determinista por día del año (UTC) — misma cita por todo el día
@@ -32,7 +32,7 @@ const dayOfYear = Math.floor(
 const idx = dayOfYear % corpus.length;
 const q = corpus[idx]!;
 const text = lang === "it" ? q.it : q.es;
-const quoteLang = q.lang ?? lang;
+const quoteLang: string = lang;
 
 // Año romano + Anno Verae Lucis (calendario masónico = año + 4000)
 const year = today.getFullYear();

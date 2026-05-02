@@ -12,7 +12,7 @@ Mientras tanto: https://logiaunionitaliana12.pelasonny-stack.workers.dev/
 ✅ JSON-LD Place del Templo Hijos del Trabajo separado (con address, geo, hasMap, yearBuilt, isAccessibleForFree, image gallery)
 ✅ JSON-LD WebSite con SearchAction + Speakable + inLanguage array
 ✅ JSON-LD FAQPage en /ingreso/ (rich result acordeón)
-✅ JSON-LD Article en historia, templo, que-es, principios, glosario, biblioteca, miembros-ilustres, vinculo-italiano + IT (datePublished, dateModified, section, keywords, speakable)
+✅ JSON-LD Article en historia, templo, que-es, principios, biblioteca, miembros-ilustres, vinculo-italiano + IT (datePublished, dateModified, section, keywords, speakable)
 ✅ JSON-LD BreadcrumbList en TODAS las páginas profundidad ≥ 2 (CTR +20-25% en SERP)
 ✅ JSON-LD Person (@graph) en miembros-ilustres con 6 figuras (Salvarezza, José Ingenieros, Salvador Ingenieros, Garibaldi, Roque Pérez, Tamburini) — sameAs Wikipedia + Wikidata para Ingenieros y Garibaldi
 ✅ Meta titles 60-65 chars con keywords + branded en TODAS las 51 páginas (ES + IT)

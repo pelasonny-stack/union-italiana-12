@@ -9,7 +9,7 @@ location:
   city: "Barracas, CABA"
 kind: "reunión-blanca"
 isPublic: true
-excerpt: "Riunione aperta aperta al pubblico sull'eredità dell'immigrazione italiana nella cultura argentina del Centenario."
+excerpt: "Riunione aperta al pubblico sull'eredità dell'immigrazione italiana nella cultura argentina del Centenario."
 draft: false
 ---
 

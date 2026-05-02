@@ -1,20 +1,42 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+const currentYear = new Date().getUTCFullYear();
+const yearsActive = currentYear - 1858;
+const itNumber = (n: number): string => {
+  const ones = ["", "uno", "due", "tre", "quattro", "cinque", "sei", "sette", "otto", "nove"];
+  const tens = ["", "dieci", "venti", "trenta", "quaranta", "cinquanta", "sessanta", "settanta", "ottanta", "novanta"];
+  if (n < 100) {
+    if (n < 10) return ones[n] ?? String(n);
+    if (n < 20) {
+      const teens = ["dieci", "undici", "dodici", "tredici", "quattordici", "quindici", "sedici", "diciassette", "diciotto", "diciannove"];
+      return teens[n - 10] ?? String(n);
+    }
+    const t = Math.floor(n / 10), o = n % 10;
+    return (tens[t] ?? "") + (o ? (o === 1 || o === 8 ? (tens[t]?.slice(0, -1) ?? "") + (ones[o] ?? "") : (ones[o] ?? "")) : "");
+  }
+  if (n < 200) return "cento" + (n > 100 ? itNumber(n - 100) : "");
+  return String(n);
+};
+const yearsItalian = itNumber(yearsActive);
 import PageHero from "../../../components/content/PageHero.astro";
 import NavRelated from "../../../components/content/NavRelated.astro";
 import Quote from "../../../components/content/Quote.astro";
 const lang = "it" as const;
 
 const milestones = [
-  { year: "1858 (e∴v∴)", title: "Fondazione", text: "23 dicembre. Un gruppo di massoni italiani e argentini inaugura le attività della Loggia con il nome di Unione Italiana. Primo Presidente: José Salvarezza, medico e figura prominente della comunità italiana." },
-  { year: "1860 (e∴v∴)—1880 (e∴v∴)", title: "Risorgimento dal Río de la Plata", text: "La Loggia opera come rifugio spirituale e operativo per i massoni italiani impegnati nell'unificazione della penisola e nella causa repubblicana." },
-  { year: "1871 (e∴v∴)", title: "Febbre gialla", text: "I membri della Loggia partecipano, insieme alla Commissione Popolare, all'assistenza medica durante l'epidemia di febbre gialla che devastò Buenos Aires." },
-  { year: "1872 (e∴v∴)", title: "Ospedale Italiano", text: "Membri della Loggia collaborano attivamente alla gestazione e al consolidamento dell'Ospedale Italiano di Buenos Aires." },
-  { year: "1882 (e∴v∴)", title: "Fondazione di La Plata", text: "Massoni della Loggia partecipano nell'équipe diretta da Dardo Rocha nella fondazione della nuova capitale provinciale." },
-  { year: "1898 (e∴v∴)", title: "José Ingenieros", text: "Il giovane José Ingenieros è iniziato nella Loggia Unione Italiana Prima N°90. Continuerà l'opera pubblicistica massonica iniziata dal padre Salvatore Ingegnieros." },
-  { year: "XX secolo", title: "Continuità e silenzio", text: "Le due guerre mondiali, i successivi colpi di stato e gli anni dell'ultima dittatura mettono alla prova la continuità istituzionale." },
-  { year: "2014 (e∴v∴)", title: "Rifondazione", text: "Un gruppo di massoni, preoccupati per la mancanza di presenza dell'Ordine a La Boca, chiede l'autorizzazione per ristabilire l'Unione Italiana N°12." },
-  { year: "Oggi", title: "Tempio Hijos del Trabajo", text: "Lavora con regolarità nel storico Tempio Hijos del Trabajo, San Antonio 814, Barracas — affiliata alla Gran Loggia dell'Argentina." },
+  { year: "1858 (e∴v∴) · 23·XII", title: "Fondazione", text: "Si inaugurano le attività della Loggia con il nome originale di Unione Italiana, con sedute in italiano. Primo Presidente: il medico genovese José Salvarezza, laureato all'Università di Buenos Aires (1866 (e∴v∴)) e figura prominente della collettività italiana porteña." },
+  { year: "1858 (e∴v∴) · anno cardine", title: "Mutua e Loggia", text: "Cinque mesi prima, il 18 luglio, aveva aperto le porte l'Unione e Benevolenza —prima Società Italiana di Mutuo Soccorso del Sud America— sotto il patrocinio simbolico di Mazzini e Garibaldi. Mutua e Loggia: due mani della stessa comunità italiana." },
+  { year: "1867 (e∴v∴) · colera", title: "Prima epidemia", text: "Salvarezza assiste gratuitamente le vittime dell'epidemia di colera, in particolare gli immigranti ammassati a La Boca e Barracas." },
+  { year: "1871 (e∴v∴) · 27·I — 11·VI", title: "Febbre gialla", text: "Si scatena l'epidemia che uccide 14.000 persone a Buenos Aires, 9.000 di esse italiane. I membri della Loggia si uniscono alla Commissione Popolare presieduta da Roque Pérez —Gran Maestro, deceduto in adempimento del dovere. Salvarezza non si assenta dal fronte sanitario." },
+  { year: "1872 (e∴v∴) · Ospedale Italiano", text: "Le logge italiane sostengono gli anni difficili dell'Ospedale Italiano —fondato nel 1853 (e∴v∴) con la prima pietra nel 1854 (e∴v∴)— nel suo consolidamento istituzionale." },
+  { year: "1876 (e∴v∴)—1877 (e∴v∴) · scisma", title: "Unione Italiana II", text: "Una maggioranza di membri chiede l'ingresso al Grande Oriente d'Italia: il 23 marzo 1877 (e∴v∴) nasce l'Unione Italiana II. La fusione successiva riunirà più di 600 membri." },
+  { year: "1882 (e∴v∴) · 19·XI", title: "Fondazione di La Plata", text: "Nella prima pietra della nuova capitale provinciale si depone una medaglia dell'Unione Italiana, insieme ad altre di logge contemporanee. L'opera è diretta da Dardo Rocha, massone egli stesso, con tracciato di Pedro Benoit." },
+  { year: "1898 (e∴v∴) · 5·VIII", title: "José Ingenieros", text: "Il giovane José Ingenieros, figlio del giornalista siciliano Salvatore Ingegnieros, viene iniziato nella Loggia Unione Italiana Prima N°90 —ramo derivato dallo scisma— al raggiungimento della maggiore età. Sarà Gran Ospedaliere della massoneria argentina nel 1901-1902 (e∴v∴) e autore de L'uomo mediocre (1913 (e∴v∴))." },
+  { year: "XX secolo", title: "Continuità e silenzio", text: "Le due guerre mondiali, i successivi colpi di stato e gli anni dell'ultima dittatura mettono alla prova la regolarità istituzionale. La Loggia attraversa periodi più visibili e altri più riservati." },
+  { year: "1983 (e∴v∴) · 6·IV", title: "Scioglimento di Hijos del Trabajo", text: "Per Decreto 4228, la Gran Loggia scioglie la R∴L∴ Hijos del Trabajo —fondata il 14 maggio 1882 (e∴v∴), consacrata nel suo tempio di San Antonio 814 il 22 giugno 1890 (e∴v∴)— dopo 101 anni di vita." },
+  { year: "2003 (e∴v∴)", title: "Hijos del Trabajo N°74", text: "La Gran Loggia autorizza la riapertura delle colonne come R∴L∴ Hijos del Trabajo N°74, restituendo l'attività rituale al tempio storico di Barracas." },
+  { year: "2014 (e∴v∴)", title: "Rifondazione dell'Unione Italiana N°12", text: "Un gruppo di massoni, preoccupati per la mancanza di presenza dell'Ordine a La Boca —nucleo storico dell'immigrazione italiana—, chiede autorizzazione per ristabilire l'Unione Italiana. La Loggia riprende la sua attività regolare nello stesso tempio dove, quasi un secolo e mezzo prima, la collettività italiana aveva eretto il suo tabernacolo." },
+  { year: "Oggi", title: "A Buenos Aires", text: "Lavoriamo i lunedì nel storico Tempio Hijos del Trabajo, San Antonio 814, Barracas — affiliata alla Gran Loggia dell'Argentina dei Liberi e Accettati Massoni." },
 ];
 ---
 
@@ -42,7 +64,7 @@ const milestones = [
     ],
   }}
 >
-  <PageHero eyebrow="1858 (e∴v∴) — 2025 (e∴v∴)" title="La nostra storia" subtitle="Centosessantasette anni di lavoro" glyph="columns" />
+  <PageHero eyebrow={`1858 (e∴v∴) — ${currentYear} (e∴v∴)`} title="La nostra storia" subtitle={`${yearsItalian.charAt(0).toUpperCase() + yearsItalian.slice(1)} anni di lavoro`} glyph="columns" />
 
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">

@@ -4,9 +4,28 @@ import PageHero from "../../../components/content/PageHero.astro";
 import NavRelated from "../../../components/content/NavRelated.astro";
 import Quote from "../../../components/content/Quote.astro";
 const lang = "es" as const;
+const currentYear = new Date().getUTCFullYear();
+const yearsActive = currentYear - 1858;
+// Convertir años a italiano para subtitle
+const itNumber = (n: number): string => {
+  const ones = ["", "uno", "due", "tre", "quattro", "cinque", "sei", "sette", "otto", "nove"];
+  const tens = ["", "dieci", "venti", "trenta", "quaranta", "cinquanta", "sessanta", "settanta", "ottanta", "novanta"];
+  if (n < 100) {
+    if (n < 10) return ones[n] ?? String(n);
+    if (n < 20) {
+      const teens = ["dieci", "undici", "dodici", "tredici", "quattordici", "quindici", "sedici", "diciassette", "diciotto", "diciannove"];
+      return teens[n - 10] ?? String(n);
+    }
+    const t = Math.floor(n / 10), o = n % 10;
+    return (tens[t] ?? "") + (o ? (o === 1 || o === 8 ? (tens[t]?.slice(0, -1) ?? "") + (ones[o] ?? "") : (ones[o] ?? "")) : "");
+  }
+  if (n < 200) return "cento" + (n > 100 ? itNumber(n - 100) : "");
+  return String(n);
+};
+const yearsItalian = itNumber(yearsActive);
 
 const milestones = [
-  { year: "1858 (e∴v∴) · 23·XII", title: "Fundación", text: "Se inauguran las actividades de la Logia bajo el nombre original de Unione Italiana, con sesiones en italiano. Primer Presidente: el médico genovés José Salvarezza, médico genovés graduado en la Universidad de Buenos Aires (1866 (e∴v∴)) y figura prominente de la colectividad italiana porteña." },
+  { year: "1858 (e∴v∴) · 23·XII", title: "Fundación", text: "Se inauguran las actividades de la Logia bajo el nombre original de Unione Italiana, con sesiones en italiano. Primer Presidente: el médico genovés José Salvarezza, graduado en la Universidad de Buenos Aires (1866 (e∴v∴)) y figura prominente de la colectividad italiana porteña." },
   { year: "1858 (e∴v∴) · año bisagra", title: "Mutual y Logia", text: "Cinco meses antes, el 18 de julio, había abierto sus puertas la Unione e Benevolenza —primera Sociedad Italiana de Mutuo Soccorso de Sudamérica— bajo el padrinazgo simbólico de Mazzini y Garibaldi. Mutual y Logia: dos manos de la misma comunidad italiana." },
   { year: "1867 (e∴v∴) · cólera", title: "Primera epidemia", text: "Salvarezza atiende sin cobrar a las víctimas de la epidemia de cólera, particularmente a los inmigrantes hacinados en La Boca y Barracas." },
   { year: "1871 (e∴v∴) · 27·I — 11·VI", title: "Fiebre amarilla", text: "Se desata la epidemia que mata a 14.000 personas en Buenos Aires, 9.000 de ellas italianas. Los miembros de la Logia se suman a la Comisión Popular presidida por Roque Pérez —Gran Maestro, fallecido en cumplimiento del deber. Salvarezza no se ausenta del frente sanitario." },
@@ -47,9 +66,9 @@ const milestones = [
   }}
 >
   <PageHero
-    eyebrow="1858 (e∴v∴) — 2025 (e∴v∴)"
+    eyebrow={`1858 (e∴v∴) — ${currentYear} (e∴v∴)`}
     title="Nuestra historia"
-    subtitle="Cento sessantasette anni di lavoro"
+    subtitle={`${yearsItalian.charAt(0).toUpperCase() + yearsItalian.slice(1)} anni di lavoro`}
     glyph="columns"
   />
 
