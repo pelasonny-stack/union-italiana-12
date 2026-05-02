@@ -1,5 +1,9 @@
 /  /es/  301
 
+# Glosario removido — fallback a sección madre
+/es/masoneria/glosario/  /es/masoneria/  301
+/it/massoneria/glossario/  /it/massoneria/  301
+
 # Slug renames (jerga interna → vocabulario civil/reglamentario)
 /es/la-logia/obediencia/  /es/la-logia/auspicios/  301
 /it/la-loggia/obbedienza/  /it/la-loggia/auspici/  301
