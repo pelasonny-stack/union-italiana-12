@@ -3,22 +3,61 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
 import NavRelated from "../../../components/content/NavRelated.astro";
 import GLABadge from "../../../components/layout/GLABadge.astro";
+import FAQJsonLd from "../../../components/seo/FAQJsonLd.astro";
 const lang = "es" as const;
+
+// Datos verificados contra masoneria-argentina.org.ar en octubre de 2026 (e∴v∴). El listado oficial
+// trae 552 entradas: 16 triángulos y 1 registro de relleno (Nro 9998) no son logias. Revisar autoridades y conteo al actualizar.
+const faqs = [
+  {
+    question: "¿Qué es la Gran Logia de la Argentina de Libres y Aceptados Masones?",
+    answer: "Es la institución masónica que se constituyó el 11 de diciembre de 1857 (e∴v∴) en Buenos Aires con el pacto de unión de siete logias, que eligieron como primer Gran Maestre a José Roque Pérez. Hoy tiene más de 530 logias en todo el país.",
+  },
+  {
+    question: "¿Dónde queda la sede de la Gran Logia de la Argentina?",
+    answer: "En Tte. Gral. Juan Domingo Perón 1242, Ciudad Autónoma de Buenos Aires, el edificio conocido como Palacio Cangallo. Teléfono (011) 4382-2585.",
+  },
+  {
+    question: "¿Se puede visitar la sede de la Gran Logia?",
+    answer: "Sí. La Gran Logia ofrece visitas guiadas a su sede central los martes y jueves, con reserva anticipada y arancelada desde su sitio oficial, masoneria-argentina.org.ar. También ofrece en su sitio un recorrido virtual en 3D del edificio.",
+  },
+  {
+    question: "¿Cuántas logias tiene la Gran Logia de la Argentina?",
+    answer: "El listado oficial de la Gran Logia reúne más de 530 logias en todo el país, cerca de 150 de ellas en la Ciudad de Buenos Aires (dato de octubre de 2026 (e∴v∴)).",
+  },
+  {
+    question: "¿Quién preside la Gran Logia de la Argentina?",
+    answer: "Su Gran Maestre (presidente) es Pablo Lázaro, y su Pro Gran Maestre, Ramiro Dall'Aglio (según el sitio oficial, octubre de 2026 (e∴v∴)).",
+  },
+  {
+    question: "¿Cómo se ingresa a la masonería de la Gran Logia de la Argentina?",
+    answer: "Siempre por una logia. El interesado puede pedirlo por decisión propia, directamente a la Gran Logia desde su sitio oficial o a una logia, o por invitación de un masón. Para la Unión Italiana N°12, la petición se inicia desde la sección Ingreso de este sitio.",
+  },
+  {
+    question: "¿Es este el sitio oficial de la Gran Logia de la Argentina?",
+    answer: "No. Este es el sitio de la Respetable Logia Unión Italiana N°12, afiliada a la Gran Logia de la Argentina de Libres y Aceptados Masones. El sitio oficial de la Gran Logia es masoneria-argentina.org.ar.",
+  },
+  {
+    question: "¿Qué relación tiene la Unión Italiana N°12 con la Gran Logia?",
+    answer: "La Unión Italiana N°12 se fundó el 23 de diciembre de 1858 (e∴v∴), un año después de la constitución de la Gran Logia, y trabaja bajo sus auspicios. Figura en el listado oficial de logias y se reúne los lunes en el Templo Hijos del Trabajo, San Antonio 814, Barracas.",
+  },
+];
 ---
 
 <BaseLayout
   lang={lang}
-  title="Afiliación GLA — Regularidad Masónica Argentina"
-  description="Unión Italiana N°12 afiliada a la Gran Logia de la Argentina (fundada 1857 (e∴v∴)). Regularidad masónica internacional, jurisdicción y autoridades."
+  title="Gran Logia de la Argentina de Libres y Aceptados Masones"
+  description="Gran Logia de la Argentina de Libres y Aceptados Masones (Gran Logia Argentina): fundada en 1857 (e∴v∴), sede en Perón 1242, visitas guiadas, logias y cómo ingresar."
   breadcrumb={[
     { name: "La Logia", url: "/es/la-logia/" },
-    { name: "Afiliación GLA", url: "/es/la-logia/auspicios/" },
+    { name: "Gran Logia de la Argentina", url: "/es/la-logia/auspicios/" },
   ]}
 >
+  <FAQJsonLd faqs={faqs} />
   <PageHero
-    eyebrow="Jurisdicción y regularidad"
-    title="Bajo afiliación a la Gran Logia"
-    subtitle="Ciencia · Justicia · Trabajo"
+    eyebrow="Afiliación"
+    title="Gran Logia de la Argentina de Libres y Aceptados Masones"
+    subtitle="Afiliación de la Unión Italiana N°12 · Ciencia · Justicia · Trabajo"
     glyph="columns"
   />
 
@@ -28,31 +67,53 @@ const lang = "es" as const;
     </div>
 
     <p class="drop-cap">
-      Toda Logia masónica regular trabaja afiliada a una autoridad mayor que asegura
-      la continuidad de la tradición, el reconocimiento entre logias hermanas y el
-      cumplimiento de los antiguos límites del oficio. La Respetable Logia Unión Italiana
-      N°12 trabaja bajo la jurisdicción de la <strong>Gran Logia de la Argentina de Libres
-      y Aceptados Masones</strong>, con sede en el Palacio Cangallo, Tte. Perón 1242, Ciudad
-      Autónoma de Buenos Aires.
+      La Respetable Logia Unión Italiana N°12 trabaja bajo los auspicios de la
+      <strong>Gran Logia de la Argentina de Libres y Aceptados Masones</strong>, con sede en
+      Tte. Gral. Juan Domingo Perón 1242, Ciudad Autónoma de Buenos Aires. En esta página
+      reunimos lo que más se pregunta sobre la Gran Logia (también llamada Gran Logia
+      Argentina): qué es, dónde está, cómo se visita y cómo se ingresa.
     </p>
 
-    <h2>La Gran Logia de la Argentina</h2>
-    <p>
-      Constituida el <strong>11 de diciembre de 1857 (e∴v∴)</strong> en Buenos Aires por figuras
-      que incluyeron a Domingo F. Sarmiento, José Roque Pérez, Miguel Valencia y Justo
-      José de Urquiza, la Gran Logia es el cuerpo soberano que agrupa a las logias regulares
-      de la Argentina. Fue, además, organización fundadora de la Confederación Masónica
-      Interamericana.
+    <p class="aviso-oficial">
+      Este no es el sitio oficial de la Gran Logia. Para trámites, reservas y comunicados,
+      el sitio oficial es
+      <a href="https://www.masoneria-argentina.org.ar/" target="_blank" rel="noopener external">masoneria-argentina.org.ar</a>.
     </p>
+
+    <h2>Qué es la Gran Logia de la Argentina</h2>
     <p>
-      Su sede actual, conocida como <strong>Palacio Cangallo</strong>, fue diseñada por
-      Dardo Rocha y completada por el arquitecto italiano Francisco Tamburini. Inaugurado
-      el 3 de marzo de 1872 (e∴v∴), el edificio alberga nueve templos, entre ellos el Gran Templo.
+      Es la institución masónica que se constituyó el <strong>11 de diciembre de 1857
+      (e∴v∴)</strong> en Buenos Aires con el pacto de unión de siete logias, Unión del Plata,
+      Confraternidad Argentina, Consuelo del Infortunio, Tolerancia, Regeneración, Lealtad y
+      Constancia, que eligieron como primer Gran Maestre al jurista <strong>José Roque
+      Pérez</strong>. Esa constitución dio unidad a las logias que trabajaban en Buenos Aires
+      y, con el tiempo, a las del interior del país.
     </p>
+
+    <h2>Sede y visitas guiadas</h2>
     <p>
-      Su lema —<em class="latin">Ciencia, Justicia, Trabajo</em>— ordena las virtudes que
-      la Orden propone a sus miembros: el cultivo del conocimiento, la rectitud en el
-      trato, y la dignidad del oficio bien hecho.
+      La sede central está en <strong>Perón 1242</strong> (antigua calle Cangallo, de ahí el
+      nombre de Palacio Cangallo), un edificio que funciona como casa de la masonería
+      argentina desde 1872 (e∴v∴). La Gran Logia ofrece <strong>visitas guiadas los martes y
+      jueves</strong>, con reserva anticipada y arancelada desde su sitio oficial, y un
+      recorrido virtual en 3D de la sede para conocerla a distancia.
+    </p>
+
+    <h2>Logias en todo el país</h2>
+    <p>
+      El <a href="https://www.masoneria-argentina.org.ar/sobre-la-gla/logias-de-la-obediencia/" target="_blank" rel="noopener external">listado oficial de logias</a>
+      reúne más de <strong>530 logias</strong> en todo el país, cerca de 150 de ellas en la
+      Ciudad de Buenos Aires (octubre de 2026 (e∴v∴)). La Unión Italiana N°12 figura en ese
+      listado: se reúne todos los lunes en el <a href="/es/la-logia/templo/">Templo Hijos del
+      Trabajo</a>, San Antonio 814, Barracas.
+    </p>
+
+    <h2>Unión Italiana N°12, un año después de la Gran Logia</h2>
+    <p>
+      La Unión Italiana N°12 se fundó el <strong>23 de diciembre de 1858 (e∴v∴)</strong>, un año
+      después de la constitución de la Gran Logia, y fue refundada en 2014 (e∴v∴). Su
+      <a href="/es/la-logia/historia/">historia</a> está ligada a la inmigración italiana en
+      Buenos Aires.
     </p>
 
     <h2>Qué significa "regular"</h2>
@@ -65,18 +126,17 @@ const lang = "es" as const;
       reconociendo —y siendo reconocido— como tal.
     </p>
 
-    <h2>Autoridades</h2>
+    <h2>Autoridades y contacto</h2>
     <ul>
-      <li><strong>Muy Respetable Gran Maestre:</strong> Pablo Lázaro</li>
-      <li><strong>Sede:</strong> Tte. Perón 1242 — Ciudad Autónoma de Buenos Aires</li>
+      <li><strong>Gran Maestre (presidente):</strong> Pablo Lázaro</li>
+      <li><strong>Pro Gran Maestre:</strong> Ramiro Dall'Aglio</li>
+      <li><strong>Sede:</strong> Tte. Gral. Juan Domingo Perón 1242 — Ciudad Autónoma de Buenos Aires</li>
+      <li><strong>Teléfono:</strong> (011) 4382-2585</li>
       <li><strong>Sitio oficial:</strong>
         <a href="https://www.masoneria-argentina.org.ar/" target="_blank" rel="noopener external">masoneria-argentina.org.ar</a>
       </li>
-      <li><strong>Contacto:</strong>
-        <a href="mailto:info@masoneria-argentina.org.ar">info@masoneria-argentina.org.ar</a>
-        · (011) 4382-2585
-      </li>
     </ul>
+    <p class="nota-fecha">Autoridades según el sitio oficial, octubre de 2026 (e∴v∴).</p>
 
     <h2>Vínculo con la masonería italiana</h2>
     <p>
@@ -84,7 +144,21 @@ const lang = "es" as const;
       la masonería italiana. Históricamente con el <em>Grande Oriente d'Italia</em> y, más
       recientemente, con la Delegación Magistral Argentina de la <em>Serenissima Gran
       Loggia d'Italia</em>. Su pertenencia formal, sin embargo, es exclusivamente la Gran
-      Logia de la Argentina: la regularidad masónica no admite afiliaciones simultáneas.
+      Logia de la Argentina.
+    </p>
+
+    <h2>Preguntas frecuentes</h2>
+    <dl class="faq">
+      {faqs.map((f) => (
+        <>
+          <dt>{f.question}</dt>
+          <dd>{f.answer}</dd>
+        </>
+      ))}
+    </dl>
+
+    <p>
+      ¿Querés ingresar a la masonería? Empezá por <a href="/es/ingreso/">cómo ser masón en Argentina</a>.
     </p>
   </article>
 
@@ -99,5 +173,21 @@ const lang = "es" as const;
 <style>
   .gla-prominent {
     margin-block: var(--space-6) var(--space-8);
+  }
+  .aviso-oficial {
+    border-left: 3px solid var(--vermiglio);
+    padding: var(--space-3) var(--space-4);
+    background: color-mix(in srgb, var(--travertino, #e8dfcc) 60%, transparent);
+  }
+  .nota-fecha {
+    font-size: 0.85em;
+    opacity: 0.75;
+  }
+  .faq dt {
+    font-weight: 600;
+    margin-top: var(--space-5);
+  }
+  .faq dd {
+    margin: var(--space-2) 0 0;
   }
 </style>

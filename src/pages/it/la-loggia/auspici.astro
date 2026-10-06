@@ -3,22 +3,61 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/content/PageHero.astro";
 import NavRelated from "../../../components/content/NavRelated.astro";
 import GLABadge from "../../../components/layout/GLABadge.astro";
+import FAQJsonLd from "../../../components/seo/FAQJsonLd.astro";
 const lang = "it" as const;
+
+// Dati verificati su masoneria-argentina.org.ar a ottobre 2026 (e∴v∴). L'elenco ufficiale ha
+// 552 voci: 16 triangoli e 1 voce segnaposto (Nro 9998) non sono logge. Rivedere autorità e conteggio quando si aggiorna.
+const faqs = [
+  {
+    question: "Che cos'è la Gran Loggia dell'Argentina dei Liberi e Accettati Massoni?",
+    answer: "È l'istituzione massonica costituita l'11 dicembre 1857 (e∴v∴) a Buenos Aires con il patto di unione di sette logge, che elessero come primo Gran Maestro José Roque Pérez. Oggi conta oltre 530 logge in tutto il paese.",
+  },
+  {
+    question: "Dove si trova la sede della Gran Loggia dell'Argentina?",
+    answer: "In Tte. Gral. Juan Domingo Perón 1242, Città Autonoma di Buenos Aires, l'edificio conosciuto come Palacio Cangallo. Telefono (011) 4382-2585.",
+  },
+  {
+    question: "Si può visitare la sede della Gran Loggia?",
+    answer: "Sì. La Gran Loggia offre visite guidate alla sua sede centrale il martedì e il giovedì, su prenotazione anticipata e a pagamento dal suo sito ufficiale, masoneria-argentina.org.ar. Offre inoltre sul suo sito un tour virtuale in 3D dell'edificio.",
+  },
+  {
+    question: "Quante logge ha la Gran Loggia dell'Argentina?",
+    answer: "L'elenco ufficiale della Gran Loggia conta oltre 530 logge in tutto il paese, circa 150 delle quali nella Città di Buenos Aires (dato di ottobre 2026 (e∴v∴)).",
+  },
+  {
+    question: "Chi presiede la Gran Loggia dell'Argentina?",
+    answer: "Il suo Gran Maestro (presidente) è Pablo Lázaro e il Pro Gran Maestro è Ramiro Dall'Aglio (secondo il sito ufficiale, ottobre 2026 (e∴v∴)).",
+  },
+  {
+    question: "Come si entra nella massoneria della Gran Loggia dell'Argentina?",
+    answer: "Sempre attraverso una loggia. L'interessato può chiederlo di propria iniziativa, direttamente alla Gran Loggia dal suo sito ufficiale o a una loggia, oppure su invito di un massone. Per l'Unione Italiana N°12, la richiesta si avvia dalla sezione Ingresso di questo sito.",
+  },
+  {
+    question: "È questo il sito ufficiale della Gran Loggia dell'Argentina?",
+    answer: "No. Questo è il sito della Rispettabile Loggia Unione Italiana N°12, affiliata alla Gran Loggia dell'Argentina dei Liberi e Accettati Massoni. Il sito ufficiale della Gran Loggia è masoneria-argentina.org.ar.",
+  },
+  {
+    question: "Che rapporto ha l'Unione Italiana N°12 con la Gran Loggia?",
+    answer: "L'Unione Italiana N°12 fu fondata il 23 dicembre 1858 (e∴v∴), un anno dopo la costituzione della Gran Loggia, e lavora sotto i suoi auspici. Compare nell'elenco ufficiale delle logge e si riunisce il lunedì nel Tempio Hijos del Trabajo, San Antonio 814, Barracas.",
+  },
+];
 ---
 
 <BaseLayout
   lang={lang}
-  title="Affiliazione GLA — Regolarità Massonica Argentina"
-  description="Unione Italiana N°12 affiliata alla Gran Loggia dell'Argentina (fondata 1857 (e∴v∴)). Regolarità massonica internazionale, giurisdizione e autorità."
+  title="Gran Loggia dell'Argentina dei Liberi e Accettati Massoni"
+  description="Gran Loggia dell'Argentina dei Liberi e Accettati Massoni (Gran Loggia Argentina): fondata nel 1857 (e∴v∴), sede in Perón 1242, visite guidate, logge e come entrare."
   breadcrumb={[
     { name: "La Loggia", url: "/it/la-loggia/" },
-    { name: "Affiliazione GLA", url: "/it/la-loggia/auspici/" },
+    { name: "Gran Loggia dell'Argentina", url: "/it/la-loggia/auspici/" },
   ]}
 >
+  <FAQJsonLd faqs={faqs} />
   <PageHero
-    eyebrow="Giurisdizione e regolarità"
-    title="Affiliata alla Gran Loggia"
-    subtitle="Scienza · Giustizia · Lavoro"
+    eyebrow="Affiliazione"
+    title="Gran Loggia dell'Argentina dei Liberi e Accettati Massoni"
+    subtitle="Affiliazione dell'Unione Italiana N°12 · Scienza · Giustizia · Lavoro"
     glyph="columns"
   />
 
@@ -28,49 +67,72 @@ const lang = "it" as const;
     </div>
 
     <p class="drop-cap">
-      Ogni Loggia massonica regolare lavora affiliata a un'autorità maggiore che assicura
-      la continuità della tradizione e il riconoscimento tra logge sorelle. La Rispettabile
-      Loggia Unione Italiana N°12 lavora sotto la giurisdizione della <strong>Gran Loggia
-      dell'Argentina dei Liberi e Accettati Massoni</strong>, con sede nel Palazzo Cangallo,
-      Tte. Perón 1242, Città Autonoma di Buenos Aires.
+      La Rispettabile Loggia Unione Italiana N°12 lavora sotto gli auspici della
+      <strong>Gran Loggia dell'Argentina dei Liberi e Accettati Massoni</strong>, con sede in
+      Tte. Gral. Juan Domingo Perón 1242, Città Autonoma di Buenos Aires. In questa pagina
+      raccogliamo ciò che più spesso si chiede sulla Gran Loggia (detta anche Gran Loggia
+      Argentina): che cos'è, dove si trova, come si visita e come si entra.
     </p>
 
-    <h2>La Gran Loggia dell'Argentina</h2>
-    <p>
-      Costituita l'<strong>11 dicembre 1857 (e∴v∴)</strong> a Buenos Aires da figure che inclusero
-      Domingo F. Sarmiento, José Roque Pérez, Miguel Valencia e Justo José de Urquiza, la
-      Gran Loggia è il corpo sovrano che riunisce le logge regolari dell'Argentina. Fu,
-      inoltre, organizzazione fondatrice della Confederazione Massonica Interamericana.
+    <p class="aviso-oficial">
+      Questo non è il sito ufficiale della Gran Loggia. Per pratiche, prenotazioni e
+      comunicati, il sito ufficiale è
+      <a href="https://www.masoneria-argentina.org.ar/" target="_blank" rel="noopener external">masoneria-argentina.org.ar</a>.
     </p>
+
+    <h2>Che cos'è la Gran Loggia dell'Argentina</h2>
     <p>
-      La sua sede attuale, conosciuta come <strong>Palazzo Cangallo</strong>, fu progettata
-      da Dardo Rocha e completata dall'architetto italiano Francisco Tamburini. Inaugurato
-      il 3 marzo 1872 (e∴v∴), l'edificio ospita nove templi, tra cui il Gran Tempio.
+      È l'istituzione massonica costituita l'<strong>11 dicembre 1857 (e∴v∴)</strong> a Buenos
+      Aires con il patto di unione di sette logge, Unión del Plata, Confraternidad Argentina,
+      Consuelo del Infortunio, Tolerancia, Regeneración, Lealtad e Constancia, che elessero come
+      primo Gran Maestro il giurista <strong>José Roque Pérez</strong>. Quella costituzione diede
+      unità alle logge che lavoravano a Buenos Aires e, col tempo, a quelle dell'interno del paese.
     </p>
+
+    <h2>Sede e visite guidate</h2>
     <p>
-      Il suo motto —<em class="latin">Scienza, Giustizia, Lavoro</em>— ordina le virtù che
-      l'Ordine propone ai suoi membri.
+      La sede centrale si trova in <strong>Perón 1242</strong> (l'antica via Cangallo, da cui il
+      nome di Palacio Cangallo), un edificio che è casa della massoneria argentina dal 1872
+      (e∴v∴). La Gran Loggia offre <strong>visite guidate il martedì e il giovedì</strong>, su
+      prenotazione anticipata e a pagamento dal suo sito ufficiale, e un tour virtuale in 3D
+      della sede per conoscerla a distanza.
+    </p>
+
+    <h2>Logge in tutto il paese</h2>
+    <p>
+      L'<a href="https://www.masoneria-argentina.org.ar/sobre-la-gla/logias-de-la-obediencia/" target="_blank" rel="noopener external">elenco ufficiale delle logge</a>
+      conta oltre <strong>530 logge</strong> in tutto il paese, circa 150 delle quali nella Città
+      di Buenos Aires (ottobre 2026 (e∴v∴)). L'Unione Italiana N°12 compare in quell'elenco: si
+      riunisce ogni lunedì nel <a href="/it/la-loggia/tempio/">Tempio Hijos del Trabajo</a>,
+      San Antonio 814, Barracas.
+    </p>
+
+    <h2>Unione Italiana N°12, un anno dopo la Gran Loggia</h2>
+    <p>
+      L'Unione Italiana N°12 fu fondata il <strong>23 dicembre 1858 (e∴v∴)</strong>, un anno dopo
+      la costituzione della Gran Loggia, e fu rifondata nel 2014 (e∴v∴). La sua
+      <a href="/it/la-loggia/storia/">storia</a> è legata all'immigrazione italiana a
+      Buenos Aires.
     </p>
 
     <h2>Cosa significa "regolare"</h2>
     <p>
-      Una Loggia regolare è quella che si costituisce conforme alle antiche tradizioni del
-      mestiere, riconosce le grandi logge sorelle riconosciute internazionalmente, e lavora
+      Una Loggia regolare è quella che si costituisce conforme alle antiche tradizioni
+      dell'Arte, riconosce le grandi logge sorelle riconosciute internazionalmente, e lavora
       affiliata a un'autorità massonica che assicura tale continuità.
     </p>
 
-    <h2>Autorità</h2>
+    <h2>Autorità e contatti</h2>
     <ul>
-      <li><strong>Rispettabilissimo Gran Maestro:</strong> Pablo Lázaro</li>
-      <li><strong>Sede:</strong> Tte. Perón 1242 — Città Autonoma di Buenos Aires</li>
+      <li><strong>Gran Maestro (presidente):</strong> Pablo Lázaro</li>
+      <li><strong>Pro Gran Maestro:</strong> Ramiro Dall'Aglio</li>
+      <li><strong>Sede:</strong> Tte. Gral. Juan Domingo Perón 1242 — Città Autonoma di Buenos Aires</li>
+      <li><strong>Telefono:</strong> (011) 4382-2585</li>
       <li><strong>Sito ufficiale:</strong>
         <a href="https://www.masoneria-argentina.org.ar/" target="_blank" rel="noopener external">masoneria-argentina.org.ar</a>
       </li>
-      <li><strong>Contatto:</strong>
-        <a href="mailto:info@masoneria-argentina.org.ar">info@masoneria-argentina.org.ar</a>
-        · (011) 4382-2585
-      </li>
     </ul>
+    <p class="nota-fecha">Autorità secondo il sito ufficiale, ottobre 2026 (e∴v∴).</p>
 
     <h2>Legame con la massoneria italiana</h2>
     <p>
@@ -79,6 +141,20 @@ const lang = "it" as const;
       più recentemente, con la Delegazione Magistrale Argentina della <em>Serenissima Gran
       Loggia d'Italia</em>. La sua appartenenza formale, tuttavia, è esclusivamente la Gran
       Loggia dell'Argentina.
+    </p>
+
+    <h2>Domande frequenti</h2>
+    <dl class="faq">
+      {faqs.map((f) => (
+        <>
+          <dt>{f.question}</dt>
+          <dd>{f.answer}</dd>
+        </>
+      ))}
+    </dl>
+
+    <p>
+      Vuoi entrare nella massoneria? Inizia da <a href="/it/ingresso/">come diventare massone in Argentina</a>.
     </p>
   </article>
 
@@ -92,4 +168,12 @@ const lang = "it" as const;
 
 <style>
   .gla-prominent { margin-block: var(--space-6) var(--space-8); }
+  .aviso-oficial {
+    border-left: 3px solid var(--vermiglio);
+    padding: var(--space-3) var(--space-4);
+    background: color-mix(in srgb, var(--travertino, #e8dfcc) 60%, transparent);
+  }
+  .nota-fecha { font-size: 0.85em; opacity: 0.75; }
+  .faq dt { font-weight: 600; margin-top: var(--space-5); }
+  .faq dd { margin: var(--space-2) 0 0; }
 </style>
