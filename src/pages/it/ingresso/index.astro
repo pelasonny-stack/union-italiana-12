@@ -4,72 +4,109 @@ import PageHero from "../../../components/content/PageHero.astro";
 import FAQJsonLd from "../../../components/seo/FAQJsonLd.astro";
 const lang = "it" as const;
 
+// Requisiti, vie di ingresso e quote secondo le domande frequenti di masoneria-argentina.org.ar (ottobre 2026 (e∴v∴)).
 const faqs = [
   {
-    question: "Quali sono i requisiti per diventare massone nell'Unione Italiana N°12?",
-    answer: "Essere uomo libero e di buoni costumi, maggiore di età (18 anni in uso GLA, 21 in uso tradizionale), professare credenza in un Principio Creatore (Grande Architetto dell'Universo), avere intelligenza e cultura per comprendere le virtù massoniche, mezzi onesti di sussistenza e reputazione integra.",
+    question: "Come si entra nella massoneria (in una loggia massonica) in Argentina?",
+    answer: "Nella Gran Loggia dell'Argentina, sempre attraverso una loggia. Si può arrivare su invito di un massone o di propria iniziativa: in tal caso la richiesta si fa alla Gran Loggia (modulo online, posta o di persona presso la sua Segreteria) e si viene contattati da un rappresentante della propria zona. Per entrare nell'Unione Italiana N°12 in particolare, la richiesta si fa dalla Soglia del Postulante di questo sito. Seguono i colloqui, la relazione degli investigatori e la votazione della Loggia.",
   },
   {
-    question: "Come si presenta domanda di ingresso alla massoneria?",
-    answer: "La candidatura nasce sempre dall'interessato, non per invito. Nell'Unione Italiana N°12 si compila il modulo della Soglia del Postulante (23 campi in 3 soglie). Se il profilo è coerente, si contatta per un primo colloquio. Il processo dalla petizione all'ingresso dura tra 6 e 12 mesi.",
+    question: "Chi può diventare massone? Cosa serve e quali sono i requisiti?",
+    answer: "Secondo la Gran Loggia dell'Argentina: essere uomo libero e di buoni costumi, avere almeno 18 anni, possedere l'intelligenza e la cultura necessarie per comprendere e praticare le virtù massoniche, e disporre di mezzi di sussistenza per sé e per la propria famiglia. Non servono fortuna né doti straordinarie. Nell'Unione Italiana N°12 si chiede inoltre di credere in un Principio Creatore, il Grande Architetto dell'Universo, senza alcun dogma.",
+  },
+  {
+    question: "A che età si può entrare nella massoneria?",
+    answer: "Dai 18 anni nella Gran Loggia dell'Argentina.",
+  },
+  {
+    question: "Quanto costa diventare massone?",
+    answer: "Si pagano le quote generali e quelle particolari della Loggia. Secondo la Gran Loggia dell'Argentina, tali importi non superano la quota mensile normale di qualsiasi istituzione di beneficenza. L'aiuto ai bisognosi è volontario e anonimo. L'importo vigente nell'Unione Italiana N°12 viene comunicato durante il colloquio.",
+  },
+  {
+    question: "Voglio diventare massone: cosa devo fare? Serve l'invito di un massone?",
+    answer: "Non serve. Si può chiedere l'ingresso di propria iniziativa, senza conoscere nessuno, oppure arrivare su invito di un massone. In entrambi i casi l'interessato compila la domanda e segue lo stesso processo. Per l'Unione Italiana N°12, il primo passo è la Soglia del Postulante di questo sito.",
+  },
+  {
+    question: "Possono entrare le donne?",
+    answer: "La Gran Loggia dell'Argentina, e quindi l'Unione Italiana N°12, inizia solo uomini.",
+  },
+  {
+    question: "Quanto dura il processo di ingresso?",
+    answer: "Nell'Unione Italiana N°12, tra 6 e 12 mesi dalla petizione all'ingresso, secondo il calendario della Loggia. Comprende tre colloqui con membri investigatori, una relazione scritta e una votazione a scrutinio segreto.",
   },
   {
     question: "La massoneria è segreta?",
-    answer: "No. È una società discreta, non segreta. I suoi principi, governo, letteratura ed esistenza sono pubblicamente disponibili dal 1717 (e∴v∴). Quel che si mantiene riservato sono certi elementi rituali (segni, tocchi, parole di riconoscimento), non l'istituzione in sé.",
+    answer: "No. È una società discreta, non segreta. I suoi principi, governo, letteratura ed esistenza sono pubblici dal 1717 (e∴v∴). Quel che si mantiene riservato sono certi elementi rituali (segni, toccamenti e parole di riconoscimento), non l'istituzione.",
   },
   {
     question: "La massoneria è una religione?",
-    answer: "No. La massoneria non è una religione, non impone alcun dogma, non officia sacramenti. Chiede credenza in un Principio Creatore (Grande Architetto dell'Universo) — formula deliberatamente aperta che ogni membro interpreta secondo la propria tradizione religiosa o filosofica.",
+    answer: "No. La massoneria non è una religione, non impone alcun dogma né officia sacramenti. La credenza in un Principio Creatore è una formula deliberatamente aperta che ogni membro interpreta secondo la propria tradizione religiosa o filosofica.",
   },
   {
-    question: "Quale tradizione massonica segue l'Unione Italiana N°12?",
-    answer: "Siamo affiliati alla Gran Loggia dell'Argentina dei Liberi e Accettati Massoni, fondata nel 1857 (e∴v∴). È l'unica federazione massonica regolare riconosciuta internazionalmente in Argentina, membro fondatore della Confederazione Massonica Interamericana.",
-  },
-  {
-    question: "Dove si riunisce la Loggia?",
-    answer: "Nel Tempio Hijos del Trabajo, San Antonio 814, Barracas, Buenos Aires. Architettura egizia (1919 (e∴v∴)) di Francisco Cabot, dichiarato Sito di Interesse Culturale dalla Città Autonoma di Buenos Aires nel 2002 (e∴v∴).",
+    question: "A quale Gran Loggia appartiene l'Unione Italiana N°12 e dove si riunisce?",
+    answer: "Lavora sotto gli auspici della Gran Loggia dell'Argentina dei Liberi e Accettati Massoni, fondata nel 1857 (e∴v∴). Si riunisce il lunedì nel Tempio Hijos del Trabajo, San Antonio 814, Barracas, Città Autonoma di Buenos Aires.",
   },
 ];
 ---
 
 <BaseLayout
   lang={lang}
-  title="Come Diventare Massone in Argentina — Ingresso alla Loggia"
-  description="Come diventare massone in Argentina: requisiti (18+, libero pensatore), processo (petizione → colloqui → ballottaggio), 6-12 mesi. Soglia del Postulante aperta."
+  title="Come Entrare nella Massoneria e Diventare Massone in Argentina"
+  description="Come entrare nella massoneria in Argentina: requisiti (uomo, dai 18 anni), come si chiede l'ingresso, quanto costa e quanto dura. Loggia Unione Italiana N°12, Buenos Aires."
   breadcrumb={[{ name: "Ingresso", url: "/it/ingresso/" }]}
 >
   <FAQJsonLd faqs={faqs} />
-  <PageHero eyebrow="Chi bussa alle porte" title="Entrare nell'Ordine" glyph="square-compass" />
+  <PageHero
+    eyebrow="Chi bussa alle porte"
+    title="Come entrare nella massoneria"
+    subtitle="Requisiti, passi, costo e tempi per diventare massone in Argentina"
+    glyph="square-compass"
+  />
 
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">
-      Se è arrivato a questa pagina per curiosità passeggera, le chiediamo di leggere con
-      attenzione. Iniziarsi nella massoneria non è iscriversi a un'associazione: è assumere
-      un impegno di anni, di presenza regolare, di lavoro su sé stessi e di lealtà fraterna.
-      L'Ordine non recluta. Chi presenta domanda lo fa di propria iniziativa, senza essere
-      stato invitato, e sapendo che la sua petizione potrebbe non essere accettata.
+      Non facciamo proselitismo. Si può arrivare alla massoneria di propria iniziativa o su
+      invito di un massone, ma la richiesta di ingresso è sempre dell'interessato. Iniziarsi
+      nella massoneria non è iscriversi a un'associazione: è assumere un impegno di anni, di
+      presenza regolare, di lavoro su sé stessi e di lealtà fraterna, sapendo che la petizione
+      potrebbe non essere accettata.
     </p>
 
-    <h2>Chi può presentare domanda?</h2>
+    <h2>Requisiti per diventare massone in Argentina</h2>
     <ul>
-      <li><strong>Maggiore di età</strong> (per uso tradizionale, 21 anni compiuti).</li>
       <li><strong>Uomo libero e di buoni costumi</strong> — formula tradizionale.</li>
-      <li><strong>Professare credenza in un Principio Creatore</strong> — il Grande Architetto dell'Universo.</li>
-      <li><strong>Mezzi onesti di sussistenza</strong> e <strong>reputazione integra</strong>.</li>
+      <li><strong>Almeno 18 anni.</strong></li>
+      <li><strong>Intelligenza e cultura</strong> sufficienti per comprendere e praticare le virtù massoniche.</li>
+      <li><strong>Mezzi onesti di sussistenza</strong> per sé e per la propria famiglia.</li>
     </ul>
+    <p>
+      Oltre a questi requisiti, l'Unione Italiana N°12, come loggia della massoneria regolare,
+      chiede a chi presenta domanda di affermare la propria credenza in un Principio Creatore, che
+      la massoneria chiama Grande Architetto dell'Universo. La formula è deliberatamente aperta:
+      ogni membro la intende secondo la propria tradizione religiosa o filosofica. Non si impone
+      alcun dogma.
+    </p>
 
-    <h2>Il processo</h2>
+    <h2>Come entrare nella massoneria, passo per passo</h2>
     <ol>
-      <li>Petizione attraverso la Soglia.</li>
+      <li>Petizione attraverso la <a href="/it/ingresso/petizione/">Soglia del Postulante</a>.</li>
       <li>Tre colloqui con membri investigatori.</li>
-      <li>Tavola degli investigatori presentata in Loggia.</li>
-      <li>Ballottaggio in scrutinio segreto.</li>
+      <li>Relazione degli investigatori presentata in Loggia.</li>
+      <li>Votazione a scrutinio segreto.</li>
       <li>Ingresso, se favorevole.</li>
     </ol>
 
+    <h2>Quanto costa diventare massone?</h2>
+    <p>
+      Si pagano le quote generali e quelle particolari della Loggia. Secondo la Gran Loggia
+      dell'Argentina, tali importi non superano la quota mensile normale di qualsiasi
+      istituzione di beneficenza. L'aiuto ai bisognosi è volontario e anonimo. L'importo
+      vigente viene comunicato durante il colloquio.
+    </p>
+
     <h2>Cosa ci si aspetta da lei</h2>
     <ul>
-      <li>Presenza regolare alle riunioni (in genere due al mese).</li>
+      <li>Presenza regolare alle riunioni della Loggia, che si tengono il lunedì.</li>
       <li>Studio personale e tavole scritte.</li>
       <li>Quota mensile.</li>
       <li>Discrezione.</li>
@@ -81,6 +118,21 @@ const faqs = [
       Non è un club sociale, né una rete professionale. Se cerca contatti, opportunità di
       affari o vantaggi materiali, non presenti domanda. L'Ordine punisce severamente l'uso
       dei legami fraterni per fini personali.
+    </p>
+
+    <h2>Domande frequenti sull'ingresso</h2>
+    <dl class="faq">
+      {faqs.map((f) => (
+        <>
+          <dt>{f.question}</dt>
+          <dd>{f.answer}</dd>
+        </>
+      ))}
+    </dl>
+    <p>
+      Di più sull'istituzione nella pagina della
+      <a href="/it/la-loggia/auspici/">Gran Loggia dell'Argentina dei Liberi e Accettati Massoni</a>
+      e in <a href="/it/massoneria/cose/">cos'è la massoneria</a>.
     </p>
 
     <hr style="margin-block: var(--space-8); border: none; border-top: 1px solid var(--border);" />
@@ -117,4 +169,6 @@ const faqs = [
     font-size: 0.85rem;
   }
   .atrio-btn:hover, .atrio-btn:focus-visible { background-color: var(--accent); color: var(--ink-900); }
+  .faq dt { font-weight: 600; margin-top: var(--space-5); }
+  .faq dd { margin: var(--space-2) 0 0; }
 </style>

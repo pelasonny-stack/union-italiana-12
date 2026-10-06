@@ -5,67 +5,81 @@ import FAQJsonLd from "../../../components/seo/FAQJsonLd.astro";
 import ContactCTA from "../../../components/content/ContactCTA.astro";
 const lang = "es" as const;
 
+// Requisitos, vías de ingreso y cuotas según las preguntas frecuentes de masoneria-argentina.org.ar (octubre de 2026 (e∴v∴)).
 const faqs = [
   {
-    question: "¿Cuáles son los requisitos para ser masón en la Unión Italiana N°12?",
-    answer: "Ser hombre libre y de buenas costumbres, mayor de edad (18 años en uso GLA, 21 en uso tradicional), profesar creencia en un Principio Creador (Gran Arquitecto del Universo), tener inteligencia y cultura para comprender las virtudes masónicas, contar con medios honestos de subsistencia y reputación intachable.",
+    question: "¿Cómo se ingresa a la masonería (a una logia masónica) en Argentina?",
+    answer: "En la Gran Logia de la Argentina, siempre a través de una logia. Se puede llegar por invitación de un masón o por decisión propia: en ese caso el pedido se hace a la Gran Logia (formulario en línea, correo o en persona en su Secretaría) y lo contacta un representante de su zona. Para ingresar a la Unión Italiana N°12 en particular, el pedido se hace desde el Umbral del Peticionario de este sitio. Después vienen las entrevistas, el informe de los investigadores y la votación de la Logia.",
   },
   {
-    question: "¿Cómo se peticiona el ingreso a la masonería?",
-    answer: "La candidatura siempre parte del interesado, no por invitación. En la Unión Italiana N°12 se completa el formulario del Umbral del Peticionario (23 campos en 3 umbrales). Si el perfil es coherente, se contacta para una primera entrevista. El proceso desde la petición hasta el ingreso dura entre 6 y 12 meses.",
+    question: "¿Quién puede ser masón? ¿Qué se necesita y cuáles son los requisitos?",
+    answer: "Según la Gran Logia de la Argentina: ser hombre libre y de buenas costumbres, tener al menos 18 años, poseer la inteligencia y la cultura necesarias para comprender y practicar las virtudes masónicas, y contar con medios de subsistencia para uno y su familia. No hace falta fortuna ni dotes extraordinarias. En la Unión Italiana N°12 se pide además creer en un Principio Creador, el Gran Arquitecto del Universo, sin dogma alguno.",
   },
   {
-    question: "¿La masonería es secreta?",
-    answer: "No. Es una sociedad discreta, no secreta. Sus principios, gobierno, literatura y existencia son públicamente disponibles desde 1717 (e∴v∴). Lo que se mantiene reservado son ciertos elementos rituales (signos, toques, palabras de reconocimiento), no la institución en sí.",
+    question: "¿A qué edad se puede entrar a la masonería?",
+    answer: "Desde los 18 años en la Gran Logia de la Argentina.",
   },
   {
-    question: "¿La masonería es una religión?",
-    answer: "No. La masonería no es una religión, no impone dogma alguno, no oficia sacramentos. Pide creencia en un Principio Creador (Gran Arquitecto del Universo) — fórmula deliberadamente abierta que cada miembro interpreta según su tradición religiosa o filosófica.",
+    question: "¿Cuánto cuesta ser masón?",
+    answer: "Se pagan las cuotas generales y las particulares de la Logia. Según la Gran Logia de la Argentina, esos importes no superan la cuota mensual normal de cualquier institución de caridad. La ayuda a los necesitados es voluntaria y anónima. El monto vigente en la Unión Italiana N°12 se informa en la entrevista.",
   },
   {
-    question: "¿Qué tradición masónica sigue la Unión Italiana N°12?",
-    answer: "Estamos afiliados a la Gran Logia de la Argentina de Libres y Aceptados Masones, fundada en 1857 (e∴v∴). Es la única federación masónica regular reconocida internacionalmente en Argentina, miembro fundador de la Confederación Masónica Interamericana.",
+    question: "Quiero ser masón, ¿qué debo hacer? ¿Hace falta que me invite un masón?",
+    answer: "No hace falta. Se puede pedir el ingreso por decisión propia, sin conocer a nadie, o llegar por invitación de un masón. En los dos casos el interesado completa la solicitud y pasa por el mismo proceso. Para la Unión Italiana N°12, el primer paso es el Umbral del Peticionario de este sitio.",
   },
   {
-    question: "¿Dónde se reúne la Logia?",
-    answer: "Los lunes en el histórico Templo Hijos del Trabajo, San Antonio 814, Barracas, Ciudad Autónoma de Buenos Aires. El templo es Patrimonio Cultural de la Ciudad (Ord. 48.475/1994 (e∴v∴)) y data de 1890 (e∴v∴), con fachada egipcia añadida en 1919 (e∴v∴) por Francisco Cabot.",
+    question: "¿Pueden ingresar mujeres?",
+    answer: "La Gran Logia de la Argentina, y por lo tanto la Unión Italiana N°12, inicia solo a varones.",
   },
   {
     question: "¿Cuánto tiempo dura el proceso de ingreso?",
-    answer: "Entre 6 y 12 meses desde la petición hasta el ingreso, según el calendario de la Logia. Incluye tres entrevistas con miembros investigadores, un informe escrito, y un balotaje en escrutinio secreto.",
+    answer: "En la Unión Italiana N°12, entre 6 y 12 meses desde la petición hasta el ingreso, según el calendario de la Logia. Incluye tres entrevistas con miembros investigadores, un informe escrito y una votación en escrutinio secreto.",
   },
   {
-    question: "¿La masonería ofrece beneficios profesionales o sociales?",
-    answer: "No. La adhesión a la masonería no otorga ventajas profesionales, favores políticos ni beneficios económicos. La Orden castiga severamente —hasta con la expulsión— el uso de los lazos fraternos para fines personales. Es un compromiso de años de trabajo sobre uno mismo.",
+    question: "¿La masonería es secreta?",
+    answer: "No. Es una sociedad discreta, no secreta. Sus principios, su gobierno, su literatura y su existencia son públicos desde 1717 (e∴v∴). Lo que se mantiene reservado son ciertos elementos rituales (signos, toques y palabras de reconocimiento), no la institución.",
+  },
+  {
+    question: "¿La masonería es una religión?",
+    answer: "No. La masonería no es una religión, no impone dogma alguno ni oficia sacramentos. La creencia en un Principio Creador es una fórmula deliberadamente abierta que cada miembro entiende según su propia tradición religiosa o filosófica.",
+  },
+  {
+    question: "¿Qué beneficios tiene ser masón?",
+    answer: "Ninguno material. La masonería no otorga ventajas profesionales, favores políticos ni beneficios económicos, y sanciona, hasta con la expulsión, el uso de los lazos fraternos para fines personales. Lo que ofrece es un trabajo de años sobre uno mismo, en compañía de otros.",
+  },
+  {
+    question: "¿A qué Gran Logia pertenece la Unión Italiana N°12 y dónde se reúne?",
+    answer: "Trabaja bajo los auspicios de la Gran Logia de la Argentina de Libres y Aceptados Masones, fundada en 1857 (e∴v∴). Se reúne los lunes en el Templo Hijos del Trabajo, San Antonio 814, Barracas, Ciudad Autónoma de Buenos Aires.",
   },
 ];
 ---
 
 <BaseLayout
   lang={lang}
-  title="Cómo Ser Masón en Argentina — Ingreso a la Logia en Buenos Aires"
-  description="Cómo ser masón en Argentina: requisitos (18+, librepensador), proceso (petición → entrevistas → balotaje), 6-12 meses. Umbral del Peticionario abierto."
+  title="Cómo Ingresar a la Masonería y Ser Masón en Argentina"
+  description="Cómo ingresar a la masonería en Argentina: requisitos (varón, desde 18 años), cómo se pide el ingreso, cuánto cuesta y cuánto tarda. Logia Unión Italiana N°12, Buenos Aires."
   breadcrumb={[{ name: "Ingreso", url: "/es/ingreso/" }]}
 >
   <FAQJsonLd faqs={faqs} />
   <PageHero
     eyebrow="Quien llama a las puertas"
-    title="Ingresar en la Orden"
+    title="Cómo ingresar a la masonería"
+    subtitle="Requisitos, pasos, costo y tiempos para ser masón en Argentina"
     glyph="square-compass"
   />
 
   <article class="container container-prose" style="padding-block: var(--space-8);">
     <p class="drop-cap">
-      No practicamos proselitismo. La candidatura parte siempre del interesado, por
-      propia decisión y sin haber sido invitado. Iniciarse en la masonería no es
-      inscribirse en una asociación: es asumir un compromiso de años, de presencia
-      regular, de trabajo sobre uno mismo y de lealtad fraterna. El camino hacia el
-      ingreso puede durar meses o años — es un proceso, no un trámite. Si esto le
-      parece desproporcionado, probablemente lo sea para usted en este momento, y eso
-      también es información valiosa.
+      No practicamos proselitismo. Se puede llegar a la masonería por decisión propia o por
+      invitación de un masón, pero el pedido de ingreso es siempre del interesado. Iniciarse
+      en la masonería no es inscribirse en una asociación: es asumir un compromiso de años,
+      de presencia regular, de trabajo sobre uno mismo y de lealtad fraterna. El camino hacia
+      el ingreso puede durar meses — es un proceso, no un trámite. Si esto le parece
+      desproporcionado, probablemente lo sea para usted en este momento, y eso también es
+      información valiosa.
     </p>
 
-    <h2>¿Quién puede peticionar?</h2>
+    <h2>Requisitos para ser masón en Argentina</h2>
     <p>
       Para ingresar a la masonería no es necesario poseer fortuna, ni conocimientos o
       aptitudes intelectuales extraordinarias, ni dotes morales excepcionales. Los
@@ -73,26 +87,40 @@ const faqs = [
     </p>
     <ul>
       <li><strong>Hombre libre y de buenas costumbres.</strong> "Hombre libre es aquel que tiene libertad para expresar sus pensamientos, no acepta imposiciones que atenten contra sus principios, ni está sujeto a la voluntad de un tercero; no está atado a ningún dogma que oscurezca su inteligencia y pervierta sus sentimientos, y carece de vicios que lo esclavicen." Para ser hombre de buenas costumbres deberá obedecer las leyes del país en que reside, venerar a su patria, honrar a su familia y ser tolerante con las ideas políticas y religiosas de sus semejantes.</li>
-      <li><strong>Mayor de edad</strong> (en uso tradicional, 21 años; nuestra federación admite desde 18).</li>
-      <li><strong>Profesar creencia en un Principio Creador</strong> — al que la masonería regular llama Gran Arquitecto del Universo. La fórmula es deliberadamente abierta: cada miembro la entiende según su propia tradición religiosa o filosófica. La Orden no impone dogma alguno.</li>
+      <li><strong>Tener al menos 18 años.</strong></li>
       <li><strong>Inteligencia y cultura</strong> suficientes para comprender y practicar las virtudes masónicas.</li>
       <li><strong>Medios honestos de subsistencia</strong> para sufragar sus necesidades, las de su familia y/o personas a su cargo.</li>
     </ul>
+    <p>
+      Además de esos requisitos, la Unión Italiana N°12, como logia de la masonería regular, pide
+      a quien peticiona que afirme su creencia en un Principio Creador, al que la masonería llama
+      Gran Arquitecto del Universo. La fórmula es deliberadamente abierta: cada miembro la entiende
+      según su propia tradición religiosa o filosófica. No se impone dogma alguno.
+    </p>
 
-    <h2>El proceso, sin eufemismos</h2>
+    <h2>Cómo ingresar a la masonería, paso a paso</h2>
     <ol>
-      <li><strong>Petición.</strong> Usted completa el formulario del Umbral. Si su perfil es coherente, será contactado para una primera entrevista.</li>
+      <li><strong>Petición.</strong> Usted completa el formulario del <a href="/es/ingreso/peticion/">Umbral del Peticionario</a>. Si su perfil es coherente, será contactado para una primera entrevista.</li>
       <li><strong>Entrevistas.</strong> Tres miembros investigadores designados por la Logia conversarán con usted por separado, en el plazo de varias semanas. Es un diálogo, no un examen.</li>
-      <li><strong>Plancha de los investigadores.</strong> Los tres miembros elevan a la Logia un informe escrito.</li>
-      <li><strong>Balotaje.</strong> La Logia, en reunión interna, vota en escrutinio secreto.</li>
-      <li><strong>Ingreso.</strong> Si el balotaje es favorable, se fija fecha. El ingreso es un acto reservado al recinto de la Logia.</li>
+      <li><strong>Informe de los investigadores.</strong> Los tres miembros elevan a la Logia un informe escrito.</li>
+      <li><strong>Votación.</strong> La Logia, en reunión interna, vota en escrutinio secreto.</li>
+      <li><strong>Ingreso.</strong> Si la votación es favorable, se fija fecha. El ingreso es un acto reservado al recinto de la Logia.</li>
     </ol>
+
+    <h2>¿Cuánto cuesta ser masón?</h2>
+    <p>
+      La Logia se sostiene con el aporte de sus miembros: se pagan las cuotas generales y las
+      particulares de la Logia. Según la Gran Logia de la Argentina, esos importes no superan la cuota
+      mensual normal de cualquier institución de caridad. La ayuda a los necesitados es
+      voluntaria y anónima, en la medida de las posibilidades de cada uno. El monto vigente se
+      informa en la entrevista.
+    </p>
 
     <h2>Lo que se espera de usted</h2>
     <ul>
-      <li>Asistencia regular a las reuniones (en general, dos por mes).</li>
+      <li>Asistencia regular a las reuniones de la Logia, que son los lunes.</li>
       <li>Estudio personal y elaboración de estudios escritos.</li>
-      <li>Cuota mensual — la Logia se sostiene con el aporte de sus miembros.</li>
+      <li>Cuota mensual.</li>
       <li>Discreción: lo trabajado en Logia no se discute fuera de Logia.</li>
       <li>Tiempo: el primer grado dura, en uso, no menos de un año.</li>
     </ul>
@@ -103,7 +131,7 @@ const faqs = [
       ni beneficios económicos.</em> No es un club social, no es una red de contactos, no
       es una asociación de beneficios. Si lo que busca son oportunidades de negocio,
       prestigio social o ventajas materiales, no peticione: no encontrará nada de eso, y
-      en el camino le habrá hecho perder tiempo a hermanos que están allí por otras razones.
+      en el camino le habrá hecho perder tiempo a miembros que están allí por otras razones.
       La Orden castiga severamente —hasta con la expulsión— el uso de los lazos fraternos
       para fines personales.
     </p>
@@ -114,6 +142,21 @@ const faqs = [
       <li>Del primer al segundo grado: no menos de un año.</li>
       <li>Para llegar al grado de Maestro: tres años en condiciones óptimas.</li>
     </ul>
+
+    <h2>Preguntas frecuentes sobre el ingreso</h2>
+    <dl class="faq">
+      {faqs.map((f) => (
+        <>
+          <dt>{f.question}</dt>
+          <dd>{f.answer}</dd>
+        </>
+      ))}
+    </dl>
+    <p>
+      Más sobre la institución en la página de la
+      <a href="/es/la-logia/auspicios/">Gran Logia de la Argentina de Libres y Aceptados Masones</a>
+      y en <a href="/es/masoneria/que-es/">qué es la masonería</a>.
+    </p>
 
     <hr style="margin-block: var(--space-8); border: none; border-top: 1px solid var(--border);" />
 
@@ -154,5 +197,12 @@ const faqs = [
   .atrio-btn:hover, .atrio-btn:focus-visible {
     background-color: var(--accent);
     color: var(--ink-900);
+  }
+  .faq dt {
+    font-weight: 600;
+    margin-top: var(--space-5);
+  }
+  .faq dd {
+    margin: var(--space-2) 0 0;
   }
 </style>
