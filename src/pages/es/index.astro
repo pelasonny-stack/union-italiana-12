@@ -53,6 +53,16 @@ const sliderPhotos = [
     </p>
   </section>
 
+  <section class="container container-narrow" style="padding-bottom: var(--space-12);">
+    <h2 class="home-h2">Una logia masónica en Buenos Aires</h2>
+    <p>
+      Nos reunimos los lunes en el Templo Hijos del Trabajo, San Antonio 814, Barracas, cerca de
+      La Boca. Somos una de las logias afiliadas a la Gran Logia de la Argentina de Libres y
+      Aceptados Masones. Si querés saber <a href="/es/masoneria/que-es/">qué es la masonería</a>
+      o <a href="/es/ingreso/">cómo ingresar a la masonería</a>, empezá por ahí.
+    </p>
+  </section>
+
   <section class="container" style="padding-bottom: var(--space-12);">
     <PhotoSlider photos={sliderPhotos} aspect="16 / 9" autoplayMs={6000} />
   </section>
@@ -75,6 +85,7 @@ const sliderPhotos = [
 </BaseLayout>
 
 <style>
+  .home-h2 { margin-top: var(--space-8); font-size: 1.5rem; }
   .lead {
     font-family: var(--font-serif);
     font-size: 1.25rem;

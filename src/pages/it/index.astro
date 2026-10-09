@@ -53,6 +53,16 @@ const sliderPhotos = [
     </p>
   </section>
 
+  <section class="container container-narrow" style="padding-bottom: var(--space-12);">
+    <h2 class="home-h2">Una loggia massonica a Buenos Aires</h2>
+    <p>
+      Ci riuniamo il lunedì nel Tempio Hijos del Trabajo, San Antonio 814, Barracas, vicino a
+      La Boca. Siamo una delle logge affiliate alla Gran Loggia dell'Argentina dei Liberi e
+      Accettati Massoni. Per sapere <a href="/it/massoneria/cose/">che cos'è la massoneria</a>
+      o <a href="/it/ingresso/">come entrare nella massoneria</a>, inizia da qui.
+    </p>
+  </section>
+
   <section class="container" style="padding-bottom: var(--space-12);">
     <PhotoSlider photos={sliderPhotos} aspect="16 / 9" autoplayMs={6000} />
   </section>
@@ -75,6 +85,7 @@ const sliderPhotos = [
 </BaseLayout>
 
 <style>
+  .home-h2 { margin-top: var(--space-8); font-size: 1.5rem; }
   .lead {
     font-family: var(--font-serif);
     font-size: 1.25rem;
