@@ -2,6 +2,23 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import { execFileSync } from "node:child_process";
+import { existsSync } from "node:fs";
+
+// lastmod = último commit del archivo de la página; si no hay archivo propio (rutas dinámicas), el último commit del repo.
+const gitDate = (/** @type {string[]} */ ...paths) => {
+  try {
+    return execFileSync("git", ["log", "-1", "--format=%cI", "--", ...paths], { encoding: "utf8" }).trim() || null;
+  } catch {
+    return null;
+  }
+};
+const repoDate = gitDate() ?? new Date().toISOString();
+const pageDate = (/** @type {string} */ url) => {
+  const path = new URL(url).pathname.replace(/^\/|\/$/g, "");
+  const file = [`src/pages/${path}.astro`, `src/pages/${path}/index.astro`].find(existsSync);
+  return (file && gitDate(file)) ?? repoDate;
+};
 
 // Triple deploy:
 // - GitHub Pages (default): base=/union-italiana-12, outDir=docs
@@ -70,7 +87,7 @@ export default defineConfig({
           item.priority = 0.5;
           item.changefreq = /** @type {any} */ ("monthly");
         }
-        item.lastmod = new Date().toISOString();
+        item.lastmod = pageDate(url);
         return item;
       },
     }),
