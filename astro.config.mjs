@@ -51,7 +51,7 @@ export default defineConfig({
           item.changefreq = /** @type {any} */ ("monthly");
         }
         // Templo + Historia: contenido pillar
-        else if (/(templo|tempio|historia|storia|que-es|cose|miembros-ilustres|membri-illustri)/.test(url)) {
+        else if (/(templo|tempio|historia|storia|que-es|cose|miembros-ilustres|membri-illustri|auspicios|auspici)/.test(url)) {
           item.priority = 0.8;
           item.changefreq = /** @type {any} */ ("monthly");
         }
